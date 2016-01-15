@@ -14,6 +14,7 @@ void USBCam::InitDefaultCommand()
 	CameraServer::GetInstance()->SetQuality(50); //set the cam quality of jpeg to be around 50 (out of 100)
 
 	CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
+	std::cout << "INITIALIZING CAMERA" << std::endl;
 }
 
 // Put methods for controlling this subsystem

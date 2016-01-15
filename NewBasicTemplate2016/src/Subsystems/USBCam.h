@@ -7,7 +7,7 @@
 class USBCam: public Subsystem
 {
 private:
-	const char* CAMERA_NAME = "cam1";
+	const char* CAMERA_NAME = "cam2";
 public:
 	USBCam();
 	void InitDefaultCommand();
