@@ -5,14 +5,6 @@
 class Robot: public IterativeRobot
 {
 private:
-	LiveWindow *lw;
-	CameraServer* camera;
-	CommandGroup *autonomousCommand;
-	Command *driverModeCommand;
-	SendableChooser *chooser;
-	SendableChooser *driverMode;
-
-	//NamedSendable *testChooser;
 	void RobotInit()
 	{
 		CommandBase::init();

@@ -12,17 +12,10 @@ class DriveTrain: public Subsystem
 public:
 	static const int NUM_MOTORS = 4;
 private:
-	CANTalon* motors[NUM_MOTORS];
+	std::unique_ptr<CANTalon> motors[NUM_MOTORS];
 
-	RobotDrive* chassis;
+	std::unique_ptr<RobotDrive> chassis;
 
-
-	double PIDValues[4][3] = {
-			{0, 0, 0},
-			{0, 0, 0},
-			{0, 0, 0},
-			{0, 0, 0}
-	};
 
 public:
 
@@ -34,17 +27,10 @@ public:
 	DriveTrain();
 	void InitDefaultCommand();
 
-	void DriveMecanum(float, float, float, double=0);;
-	void RotateMecanum(float);
-
-	void DriveTank(float, float, double=0);
+	void DriveTank(float, float);
 	void RotateTank(float);
 
 	void SetSafetyEnabled(bool);
-
-	void GetDriveVelocties(float*);
-
-	void GetMotorPIDValues(int, double*);
 
 	void Invert(bool inverted);
 };
