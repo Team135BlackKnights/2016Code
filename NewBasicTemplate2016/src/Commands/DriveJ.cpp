@@ -1,6 +1,6 @@
 #include <Commands/DriveJ.h>
 #include "RobotMap.h"
-//#include "../Subsystems/MecanumDrive.h"
+#include "../Subsystems/DriveTrain.h"
 
 DriveJ::DriveJ()
 {
@@ -13,7 +13,6 @@ DriveJ::DriveJ()
 // Called just before this Command runs the first time
 void DriveJ::Initialize() {
 	//this->inverted = SmartDashboard::GetBoolean("Inverted", false);
-	std::cout << "Inverting drive train" << std::endl;
 	driveTrain->Invert(this->inverted);
 }
 
@@ -24,7 +23,7 @@ void DriveJ::Execute()
 	//if (newInvert != this->inverted)
 		//driveTrain->Invert(newInvert);
 
-	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT), 0); //Drives the Robot depending on x-y-z speed values
+	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 }
 
 // Make this return true when this Command no longer needs to run execute()
