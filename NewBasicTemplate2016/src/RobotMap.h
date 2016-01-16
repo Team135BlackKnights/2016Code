@@ -15,13 +15,13 @@
 
 	//constexpr bool ROBOT_MAIN = false;
 
-    const int MOTOR_FRONT_LEFT	= 11;
-    const int MOTOR_REAR_LEFT	= 13;
-    const int MOTOR_FRONT_RIGHT	= 10;
-    const int MOTOR_REAR_RIGHT	= 12;
+    const int MOTOR_FRONT_LEFT	= 10;
+    const int MOTOR_REAR_LEFT	= 11;
+    const int MOTOR_FRONT_RIGHT	= 12;
+    const int MOTOR_REAR_RIGHT	= 13;
 
-    const int JOYSTICK_LEFT = 1;
-    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_LEFT = 0;
+    const int JOYSTICK_RIGHT = 1;
     const int JOYSTICK_MANIPULATOR_CONTROL = 2;
     const int JOYSTICK_BUTTON_BOX = 3;
 
