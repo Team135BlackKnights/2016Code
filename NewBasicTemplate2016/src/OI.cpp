@@ -11,6 +11,7 @@ OI::OI()
 	//sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
 	//sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
 	//commit test
+	//lolololol
 	/*
 	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //Declares new buttons for Joysticks max # of buttons is 12
 	{
