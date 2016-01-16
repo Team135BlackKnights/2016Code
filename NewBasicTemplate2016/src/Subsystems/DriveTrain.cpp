@@ -24,12 +24,23 @@ DriveTrain::DriveTrain():
 
 		chassis->SetSafetyEnabled(false);
 
+		for (int i = 0; i < NUM_MOTORS; i++) {
+			motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+			motors[i]->SetControlMode(CANTalon::kPosition);
+			//  motors[i]->SetPosition(0);
+			motors[i]->SetEncPosition(0);
+		}
 }
 
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
 	SetDefaultCommand(new DriveJ());
+}
+
+int DriveTrain::GetEncoderValues(int MotorPort) {
+
+	return motors[MotorPort]->GetEncPosition();
 }
 
 void DriveTrain::DriveTank(float left, float right)

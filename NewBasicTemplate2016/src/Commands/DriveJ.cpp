@@ -26,7 +26,19 @@ void DriveJ::Execute()
 		driveTrain->InvertMotors(this->inverted);
 	}
 
+
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
+
+	encoderValues[FRONT_LEFT] = driveTrain->GetEncoderValues(FRONT_LEFT);
+	encoderValues[FRONT_RIGHT] = driveTrain->GetEncoderValues(FRONT_RIGHT);
+	encoderValues[REAR_LEFT] = driveTrain->GetEncoderValues(REAR_LEFT);
+	encoderValues[REAR_RIGHT] = driveTrain->GetEncoderValues(REAR_RIGHT);
+
+	SmartDashboard::PutNumber(FrontLeftString, encoderValues[FRONT_LEFT]);
+	SmartDashboard::PutNumber(FrontRightString, encoderValues[FRONT_RIGHT]);
+	SmartDashboard::PutNumber(RearLeftString, encoderValues[REAR_LEFT]);
+	SmartDashboard::PutNumber(RearRightString, encoderValues[REAR_RIGHT]);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

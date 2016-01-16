@@ -33,6 +33,9 @@ public:
 	void SetSafetyEnabled(bool);
 
 	void InvertMotors(bool inverted);
+
+	int GetEncoderValues(int);
+
 };
 
 #endif
