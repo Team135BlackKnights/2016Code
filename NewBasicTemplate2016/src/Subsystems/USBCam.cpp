@@ -7,9 +7,20 @@
 #include <vector>
 
 USBCam::USBCam() :
-		Subsystem("ExampleSubsystem")
+		Subsystem("USBCam")
 {
 
+	grip.reset(NetworkTable::GetTable("GRIP").get());
+	//grip = NetworkTable::GetTable("grip");
+	std::cout << "GRIP STARTED before" << std::endl;
+
+	//starts the yung grip and checks for error
+	//error will most likely be if we dont have JRE.
+	//if (execl(JAVA,"-jar", GRIP_JAR, GRIP_PROJECT, nullptr) == -1) {
+		//wpi_setErrnoErrorWithContext("Failed to run GRIP"); //throws error
+	//}
+
+	std::cout << "GRIP STARTED after" << std::endl;
 }
 
 void USBCam::InitDefaultCommand()
@@ -19,13 +30,6 @@ void USBCam::InitDefaultCommand()
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 
-	//starts the yung grip and checks for error
-	//error will most likely be if we dont have JRE.
-	if (execl(JAVA,"-jar", GRIP_JAR, GRIP_PROJECT, nullptr) == -1) {
-		wpi_setErrnoErrorWithContext("Failed to run GRIP"); //throws error
-	}
-
-	std::cout << "GRIP STARTED" << std::endl;
 }
 
 
