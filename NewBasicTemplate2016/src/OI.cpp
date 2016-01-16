@@ -7,11 +7,10 @@ OI::OI()
 {
 //
 	// Process operator interface input here.
-	//sticks[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //Declares new Joystick
-	//sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
-	//sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
-	//commit test
-	//lolololol
+	sticks[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //Declares new Joystick
+	sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
+	sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
+
 	/*
 	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //Declares new buttons for Joysticks max # of buttons is 12
 	{
@@ -22,11 +21,12 @@ OI::OI()
 		}
 	}
 	*/
+	//buttons[LEFT][5]->WhenPressed(new Fire())
 }
 
 float OI::GetStickX(int hand)
 {
-	//float value = sticks[hand]->GetX(); // Returns X axis value of Joysticks
+	float value = sticks[hand]->GetX(); // Returns X axis value of Joysticks
 	//if (abs(value) > DEAD_BAND)
 		return 0;
 	//return 0;
@@ -56,6 +56,5 @@ float OI::GetStickSlider(int hand)
 
 bool OI::GetButton(int stick, int button)
 {
-	//return buttons[stick][button]->Get();
-	return 0;
+	return buttons[stick][button]->Get();
 }
