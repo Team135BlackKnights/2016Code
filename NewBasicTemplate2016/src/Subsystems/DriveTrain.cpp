@@ -12,7 +12,7 @@ typedef Riley TheGoodMan;
 
 
 DriveTrain::DriveTrain():
-	Subsystem("MecanumDrive")
+	Subsystem("DriveTrain")
 {
 
 		motors[FRONT_LEFT].reset(new thing(MOTOR_FRONT_LEFT));
@@ -63,4 +63,5 @@ void DriveTrain::Invert(bool inverted)
 	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, !inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, inverted);
+	std::cout << "inverting motors";
 }
