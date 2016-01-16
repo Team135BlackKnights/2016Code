@@ -14,8 +14,6 @@ USBCam::USBCam() :
 
 void USBCam::InitDefaultCommand()
 {
-	//***first 2 lines primarily for the drivers, can be removed with
-	//0 impact on vision processing.***
 	//set the cam quality of jpeg to be around 50 (out of 100)
 	CameraServer::GetInstance()->SetQuality(50);
 	//Start the automatic capture to dashboard
@@ -27,16 +25,15 @@ void USBCam::InitDefaultCommand()
 		wpi_setErrnoErrorWithContext("Failed to run GRIP"); //throws error
 	}
 
-
 	std::cout << "GRIP STARTED" << std::endl;
 }
+
 
 std::tuple<double, double, double> USBCam::findBiggest()
 {
 	auto areas = grip->GetNumberArray("myCountoursReport/area", llvm::ArrayRef<double>()),
 	xs = grip->GetNumberArray("myCountoursReport/x", llvm::ArrayRef<double>()),
 	ys = grip->GetNumberArray("myCountoursReport/y", llvm::ArrayRef<double>());
-
 	targetArea = -1.0;
 	targetX = 0.0;
 	targetY = 0.0;
@@ -56,4 +53,21 @@ std::tuple<double, double, double> USBCam::findBiggest()
 	//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
 	return std::make_tuple(targetArea, targetX, targetY);
 }
+
+
+double USBCam::xDistanceToCenter(double x)
+{
+	return x - XWIDTH/2;
+}
+
+double USBCam::yDistanceToCenter(double y)
+{
+	return y - YWIDTH/2;
+}
+
+double USBCam::percentArea(double area)
+{
+	return area/(XWIDTH*YWIDTH);
+}
+
 

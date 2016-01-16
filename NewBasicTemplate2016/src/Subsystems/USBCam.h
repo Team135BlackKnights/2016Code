@@ -18,10 +18,15 @@ private:
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
+	const int XWIDTH = 360;
+	const int YWIDTH = 240;
 public:
 	USBCam();
 	void InitDefaultCommand();
 	std::tuple<double, double, double> findBiggest();
+	double xDistanceToCenter(double x);
+	double yDistanceToCenter(double y);
+	double percentArea(double area);
 };
 
 #endif

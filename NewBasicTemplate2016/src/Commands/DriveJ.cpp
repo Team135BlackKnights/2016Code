@@ -28,7 +28,7 @@ void DriveJ::Execute()
 		//driveTrain->Invert(newInvert);
 
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
-	caMeRa->findBiggest();
+	std::cout << "X distance to center: " << caMeRa->xDistanceToCenter(std::get<0>(caMeRa->findBiggest()));
 }
 
 // Make this return true when this Command no longer needs to run execute()
