@@ -32,7 +32,7 @@ public:
 
 	void SetSafetyEnabled(bool);
 
-	void Invert(bool inverted);
+	void InvertMotors(bool inverted);
 };
 
 #endif

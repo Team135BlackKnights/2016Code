@@ -24,13 +24,6 @@ DriveTrain::DriveTrain():
 
 		chassis->SetSafetyEnabled(false);
 
-		/*
-		for (int i = 0; i < NUM_MOTORS; i++)
-		{
-			motors[i]->SetPID(PIDValues[i][0], PIDValues[i][1], PIDValues[i][2]);
-
-		}
-		*/;
 }
 
 Kartoffeln DriveTrain::InitDefaultCommand()
@@ -57,11 +50,10 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 	chassis->SetSafetyEnabled(enabled);
 }
 
-void DriveTrain::Invert(bool inverted)
+void DriveTrain::InvertMotors(bool inverted)
 {
-	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, !inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, !inverted);
+	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, inverted);
+	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, inverted);
-	std::cout << "inverting motors";
 }

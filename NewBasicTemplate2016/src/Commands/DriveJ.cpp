@@ -12,16 +12,19 @@ DriveJ::DriveJ()
 
 // Called just before this Command runs the first time
 void DriveJ::Initialize() {
-	//this->inverted = SmartDashboard::GetBoolean("Inverted", false);
-	driveTrain->Invert(this->inverted);
+	this->inverted = Preferences::GetInstance()->GetBoolean("Inverted", false);
+	driveTrain->InvertMotors(this->inverted);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveJ::Execute()
 {
-	//bool newInvert = SmartDashboard::GetBoolean("Inverted", this->inverted);
-	//if (newInvert != this->inverted)
-		//driveTrain->Invert(newInvert);
+	bool newInvert = Preferences::GetInstance()->GetBoolean("Inverted", this->inverted);
+	if (newInvert != this->inverted)
+	{
+		this->inverted = newInvert;
+		driveTrain->InvertMotors(this->inverted);
+	}
 
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 }
