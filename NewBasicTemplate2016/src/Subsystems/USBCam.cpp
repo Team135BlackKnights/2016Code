@@ -15,9 +15,9 @@ USBCam::USBCam() :
 void USBCam::InitDefaultCommand()
 {
 	//set the cam quality of jpeg to be around 50 (out of 100)
-	CameraServer::GetInstance()->SetQuality(50);
+	//CameraServer::GetInstance()->SetQuality(50);
 	//Start the automatic capture to dashboard
-	CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
+	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 
 	//starts the yung grip and checks for error
 	//error will most likely be if we dont have JRE.
