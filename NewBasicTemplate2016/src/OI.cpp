@@ -10,7 +10,7 @@ OI::OI()
 	//sticks[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //Declares new Joystick
 	//sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
 	//sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
-	//TEST COMMIT 4
+	//asdfasdf
 	/*
 	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //Declares new buttons for Joysticks max # of buttons is 12
 	{
