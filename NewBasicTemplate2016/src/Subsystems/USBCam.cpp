@@ -28,7 +28,7 @@ void USBCam::InitDefaultCommand()
 	}
 
 
-	std::cout << "INITIALIZING CAMERA" << std::endl;
+	std::cout << "GRIP STARTED" << std::endl;
 }
 
 std::tuple<double, double, double> USBCam::findBiggest()
@@ -37,7 +37,9 @@ std::tuple<double, double, double> USBCam::findBiggest()
 	xs = grip->GetNumberArray("myCountoursReport/x", llvm::ArrayRef<double>()),
 	ys = grip->GetNumberArray("myCountoursReport/y", llvm::ArrayRef<double>());
 
-	double targetArea = -1.0, targetX = 0.0, targetY = 0.0;
+	targetArea = -1.0;
+	targetX = 0.0;
+	targetY = 0.0;
 	for (int i = 0; i < areas.size(); i++){
 		double area = areas[i], x = xs[i], y = ys[i];
 		if (area > targetArea){
@@ -47,6 +49,11 @@ std::tuple<double, double, double> USBCam::findBiggest()
 		}
 		std::cout << "Got contour: area=" << area << ", x=" << x << ", y=" << y << std::endl;
     }
-
+	//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+	std::cout << "TARGET ACQUIRED!" << std::endl;
+	std::cout << "AREA = " << targetArea << std::endl;
+	std::cout << "(X,Y) = (" << targetX << "," << targetY << ")" << std::endl;
+	//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
 	return std::make_tuple(targetArea, targetX, targetY);
 }
+

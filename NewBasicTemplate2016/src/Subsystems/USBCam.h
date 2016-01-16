@@ -15,9 +15,9 @@ private:
 	const char * const GRIP_JAR = "/home/lvuser/grip.jar";
 	const char * const GRIP_PROJECT = "home/lvuser/myproject.grip";
 	std::shared_ptr<NetworkTable> grip = NetworkTable::GetTable("grip");
-	//std::vector<double> areas;
-	//std::vector<double> xs;
-	//std::vector<double> ys;
+	double targetX = 0.0;
+	double targetY = 0.0;
+	double targetArea = -1.0;
 public:
 	USBCam();
 	void InitDefaultCommand();

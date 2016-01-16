@@ -1,6 +1,9 @@
 #include <Commands/DriveJ.h>
-#include "RobotMap.h"
-#include "../Subsystems/DriveTrain.h"
+#include <OI.h>
+#include <Subsystems/DriveTrain.h>
+#include <Subsystems/USBCam.h>
+#include <cstdbool>
+#include <memory>
 
 DriveJ::DriveJ()
 {
@@ -8,6 +11,7 @@ DriveJ::DriveJ()
 	// eg. Requires(chassis);
 	inverted = false;
 	Requires(driveTrain.get());
+	Requires(caMeRa.get());
 }
 
 // Called just before this Command runs the first time
@@ -24,6 +28,7 @@ void DriveJ::Execute()
 		//driveTrain->Invert(newInvert);
 
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
+	caMeRa->findBiggest();
 }
 
 // Make this return true when this Command no longer needs to run execute()
