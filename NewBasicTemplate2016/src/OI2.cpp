@@ -1,5 +1,5 @@
 /*
-	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR CONTROL. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
+	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
  */
 #include "OI.h"
 #include "RobotMap.h"
@@ -8,7 +8,13 @@
 
 OI::OI()
 {
-	joysticksArray[LEFT]
+	joysticksArray[LEFT].reset(Joystick(JOYSTICK_LEFT)); //creates a left joystick object
+	joysticksArray[RIGHT].reset(Joystick(JOYSTICK_LEFT)); //creates a right joystick object
+
+	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //assigns values to each button in the array for each controller
+			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; j++)
+				buttons[i][k].reset(new JoystickButton(sticks[i].get(), k));
+
 }
 
 //OI Functions

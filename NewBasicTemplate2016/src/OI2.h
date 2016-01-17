@@ -17,7 +17,7 @@ protected:
 		 */
 public:
 	static const int LEFT = 0; // sets LEFT controller
-	static const int Right = 1; // sets LEFT controller
+	static const int RIGHT = 1; // sets LEFT controller
 	static constexpr float DEAD_ZONE = .05f; //declares dead zone
 
 	OI();
