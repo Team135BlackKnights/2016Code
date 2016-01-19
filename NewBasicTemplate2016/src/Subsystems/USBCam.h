@@ -11,9 +11,10 @@ class USBCam: public Subsystem
 {
 private:
 	const char* CAMERA_NAME = "cam2";
-	const char * const JAVA = "/usr/local/frc/JRE/bin/java";
-	const char * const GRIP_JAR = "/home/lvuser/grip.jar";
-	const char * const GRIP_PROJECT = "home/lvuser/dankmemesv3.grip";
+	const char *JAVA = "/usr/local/frc/JRE/bin/java";
+	char *GRIP_ARGS[5] = {"java", "-jar",
+			"/home/lvuser/grip.jar",
+			"/home/lvuser/dankmemesv3.grip", NULL};
 	std::shared_ptr<NetworkTable> grip;
 	double targetX = 0.0;
 	double targetY = 0.0;

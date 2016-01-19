@@ -16,9 +16,8 @@ USBCam::USBCam() :
 
 	//starts the yung grip and checks for error
 	//error will most likely be if we dont have JRE.
-	//if (execl(JAVA,"-jar", GRIP_JAR, GRIP_PROJECT, nullptr) == -1) {
-		//wpi_setErrnoErrorWithContext("Failed to run GRIP"); //throws error
-	//}
+	if(execv(JAVA, GRIP_ARGS) == -1)
+		perror("Error running GRIP");
 
 	std::cout << "GRIP STARTED after" << std::endl;
 }
