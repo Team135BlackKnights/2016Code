@@ -16,6 +16,13 @@ private:
 
 	std::unique_ptr<RobotDrive> chassis;
 
+	static const int COUNT;
+	int quadratureCOUNT;
+
+	double RADIUS;
+
+	double CIRCUM;
+
 
 public:
 
@@ -37,6 +44,8 @@ public:
 	int GetEncoderPosition(int);
 	int GetEncoderVelocity(int);
 	void ZeroEncoder(int);
+	double GetDistance(int);
+	double GetVelocity(int);
 
 };
 
