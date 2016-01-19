@@ -34,7 +34,9 @@ public:
 
 	void InvertMotors(bool inverted);
 
-	int GetEncoderValues(int);
+	int GetEncoderPosition(int);
+	int GetEncoderVelocity(int);
+	void ZeroEncoder(int);
 
 };
 

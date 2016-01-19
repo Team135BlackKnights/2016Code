@@ -26,9 +26,9 @@ DriveTrain::DriveTrain():
 
 		for (int i = 0; i < NUM_MOTORS; i++) {
 			motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-			motors[i]->SetControlMode(CANTalon::kPosition);
+			//  motors[i]->SetControlMode(CANTalon::kPosition);
 			//  motors[i]->SetPosition(0);
-			motors[i]->SetEncPosition(0);
+			//  motors[i]->SetEncPosition(0);
 		}
 }
 
@@ -38,9 +38,23 @@ Kartoffeln DriveTrain::InitDefaultCommand()
 	SetDefaultCommand(new DriveJ());
 }
 
-int DriveTrain::GetEncoderValues(int MotorPort) {
+int DriveTrain::GetEncoderPosition(int MotorPort) {
 
-	return motors[MotorPort]->GetEncPosition();
+	//  This value is equal to the (Count*4) * (Number of Revolutions of the Motor)
+	return motors[MotorPort]->GetPosition();
+}
+
+int DriveTrain::GetEncoderVelocity(int MotorPort) {
+
+	//  Gets the Speed Value (Encoder Ticks/.1sec.) of the Encoder
+	//  The value will be Count*4 because it is a quadrature encoder
+	return motors[MotorPort]->GetSpeed();
+}
+
+void DriveTrain::ZeroEncoder(int MotorPort) {
+
+	//  Resets the Encoder Value to Zero
+	motors[MotorPort]->SetPosition(0);
 }
 
 void DriveTrain::DriveTank(float left, float right)
