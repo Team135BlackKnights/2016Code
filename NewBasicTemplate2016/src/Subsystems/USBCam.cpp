@@ -10,16 +10,21 @@ USBCam::USBCam() :
 		Subsystem("USBCam")
 {
 
-	grip.reset(NetworkTable::GetTable("GRIP").get());
+	//grip = NetworkTable::GetTable("grip");
+	grip.reset(NetworkTable::GetTable("grip").get());
 	//grip = NetworkTable::GetTable("grip");
 	std::cout << "GRIP STARTED before" << std::endl;
 
 	//starts the yung grip and checks for error
 	//error will most likely be if we dont have JRE.
-	if(execv(JAVA, GRIP_ARGS) == -1)
-		perror("Error running GRIP");
+	if (fork() == 0) {
+		if (execv(JAVA, GRIP_ARGS) == -1) {
+		    perror("Error running GRIP");
+		}
+	}
 
 	std::cout << "GRIP STARTED after" << std::endl;
+
 }
 
 void USBCam::InitDefaultCommand()
@@ -32,9 +37,14 @@ void USBCam::InitDefaultCommand()
 }
 
 
-std::tuple<double, double, double> USBCam::findBiggest()
+void USBCam::findBiggest()
 {
-	auto areas = grip->GetNumberArray("myCountoursReport/area", llvm::ArrayRef<double>()),
+	auto arr = grip->GetNumberArray("myContoursReport/area", llvm::ArrayRef<double>());
+	for(auto area: arr) {
+		std::cout << "got a contour wit area = " << area << std::endl;
+	}
+
+	/*auto areas = grip->GetNumberArray("myCountoursReport/area", llvm::ArrayRef<double>()),
 	xs = grip->GetNumberArray("myCountoursReport/x", llvm::ArrayRef<double>()),
 	ys = grip->GetNumberArray("myCountoursReport/y", llvm::ArrayRef<double>());
 	targetArea = -1.0;
@@ -54,7 +64,7 @@ std::tuple<double, double, double> USBCam::findBiggest()
 	std::cout << "AREA = " << targetArea << std::endl;
 	std::cout << "(X,Y) = (" << targetX << "," << targetY << ")" << std::endl;
 	//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
-	return std::make_tuple(targetArea, targetX, targetY);
+	//return std::make_tuple(targetArea, targetX, targetY);*/
 }
 
 

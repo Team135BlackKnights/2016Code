@@ -24,7 +24,7 @@ private:
 public:
 	USBCam();
 	void InitDefaultCommand();
-	std::tuple<double, double, double> findBiggest();
+	void findBiggest();
 	double xDistanceToCenter(double x);
 	double yDistanceToCenter(double y);
 	double percentArea(double area);
