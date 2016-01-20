@@ -17,11 +17,11 @@ private:
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Need a value for the count of the encoder
-	static const int COUNT;
+	static const int COUNT = 64;
 	int quadratureCOUNT;
 
 	//  Need a value for the radius of the wheel
-	double RADIUS;
+	double RADIUS = 4.5; //  In inches
 
 	double CIRCUM;
 

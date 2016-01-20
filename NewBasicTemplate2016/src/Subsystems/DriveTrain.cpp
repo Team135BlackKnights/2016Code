@@ -28,6 +28,7 @@ DriveTrain::DriveTrain():
 			//  motors[i]->SetControlMode(CANTalon::kPosition);
 			//  motors[i]->SetPosition(0);
 			//  motors[i]->SetEncPosition(0);
+			motors[i]->ConfigEncoderCodesPerRev(64);
 		}
 
 		quadratureCOUNT = COUNT * 4;
@@ -74,7 +75,7 @@ double DriveTrain::GetVelocity(int MotorPort) {
 	int encoderVelocity = GetEncoderVelocity(MotorPort);
 	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(quadratureCOUNT);
 	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * CIRCUM;
-	return DISTANCE_PER_SEC;
+	return DISTANCE_PER_SEC;  //  Units: Inches per second
 
 }
 
