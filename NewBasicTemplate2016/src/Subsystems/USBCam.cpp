@@ -11,7 +11,7 @@ USBCam::USBCam() :
 {
 
 	//grip = NetworkTable::GetTable("grip");
-	grip.reset(NetworkTable::GetTable("grip").get());
+	/*grip.reset(NetworkTable::GetTable("grip").get());
 	//grip = NetworkTable::GetTable("grip");
 	std::cout << "GRIP STARTED before" << std::endl;
 
@@ -24,7 +24,7 @@ USBCam::USBCam() :
 	}
 
 	std::cout << "GRIP STARTED after" << std::endl;
-
+*/
 }
 
 void USBCam::InitDefaultCommand()
