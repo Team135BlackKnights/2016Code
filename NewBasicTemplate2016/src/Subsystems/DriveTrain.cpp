@@ -14,7 +14,6 @@ typedef Riley TheGoodMan;
 DriveTrain::DriveTrain():
 	Subsystem("DriveTrain")
 {
-
 		motors[FRONT_LEFT].reset(new thing(MOTOR_FRONT_LEFT));
 		motors[REAR_LEFT].reset(new thing(MOTOR_REAR_LEFT));
 		motors[FRONT_RIGHT].reset(new CANTalon(MOTOR_FRONT_RIGHT));
@@ -24,12 +23,60 @@ DriveTrain::DriveTrain():
 
 		chassis->SetSafetyEnabled(false);
 
+		for (int i = 0; i < NUM_MOTORS; i++) {
+			motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+			//  motors[i]->SetControlMode(CANTalon::kPosition);
+			//  motors[i]->SetPosition(0);
+			//  motors[i]->SetEncPosition(0);
+			motors[i]->ConfigEncoderCodesPerRev(64);
+		}
+
+		quadratureCOUNT = COUNT * 4;
+
+		CIRCUM = (2 * RADIUS) * 3.141593;
+
 }
 
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
 	SetDefaultCommand(new DriveJ());
+}
+
+int DriveTrain::GetEncoderPosition(int MotorPort) {
+
+	//  This value is equal to the (Count*4) * (Number of Revolutions of the Motor)
+	return motors[MotorPort]->GetPosition();
+}
+
+int DriveTrain::GetEncoderVelocity(int MotorPort) {
+
+	//  Gets the Speed Value (Encoder Ticks/.1sec.) of the Encoder
+	//  The value will be Count*4 because it is a quadrature encoder
+	return motors[MotorPort]->GetSpeed();
+}
+
+void DriveTrain::ZeroEncoder(int MotorPort) {
+
+	//  Resets the Encoder Value to Zero
+	motors[MotorPort]->SetPosition(0);
+}
+
+double DriveTrain::GetDistance(int MotorPort) {
+
+	int encoderPosition = GetEncoderPosition(MotorPort);
+	double REVS = (encoderPosition/quadratureCOUNT);
+	double DISTANCE_TRAVELED = REVS * CIRCUM;
+	return DISTANCE_TRAVELED;
+}
+
+double DriveTrain::GetVelocity(int MotorPort) {
+
+	int encoderVelocity = GetEncoderVelocity(MotorPort);
+	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(quadratureCOUNT);
+	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * CIRCUM;
+	return DISTANCE_PER_SEC;  //  Units: Inches per second
+
 }
 
 void DriveTrain::DriveTank(float left, float right)

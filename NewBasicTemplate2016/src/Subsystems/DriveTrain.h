@@ -16,6 +16,15 @@ private:
 
 	std::unique_ptr<RobotDrive> chassis;
 
+	//  Need a value for the count of the encoder
+	static const int COUNT = 64;
+	int quadratureCOUNT;
+
+	//  Need a value for the radius of the wheel
+	double RADIUS = 4.5; //  In inches
+
+	double CIRCUM;
+
 
 public:
 
@@ -33,6 +42,13 @@ public:
 	void SetSafetyEnabled(bool);
 
 	void InvertMotors(bool inverted);
+
+	int GetEncoderPosition(int);
+	int GetEncoderVelocity(int);
+	void ZeroEncoder(int);
+	double GetDistance(int);
+	double GetVelocity(int);
+
 };
 
 #endif
