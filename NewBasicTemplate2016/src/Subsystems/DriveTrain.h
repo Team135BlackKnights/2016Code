@@ -48,6 +48,7 @@ public:
 	void ZeroEncoder(int);
 	double GetDistance(int);
 	double GetVelocity(int);
+	double GetRevsPerSecond(int);
 
 };
 

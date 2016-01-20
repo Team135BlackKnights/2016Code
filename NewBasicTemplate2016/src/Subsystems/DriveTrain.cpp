@@ -70,11 +70,17 @@ double DriveTrain::GetDistance(int MotorPort) {
 	return DISTANCE_TRAVELED;
 }
 
-double DriveTrain::GetVelocity(int MotorPort) {
+double DriveTrain::GetRevsPerSecond(int MotorPort) {
 
 	int encoderVelocity = GetEncoderVelocity(MotorPort);
-	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(quadratureCOUNT);
-	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * CIRCUM;
+	double REVS_PER_SEC = (encoderVelocity * 10)/(quadratureCOUNT);
+	return REVS_PER_SEC;
+}
+
+double DriveTrain::GetVelocity(int MotorPort) {
+
+
+	double DISTANCE_PER_SEC = GetRevolutionsPerSecond(MotorPort) * CIRCUM;
 	return DISTANCE_PER_SEC;  //  Units: Inches per second
 
 }

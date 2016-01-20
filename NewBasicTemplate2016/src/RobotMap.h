@@ -25,4 +25,6 @@
     const int JOYSTICK_MANIPULATOR_CONTROL = 2;
     const int JOYSTICK_BUTTON_BOX = 3;
 
+    const int NUM_OF_MOTORS = 4;
+
 #endif
