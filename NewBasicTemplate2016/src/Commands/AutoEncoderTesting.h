@@ -22,8 +22,6 @@ private:
 						RearRightString = "Rear Right Motor Encoder Revs Per Second: ";
 	//  std::unique_ptr<Timer> timer;
 
-	static const int NUM_OF_MOTORS = 4;
-
 public:
 	AutoEncoderTesting();
 	void Initialize();
