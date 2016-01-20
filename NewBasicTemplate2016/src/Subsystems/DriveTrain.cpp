@@ -79,6 +79,16 @@ double DriveTrain::GetVelocity(int MotorPort) {
 
 }
 
+double DriveTrain::ReturnPIDInput(int MotorPort) {
+	//  Get() the value from the sensor, in this case, encoder
+	return GetVelocity(MotorPort);
+}
+
+void DriveTrain::FeedbackPIDOutput(double output) {
+	//  PIDWrite()
+
+}
+
 void DriveTrain::DriveTank(float left, float right)
 {
 	left = fmax(-1, fmin(1, left));

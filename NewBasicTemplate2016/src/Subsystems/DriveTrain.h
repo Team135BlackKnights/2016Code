@@ -49,6 +49,9 @@ public:
 	double GetDistance(int);
 	double GetVelocity(int);
 
+	double ReturnPIDInput(int);
+	void FeedbackPIDOutput(double);
+
 };
 
 #endif
