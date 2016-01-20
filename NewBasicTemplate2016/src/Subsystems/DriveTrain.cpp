@@ -25,7 +25,7 @@ DriveTrain::DriveTrain():
 
 		for (int i = 0; i < NUM_MOTORS; i++) {
 			motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-			//  motors[i]->SetControlMode(CANTalon::kPosition);
+			motors[i]->SetControlMode(CANTalon::kPosition);
 			//  motors[i]->SetPosition(0);
 			//  motors[i]->SetEncPosition(0);
 			motors[i]->ConfigEncoderCodesPerRev(64);
@@ -81,14 +81,21 @@ double DriveTrain::GetVelocity(int MotorPort) {
 
 double DriveTrain::ReturnPIDInput(int MotorPort) {
 	//  Get() the value from the sensor, in this case, encoder
-	return GetVelocity(MotorPort);
+	return GetEncoderVelocity(MotorPort);
 }
 
-void DriveTrain::FeedbackPIDOutput(double output) {
+void DriveTrain::FeedbackPIDOutput(int MotorPort, double output) {
 	//  PIDWrite()
-
+	motors[MotorPort]->PIDWrite(output);
 
 }
+
+void DriveTrain::SetPIDValues(int MotorPort, double PValue, double IValue, double DValue) {
+
+	motors[MotorPort]->SetPID(PValue, IValue, DValue);
+
+}
+
 
 void DriveTrain::DriveTank(float left, float right)
 {
@@ -96,6 +103,11 @@ void DriveTrain::DriveTank(float left, float right)
 	right = fmax(-1, fmin(1, right));
 
 	chassis->TankDrive(left, right);
+}
+
+void DriveTrain::SetMotorValue(int MotorPort, double MotorPower) {
+
+	motors[MotorPort]->Set(MotorPower);
 }
 
 void DriveTrain::RotateTank(float power)

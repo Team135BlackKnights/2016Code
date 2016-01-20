@@ -38,6 +38,7 @@ public:
 
 	void DriveTank(float, float);
 	void RotateTank(float);
+	void SetMotorValue(int, double);
 
 	void SetSafetyEnabled(bool);
 
@@ -50,7 +51,8 @@ public:
 	double GetVelocity(int);
 
 	double ReturnPIDInput(int);
-	void FeedbackPIDOutput(double);
+	void FeedbackPIDOutput(int, double);
+	void SetPIDValues(int, double, double, double);
 
 };
 
