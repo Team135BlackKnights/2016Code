@@ -25,7 +25,7 @@ DriveTrain::DriveTrain():
 
 		for (int i = 0; i < NUM_MOTORS; i++) {
 			motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-			motors[i]->SetControlMode(CANTalon::kPosition);
+			//  motors[i]->SetControlMode(CANTalon::kPosition);
 			//  motors[i]->SetPosition(0);
 			//  motors[i]->SetEncPosition(0);
 			motors[i]->ConfigEncoderCodesPerRev(64);
@@ -52,7 +52,8 @@ int DriveTrain::GetEncoderPosition(int MotorPort) {
 int DriveTrain::GetEncoderVelocity(int MotorPort) {
 
 	//  Gets the Speed Value (Encoder Ticks/.1sec.) of the Encoder
-	//  The value will be Count*4 because it is a quadrature encoder
+	//  The value should be Count*4 because it is a quadrature encoder
+	//  This value will also be used for graphing values for PID Tuning
 	return motors[MotorPort]->GetSpeed();
 }
 
@@ -77,11 +78,6 @@ double DriveTrain::GetVelocity(int MotorPort) {
 	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * CIRCUM;
 	return DISTANCE_PER_SEC;  //  Units: Inches per second
 
-}
-
-double DriveTrain::ReturnPIDInput(int MotorPort) {
-	//  Get() the value from the sensor, in this case, encoder
-	return GetEncoderVelocity(MotorPort);
 }
 
 void DriveTrain::FeedbackPIDOutput(int MotorPort, double output) {

@@ -8,13 +8,13 @@ class PIDTesting: public CommandBase
 {
 private:
 	int PortNumber = 2;
-	//  std::unique_ptr<LiveWindow> lw;
-	//  std::unique_ptr<CANTalon> talon;
+
 	int PValue,
 		IValue,
 		DValue;
 
 	int Power = .5;
+
 	double encoderValue;
 
 	std::unique_ptr<Timer> timer;

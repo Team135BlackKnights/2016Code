@@ -16,6 +16,7 @@ PIDTesting::PIDTesting()
 void PIDTesting::Initialize()
 {
 	driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
+	driveTrain->ZeroEncoder(PortNumber);
 	timer->Start();
 }
 

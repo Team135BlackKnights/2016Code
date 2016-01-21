@@ -5,9 +5,13 @@
 class Robot: public IterativeRobot
 {
 private:
+	std::unique_ptr<Command> autoCommand;
+
 	void RobotInit()
 	{
 		CommandBase::init();
+		autoCommand.reset(new Command());
+
 	}
 	
 	void DisabledPeriodic()
@@ -17,6 +21,8 @@ private:
 
 	void AutonomousInit()
 	{
+		autoCommand = new PIDTesting();
+		autoCommand->Start();
 	}
 
 	void AutonomousPeriodic()

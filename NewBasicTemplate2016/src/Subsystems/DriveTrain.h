@@ -50,7 +50,6 @@ public:
 	double GetDistance(int);
 	double GetVelocity(int);
 
-	double ReturnPIDInput(int);
 	void FeedbackPIDOutput(int, double);
 	void SetPIDValues(int, double, double, double);
 
