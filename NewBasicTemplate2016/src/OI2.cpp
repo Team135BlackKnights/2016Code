@@ -25,6 +25,7 @@ float OI::GetStickX(int controllerNum) //Returns controller's x value
 
 	if (abs(value) > DEAD_ZONE)
 		return 0; //returns 0 if controllers are within the deadzone
+	return value;
 }
 
 float OI::GetStickY(int controllerNum)
@@ -33,6 +34,7 @@ float OI::GetStickY(int controllerNum)
 
 	if (abs(value) > DEAD_ZONE)
 		return 0; //returns 0 if controllers are within the deadzone
+	return value;
 }
 
 float OI::GetStickTwist(int controllerNum)
