@@ -25,8 +25,10 @@ private:
 
 	double CIRCUM;
 
+	std::ofstream logFile;
 
 public:
+	//  std::ofstream o(filename.c_str());
 
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
 						REAR_LEFT = RobotDrive::kRearLeftMotor,
@@ -52,6 +54,9 @@ public:
 
 	void FeedbackPIDOutput(int, double);
 	void SetPIDValues(int, double, double, double);
+
+	void LogPIDValues(double, double);
+	void CloseLogFile();
 
 };
 

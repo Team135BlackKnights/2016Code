@@ -10,7 +10,7 @@ private:
 	void RobotInit()
 	{
 		CommandBase::init();
-		autoCommand.reset(new Command());
+		autoCommand.reset(new PIDTesting());
 
 	}
 	
@@ -21,7 +21,6 @@ private:
 
 	void AutonomousInit()
 	{
-		autoCommand = new PIDTesting();
 		autoCommand->Start();
 	}
 
