@@ -6,7 +6,7 @@
 class OI
 {
 protected:
-	static const int JOYSTICKS = 2; //max number of joysticks connected
+	static const int JOYSTICKS = 3; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
 	std::unique_ptr<Joystick> joysticksArray[JOYSTICKS]; //creates an array of the joysticks
 	std::unique_ptr<JoystickButton> buttonsArray[JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1]; //creates an array of the joysticks vs the buttons starting with buttons at 1

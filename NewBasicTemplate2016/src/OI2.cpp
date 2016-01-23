@@ -1,11 +1,13 @@
 /*
 	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
+	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
+// OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
 {
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
@@ -40,13 +42,14 @@ float OI::GetStickY(int controllerNum)
 float OI::GetStickTwist(int controllerNum)
 {
 	float value = joysticksArray[controllerNum]->GetTwist(); //Gets twist value from joystick
+	return value;
 }
 
 float OI::GetStickSlider(int controllerNum)
 {
 	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
 }
-
+\
 bool OI::GetButton(int controllerNum, int buttonNum)
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
