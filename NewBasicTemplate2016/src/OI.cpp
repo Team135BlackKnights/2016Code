@@ -19,6 +19,10 @@ OI::OI()
 			buttons[i][j].reset(new JoystickButton(sticks[i].get(), j));
 		}
 	}
+
+	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new JoystickTesting());
+	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
+
 }
 
 float OI::GetStickX(int hand)

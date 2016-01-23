@@ -3,9 +3,15 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
+#include "OI.h"
+#include "DriveTrain.h"
 
 class JoystickTesting: public CommandBase
 {
+private:
+	double joystickX,
+		   joystickY;
+
 public:
 	JoystickTesting();
 	void Initialize();
