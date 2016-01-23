@@ -14,10 +14,10 @@ DriveJ::DriveJ()
 void DriveJ::Initialize() {
 	this->inverted = Preferences::GetInstance()->GetBoolean("Inverted", false);
 	driveTrain->InvertMotors(this->inverted);
-	for (int i = 0; i < NUM_OF_MOTORS; i++) {
+	/*for (int i = 0; i < NUM_OF_MOTORS; i++) {
 		//  This will zero out all the encoders before the code below executes
 		driveTrain->ZeroEncoder(i);
-	}
+	}*/
 }
 
 // Called repeatedly when this Command is scheduled to run

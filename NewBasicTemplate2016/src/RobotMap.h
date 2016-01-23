@@ -26,5 +26,7 @@
     const int JOYSTICK_BUTTON_BOX = 3;
 
     const int NUM_OF_MOTORS = 4;
+    const int TRIGGER = 1;
+    const int SIDE_BUTTON = 2;
 
 #endif

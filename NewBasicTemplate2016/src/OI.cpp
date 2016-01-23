@@ -2,6 +2,7 @@
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
+#include "Commands/PIDTesting.h"
 
 OI::OI()
 {
@@ -19,6 +20,9 @@ OI::OI()
 			buttons[i][j].reset(new JoystickButton(sticks[i].get(), j));
 		}
 	}
+
+	buttons[JOYSTICK_LEFT][TRIGGER]->WhenPressed(new PIDTesting());
+	buttons[JOYSTICK_LEFT][SIDE_BUTTON]->CancelWhenPressed(new PIDTesting());
 }
 
 float OI::GetStickX(int hand)
