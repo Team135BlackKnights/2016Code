@@ -3,6 +3,7 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
+#include "Subsystems/LogData.h"
 
 class PIDTesting: public CommandBase
 {
@@ -20,6 +21,8 @@ private:
 	std::unique_ptr<Timer> timer;
 
 	double timerValue;
+
+	std::string PIDFileName = "PID.csv";
 
 public:
 	PIDTesting();

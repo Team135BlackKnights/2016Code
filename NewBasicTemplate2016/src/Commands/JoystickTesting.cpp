@@ -22,7 +22,7 @@ void JoystickTesting::Execute()
 		SmartDashboard::PutNumber("JoystickX Value:", joystickX);
 		SmartDashboard::PutNumber("JoystickY Value", joystickY);
 
-		driveTrain->LogPIDValues(joystickX, joystickY);
+		logData->WriteData(joystickX, joystickY, joystickFileName);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -34,7 +34,7 @@ bool JoystickTesting::IsFinished()
 // Called once after isFinished returns true
 void JoystickTesting::End()
 {
-
+	logData->CloseFile();
 }
 
 
@@ -42,6 +42,6 @@ void JoystickTesting::End()
 // subsystems is scheduled to run
 void JoystickTesting::Interrupted()
 {
-	driveTrain->LogPIDValues(000, 000);
-
+	logData->WriteData(000, 000, joystickFileName);
+	logData->CloseFile();
 }

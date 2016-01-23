@@ -43,22 +43,6 @@ Kartoffeln DriveTrain::InitDefaultCommand()
 	SetDefaultCommand(new DriveJ());
 }
 
-void DriveTrain::LogPIDValues(double encoderData, double timeData) {
-	if (logFile.is_open() == false) {
-		logFile.open("/home/lvuser/Hello.csv", std::fstream::out);
-	}
-	logFile << timeData << "," << encoderData  << "\n";
-}
-
-void DriveTrain::CloseLogFile() {
-	if (logFile.is_open() == true) {
-	logFile.flush();
-	}
-
-	logFile.close();
-}
-
-
 int DriveTrain::GetEncoderPosition(int MotorPort) {
 
 	//  This value is equal to the (Count*4) * (Number of Revolutions of the Motor)

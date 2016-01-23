@@ -29,7 +29,7 @@ void PIDTesting::Execute()
 	SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
 	SmartDashboard::PutNumber("Timer", timerValue);
 
-	driveTrain->LogPIDValues(encoderValue, timerValue);
+	logData->WriteData(timerValue, encoderValue, PIDFileName);
 
 	//  How to Graph these values??
 }
@@ -48,12 +48,13 @@ bool PIDTesting::IsFinished()
 // Called once after isFinished returns true
 void PIDTesting::End()
 {
-	driveTrain->CloseLogFile();
+	logData->CloseFile();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void PIDTesting::Interrupted()
 {
-	driveTrain->LogPIDValues(000, 000);
+	logData->WriteData(000, 000, PIDFileName);
+	logData->CloseFile();
 }
