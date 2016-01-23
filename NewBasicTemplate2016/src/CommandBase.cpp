@@ -1,10 +1,12 @@
-#include "CommandBase.h"
-#include "Commands/Scheduler.h"
+#include <CommandBase.h>
+#include <OI.h>
+#include <Subsystems/DriveTrain.h>
+#include <Subsystems/USBCam.h>
 
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
-std::unique_ptr<USBCam> CommandBase::usbCam;
+std::unique_ptr<USBCam> CommandBase::caMeRa;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 CommandBase::CommandBase(const std::string &name) :
@@ -26,6 +28,6 @@ void CommandBase::init()
 
 	oi.reset(new OI());
 
-	usbCam.reset(new USBCam());
+	caMeRa.reset(new USBCam());
 	//preferences.reset(Preferences::GetInstance());
 }
