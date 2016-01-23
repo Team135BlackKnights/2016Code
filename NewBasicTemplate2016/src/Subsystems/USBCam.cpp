@@ -5,7 +5,7 @@ USBCam::USBCam() :
 		Subsystem("USBCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
-	visionTable.reset(NetworkTable::GetTable("table").get());
+	visionTable.reset(NetworkTable::GetTable("SmartDashboard").get());
 }
 
 void USBCam::InitDefaultCommand()
@@ -21,8 +21,14 @@ void USBCam::InitDefaultCommand()
 void USBCam::findBiggest()
 {
 	//visionTable->
-	/*auto areas = grip->GetNumberArray("myCountoursReport/area", llvm::ArrayRef<double>()),
-	xs = grip->GetNumberArray("myCountoursReport/x", llvm::ArrayRef<double>()),
+	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
+	if(xys.size() > 2)
+		return;
+	double x = xys[0];
+	double y = xys[1];
+	std::cout << "x: " << x << std::endl;
+	std::cout << "y: " << y << std::endl;
+	/*xs = grip->GetNumberArray("myCountoursReport/x", llvm::ArrayRef<double>()),
 	ys = grip->GetNumberArray("myCountoursReport/y", llvm::ArrayRef<double>());
 	targetArea = -1.0;
 	targetX = 0.0;

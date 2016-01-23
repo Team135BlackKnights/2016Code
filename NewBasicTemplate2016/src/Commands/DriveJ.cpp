@@ -11,6 +11,7 @@ DriveJ::DriveJ()
 	// eg. Requires(chassis);
 	inverted = false;
 	Requires(driveTrain.get());
+	Requires(caMeRa.get());
 }
 
 // Called just before this Command runs the first time
@@ -27,6 +28,8 @@ void DriveJ::Execute()
 		//driveTrain->Invert(newInvert);
 
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
+	//testing, just sending x, y
+	caMeRa->findBiggest();
 }
 
 // Make this return true when this Command no longer needs to run execute()
