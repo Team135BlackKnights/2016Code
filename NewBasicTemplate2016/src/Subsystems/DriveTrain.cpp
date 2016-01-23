@@ -80,7 +80,7 @@ double DriveTrain::GetRevsPerSecond(int MotorPort) {
 double DriveTrain::GetVelocity(int MotorPort) {
 
 
-	double DISTANCE_PER_SEC = GetRevolutionsPerSecond(MotorPort) * CIRCUM;
+	double DISTANCE_PER_SEC = GetRevsPerSecond(MotorPort) * CIRCUM;
 	return DISTANCE_PER_SEC;  //  Units: Inches per second
 
 }
