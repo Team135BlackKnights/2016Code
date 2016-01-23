@@ -25,7 +25,6 @@ private:
 
 	double CIRCUM;
 
-
 public:
 
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
@@ -38,6 +37,7 @@ public:
 
 	void DriveTank(float, float);
 	void RotateTank(float);
+	void SetMotorValue(int, double);
 
 	void SetSafetyEnabled(bool);
 
@@ -48,7 +48,9 @@ public:
 	void ZeroEncoder(int);
 	double GetDistance(int);
 	double GetVelocity(int);
-	double GetRevsPerSecond(int);
+
+	void FeedbackPIDOutput(int, double);
+	void SetPIDValues(int, double, double, double);
 
 };
 

@@ -52,7 +52,8 @@ int DriveTrain::GetEncoderPosition(int MotorPort) {
 int DriveTrain::GetEncoderVelocity(int MotorPort) {
 
 	//  Gets the Speed Value (Encoder Ticks/.1sec.) of the Encoder
-	//  The value will be Count*4 because it is a quadrature encoder
+	//  The value should be Count*4 because it is a quadrature encoder
+	//  This value will also be used for graphing values for PID Tuning
 	return motors[MotorPort]->GetSpeed();
 }
 
@@ -70,20 +71,27 @@ double DriveTrain::GetDistance(int MotorPort) {
 	return DISTANCE_TRAVELED;
 }
 
-double DriveTrain::GetRevsPerSecond(int MotorPort) {
-
-	int encoderVelocity = GetEncoderVelocity(MotorPort);
-	double REVS_PER_SEC = (encoderVelocity * 10)/(quadratureCOUNT);
-	return REVS_PER_SEC;
-}
-
 double DriveTrain::GetVelocity(int MotorPort) {
 
-
-	double DISTANCE_PER_SEC = GetRevsPerSecond(MotorPort) * CIRCUM;
+	int encoderVelocity = GetEncoderVelocity(MotorPort);
+	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(quadratureCOUNT);
+	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * CIRCUM;
 	return DISTANCE_PER_SEC;  //  Units: Inches per second
 
 }
+
+void DriveTrain::FeedbackPIDOutput(int MotorPort, double output) {
+	//  PIDWrite()
+	motors[MotorPort]->PIDWrite(output);
+
+}
+
+void DriveTrain::SetPIDValues(int MotorPort, double PValue, double IValue, double DValue) {
+
+	motors[MotorPort]->SetPID(PValue, IValue, DValue);
+
+}
+
 
 void DriveTrain::DriveTank(float left, float right)
 {
@@ -91,6 +99,11 @@ void DriveTrain::DriveTank(float left, float right)
 	right = fmax(-1, fmin(1, right));
 
 	chassis->TankDrive(left, right);
+}
+
+void DriveTrain::SetMotorValue(int MotorPort, double MotorPower) {
+
+	motors[MotorPort]->Set(MotorPower);
 }
 
 void DriveTrain::RotateTank(float power)
