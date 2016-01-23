@@ -34,7 +34,7 @@ PIDLogging::~PIDLogging() {
 void PIDLogging::SetupMotors() {
 	for (int i = 0; i < this->numMotors; i++) {
 		motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-		//  motors[i]->SetControlMode(CANTalon::kPosition);
+		motors[i]->SetControlMode(CANTalon::kPosition);
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
@@ -46,6 +46,10 @@ int PIDLogging::GetEncoderPosition(int motorIndex) {
 
 	//  This value is equal to the (Count*4) * (Number of Revolutions of the Motor)
 	return motors[motorIndex]->GetEncPosition();
+}
+
+int PIDLogging::GetEncoder(int motorIndex) {
+	return motors[motorIndex]->Get();
 }
 
 int PIDLogging::GetEncoderVelocity(int motorIndex) {
@@ -98,7 +102,8 @@ void PIDLogging::SetPIDValues(int motorIndex) {
 }
 
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
-	double encoderValue = this->GetEncoderPosition(motorIndex);
+	int encoderPosition = this->GetEncoderPosition(motorIndex);
+	int encoderGet = this->GetEncoder(motorIndex);
 
 	std::cout << "LOGGING THINGS!";
 	// current date/time based on current system
@@ -117,7 +122,7 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
 	//std::string fileName = month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
 	std::string fileName = "HELLO";
 	std::stringstream ss2;
-	ss2 << timerValue << "," << encoderValue;
+	ss2 << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet;
 	this->WriteString(fileName, ss2.str());
 }
 

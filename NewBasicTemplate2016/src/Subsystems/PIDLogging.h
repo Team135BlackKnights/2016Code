@@ -34,6 +34,7 @@ public:
 public:
 	void SetupMotors();
 	int GetEncoderPosition(int);
+	int GetEncoder(int);
 	int GetEncoderVelocity(int);
 	void ZeroEncoder(int);
 	void ZeroAllEncoders();
