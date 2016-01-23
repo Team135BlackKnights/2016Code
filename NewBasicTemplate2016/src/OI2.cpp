@@ -50,7 +50,7 @@ float OI::GetStickSlider(int controllerNum)
 	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
 }
 \
-bool OI::GetButton(int controllerNum, int buttonNum)
+bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
 }

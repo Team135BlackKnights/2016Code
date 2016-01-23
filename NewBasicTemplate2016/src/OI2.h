@@ -8,6 +8,7 @@ class OI
 protected:
 	static const int JOYSTICKS = 3; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
+	//unique_ptr creates a(n) unique pointer  ask Eddie if confused
 	std::unique_ptr<Joystick> joysticksArray[JOYSTICKS]; //creates an array of the joysticks
 	std::unique_ptr<JoystickButton> buttonsArray[JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1]; //creates an array of the joysticks vs the buttons starting with buttons at 1
 		 /*	 	 	 	 	 	 Buttons * 0 is invalid *
