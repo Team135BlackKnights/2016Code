@@ -8,21 +8,21 @@
 class PIDTesting: public CommandBase
 {
 private:
-	int PortNumber = 2;
+	//int PortNumber = 2;
 
-	int PValue,
-		IValue,
-		DValue;
+	//int PValue,
+	//	IValue,
+	//	DValue;
 
-	int Power = .5;
+	//int power = .5;
 
-	double encoderValue;
+	//double encoderValue;
 
 	std::unique_ptr<Timer> timer;
 
 	double timerValue;
 
-	std::string PIDFileName = "PID.csv";
+	//std::string PIDFileName = "PID.csv";
 
 public:
 	PIDTesting();

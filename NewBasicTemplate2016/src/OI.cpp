@@ -21,8 +21,8 @@ OI::OI()
 		}
 	}
 
-	buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new JoystickTesting());
-	buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
+	buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new PIDTesting());
+	//buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
 
 }
 

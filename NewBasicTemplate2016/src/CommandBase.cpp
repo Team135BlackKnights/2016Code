@@ -4,7 +4,7 @@
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
-std::unique_ptr<LogData> CommandBase::logData;
+//std::unique_ptr<LogData> CommandBase::logData;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 CommandBase::CommandBase(const std::string &name) :
@@ -26,7 +26,7 @@ void CommandBase::init()
 
 	oi.reset(new OI());
 
-	logData.reset(new LogData());
+	//logData.reset(new LogData());
 
 	//preferences.reset(Preferences::GetInstance());
 }

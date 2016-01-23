@@ -6,30 +6,33 @@ PIDTesting::PIDTesting()
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 	timer.reset(new Timer());
+	timerValue = 0;
 
-	SmartDashboard::GetNumber("PValue", PValue);
-	SmartDashboard::GetNumber("IValue", IValue);
-	SmartDashboard::GetNumber("DValue", DValue);
+	//PValue = SmartDashboard::GetNumber("PValue", PValue);
+	//SmartDashboard::GetNumber("IValue", IValue);
+	//SmartDashboard::GetNumber("DValue", DValue);
 }
 
 // Called just before this Command runs the first time
 void PIDTesting::Initialize()
 {
-	driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
-	driveTrain->ZeroEncoder(PortNumber);
+	//driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
+	driveTrain->ZeroAllEncoders();
 	timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
-	driveTrain->SetMotorValue(PortNumber, Power);
-	encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
+	int index = 0;
+	std::cout << "Executing?" << std::endl;
+	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
-	SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
+	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
 	SmartDashboard::PutNumber("Timer", timerValue);
 
-	logData->WriteData(timerValue, encoderValue, PIDFileName);
+
+	driveTrain->LogEncoderData(index, timerValue);
 
 	//  How to Graph these values??
 }
@@ -48,13 +51,14 @@ bool PIDTesting::IsFinished()
 // Called once after isFinished returns true
 void PIDTesting::End()
 {
-	logData->CloseFile();
+	driveTrain->CloseFile();
+	std::cout << "Ended" << std::endl;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void PIDTesting::Interrupted()
 {
-	logData->WriteData(000, 000, PIDFileName);
-	logData->CloseFile();
+	std::cout << "Interrupted" << std::endl;
+	driveTrain->CloseFile();
 }

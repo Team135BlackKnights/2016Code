@@ -7,23 +7,17 @@
 #include "../OI.h"
 #include <fstream>
 
-class DriveTrain: public Subsystem
+class DriveTrain: public PIDLogging
 {
 public:
 	static const int NUM_MOTORS = 4;
 private:
-	std::unique_ptr<CANTalon> motors[NUM_MOTORS];
+	//std::unique_ptr<CANTalon> motors[NUM_MOTORS];
 
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Need a value for the count of the encoder
 	static const int COUNT = 64;
-	int quadratureCOUNT;
-
-	//  Need a value for the radius of the wheel
-	double RADIUS = 4.5; //  In inches
-
-	double CIRCUM;
 
 public:
 
@@ -42,15 +36,6 @@ public:
 	void SetSafetyEnabled(bool);
 
 	void InvertMotors(bool inverted);
-
-	int GetEncoderPosition(int);
-	int GetEncoderVelocity(int);
-	void ZeroEncoder(int);
-	double GetDistance(int);
-	double GetVelocity(int);
-
-	void FeedbackPIDOutput(int, double);
-	void SetPIDValues(int, double, double, double);
 
 };
 

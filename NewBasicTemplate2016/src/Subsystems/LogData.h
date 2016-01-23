@@ -1,21 +1,22 @@
 #ifndef LogData_H
 #define LogData_H
 
-#include "Commands/Subsystem.h"
 #include "WPILib.h"
 #include <fstream>
 
-class LogData: public Subsystem
+class LogData
 {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 	std::ofstream logFile;
+	std::string filePath;
 
 public:
-	LogData();
-	void InitDefaultCommand();
-	void WriteData(double, double, std::string);
+	LogData(std::string);
+	void WriteString(std::string, std::string);
+	void WriteDoubles(std::string, double...);
+	void ChangeFilePath(std::string);
 	void CloseFile();
 };
 

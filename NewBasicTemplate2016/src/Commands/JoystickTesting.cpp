@@ -22,7 +22,7 @@ void JoystickTesting::Execute()
 		SmartDashboard::PutNumber("JoystickX Value:", joystickX);
 		SmartDashboard::PutNumber("JoystickY Value", joystickY);
 
-		logData->WriteData(joystickX, joystickY, joystickFileName);
+		logData->WriteTwoDoubles(joystickX, joystickY, joystickFileName);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -42,6 +42,6 @@ void JoystickTesting::End()
 // subsystems is scheduled to run
 void JoystickTesting::Interrupted()
 {
-	logData->WriteData(000, 000, joystickFileName);
+	logData->WriteTwoDoubles(000, 000, joystickFileName);
 	logData->CloseFile();
 }

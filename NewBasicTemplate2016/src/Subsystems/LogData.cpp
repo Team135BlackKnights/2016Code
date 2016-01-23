@@ -1,23 +1,35 @@
 #include "LogData.h"
 #include "../RobotMap.h"
 
-LogData::LogData() :
-		Subsystem("ExampleSubsystem")
+LogData::LogData(std::string filePath)
 {
-
+	this->filePath = filePath;
 }
 
-void LogData::InitDefaultCommand()
-{
-	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
-}
-
-void LogData::WriteData(double dataValueOne, double dataValueTwo, std::string fileName) {
-	if (logFile.is_open() == false) {
-		logFile.open("/home/lvuser/" + fileName, std::fstream::out);
+void LogData::WriteString(std::string fileName, std::string data) {
+	if (!logFile.is_open()) {
+		logFile.open(this->filePath + fileName, std::fstream::out);
 	}
-	logFile << dataValueOne << "," << dataValueTwo << "," << "\n";
+	logFile << data << "\n";
+}
+
+void LogData::WriteDoubles(std::string fileName, double values...) {
+	if (logFile.is_open() == false) {
+		logFile.open(filePath + fileName, std::fstream::out);
+	}
+	bool comma = false;
+	for (double value: values) {
+		if (comma)
+			logFile << ", ";
+		else
+			comma = true;
+		logFile << value;
+	}
+	logFile << "\n";
+}
+
+void LogData::ChangeFilePath(std::string path) {
+	this->filePath = path;
 }
 
 void LogData::CloseFile() {
