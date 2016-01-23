@@ -16,7 +16,6 @@ void JoystickTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void JoystickTesting::Execute()
 {
-	if (oi->GetButton[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER] == true) {
 		joystickX = oi->GetStickX(JOYSTICK_LEFT);
 		joystickY = oi->GetStickY(JOYSTICK_LEFT);
 
@@ -24,26 +23,20 @@ void JoystickTesting::Execute()
 		SmartDashboard::PutNumber("JoystickY Value", joystickY);
 
 		driveTrain->LogPIDValues(joystickX, joystickY);
-	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool JoystickTesting::IsFinished()
 {
-	if (oi->GetButton[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER] == false) {
-		return true;
-	}
-	else {
-		return false;
-
-	}
+	return false;
 }
 
 // Called once after isFinished returns true
 void JoystickTesting::End()
 {
-	driveTrain->CloseLogFile();
+
 }
+
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
