@@ -9,7 +9,7 @@ class USBCam: public Subsystem
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	static char* CAMERA_NAME = "cam1";
+	const char* CAMERA_NAME = "cam2";
 public:
 	USBCam();
 	void InitDefaultCommand();
