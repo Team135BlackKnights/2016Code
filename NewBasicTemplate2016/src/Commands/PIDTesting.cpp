@@ -19,13 +19,19 @@ void PIDTesting::Initialize()
 	//driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
 	driveTrain->ZeroAllEncoders();
 	timer->Start();
+
+	std::string fileName = "HELLO";
+	std::stringstream ss1;
+	ss1 << driveTrain->p << "," << driveTrain->i << "," << driveTrain->d;
+	driveTrain->WriteString(fileName, ss1.str());
+	driveTrain->WriteString(fileName, "---------------------------");
 }
 
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
 	int index = 0;
-	std::cout << "Executing?" << std::endl;
+	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
@@ -40,7 +46,7 @@ void PIDTesting::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PIDTesting::IsFinished()
 {
-	if (timer->Get() >= 15) {
+	if (timer->Get() >= 5) {
 		return true;
 	}
 	else {
@@ -51,7 +57,7 @@ bool PIDTesting::IsFinished()
 // Called once after isFinished returns true
 void PIDTesting::End()
 {
-	driveTrain->CloseFile();
+	driveTrain->ClosePIDFile();
 	std::cout << "Ended" << std::endl;
 }
 
@@ -60,5 +66,5 @@ void PIDTesting::End()
 void PIDTesting::Interrupted()
 {
 	std::cout << "Interrupted" << std::endl;
-	driveTrain->CloseFile();
+	driveTrain->ClosePIDFile();
 }

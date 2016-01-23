@@ -12,14 +12,14 @@ typedef Riley TheGoodMan;
 
 
 DriveTrain::DriveTrain():
-		PIDLogging("DriveTrain", "/home/lvuser/DriveTrainData", 1.0, 0.0, 0.0, NUM_MOTORS, 4.5)
+		PIDLogging("DriveTrain", "/home/lvuser/", 1.0, 0.0, 0.0, NUM_MOTORS, 4.5)
 {
-		motors[FRONT_LEFT].reset(new thing(MOTOR_FRONT_LEFT));
-		motors[REAR_LEFT].reset(new thing(MOTOR_REAR_LEFT));
-		motors[FRONT_RIGHT].reset(new CANTalon(MOTOR_FRONT_RIGHT));
-		motors[REAR_RIGHT].reset(new CANTalon(MOTOR_REAR_RIGHT));
+		motors[FRONT_LEFT] = new thing(MOTOR_FRONT_LEFT);
+		motors[REAR_LEFT] = new thing(MOTOR_REAR_LEFT);
+		motors[FRONT_RIGHT] = new CANTalon(MOTOR_FRONT_RIGHT);
+		motors[REAR_RIGHT] = new CANTalon(MOTOR_REAR_RIGHT);
 
-		chassis.reset(new RobotDrive(motors[FRONT_LEFT].get(), motors[REAR_LEFT].get(), motors[FRONT_RIGHT].get(), motors[REAR_RIGHT].get()));
+		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
 
 		chassis->SetSafetyEnabled(false);
 
@@ -27,6 +27,8 @@ DriveTrain::DriveTrain():
 
 
 }
+
+DriveTrain::~DriveTrain() {};
 
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
@@ -63,4 +65,8 @@ void DriveTrain::InvertMotors(bool inverted)
 	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, inverted);
+}
+
+void DriveTrain::ClosePIDFile() {
+	this->CloseFile();
 }

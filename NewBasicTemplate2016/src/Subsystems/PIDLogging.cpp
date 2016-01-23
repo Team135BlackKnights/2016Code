@@ -5,7 +5,8 @@
  *      Author: conne_000
  */
 
-#include <Subsystems/PIDLogging.h>
+#include "PIDLogging.h"
+#include <sstream>
 
 PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, double p, double i, double d, int numMotors, double radius):
 	PIDSubsystem("PIDLogging", p, i, d),
@@ -18,13 +19,15 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, dou
 	this->circumfrence = this->radius * 3.14159;
 	this->p = p, this->i = i, this->d = d;
 
-	motors = std::shared_ptr<CANTalon>[numMotors];
+	//CANTalon motorTemps[numMotors];
+	//this->motors = motorTemps;
+	//memcpy(this->motors, motorTemps, numMotors);
 }
 
 PIDLogging::~PIDLogging() {
 	// TODO Auto-generated destructor stub
 	for (int i = 0; i < numMotors; i++) {
-		motors[i].reset();
+		delete motors[i];
 	}
 }
 
@@ -42,7 +45,7 @@ void PIDLogging::SetupMotors() {
 int PIDLogging::GetEncoderPosition(int motorIndex) {
 
 	//  This value is equal to the (Count*4) * (Number of Revolutions of the Motor)
-	return motors[motorIndex]->GetPosition();
+	return motors[motorIndex]->GetEncPosition();
 }
 
 int PIDLogging::GetEncoderVelocity(int motorIndex) {
@@ -89,29 +92,43 @@ void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
 }
 
 void PIDLogging::SetPIDValues(int motorIndex) {
-	motors[i]->SetP(this->p);
-	motors[i]->SetI(this->i);
-	motors[i]->SetD(this->d);
+	motors[motorIndex]->SetP(this->p);
+	motors[motorIndex]->SetI(this->i);
+	motors[motorIndex]->SetD(this->d);
 }
 
-void PIDLogging::LogEncoderData(int motorIndex, double time) {
-	double encoderValue = this->GetEncoderVelocity(motorIndex);
+void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
+	double encoderValue = this->GetEncoderPosition(motorIndex);
 
+	std::cout << "LOGGING THINGS!";
 	// current date/time based on current system
 	time_t now = time(0);
 	tm *ltm = localtime(&now);
 
 	// print various components of tm structure.
-	std::string year = (std::string)(int)(1900 + ltm->tm_year);
+	/*
+	std::string year = (int)(1900 + ltm->tm_year).str();
 	std::string month = (std::string)(int)(1 + ltm->tm_mon);
 	std::string day = (std::string)(int)(ltm->tm_mday);
 	std::string hour = (std::string)(int)(ltm->tm_hour);
 	std::string min = (std::string)(int)(ltm->tm_min);
 	std::string sec = (std::string)(int)(ltm->tm_sec);
-	std::string fileName = month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
-	this->WriteDoubles(fileName, this->p, this->i, this->d);
-	this->WriteString(fileName, "---------------------------");
-	this->WriteDoubles(fileName, time, motorIndex);
+	*/
+	//std::string fileName = month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
+	std::string fileName = "HELLO";
+	std::stringstream ss2;
+	ss2 << timerValue << "," << encoderValue;
+	this->WriteString(fileName, ss2.str());
 }
+
+void PIDLogging::PIDWrite(float output) {}
+void PIDLogging::SetAbsoluteTolerance(float absValue) {}
+void PIDLogging::SetPercentTolerance(float percent) {}
+bool PIDLogging::OnTarget() const {return true;}
+double PIDLogging::PIDGet() {return 0;}
+double PIDLogging::ReturnPIDInput() {return 0;}
+void PIDLogging::UsePIDOutput(double output) {}
+void PIDLogging::InitTable(std::shared_ptr<ITable> table) {};
+std::string PIDLogging::GetSmartDashboardType() const {return "";};
 
 

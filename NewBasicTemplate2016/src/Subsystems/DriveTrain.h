@@ -1,8 +1,7 @@
 #ifndef MecanumDrive_H
-
 #define MecanumDrive_H
 
-#include "Commands/Subsystem.h"
+#include "PIDLogging.h"
 #include "WPILib.h"
 #include "../OI.h"
 #include <fstream>
@@ -27,6 +26,7 @@ public:
 						REAR_RIGHT = RobotDrive::kRearRightMotor;
 
 	DriveTrain();
+	~DriveTrain();
 	void InitDefaultCommand();
 
 	void DriveTank(float, float);
@@ -36,6 +36,7 @@ public:
 	void SetSafetyEnabled(bool);
 
 	void InvertMotors(bool inverted);
+	void ClosePIDFile();
 
 };
 

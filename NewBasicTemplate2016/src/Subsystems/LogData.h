@@ -15,7 +15,7 @@ private:
 public:
 	LogData(std::string);
 	void WriteString(std::string, std::string);
-	void WriteDoubles(std::string, double...);
+	void WriteDoubles(std::string, double[]);
 	void ChangeFilePath(std::string);
 	void CloseFile();
 };

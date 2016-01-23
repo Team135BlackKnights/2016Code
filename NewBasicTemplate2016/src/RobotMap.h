@@ -25,7 +25,7 @@
     const int JOYSTICK_MANIPULATOR_CONTROL = 2;
     const int JOYSTICK_BUTTON_BOX = 3;
 
-    const int JOYSTICK_BUTTON_TESTER_START = 5;
+    const int JOYSTICK_BUTTON_TESTER_START = 1;
     const int JOYSTICK_BUTTON_TESTER_STOP = 6;
 
 

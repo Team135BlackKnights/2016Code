@@ -9,14 +9,16 @@
 #define SRC_SUBSYSTEMS_PIDLOGGING_H_
 
 #include <Commands/PIDSubsystem.h>
+#include "LogData.h"
 
-virtual class PIDLogging: public PIDSubsystem, LogData {
+class PIDLogging: public PIDSubsystem, public LogData {
 public:
 	PIDLogging(const std::string&, const std::string&, double, double, double, int, double);
 	virtual ~PIDLogging();
 
-private:
-	std::shared_ptr<CANTalon> motors[]; //Array of motors that you want to read encoder data from
+protected:
+	//std::shared_ptr<CANTalon> motors[]; //Array of motors that you want to read encoder data from
+	CANTalon* motors[10];
 
 	int numMotors;
 	static const int COUNT = 64;
@@ -26,20 +28,41 @@ private:
 
 	double circumfrence;
 
+public:
 	double p, i, d;
 
 public:
-	virtual void SetupMotors();
-	virtual int GetEncoderPosition(int);
-	virtual int GetEncoderVelocity(int);
-	virtual void ZeroEncoder(int);
-	virtual void ZeroAllEncoders();
-	virtual double GetDistance(int);
-	virtual double GetVelocity(int);
-	virtual void LogEncoderData(int, double);
+	void SetupMotors();
+	int GetEncoderPosition(int);
+	int GetEncoderVelocity(int);
+	void ZeroEncoder(int);
+	void ZeroAllEncoders();
+	double GetDistance(int);
+	double GetVelocity(int);
+	void LogEncoderData(int, double);
 
-	virtual void FeedbackPIDOutput(int, double);
-	virtual void SetPIDValues(int);
+	void FeedbackPIDOutput(int, double);
+	void SetPIDValues(int);
+
+
+	// PIDOutput interface
+	void PIDWrite(float output);
+
+	// PIDSource interface
+	double PIDGet();
+
+	void SetAbsoluteTolerance(float absValue);
+	void SetPercentTolerance(float percent);
+	bool OnTarget() const;
+
+	protected:
+
+	double ReturnPIDInput();
+	void UsePIDOutput(double output);
+
+	public:
+	void InitTable(std::shared_ptr<ITable> table);
+	std::string GetSmartDashboardType() const;
 };
 
 #endif /* SRC_SUBSYSTEMS_PIDLOGGING_H_ */

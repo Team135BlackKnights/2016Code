@@ -1,5 +1,6 @@
 #include "LogData.h"
 #include "../RobotMap.h"
+#include<stdarg.h>
 
 LogData::LogData(std::string filePath)
 {
@@ -13,12 +14,14 @@ void LogData::WriteString(std::string fileName, std::string data) {
 	logFile << data << "\n";
 }
 
-void LogData::WriteDoubles(std::string fileName, double values...) {
+void LogData::WriteDoubles(std::string fileName, double values[]) {
 	if (logFile.is_open() == false) {
 		logFile.open(filePath + fileName, std::fstream::out);
 	}
 	bool comma = false;
-	for (double value: values) {
+	int size = sizeof(values)/sizeof(values[0]);
+	for (int i = 0; i < size; i++) {
+		double value = values[i];
 		if (comma)
 			logFile << ", ";
 		else

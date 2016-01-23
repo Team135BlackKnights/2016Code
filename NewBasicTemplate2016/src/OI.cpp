@@ -3,6 +3,7 @@
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 #include "Commands/JoystickTesting.h"
+#include "Commands/PIDTesting.h"
 
 OI::OI()
 {
