@@ -5,7 +5,7 @@ USBCam::USBCam() :
 		Subsystem("USBCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
-	visionTable.reset(NetworkTable::GetTable("table"));
+	visionTable.reset(NetworkTable::GetTable("table").get());
 }
 
 void USBCam::InitDefaultCommand()
