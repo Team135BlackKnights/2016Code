@@ -1,5 +1,6 @@
 
 #include <Subsystems/USBCam.h>
+#include <math.h>
 
 USBCam::USBCam() :
 		Subsystem("USBCam")
@@ -24,46 +25,47 @@ void USBCam::findBiggest()
 	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
 	if(xys.size() > 2)
 		return;
-	double x = xys[0];
-	double y = xys[1];
+	x = xys[0];
+	y = xys[1];
 	std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
-	/*xs = grip->GetNumberArray("myCountoursReport/x", llvm::ArrayRef<double>()),
-	ys = grip->GetNumberArray("myCountoursReport/y", llvm::ArrayRef<double>());
-	targetArea = -1.0;
-	targetX = 0.0;
-	targetY = 0.0;
-	for (int i = 0; i < areas.size(); i++){
-		double area = areas[i], x = xs[i], y = ys[i];
-		if (area > targetArea){
-			targetArea = area;
-			targetX = x;
-			targetY = y;
-		}
-		std::cout << "Got contour: area=" << area << ", x=" << x << ", y=" << y << std::endl;
-    }
-	//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
-	std::cout << "TARGET ACQUIRED!" << std::endl;
-	std::cout << "AREA = " << targetArea << std::endl;
-	std::cout << "(X,Y) = (" << targetX << "," << targetY << ")" << std::endl;
-	//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
-	//return std::make_tuple(targetArea, targetX, targetY);*/
 }
-
 
 double USBCam::xDistanceToCenter(double x)
 {
-	return x - XWIDTH/2;
+	return x - X_IMAGE_RES /2;
 }
 
 double USBCam::yDistanceToCenter(double y)
 {
-	return y - YWIDTH/2;
+	return y - Y_IMAGE_RES/2;
 }
 
 double USBCam::percentArea(double area)
 {
-	return area/(XWIDTH*YWIDTH);
+	return area/(X_IMAGE_RES*Y_IMAGE_RES);
 }
 
+double USBCam::getWidth()
+{
+	return width;
+}
 
+double USBCam::getHeight()
+{
+	return height;
+}
+
+double USBCam::getX()
+{
+	return x;
+}
+
+double USBCam::getY()
+{
+	return y;
+}
+double USBCam::distanceToBlob(double x, double y, double width, double height)
+{
+	return X_WIDTH_GOAL * X_IMAGE_RES / (2*PIXEL_WIDTH * tan(AXIS_VANGLE / 2));
+}

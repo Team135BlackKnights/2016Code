@@ -30,6 +30,9 @@ void DriveJ::Execute()
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 	//testing, just sending x, y
 	caMeRa->findBiggest();
+	//maybe print distance if it possibly works
+	std::cout << "distance to blob: " << caMeRa->distanceToBlob(caMeRa->getX(),
+			caMeRa->getY(), caMeRa->getWidth(), caMeRa->getHeight()) << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
