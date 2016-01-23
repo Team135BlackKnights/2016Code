@@ -11,7 +11,7 @@ class USBCam: public Subsystem
 {
 private:
 	const char* CAMERA_NAME = "cam2";
-	std::unique_ptr<NetworkTable> visionTable;
+	std::shared_ptr<NetworkTable> visionTable;
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
