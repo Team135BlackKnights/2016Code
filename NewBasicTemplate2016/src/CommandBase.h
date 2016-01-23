@@ -1,11 +1,13 @@
 #ifndef COMMAND_BASE_H
 #define COMMAND_BASE_H
 
+#include <Commands/Command.h>
+#include <memory>
 #include <string>
-#include "Commands/Command.h"
-#include "Subsystems/DriveTrain.h"
-#include "OI.h"
-#include "WPILib.h"
+
+class DriveTrain;
+class OI;
+class USBCam;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -21,6 +23,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<DriveTrain> driveTrain;
 	static std::unique_ptr<OI> oi;
+	static std::unique_ptr<USBCam> usbCam;
 	//static std::unique_ptr<Preferences> preferences;
 };
 
