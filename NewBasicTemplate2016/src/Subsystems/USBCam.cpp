@@ -5,7 +5,7 @@ USBCam::USBCam() :
 		Subsystem("USBCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
-	visionTable.reset(NetworkTable::GetTable("SmartDashboard").get());
+	visionTable = NetworkTable::GetTable("SmartDashboard");
 }
 
 void USBCam::InitDefaultCommand()
@@ -22,7 +22,7 @@ void USBCam::findBiggest()
 {
 	//visionTable->
 	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
-	if(xys.size() > 2)
+	if(xys.size() > 2 || xys.size() == 0)
 		return;
 	double x = xys[0];
 	double y = xys[1];
