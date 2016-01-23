@@ -31,8 +31,7 @@ void DriveJ::Execute()
 	//testing, just sending x, y
 	caMeRa->findBiggest();
 	//maybe print distance if it possibly works
-	std::cout << "distance to blob: " << caMeRa->distanceToBlob(caMeRa->getX(),
-			caMeRa->getY(), caMeRa->getWidth(), caMeRa->getHeight()) << std::endl;
+	std::cout << "distance to blob: " << caMeRa->distanceToBlob(caMeRa->getWidth()) << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

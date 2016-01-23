@@ -65,7 +65,7 @@ double USBCam::getY()
 {
 	return y;
 }
-double USBCam::distanceToBlob(double x, double y, double width, double height)
+double USBCam::distanceToBlob(double pixel_width)
 {
-	return X_WIDTH_GOAL * X_IMAGE_RES / (2*PIXEL_WIDTH * tan(AXIS_VANGLE / 2));
+	return X_WIDTH_GOAL * X_IMAGE_RES / (2*pixel_width * tan(AXIS_VANGLE / 2));
 }

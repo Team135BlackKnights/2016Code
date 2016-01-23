@@ -19,7 +19,6 @@ private:
 	const int Y_IMAGE_RES = 240;
 	const int X_WIDTH_GOAL = 20; //in inches
 	const int Y_HEIGHT_GOAL = 14; //inches
-	int PIXEL_WIDTH; //find this
 	const double AXIS_VANGLE = 67;
 	double x;
 	double y;
@@ -36,7 +35,7 @@ public:
 	double getY();
 	double getWidth();
 	double getHeight();
-	double distanceToBlob(double x, double y, double width, double height);
+	double distanceToBlob(double pixel_width);
 };
 
 #endif
