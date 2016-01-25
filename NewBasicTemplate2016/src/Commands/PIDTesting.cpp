@@ -20,11 +20,18 @@ void PIDTesting::Initialize()
 	driveTrain->ZeroAllEncoders();
 	timer->Start();
 
-	std::string fileName = "HELLO";
+	std::stringstream fileName;
+	// current date/time based on current system
+	time_t now = time(0);
+	tm *ltm = localtime(&now);
+	fileName <<  1 + ltm->tm_mon << "-" << ltm->tm_mday << "-" << ltm->tm_year - 100 << " " <<
+			ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec;
+	driveTrain->ChangeFileName(fileName.str());
+
 	std::stringstream ss1;
 	ss1 << driveTrain->p << "," << driveTrain->i << "," << driveTrain->d;
-	driveTrain->WriteString(fileName, ss1.str());
-	driveTrain->WriteString(fileName, "---------------------------");
+	driveTrain->WriteString(ss1.str());
+	driveTrain->WriteString("---------------------------");
 }
 
 // Called repeatedly when this Command is scheduled to run

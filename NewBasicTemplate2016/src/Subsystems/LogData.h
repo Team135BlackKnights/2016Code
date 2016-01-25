@@ -11,12 +11,14 @@ private:
 	// for methods that implement subsystem capabilities
 	std::ofstream logFile;
 	std::string filePath;
+	std::string fileName;
 
 public:
 	LogData(std::string);
-	void WriteString(std::string, std::string);
-	void WriteDoubles(std::string, double[]);
+	void WriteString(std::string, std::string="", std::string="");
+	//void WriteDoubles(std::string, double[]);
 	void ChangeFilePath(std::string);
+	void ChangeFileName(std::string);
 	void CloseFile();
 };
 

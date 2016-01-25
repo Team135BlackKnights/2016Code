@@ -106,24 +106,9 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
 	int encoderGet = this->GetEncoder(motorIndex);
 
 	std::cout << "LOGGING THINGS!";
-	// current date/time based on current system
-	time_t now = time(0);
-	tm *ltm = localtime(&now);
-
-	// print various components of tm structure.
-	/*
-	std::string year = (int)(1900 + ltm->tm_year).str();
-	std::string month = (std::string)(int)(1 + ltm->tm_mon);
-	std::string day = (std::string)(int)(ltm->tm_mday);
-	std::string hour = (std::string)(int)(ltm->tm_hour);
-	std::string min = (std::string)(int)(ltm->tm_min);
-	std::string sec = (std::string)(int)(ltm->tm_sec);
-	*/
-	//std::string fileName = month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
-	std::string fileName = "HELLO";
-	std::stringstream ss2;
-	ss2 << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet;
-	this->WriteString(fileName, ss2.str());
+	std::stringstream data;
+	data << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet;
+	this->WriteString(data.str());
 }
 
 void PIDLogging::PIDWrite(float output) {}
