@@ -10,8 +10,8 @@ OI::OI()
 
 	// Process operator interface input here.
 	sticks[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //Declares new Joystick
-	sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
-	sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
+	//sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
+	//sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
 
 	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //Declares new buttons for Joysticks max # of buttons is 12
 	{
@@ -37,7 +37,7 @@ float OI::GetStickX(int hand)
 
 float OI::GetStickY(int hand)
 {
-	float value = sticks[hand]->GetY(); // Returns Y axis value of Joysticks
+	float value = 0;//sticks[hand]->GetY(); // Returns Y axis value of Joysticks
 	//if (abs(value) > DEAD_BAND)
 		return value;
 	//return 0;

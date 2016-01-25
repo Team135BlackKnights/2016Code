@@ -7,6 +7,7 @@
 
 #include "PIDLogging.h"
 #include <sstream>
+#include "RobotMap.h"
 
 PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, double p, double i, double d, int numMotors, double radius):
 	PIDSubsystem("PIDLogging", p, i, d),
@@ -104,10 +105,12 @@ void PIDLogging::SetPIDValues(int motorIndex) {
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
 	int encoderPosition = this->GetEncoderPosition(motorIndex);
 	int encoderGet = this->GetEncoder(motorIndex);
+	double speed = this->GetEncoderVelocity(motorIndex);
+	timerValue = Trunc(timerValue, 4);
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream data;
-	data << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet;
+	data << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet << "\t" << speed;
 	this->WriteString(data.str());
 }
 

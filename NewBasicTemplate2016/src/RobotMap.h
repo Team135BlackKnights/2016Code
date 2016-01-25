@@ -14,6 +14,7 @@
 // following variables to use with your drivetrain subsystem.
 
 	//constexpr bool ROBOT_MAIN = false;
+	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 11;
