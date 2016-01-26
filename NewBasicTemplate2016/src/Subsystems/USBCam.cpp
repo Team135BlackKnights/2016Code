@@ -7,6 +7,10 @@ USBCam::USBCam() :
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
 	visionTable = NetworkTable::GetTable("SmartDashboard");
+	height = 0;
+	width = 0;
+	x = 0;
+	y = 0;
 }
 
 void USBCam::InitDefaultCommand()

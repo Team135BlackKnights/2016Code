@@ -15,8 +15,8 @@ private:
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
-	const int X_IMAGE_RES = 320;
-	const int Y_IMAGE_RES = 240;
+	const int X_IMAGE_RES = 360;
+	const int Y_IMAGE_RES = 480;
 	const int X_WIDTH_GOAL = 20; //in inches
 	const int Y_HEIGHT_GOAL = 14; //inches
 	const double AXIS_VANGLE = 67;
