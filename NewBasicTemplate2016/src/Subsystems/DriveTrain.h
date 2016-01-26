@@ -18,6 +18,9 @@ private:
 	//  Need a value for the count of the encoder
 	static const int COUNT = 64;
 
+	//  Measured in Inches
+	static const int RADIUS = 6.25;
+
 public:
 
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
