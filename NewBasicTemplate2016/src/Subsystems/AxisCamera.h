@@ -7,7 +7,7 @@
 #include "WPILib.h"
 #include <unistd.h>
 
-class USBCam: public Subsystem
+class AxisCamera: public Subsystem
 {
 private:
 	const char* CAMERA_NAME = "cam2";
@@ -25,7 +25,7 @@ private:
 	double width;
 	double height;
 public:
-	USBCam();
+	AxisCamera();
 	void InitDefaultCommand();
 	void findBiggest();
 	double xDistanceToCenter(double x);

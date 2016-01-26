@@ -1,8 +1,8 @@
 
-#include <Subsystems/USBCam.h>
 #include <math.h>
+#include <Subsystems/AxisCamera.h>
 
-USBCam::USBCam() :
+AxisCamera::AxisCamera() :
 		Subsystem("USBCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
@@ -13,7 +13,7 @@ USBCam::USBCam() :
 	y = 0;
 }
 
-void USBCam::InitDefaultCommand()
+void AxisCamera::InitDefaultCommand()
 {
 	//set the cam quality of jpeg to be around 50 (out of 100)
 	//CameraServer::GetInstance()->SetQuality(50);
@@ -23,7 +23,7 @@ void USBCam::InitDefaultCommand()
 }
 
 
-void USBCam::findBiggest()
+void AxisCamera::findBiggest()
 {
 	//visionTable->
 	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
@@ -35,41 +35,41 @@ void USBCam::findBiggest()
 	std::cout << "y: " << y << std::endl;
 }
 
-double USBCam::xDistanceToCenter(double x)
+double AxisCamera::xDistanceToCenter(double x)
 {
 	return x - X_IMAGE_RES /2;
 }
 
-double USBCam::yDistanceToCenter(double y)
+double AxisCamera::yDistanceToCenter(double y)
 {
 	return y - Y_IMAGE_RES/2;
 }
 
-double USBCam::percentArea(double area)
+double AxisCamera::percentArea(double area)
 {
 	return area/(X_IMAGE_RES*Y_IMAGE_RES);
 }
 
-double USBCam::getWidth()
+double AxisCamera::getWidth()
 {
 	return width;
 }
 
-double USBCam::getHeight()
+double AxisCamera::getHeight()
 {
 	return height;
 }
 
-double USBCam::getX()
+double AxisCamera::getX()
 {
 	return x;
 }
 
-double USBCam::getY()
+double AxisCamera::getY()
 {
 	return y;
 }
-double USBCam::distanceToBlob(double pixel_width)
+double AxisCamera::distanceToBlob(double pixel_width)
 {
 	return X_WIDTH_GOAL * X_IMAGE_RES / (2*pixel_width * tan(AXIS_VANGLE / 2));
 }

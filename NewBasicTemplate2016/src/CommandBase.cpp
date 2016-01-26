@@ -4,7 +4,7 @@
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
-std::unique_ptr<USBCam> CommandBase::caMeRa;
+std::unique_ptr<AxisCamera> CommandBase::caMeRa;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -25,5 +25,5 @@ void CommandBase::init()
 
 	oi.reset(new OI());
 
-	caMeRa.reset(new USBCam());
+	caMeRa.reset(new AxisCamera());
 }
