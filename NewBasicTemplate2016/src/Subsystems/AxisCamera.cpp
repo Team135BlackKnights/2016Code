@@ -1,4 +1,4 @@
-
+#include <RobotMap.h>
 #include <math.h>
 #include <Subsystems/AxisCamera.h>
 
@@ -11,6 +11,7 @@ AxisCamera::AxisCamera() :
 	width = 0;
 	x = 0;
 	y = 0;
+	yServo = new Servo(SERVO_PORT);
 }
 
 void AxisCamera::InitDefaultCommand()
@@ -19,11 +20,11 @@ void AxisCamera::InitDefaultCommand()
 	//CameraServer::GetInstance()->SetQuality(50);
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
-
+	SetDefaultCommand(new CameraTracking());
 }
 
 
-void AxisCamera::findBiggest()
+void AxisCamera::GetCameraValues()
 {
 	//visionTable->
 	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
@@ -35,12 +36,12 @@ void AxisCamera::findBiggest()
 	std::cout << "y: " << y << std::endl;
 }
 
-double AxisCamera::xDistanceToCenter(double x)
+double AxisCamera::xDistanceToCenter()
 {
 	return x - X_IMAGE_RES /2;
 }
 
-double AxisCamera::yDistanceToCenter(double y)
+double AxisCamera::yDistanceToCenter()
 {
 	return y - Y_IMAGE_RES/2;
 }
@@ -72,4 +73,13 @@ double AxisCamera::getY()
 double AxisCamera::distanceToBlob(double pixel_width)
 {
 	return X_WIDTH_GOAL * X_IMAGE_RES / (2*pixel_width * tan(AXIS_VANGLE / 2));
+}
+
+void AxisCamera::setServoY()
+{
+	double offset = yDistanceToCenter();
+	if(offset <= -5)
+		yServo->Set(yServo->Get() + .005f);
+	else if(offset >= 5)
+		yServo->Set(yServo->Get() - .005f);
 }

@@ -24,18 +24,20 @@ private:
 	double y;
 	double width;
 	double height;
+	std::unique_ptr<Servo> yServo;
 public:
 	AxisCamera();
 	void InitDefaultCommand();
-	void findBiggest();
-	double xDistanceToCenter(double x);
-	double yDistanceToCenter(double y);
+	void GetCameraValues();
+	double xDistanceToCenter();
+	double yDistanceToCenter();
 	double percentArea(double area);
 	double getX();
 	double getY();
 	double getWidth();
 	double getHeight();
 	double distanceToBlob(double pixel_width);
+	void setServoY();
 };
 
 #endif
