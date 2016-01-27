@@ -11,7 +11,8 @@ AxisCamera::AxisCamera() :
 	width = 0;
 	x = 0;
 	y = 0;
-	yServo = new Servo(SERVO_PORT);
+	yServo = new Servo(SERVO_PORT_Y);
+	xServo = new Servo(SERVO_PORT_X);
 }
 
 void AxisCamera::InitDefaultCommand()
@@ -32,6 +33,7 @@ void AxisCamera::GetCameraValues()
 		return;
 	x = xys[0];
 	y = xys[1];
+
 	std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
 }
@@ -82,4 +84,13 @@ void AxisCamera::setServoY()
 		yServo->Set(yServo->Get() + .005f);
 	else if(offset >= 5)
 		yServo->Set(yServo->Get() - .005f);
+}
+
+void AxisCamera::setServoX()
+{
+	double offset = xDistanceToCenter();
+	if(offset <= -5)
+		xServo->Set(xServo->Get() + .005f);
+	else if(offset >= 5)
+		xServo->Set(xServo->Get() - .005f);
 }

@@ -25,6 +25,7 @@ private:
 	double width;
 	double height;
 	std::unique_ptr<Servo> yServo;
+	std::unique_ptr<Servo> xServo;
 public:
 	AxisCamera();
 	void InitDefaultCommand();
@@ -38,6 +39,7 @@ public:
 	double getHeight();
 	double distanceToBlob(double pixel_width);
 	void setServoY();
+	void setServoX();
 };
 
 #endif
