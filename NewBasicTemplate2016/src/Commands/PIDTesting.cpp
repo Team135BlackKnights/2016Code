@@ -1,6 +1,8 @@
 #include "PIDTesting.h"
 #include <sstream>
 
+
+//  Integer MotorPort is TBD
 PIDTesting::PIDTesting()
 {
 	// Use Requires() here to declare subsystem dependencies
@@ -8,6 +10,12 @@ PIDTesting::PIDTesting()
 	Requires(driveTrain.get());
 	timer.reset(new Timer());
 	timerValue = 0;
+
+	p = SmartDashboard::GetNumber("PValue", p);
+	i = SmartDashboard::GetNumber("IValue", i);
+	d = SmartDashboard::GetNumber("DValue", d);
+
+
 
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
@@ -21,18 +29,12 @@ void PIDTesting::Initialize()
 	driveTrain->ZeroAllEncoders();
 	timer->Start();
 
-	std::stringstream fileName;
-	// current date/time based on current system
-	time_t now = time(0);
-	tm *ltm = localtime(&now);
-	fileName <<  1 + ltm->tm_mon << "-" << ltm->tm_mday << "-" << ltm->tm_year - 100 << " " <<
-			ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec;
-	driveTrain->ChangeFileName(fileName.str());
+	//  Creates a File Name Based off of the Current Time
+	driveTrain->BasedTimeCreateFileName();
 
-	std::stringstream ss1;
-	ss1 << driveTrain->p << "," << driveTrain->i << "," << driveTrain->d;
-	driveTrain->WriteString(ss1.str());
-	driveTrain->WriteString("---------------------------");
+	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
+	driveTrain->SetPIDValues(p, i, d, MotorPort);
+	driveTrain->DisplayPIDValuesInLogData(p, i, d);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -44,9 +46,11 @@ void PIDTesting::Execute()
 	timerValue = timer->Get();
 	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
 	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
+	encoderEncPosition = driveTrain->GetEncoderPosition(MotorPort);
+	encoderPosition = driveTrain->GetPosition(MotorPort);
 
 
-	driveTrain->LogEncoderData(index, timerValue);
+	driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
 
 	//  How to Graph these values??
 }

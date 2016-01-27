@@ -15,6 +15,7 @@ private:
 	static const int RADIUS = 6;
 	static const int NUM_MOTORS = 2;
 
+
 public:
 	Shooter();
 	void InitDefaultCommand();

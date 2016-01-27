@@ -22,6 +22,21 @@ private:
 
 	double timerValue;
 
+	int encoderEncPosition;
+
+	int encoderPosition;
+
+	double p,
+		   i,
+		   d;
+
+
+	//  DriveTrain::FrontLeft = 0
+	//  DriveTrain::RearLeft = 2
+	//  DriveTrain::FrontRight = 1
+	//  DriveTrain::RearRight = 3
+	const int MotorPort;
+
 	//std::string PIDFileName = "PID.csv";
 
 public:

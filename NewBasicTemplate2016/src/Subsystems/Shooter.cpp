@@ -5,6 +5,9 @@ Shooter::Shooter() :
 	PIDLogging("Shooter", "/home/lvuser/", 1.0, 0.0, 0.0, NUM_MOTORS, RADIUS)
 {
 
+	//  The motor ID's still need to be configured
+	motors[MOTOR_SHOOTER_RIGHT] = new CANTalon(MOTOR_SHOOTER_RIGHT_ID);
+	motors[MOTOR_SHOOTER_LEFT] = new CANTalon(MOTOR_SHOOTER_LEFT_ID);
 }
 
 void Shooter::InitDefaultCommand()

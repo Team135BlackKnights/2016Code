@@ -21,8 +21,12 @@
     const int MOTOR_FRONT_RIGHT	= 12;
     const int MOTOR_REAR_RIGHT	= 13;
 
-    const int MOTOR_SHOOTER_RIGHT;
-    const int MOTOR_SHOOTER_LEFT;
+    //  Inaccurate ID Values for the Talon
+    const int MOTOR_SHOOTER_RIGHT_ID = 8;
+    const int MOTOR_SHOOTER_LEFT_ID = 9;
+
+	const int MOTOR_SHOOTER_RIGHT = 4;
+	const int MOTOR_SHOOTER_LEFT = 5;
 
     //  Joystick Ports
     const int JOYSTICK_LEFT = 0;
