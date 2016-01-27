@@ -7,10 +7,12 @@ std::unique_ptr<OI> CommandBase::oi;
 //std::unique_ptr<LogData> CommandBase::logData;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
+/*
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
 {
 }
+*/
 
 CommandBase::CommandBase() :
 		Command()

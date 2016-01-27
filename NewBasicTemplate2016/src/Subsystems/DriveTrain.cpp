@@ -12,7 +12,7 @@ typedef Riley TheGoodMan;
 
 
 DriveTrain::DriveTrain():
-		PIDLogging("DriveTrain", "/home/lvuser/", 1.0, 0.0, 0.0, NUM_MOTORS, 4.5)
+		PIDLogging("DriveTrain", "/home/lvuser/", 1.0, 0.0, 0.0, NUM_MOTORS, RADIUS)
 {
 		motors[FRONT_LEFT] = new thing(MOTOR_FRONT_LEFT);
 		motors[REAR_LEFT] = new thing(MOTOR_REAR_LEFT);

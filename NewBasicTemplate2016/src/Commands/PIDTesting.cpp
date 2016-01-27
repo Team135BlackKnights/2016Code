@@ -1,4 +1,5 @@
 #include "PIDTesting.h"
+#include <sstream>
 
 PIDTesting::PIDTesting()
 {
@@ -42,7 +43,7 @@ void PIDTesting::Execute()
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
-	SmartDashboard::PutNumber("Timer", timerValue);
+	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
 
 
 	driveTrain->LogEncoderData(index, timerValue);

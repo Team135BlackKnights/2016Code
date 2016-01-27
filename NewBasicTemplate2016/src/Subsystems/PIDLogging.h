@@ -46,6 +46,7 @@ public:
 	void SetPIDValues(int);
 
 
+	//  The functions below are not defined in the .cpp file and are not used
 	// PIDOutput interface
 	void PIDWrite(float output);
 
