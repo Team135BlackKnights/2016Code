@@ -1,5 +1,6 @@
-#ifndef USBCam_H
-#define USBCam_H
+
+#ifndef AxisCamera_H
+#define AxisCamera_H
 
 #include <Commands/Subsystem.h>
 #include <networktables/NetworkTable.h>

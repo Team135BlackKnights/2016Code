@@ -2,8 +2,8 @@
 #include <math.h>
 #include <Subsystems/AxisCamera.h>
 
-AxisCamera::AxisCamera() :
-		Subsystem("USBCam")
+AxisCamera::AxisCamera():
+		Subsystem("AxisCamera")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
 	visionTable = NetworkTable::GetTable("SmartDashboard");
