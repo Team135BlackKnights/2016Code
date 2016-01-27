@@ -18,6 +18,8 @@ private:
 
 	double timerValue;
 
+	static const short int WHAT_TO_LOG = 0b101;
+
 public:
 	ShooterCommand();
 	void Initialize();

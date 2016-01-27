@@ -28,10 +28,12 @@ protected:
 
 	double circumfrence;
 
-	static const int POSITION = 0b01;
+	static const int POSITION = 0b001;
 	static const int POSITION_OFFSET = 0;
-	static const int VELOCITY = 0b10;
+	static const int VELOCITY = 0b010;
 	static const int VELOCITY_OFFSET = 1;
+	static const int DISTANCE = 0b100;
+	static const int DISTANCE_OFFSET = 2;
 
 public:
 	double p, i, d;

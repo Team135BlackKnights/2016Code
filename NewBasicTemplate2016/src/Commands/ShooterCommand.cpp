@@ -20,13 +20,13 @@ void ShooterCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ShooterCommand::Execute()
 {
-	encoderVelocity = shooter->GetEncoderVelocity(MOTOR_SHOOTER_RIGHT);
+	//encoderVelocity = shooter->GetEncoderVelocity(MOTOR_SHOOTER_RIGHT);
 	timerValue = timer->Get();
 
 	SmartDashboard::PutNumber("Time: ", timerValue);
-	SmartDashboard::PutNumber("Encoder Velocoty: ", encoderVelocity);
+	//SmartDashboard::PutNumber("Encoder Velocoty: ", encoderVelocity);
 
-	shooter->LogOneEncoderValue(MOTOR_SHOOTER_RIGHT, timerValue, encoderVelocity);
+	shooter->LogEncoderData(Shooter::MOTOR_SHOOTER_RIGHT, timerValue, WHAT_TO_LOG);
 
 }
 

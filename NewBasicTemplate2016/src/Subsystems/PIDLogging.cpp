@@ -131,6 +131,8 @@ void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 		data << ",\t" << "POSITION";
 	if((whatToLog >> VELOCITY_OFFSET) & 1)
 		data << "\t" << "VELOCITY";
+	if((whatToLog >> DISTANCE_OFFSET) & 1)
+		data << "\t" "DISTANCE";
 }
 
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
@@ -143,6 +145,8 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 		data << ",\t" << this->GetEncoderPosition(motorIndex);
 	if((whatToLog >> VELOCITY_OFFSET) & 1)
 		data << "\t" << this->GetEncoderVelocity(motorIndex);
+	if((whatToLog >> DISTANCE_OFFSET) & 1)
+		data << "\t" << this->GetDistance(motorIndex);
 }
 void PIDLogging::PIDWrite(float output) {}
 void PIDLogging::SetAbsoluteTolerance(float absValue) {}

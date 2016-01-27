@@ -26,9 +26,6 @@
     const int MOTOR_SHOOTER_RIGHT_ID = 8;
     const int MOTOR_SHOOTER_LEFT_ID = 9;
 
-	const int MOTOR_SHOOTER_RIGHT = 4;
-	const int MOTOR_SHOOTER_LEFT = 5;
-
     //  Joystick Ports
     const int JOYSTICK_LEFT = 0;
     const int JOYSTICK_RIGHT = 1;
