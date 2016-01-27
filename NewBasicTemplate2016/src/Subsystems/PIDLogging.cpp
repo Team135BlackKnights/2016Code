@@ -34,7 +34,8 @@ PIDLogging::~PIDLogging() {
 void PIDLogging::SetupMotors() {
 	for (int i = 0; i < this->numMotors; i++) {
 		motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-		motors[i]->SetControlMode(CANTalon::kPosition);
+		//  Only need SetControlMode if using Get() or Set() for something other than setting the motor value
+		//  motors[i]->SetControlMode(CANTalon::kPosition);
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
@@ -48,7 +49,7 @@ int PIDLogging::GetEncoderPosition(int motorIndex) {
 	return motors[motorIndex]->GetEncPosition();
 }
 
-int PIDLogging::GetEncoder(int motorIndex) {
+int PIDLogging::GetPosition(int motorIndex) {
 	return motors[motorIndex]->Get();
 }
 
@@ -103,7 +104,7 @@ void PIDLogging::SetPIDValues(int motorIndex) {
 
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
 	int encoderPosition = this->GetEncoderPosition(motorIndex);
-	int encoderGet = this->GetEncoder(motorIndex);
+	int encoderGet = this->GetPosition(motorIndex);
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream data;

@@ -66,6 +66,8 @@ bool PIDTesting::IsFinished()
 void PIDTesting::End()
 {
 	driveTrain->ClosePIDFile();
+	timer->Stop();
+	timer->Reset();
 	std::cout << "Ended" << std::endl;
 }
 
@@ -75,4 +77,6 @@ void PIDTesting::Interrupted()
 {
 	std::cout << "Interrupted" << std::endl;
 	driveTrain->ClosePIDFile();
+	timer->Stop();
+	timer->Reset();
 }
