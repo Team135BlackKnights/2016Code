@@ -19,6 +19,7 @@ private:
 	double timerValue;
 
 	static const short int WHAT_TO_LOG = 0b101;
+	static const double TIME = 5d;
 
 public:
 	ShooterCommand();
