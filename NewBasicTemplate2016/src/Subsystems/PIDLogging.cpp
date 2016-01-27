@@ -97,39 +97,29 @@ void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
 
 }
 
-void PIDLogging::SetPIDValues(double p, double i, double d, int motorIndex) {
-	motors[motorIndex]->SetP(p);
-	motors[motorIndex]->SetI(i);
-	motors[motorIndex]->SetD(d);
+void PIDLogging::SetPIDValues(int motorIndex) {
+	motors[motorIndex]->SetP(this->p);
+	motors[motorIndex]->SetI(this->p);
+	motors[motorIndex]->SetD(this->p);
 }
 
-<<<<<<< HEAD
-void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
-	int encoderPosition = this->GetEncoderPosition(motorIndex);
-	int encoderGet = this->GetEncoder(motorIndex);
-	double speed = this->GetEncoderVelocity(motorIndex);
-	timerValue = Trunc(timerValue, 4);
-=======
-void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double DataOne, double DataTwo) {
+void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
 	//  int encoderPosition = this->GetEncoderPosition(motorIndex);
 	//  int encoderGet = this->GetPosition(motorIndex);
->>>>>>> refs/heads/PID
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream data;
-<<<<<<< HEAD
-	data << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet << "\t" << speed;
-=======
-	data << timerValue << ",\t" << DataOne << ",\t" << DataTwo;
->>>>>>> refs/heads/PID
+	timerValue = Trunc(timerValue, 4);
+	data << timerValue << ",\t" << dataOne << ",\t" << dataTwo;
 	this->WriteString(data.str());
 }
 
-void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double DataOne) {
+void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double dataOne) {
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream logger;
-	logger << timerValue << ",\t" << DataOne  << "\n";
+	timerValue = Trunc(timerValue, 4);
+	logger << timerValue << ",\t" << dataOne  << "\n";
 	this->WriteString(logger.str());
 }
 

@@ -44,7 +44,7 @@ public:
 	void LogOneEncoderValue(int, double, double);
 
 	void FeedbackPIDOutput(int, double);
-	void SetPIDValues(double, double, double, int);
+	void SetPIDValues(int);
 
 
 	//  The functions below are not defined in the .cpp file and are not used

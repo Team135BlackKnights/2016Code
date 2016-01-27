@@ -6,6 +6,8 @@ ShooterCommand::ShooterCommand()
 	// eg. Requires(chassis);
 	Requires(shooter.get());
 	timer.reset(new Timer());
+	timerValue = 0;
+	encoderVelocity = 0;
 }
 
 // Called just before this Command runs the first time
@@ -24,7 +26,7 @@ void ShooterCommand::Execute()
 	SmartDashboard::PutNumber("Time: ", timerValue);
 	SmartDashboard::PutNumber("Encoder Velocoty: ", encoderVelocity);
 
-	shooter->LogEncoderData(MOTOR_SHOOTER_RIGHT, timerValue, encoderVelocity);
+	shooter->LogOneEncoderValue(MOTOR_SHOOTER_RIGHT, timerValue, encoderVelocity);
 
 }
 

@@ -8,6 +8,8 @@ PIDTesting::PIDTesting()
 	Requires(driveTrain.get());
 	timer.reset(new Timer());
 	timerValue = 0;
+	encoderPosition = 0;
+	encoderEncPosition = 0;
 
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
@@ -25,7 +27,7 @@ void PIDTesting::Initialize()
 	driveTrain->BasedTimeCreateFileName();
 
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
-	driveTrain->SetPIDValues(p, i, d, MotorPort);
+	//driveTrain->SetPIDValues(motorPort);
 	driveTrain->DisplayPIDValuesInLogData(p, i, d);
 }
 
@@ -39,8 +41,8 @@ void PIDTesting::Execute()
 	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
 	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
 	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
-	encoderEncPosition = driveTrain->GetEncoderPosition(MotorPort);
-	encoderPosition = driveTrain->GetPosition(MotorPort);
+	encoderEncPosition = driveTrain->GetEncoderPosition(motorPort);
+	encoderPosition = driveTrain->GetPosition(motorPort);
 
 
 	driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);

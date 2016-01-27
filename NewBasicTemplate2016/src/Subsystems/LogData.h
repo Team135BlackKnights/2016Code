@@ -3,6 +3,7 @@
 
 #include "WPILib.h"
 #include <fstream>
+#include <string>
 
 class LogData
 {
@@ -15,7 +16,7 @@ private:
 
 public:
 	LogData(std::string);
-	void WriteString(std::string, std::string="", std::string="");
+	void WriteString(std::string);
 	//void WriteDoubles(std::string, double[]);
 	void ChangeFilePath(std::string);
 	void ChangeFileName(std::string);
@@ -23,6 +24,7 @@ public:
 	void BasedSubsytemCreateFileName(std::string, std::string, double, double, double);
 	void DisplayPIDValuesInLogData(double, double, double);
 	void CloseFile();
+	void OpenFile();
 };
 
 #endif

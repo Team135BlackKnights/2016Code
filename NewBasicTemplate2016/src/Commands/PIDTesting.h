@@ -35,7 +35,7 @@ private:
 	//  DriveTrain::RearLeft = 2
 	//  DriveTrain::FrontRight = 1
 	//  DriveTrain::RearRight = 3
-	const int MotorPort;
+	const int motorPort = DriveTrain::FRONT_LEFT;
 
 	//std::string PIDFileName = "PID.csv";
 
