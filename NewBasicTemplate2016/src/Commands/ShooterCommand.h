@@ -18,7 +18,7 @@ private:
 
 	double timerValue;
 
-	static const short int WHAT_TO_LOG = 0b101;
+	static const short int WHAT_TO_LOG = PIDLogging::POSITION & PIDLogging::DISTANCE;
 	static constexpr double TIME = 5;
 
 public:
