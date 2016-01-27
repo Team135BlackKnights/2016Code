@@ -1,8 +1,8 @@
 #include <RobotMap.h>
 #include <math.h>
-#include <Subsystems/AxisCamera.h>
+#include <Subsystems/AxisCam.h>
 
-AxisCamera::AxisCamera():
+AxisCam::AxisCam():
 		Subsystem("AxisCamera")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
@@ -15,7 +15,7 @@ AxisCamera::AxisCamera():
 	xServo = new Servo(SERVO_PORT_X);
 }
 
-void AxisCamera::InitDefaultCommand()
+void AxisCam::InitDefaultCommand()
 {
 	//set the cam quality of jpeg to be around 50 (out of 100)
 	//CameraServer::GetInstance()->SetQuality(50);
@@ -25,7 +25,7 @@ void AxisCamera::InitDefaultCommand()
 }
 
 
-void AxisCamera::GetCameraValues()
+void AxisCam::GetCameraValues()
 {
 	//visionTable->
 	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
@@ -38,46 +38,46 @@ void AxisCamera::GetCameraValues()
 	std::cout << "y: " << y << std::endl;
 }
 
-double AxisCamera::xDistanceToCenter()
+double AxisCam::xDistanceToCenter()
 {
 	return x - X_IMAGE_RES /2;
 }
 
-double AxisCamera::yDistanceToCenter()
+double AxisCam::yDistanceToCenter()
 {
 	return y - Y_IMAGE_RES/2;
 }
 
-double AxisCamera::percentArea(double area)
+double AxisCam::percentArea(double area)
 {
 	return area/(X_IMAGE_RES*Y_IMAGE_RES);
 }
 
-double AxisCamera::getWidth()
+double AxisCam::getWidth()
 {
 	return width;
 }
 
-double AxisCamera::getHeight()
+double AxisCam::getHeight()
 {
 	return height;
 }
 
-double AxisCamera::getX()
+double AxisCam::getX()
 {
 	return x;
 }
 
-double AxisCamera::getY()
+double AxisCam::getY()
 {
 	return y;
 }
-double AxisCamera::distanceToBlob(double pixel_width)
+double AxisCam::distanceToBlob(double pixel_width)
 {
 	return X_WIDTH_GOAL * X_IMAGE_RES / (2*pixel_width * tan(AXIS_VANGLE / 2));
 }
 
-void AxisCamera::setServoY()
+void AxisCam::setServoY()
 {
 	double offset = yDistanceToCenter();
 	if(offset <= -5)
@@ -86,7 +86,7 @@ void AxisCamera::setServoY()
 		yServo->Set(yServo->Get() - .005f);
 }
 
-void AxisCamera::setServoX()
+void AxisCam::setServoX()
 {
 	double offset = xDistanceToCenter();
 	if(offset <= -5)

@@ -1,6 +1,6 @@
 
-#ifndef AxisCamera_H
-#define AxisCamera_H
+#ifndef AxisCam_H
+#define AxisCam_H
 
 #include <Commands/Subsystem.h>
 #include <networktables/NetworkTable.h>
@@ -9,7 +9,7 @@
 #include "WPILib.h"
 #include <unistd.h>
 
-class AxisCamera: public Subsystem
+class AxisCam: public Subsystem
 {
 private:
 	const char* CAMERA_NAME = "cam2";
@@ -29,7 +29,7 @@ private:
 	std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
 public:
-	AxisCamera();
+	AxisCam();
 	void InitDefaultCommand();
 	void GetCameraValues();
 	double xDistanceToCenter();

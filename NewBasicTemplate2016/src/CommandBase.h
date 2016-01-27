@@ -1,10 +1,11 @@
 #ifndef COMMAND_BASE_H
 #define COMMAND_BASE_H
 
-#include <Subsystems/AxisCamera.h>
+#include <Subsystems/AxisCam.h>
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/AxisCam.h"
 #include "OI.h"
 #include "WPILib.h"
 
@@ -22,7 +23,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<DriveTrain> driveTrain;
 	static std::unique_ptr<OI> oi;
-	static std::unique_ptr<AxisCamera> caMeRa;
+	static std::unique_ptr<AxisCam> caMeRa;
 };
 
 #endif
