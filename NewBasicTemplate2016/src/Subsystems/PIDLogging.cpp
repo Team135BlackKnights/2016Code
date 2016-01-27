@@ -123,6 +123,27 @@ void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double da
 	this->WriteString(logger.str());
 }
 
+void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
+	std::stringstream data;
+	data << "TIME";
+
+	if((whatToLog >> POSITION_OFFSET) & 1)
+		data << ",\t" << "POSITION";
+	if((whatToLog >> VELOCITY_OFFSET) & 1)
+		data << "\t" << "VELOCITY";
+}
+
+void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
+	std::cout << "NEW LOGGING!";
+	std::stringstream data;
+	timerValue = Trunc(timerValue, 4);
+	data << timerValue;
+
+	if((whatToLog >> POSITION_OFFSET) & 1)
+		data << ",\t" << this->GetEncoderPosition(motorIndex);
+	if((whatToLog >> VELOCITY_OFFSET) & 1)
+		data << "\t" << this->GetEncoderVelocity(motorIndex);
+}
 void PIDLogging::PIDWrite(float output) {}
 void PIDLogging::SetAbsoluteTolerance(float absValue) {}
 void PIDLogging::SetPercentTolerance(float percent) {}

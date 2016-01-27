@@ -28,6 +28,11 @@ protected:
 
 	double circumfrence;
 
+	static const int POSITION = 0b01;
+	static const int POSITION_OFFSET = 0;
+	static const int VELOCITY = 0b10;
+	static const int VELOCITY_OFFSET = 1;
+
 public:
 	double p, i, d;
 
@@ -42,6 +47,9 @@ public:
 	double GetVelocity(int);
 	void LogTwoEncoderValues(int, double, double, double);
 	void LogOneEncoderValue(int, double, double);
+
+	void LogEncoderData(int, double, short int);
+	void LogEncoderDataHeader(short int);
 
 	void FeedbackPIDOutput(int, double);
 	void SetPIDValues(int);
