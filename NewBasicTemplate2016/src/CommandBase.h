@@ -1,14 +1,12 @@
 #ifndef COMMAND_BASE_H
 #define COMMAND_BASE_H
 
-#include <Subsystems/AxisCam.h>
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/AxisCam.h"
 #include "OI.h"
 #include "WPILib.h"
-#include <Subsystems/AxisCam.h>
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
