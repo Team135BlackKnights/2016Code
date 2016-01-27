@@ -48,6 +48,31 @@ void LogData::ChangeFileName(std::string name) {
 	this->fileName = name;
 }
 
+void LogData::BasedTimeCreateFileName() {
+	std::stringstream fileName;
+	// current date/time based on current system
+	time_t now = time(0);
+	tm *ltm = localtime(&now);
+	fileName <<  1 + ltm->tm_mon << "-" << ltm->tm_mday << "-" << ltm->tm_year - 100 << " " <<
+				ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec;
+	ChangeFileName(fileName.str());
+}
+
+void LogData::BasedSubsytemCreateFileName(std::string Subsystem, std::string TestingSubject, double p, double i, double d) {
+	std::stringstream fileName;
+	fileName << Subsystem << "-" << TestingSubject << p << "-" << i << "-" << d;
+	ChangeFileName(fileName.str());
+
+}
+
+void LogData::DisplayPIDValuesInLogData(double p, double i, double d) {
+	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
+	std::stringstream ss1;
+	ss1 << p << "," << i << "," << d;
+	WriteString(ss1.str());
+	WriteString("---------------------------");
+}
+
 void LogData::CloseFile() {
 	if (logFile.is_open() == true) {
 		logFile.flush();

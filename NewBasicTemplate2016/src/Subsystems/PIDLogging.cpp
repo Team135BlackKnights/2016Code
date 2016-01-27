@@ -35,7 +35,8 @@ PIDLogging::~PIDLogging() {
 void PIDLogging::SetupMotors() {
 	for (int i = 0; i < this->numMotors; i++) {
 		motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-		motors[i]->SetControlMode(CANTalon::kPosition);
+		//  Only need SetControlMode if using Get() or Set() for something other than setting the motor value
+		//  motors[i]->SetControlMode(CANTalon::kPosition);
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
@@ -49,8 +50,8 @@ int PIDLogging::GetEncoderPosition(int motorIndex) {
 	return motors[motorIndex]->GetEncPosition();
 }
 
-int PIDLogging::GetEncoder(int motorIndex) {
-	return motors[motorIndex]->Get();
+int PIDLogging::GetPosition(int motorIndex) {
+	return motors[motorIndex]->GetPosition();
 }
 
 int PIDLogging::GetEncoderVelocity(int motorIndex) {
@@ -96,22 +97,40 @@ void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
 
 }
 
-void PIDLogging::SetPIDValues(int motorIndex) {
-	motors[motorIndex]->SetP(this->p);
-	motors[motorIndex]->SetI(this->i);
-	motors[motorIndex]->SetD(this->d);
+void PIDLogging::SetPIDValues(double p, double i, double d, int motorIndex) {
+	motors[motorIndex]->SetP(p);
+	motors[motorIndex]->SetI(i);
+	motors[motorIndex]->SetD(d);
 }
 
+<<<<<<< HEAD
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue) {
 	int encoderPosition = this->GetEncoderPosition(motorIndex);
 	int encoderGet = this->GetEncoder(motorIndex);
 	double speed = this->GetEncoderVelocity(motorIndex);
 	timerValue = Trunc(timerValue, 4);
+=======
+void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double DataOne, double DataTwo) {
+	//  int encoderPosition = this->GetEncoderPosition(motorIndex);
+	//  int encoderGet = this->GetPosition(motorIndex);
+>>>>>>> refs/heads/PID
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream data;
+<<<<<<< HEAD
 	data << timerValue << ",\t" << encoderPosition << ",\t" << encoderGet << "\t" << speed;
+=======
+	data << timerValue << ",\t" << DataOne << ",\t" << DataTwo;
+>>>>>>> refs/heads/PID
 	this->WriteString(data.str());
+}
+
+void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double DataOne) {
+
+	std::cout << "LOGGING THINGS!";
+	std::stringstream logger;
+	logger << timerValue << ",\t" << DataOne  << "\n";
+	this->WriteString(logger.str());
 }
 
 void PIDLogging::PIDWrite(float output) {}

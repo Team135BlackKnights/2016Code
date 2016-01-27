@@ -7,6 +7,7 @@
 #include "Subsystems/LogData.h"
 #include "OI.h"
 #include "WPILib.h"
+#include "Subsystems/Shooter.h"
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -23,6 +24,7 @@ public:
 	static std::unique_ptr<DriveTrain> driveTrain;
 	static std::unique_ptr<OI> oi;
 	static std::unique_ptr<LogData> logData;
+	static std::unique_ptr<Shooter> shooter;
 	//static std::unique_ptr<Preferences> preferences;
 };
 

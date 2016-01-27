@@ -34,16 +34,17 @@ public:
 public:
 	void SetupMotors();
 	int GetEncoderPosition(int);
-	int GetEncoder(int);
+	int GetPosition(int);
 	int GetEncoderVelocity(int);
 	void ZeroEncoder(int);
 	void ZeroAllEncoders();
 	double GetDistance(int);
 	double GetVelocity(int);
-	void LogEncoderData(int, double);
+	void LogTwoEncoderValues(int, double, double, double);
+	void LogOneEncoderValue(int, double, double);
 
 	void FeedbackPIDOutput(int, double);
-	void SetPIDValues(int);
+	void SetPIDValues(double, double, double, int);
 
 
 	//  The functions below are not defined in the .cpp file and are not used
