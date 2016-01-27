@@ -1,4 +1,5 @@
 #include "CameraTracking.h"
+#include "AxisCamera.h"
 
 CameraTracking::CameraTracking()
 {

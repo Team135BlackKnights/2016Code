@@ -4,6 +4,7 @@
 
 #include <Commands/Subsystem.h>
 #include <networktables/NetworkTable.h>
+#include "../CommandBase.h"
 #include <memory>
 #include "WPILib.h"
 #include <unistd.h>
