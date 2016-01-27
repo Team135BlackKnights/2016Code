@@ -1,9 +1,10 @@
 #include <RobotMap.h>
 #include <math.h>
 #include <Subsystems/AxisCam.h>
+#include "../Commands/CameraTracking.h"
 
 AxisCam::AxisCam():
-		Subsystem("AxisCamera")
+		Subsystem("AxisCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
 	visionTable = NetworkTable::GetTable("SmartDashboard");
@@ -11,8 +12,8 @@ AxisCam::AxisCam():
 	width = 0;
 	x = 0;
 	y = 0;
-	yServo = new Servo(SERVO_PORT_Y);
-	xServo = new Servo(SERVO_PORT_X);
+	yServo.reset(new Servo(SERVO_PORT_Y));
+	xServo.reset(new Servo(SERVO_PORT_X));
 }
 
 void AxisCam::InitDefaultCommand()

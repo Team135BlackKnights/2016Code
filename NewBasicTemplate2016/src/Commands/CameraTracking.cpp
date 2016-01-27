@@ -1,4 +1,4 @@
-#include <Subsystems/AxisCam.h>
+
 #include "CameraTracking.h"
 #include "Subsystems/AxisCam.h"
 
@@ -7,7 +7,7 @@ CameraTracking::CameraTracking()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(caMeRa.get());
+	Requires(cam.get());
 }
 
 // Called just before this Command runs the first time
@@ -20,15 +20,15 @@ void CameraTracking::Initialize()
 void CameraTracking::Execute()
 {
 	//obtain fresh and clean values
-	caMeRa->GetCameraValues();
+	cam->GetCameraValues();
 	//maybe print distance if it possibly works
 	//std::cout << "distance to blob: " << caMeRa->distanceToBlob(caMeRa->getWidth()) << std::endl;
-	std::cout << "distance to center: X : " << caMeRa->xDistanceToCenter() << " Y: " <<
-			caMeRa->yDistanceToCenter() <<std::endl;
-	if(caMeRa->xServo != NULL && caMeRa->yServo != NULL)
+	std::cout << "distance to center: X : " << cam->xDistanceToCenter() << " Y: " <<
+			cam->yDistanceToCenter() <<std::endl;
+	if(cam->xServo != NULL && cam->yServo != NULL)
 	{
-		caMeRa->setServoY();
-		caMeRa->setServoX();
+		cam->setServoY();
+		cam->setServoX();
 	}
 }
 

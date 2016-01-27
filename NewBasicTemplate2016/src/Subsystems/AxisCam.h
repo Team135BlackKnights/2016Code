@@ -1,4 +1,3 @@
-
 #ifndef AxisCam_H
 #define AxisCam_H
 
@@ -26,8 +25,7 @@ private:
 	double y;
 	double width;
 	double height;
-	std::unique_ptr<Servo> yServo;
-	std::unique_ptr<Servo> xServo;
+
 public:
 	AxisCam();
 	void InitDefaultCommand();
@@ -42,6 +40,8 @@ public:
 	double distanceToBlob(double pixel_width);
 	void setServoY();
 	void setServoX();
+	std::unique_ptr<Servo> yServo;
+	std::unique_ptr<Servo> xServo;
 };
 
 #endif
