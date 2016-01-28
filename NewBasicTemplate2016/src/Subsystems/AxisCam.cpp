@@ -82,16 +82,20 @@ void AxisCam::setServoY()
 {
 	double offset = yDistanceToCenter();
 	if(offset <= -5)
-		yServo->Set(yServo->Get() + .005f);
+		std::cout<<"down"<<std::endl;
+		///yServo->Set(yServo->Get() + .005f);
 	else if(offset >= 5)
-		yServo->Set(yServo->Get() - .005f);
+		std::cout<<"up"<<std::endl;
+		//yServo->Set(yServo->Get() - .005f);
 }
 
 void AxisCam::setServoX()
 {
 	double offset = xDistanceToCenter();
 	if(offset <= -5)
-		xServo->Set(xServo->Get() + .005f);
+		std::cout<<"right"<<std::endl;
+		//xServo->Set(xServo->Get() + .005f);
 	else if(offset >= 5)
-		xServo->Set(xServo->Get() - .005f);
+		std::cout<<"left"<<std::endl;
+		//xServo->Set(xServo->Get() - .005f);
 }
