@@ -20,7 +20,8 @@ DriveTrain::DriveTrain():
 		motors[FRONT_RIGHT] = new CANTalon(MOTOR_FRONT_RIGHT);
 		motors[REAR_RIGHT] = new CANTalon(MOTOR_REAR_RIGHT);
 
-		chassis.reset(new RobotDrive(motors[FRONT_LEFT].get(), motors[REAR_LEFT].get(), motors[FRONT_RIGHT].get(), motors[REAR_RIGHT].get()));
+		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
+
 
 		chassis->SetSafetyEnabled(false);
 
