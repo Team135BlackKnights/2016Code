@@ -1,9 +1,9 @@
-#ifndef OI_H
-#define OI_H
+#ifndef OI2_H
+#define OI2_H
 
 #include "WPILib.h"
 
-class OI
+class OI2
 {
 protected:
 	static const int JOYSTICKS = 3; //max number of joysticks connected
@@ -19,9 +19,10 @@ protected:
 public:
 	static const int LEFT = 1; // sets LEFT controller
 	static const int RIGHT = 2; // sets RIGHT controller
+	static const int BBOX = 3; // sets buttonbox
 	static constexpr float DEAD_ZONE = .05f; //declares dead zone
 
-	OI();
+	OI2();
 	float GetStickX(int);
 	float GetStickY(int);
 	float GetStickTwist(int);

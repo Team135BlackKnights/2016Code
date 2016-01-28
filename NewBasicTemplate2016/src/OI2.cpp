@@ -2,25 +2,26 @@
 	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
 	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
-#include "OI.h"
-#include "RobotMap.h"
+#include "OI2.h"
+#include "RobotMap2.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
-OI::OI()
+OI2::OI2()
 {
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
-	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_LEFT)); //creates a right joystick object
+	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
-	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //assigns values to each button in the array for each controller
+	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
-				buttons[i][k].reset(new JoystickButton(sticks[i].get(), k));
+				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
 }
 
 //OI Functions
-float OI::GetStickX(int controllerNum) //Returns controller's x value
+float OI2::GetStickX(int controllerNum) //Returns controller's x value
 {
 	float value = joysticksArray[controllerNum]->GetX(); //Gets x value from joystick
 	//makes value equal to the output of GetX() when the parameter is joysticksArray[controllerNum]
@@ -30,7 +31,7 @@ float OI::GetStickX(int controllerNum) //Returns controller's x value
 	return value;
 }
 
-float OI::GetStickY(int controllerNum)
+float OI2::GetStickY(int controllerNum)
 {
 	float value = joysticksArray[controllerNum]->GetY(); //Gets y value from joystick
 
@@ -39,18 +40,18 @@ float OI::GetStickY(int controllerNum)
 	return value;
 }
 
-float OI::GetStickTwist(int controllerNum)
+float OI2::GetStickTwist(int controllerNum)
 {
 	float value = joysticksArray[controllerNum]->GetTwist(); //Gets twist value from joystick
 	return value;
 }
 
-float OI::GetStickSlider(int controllerNum)
+float OI2::GetStickSlider(int controllerNum)
 {
 	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
 }
 \
-bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
+bool OI2::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
 }
