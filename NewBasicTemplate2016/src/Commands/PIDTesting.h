@@ -30,6 +30,10 @@ private:
 		   i,
 		   d;
 
+	static const int VELOCITY_LOG = 0b011;
+
+	std::unique_ptr<Preferences> preference;
+
 
 	//  DriveTrain::FrontLeft = 0
 	//  DriveTrain::RearLeft = 2

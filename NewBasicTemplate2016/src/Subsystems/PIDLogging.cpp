@@ -9,7 +9,7 @@
 #include <sstream>
 #include "RobotMap.h"
 
-PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, double p, double i, double d, int numMotors, double radius):
+PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int numMotors, double radius):
 	PIDSubsystem("PIDLogging", p, i, d),
 	LogData(filePath)
 {
@@ -18,7 +18,8 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, dou
 	this->numMotors = numMotors;
 	this->radius = radius;
 	this->circumfrence = this->radius * 3.14159;
-	this->p = p, this->i = i, this->d = d;
+	this->SetPIDValues();
+	preference.reset(new Preferences());
 
 	//CANTalon motorTemps[numMotors];
 	//this->motors = motorTemps;
@@ -40,7 +41,7 @@ void PIDLogging::SetupMotors() {
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
-		this->SetPIDValues(i);
+		this->UpdateMotorToReflectCurrentPIDValues(i);
 	}
 }
 
@@ -97,10 +98,26 @@ void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
 
 }
 
-void PIDLogging::SetPIDValues(int motorIndex) {
-	motors[motorIndex]->SetP(this->p);
-	motors[motorIndex]->SetI(this->p);
-	motors[motorIndex]->SetD(this->p);
+void PIDLogging::SetPIDValues(int motorIndex, double P, double I, double D) {
+	this->p = p;
+	this->i = i;
+	this->d = d;
+	motors[motorIndex]->SetP(p);
+	motors[motorIndex]->SetI(i);
+	motors[motorIndex]->SetD(d);
+}
+
+void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex, std::string PreferencePName, std::string PreferenceIName, std::string PreferenceDName) {
+
+	this->p = preference->GetDouble("P Value is:" + this->m_name, 1.0);
+	this->i = preference->GetDouble(PreferenceIName, 0.0);
+	this->d = preference->GetDouble(PreferenceDName, 0.0);
+}
+
+void LogData::BasedSubsytemCreateFileNameWithPID(std::string Subsystem, std::string Variable, double p, double i, double d) {
+	std::stringstream NameofFile;
+	NameofFile << Subsystem << "-" << Variable << "-" << p << "-" << i << "-" << d;
+	ChangeFileName(NameofFile.str());
 }
 
 void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
@@ -148,7 +165,8 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
 		data << "\t" << this->GetDistance(motorIndex);
 }
-void PIDLogging::PIDWrite(float output) {}
+
+
 void PIDLogging::SetAbsoluteTolerance(float absValue) {}
 void PIDLogging::SetPercentTolerance(float percent) {}
 bool PIDLogging::OnTarget() const {return true;}

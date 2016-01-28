@@ -8,8 +8,13 @@ PIDTesting::PIDTesting()
 	Requires(driveTrain.get());
 	timer.reset(new Timer());
 	timerValue = 0;
-	encoderPosition = 0;
-	encoderEncPosition = 0;
+	//  encoderPosition = 0;
+	//  encoderEncPosition = 0;
+	preference.reset(new Preferences());
+
+	p = preference->GetDouble("PIDTesting-PValue", 1.0);
+	i = preference->GetDouble("PIDTesting-IValue", 0.0);
+	d = preference->GetDouble("PIDTesting-DValue", 0.0);
 
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
@@ -27,7 +32,7 @@ void PIDTesting::Initialize()
 	driveTrain->BasedTimeCreateFileName();
 
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
-	//driveTrain->SetPIDValues(motorPort);
+	driveTrain->SetPIDValues(motorPort, p, i, d);
 	driveTrain->DisplayPIDValuesInLogData(p, i, d);
 }
 
@@ -40,12 +45,13 @@ void PIDTesting::Execute()
 	timerValue = timer->Get();
 	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
 	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
-	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
-	encoderEncPosition = driveTrain->GetEncoderPosition(motorPort);
-	encoderPosition = driveTrain->GetPosition(motorPort);
+
+	//  encoderEncPosition = driveTrain->GetEncoderPosition(motorPort);
+	//  encoderPosition = driveTrain->GetPosition(motorPort);
+	driveTrain->LogEncoderData(motorPort, timerValue, VELOCITY_LOG);
 
 
-	driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
+	//  driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
 
 	//  How to Graph these values??
 }

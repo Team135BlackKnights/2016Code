@@ -13,7 +13,7 @@
 
 class PIDLogging: public PIDSubsystem, public LogData {
 public:
-	PIDLogging(const std::string&, const std::string&, double, double, double, int, double);
+	PIDLogging(const std::string&, const std::string&, int, double);
 	virtual ~PIDLogging();
 
 protected:
@@ -35,6 +35,8 @@ protected:
 	static const int DISTANCE = 		0b100;
 	static const int DISTANCE_OFFSET = 2;
 
+	std::unique_ptr<Preferences> preference;
+
 public:
 	double p, i, d;
 
@@ -54,12 +56,14 @@ public:
 	void LogEncoderDataHeader(short int);
 
 	void FeedbackPIDOutput(int, double);
-	void SetPIDValues(int);
+	void SetPIDValues(int, double, double, double);
+	void UpdateMotorToReflectCurrentPIDValues(int, std::string, std::string, std::string);
+	void BasedSubsytemCreateFileNameWithPID(std::string, std::string, double, double, double);
 
 
 	//  The functions below are not defined in the .cpp file and are not used
 	// PIDOutput interface
-	void PIDWrite(float output);
+	void PIDWriteValueForFeedback(int, double);
 
 	// PIDSource interface
 	double PIDGet();

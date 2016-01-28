@@ -50,12 +50,6 @@ void LogData::BasedTimeCreateFileName() {
 	ChangeFileName(fileName.str());
 }
 
-void LogData::BasedSubsytemCreateFileName(std::string Subsystem, std::string TestingSubject, double p, double i, double d) {
-	std::stringstream fileName;
-	fileName << Subsystem << "-" << TestingSubject << p << "-" << i << "-" << d;
-	ChangeFileName(fileName.str());
-}
-
 void LogData::DisplayPIDValuesInLogData(double p, double i, double d) {
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
 	this->OpenFile();

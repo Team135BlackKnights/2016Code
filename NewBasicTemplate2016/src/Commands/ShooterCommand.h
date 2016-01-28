@@ -18,8 +18,14 @@ private:
 
 	double timerValue;
 
-	static const short int WHAT_TO_LOG = PIDLogging::POSITION & PIDLogging::DISTANCE;
+	static const short int VELOCITY_LOG = 0b010;
 	static constexpr double TIME = 5;
+
+	double PValue,
+		   IValue,
+		   DValue;
+
+	const int motorPort = Shooter::MOTOR_SHOOTER_RIGHT;
 
 public:
 	ShooterCommand();

@@ -2,12 +2,13 @@
 #include "../RobotMap.h"
 
 Shooter::Shooter() :
-	PIDLogging("Shooter", "/home/lvuser/", 1.0, 0.0, 0.0, NUM_MOTORS, RADIUS)
+	PIDLogging("Shooter", "/home/lvuser/",NUM_MOTORS, RADIUS)
 {
 
 	//  The motor ID's still need to be configured
 	motors[MOTOR_SHOOTER_RIGHT] = new CANTalon(MOTOR_SHOOTER_RIGHT_ID);
 	motors[MOTOR_SHOOTER_LEFT] = new CANTalon(MOTOR_SHOOTER_LEFT_ID);
+	this->SetupMotors();
 }
 
 void Shooter::InitDefaultCommand()
