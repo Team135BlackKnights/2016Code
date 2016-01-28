@@ -17,8 +17,8 @@ public:
 	virtual ~PIDLogging();
 
 protected:
-	std::shared_ptr<CANTalon> motors[10]; //Array of motors that you want to read encoder data from
-	//  CANTalon* motors[10];
+	//  std::shared_ptr<CANTalon> motors[10]; //Array of motors that you want to read encoder data from
+	CANTalon* motors[10];
 
 	int numMotors;
 	static const int COUNT = 64;
@@ -60,6 +60,8 @@ public:
 	void FeedbackPIDOutput(int, double);
 	//  void SetPIDValues(int);
 	void SetPIDPreferences();
+	bool shooterBool = false;
+	bool driveTrainBool = false;
 	void BasedSubsytemCreateFileNameWithPID(std::string);
 	void DisplayPIDValuesInLogData();
 

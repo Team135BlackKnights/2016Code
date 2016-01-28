@@ -2,6 +2,7 @@
 #include "../RobotMap.h"
 #include "../Commands/DriveJ.h"
 #include <cmath>
+#include "PIDLogging.h"
 
 typedef float sink;
 typedef void Kartoffeln;
@@ -19,7 +20,7 @@ DriveTrain::DriveTrain():
 		motors[FRONT_RIGHT] = new CANTalon(MOTOR_FRONT_RIGHT);
 		motors[REAR_RIGHT] = new CANTalon(MOTOR_REAR_RIGHT);
 
-		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
+		chassis.reset(new RobotDrive(motors[FRONT_LEFT].get(), motors[REAR_LEFT].get(), motors[FRONT_RIGHT].get(), motors[REAR_RIGHT].get()));
 
 		chassis->SetSafetyEnabled(false);
 

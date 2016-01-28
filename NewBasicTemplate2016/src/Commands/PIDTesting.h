@@ -26,10 +26,6 @@ private:
 
 	int encoderPosition;
 
-	double p,
-		   i,
-		   d;
-
 	static const int VELOCITY_LOG = 0b011;
 
 	std::unique_ptr<Preferences> preference;
@@ -39,7 +35,8 @@ private:
 	//  DriveTrain::RearLeft = 2
 	//  DriveTrain::FrontRight = 1
 	//  DriveTrain::RearRight = 3
-	const int motorPort = DriveTrain::FRONT_LEFT;
+	//  const int MOTOR_FRONT_LEFT	= ID# 10;
+	const int motorIndex = DriveTrain::FRONT_LEFT;
 
 	//std::string PIDFileName = "PID.csv";
 

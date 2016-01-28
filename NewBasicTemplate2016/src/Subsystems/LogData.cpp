@@ -1,6 +1,7 @@
 #include "LogData.h"
 #include "../RobotMap.h"
 #include<stdarg.h>
+#include <sstream>
 
 LogData::LogData(std::string filePath)
 {

@@ -107,9 +107,24 @@ void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
 
 void PIDLogging::SetPIDPreferences() {
 
-	this->p = preference->GetDouble("PValue-" + this->m_name, 1.0);
-	this->i = preference->GetDouble("IValue-" + this->m_name, 0.0);
-	this->d = preference->GetDouble("DValue-" + this->m_name, 0.0);
+	//  this->p = preference->GetDouble("PValue-" + this->m_name, 1.0);
+	//  this->i = preference->GetDouble("IValue-" + this->m_name, 0.0);
+	//  this->d = preference->GetDouble("DValue-" + this->m_name, 0.0);
+
+	if (shooterBool) {
+		this->p = preference->GetDouble("ShooterPValue", 1.0);
+		this->i = preference->GetDouble("ShooterIValue", 0.0);
+		this->d = preference->GetDouble("ShooterDValue", 0.0);
+	}
+	if (driveTrainBool) {
+		this->p = preference->GetDouble("DriveTrainPValue", 1.0);
+		this->i = preference->GetDouble("DriveTrainIValue", 0.0);
+		this->d = preference->GetDouble("DriveTrainDValue", 0.0);
+
+	}
+
+
+
 
 	for (int i = 0; i < numMotors; i++)
 		UpdateMotorToReflectCurrentPIDValues(i);
@@ -129,7 +144,7 @@ void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double d
 	std::cout << "LOGGING THINGS!";
 	std::stringstream data;
 	timerValue = Trunc(timerValue, 4);
-	data << timerValue << ",\t" << dataOne << ",\t" << dataTwo;
+	data << timerValue << "," << dataOne << "," << dataTwo << "\n";
 	this->WriteString(data.str());
 }
 

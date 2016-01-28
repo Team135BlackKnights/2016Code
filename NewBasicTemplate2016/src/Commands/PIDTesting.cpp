@@ -1,6 +1,8 @@
 #include "PIDTesting.h"
 #include <sstream>
 
+
+//  Using this now to test the difference between GetPosition(), GetEncPosition()
 PIDTesting::PIDTesting()
 {
 	// Use Requires() here to declare subsystem dependencies
@@ -8,13 +10,9 @@ PIDTesting::PIDTesting()
 	Requires(driveTrain.get());
 	timer.reset(new Timer());
 	timerValue = 0;
-	//  encoderPosition = 0;
-	//  encoderEncPosition = 0;
-	preference.reset(new Preferences());
-
-	p = preference->GetDouble("PIDTesting-PValue", 1.0);
-	i = preference->GetDouble("PIDTesting-IValue", 0.0);
-	d = preference->GetDouble("PIDTesting-DValue", 0.0);
+	encoderPosition = 0;
+	encoderEncPosition = 0;
+	PIDLogging::driveTrainBool = true;
 
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
@@ -32,8 +30,7 @@ void PIDTesting::Initialize()
 	driveTrain->BasedTimeCreateFileName();
 
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
-	driveTrain->SetPIDValues(motorPort, p, i, d);
-	driveTrain->DisplayPIDValuesInLogData(p, i, d);
+	driveTrain->SetPIDPreferences();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -44,11 +41,11 @@ void PIDTesting::Execute()
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//SmartDashboard::PutNumber("Encoder Velocity", encoderValue);
-	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
+	SmartDashboard::PutNumber("Timer", timerValue);
 
-	//  encoderEncPosition = driveTrain->GetEncoderPosition(motorPort);
-	//  encoderPosition = driveTrain->GetPosition(motorPort);
-	driveTrain->LogEncoderData(motorPort, timerValue, VELOCITY_LOG);
+	encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
+	encoderPosition = driveTrain->GetPosition(motorIndex);
+	driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderPosition);
 
 
 	//  driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
@@ -59,7 +56,7 @@ void PIDTesting::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PIDTesting::IsFinished()
 {
-	if (timer->Get() >= 5) {
+	if (timerValue >= 5) {
 		return true;
 	}
 	else {
