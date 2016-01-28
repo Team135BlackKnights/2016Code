@@ -17,8 +17,8 @@ public:
 	virtual ~PIDLogging();
 
 protected:
-	//std::shared_ptr<CANTalon> motors[]; //Array of motors that you want to read encoder data from
-	CANTalon* motors[10];
+	std::shared_ptr<CANTalon> motors[10]; //Array of motors that you want to read encoder data from
+	//  CANTalon* motors[10];
 
 	int numMotors;
 	static const int COUNT = 64;
@@ -36,9 +36,11 @@ protected:
 	static const int DISTANCE_OFFSET = 2;
 
 	std::unique_ptr<Preferences> preference;
-
 public:
 	double p, i, d;
+
+private:
+	void UpdateMotorToReflectCurrentPIDValues(int);
 
 public:
 	void SetupMotors();
@@ -56,9 +58,10 @@ public:
 	void LogEncoderDataHeader(short int);
 
 	void FeedbackPIDOutput(int, double);
-	void SetPIDValues(int, double, double, double);
-	void UpdateMotorToReflectCurrentPIDValues(int, std::string, std::string, std::string);
-	void BasedSubsytemCreateFileNameWithPID(std::string, std::string, double, double, double);
+	//  void SetPIDValues(int);
+	void SetPIDPreferences();
+	void BasedSubsytemCreateFileNameWithPID(std::string);
+	void DisplayPIDValuesInLogData();
 
 
 	//  The functions below are not defined in the .cpp file and are not used

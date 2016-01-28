@@ -21,11 +21,9 @@ private:
 	static const short int VELOCITY_LOG = 0b010;
 	static constexpr double TIME = 5;
 
-	double PValue,
-		   IValue,
-		   DValue;
-
 	const int motorPort = Shooter::MOTOR_SHOOTER_RIGHT;
+
+	const int motorPower = .5;
 
 public:
 	ShooterCommand();

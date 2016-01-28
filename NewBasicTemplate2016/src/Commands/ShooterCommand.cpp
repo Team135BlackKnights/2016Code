@@ -15,19 +15,23 @@ void ShooterCommand::Initialize()
 {
 	shooter->ZeroAllEncoders();
 	timer->Start();
-	shooter->SetPIDValues();
-	shooter->UpdateMotorToReflectCurrentPIDValues(motorPort, "Shooter-PValue", "Shooter-IValue", "Shooter-DValue");
-	shooter->BasedSubsytemCreateFileNameWithPID("Shooter", "EncoderVelocity", PValue, IValue, DValue);
+	shooter->SetPIDPreferences();
+	shooter->BasedSubsytemCreateFileNameWithPID("EncoderVelocity");
+	shooter->OpenFile();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ShooterCommand::Execute()
 {
+
+	shooter->SetMotorValue(motorPort, motorPower);
 	//  encoderVelocity = shooter->GetEncoderVelocity(Shooter::MOTOR_SHOOTER_RIGHT);
 	timerValue = timer->Get();
 
+	encoderVelocity = shooter->GetEncoderVelocity(motorPort);
+
 	SmartDashboard::PutNumber("Time: ", timerValue);
-	//  SmartDashboard::PutNumber("Encoder Velocoty: ", encoderVelocity);
+	SmartDashboard::PutNumber("Encoder Velocoty: ", encoderVelocity);
 
 	shooter->LogEncoderData(motorPort, timerValue, VELOCITY_LOG);
 
@@ -43,6 +47,7 @@ bool ShooterCommand::IsFinished()
 void ShooterCommand::End()
 {
 	shooter->CloseFile();
+	shooter->SetMotorValue(motorPort, 0);
 	timer->Stop();
 	timer->Reset();
 }

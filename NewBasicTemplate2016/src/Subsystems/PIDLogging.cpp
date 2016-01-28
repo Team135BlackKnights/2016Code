@@ -18,7 +18,6 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 	this->numMotors = numMotors;
 	this->radius = radius;
 	this->circumfrence = this->radius * 3.14159;
-	this->SetPIDValues();
 	preference.reset(new Preferences());
 
 	//CANTalon motorTemps[numMotors];
@@ -41,7 +40,8 @@ void PIDLogging::SetupMotors() {
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
-		this->UpdateMotorToReflectCurrentPIDValues(i);
+		//  this->SetPIDValues(i);
+		SetPIDPreferences();
 	}
 }
 
@@ -98,25 +98,27 @@ void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
 
 }
 
-void PIDLogging::SetPIDValues(int motorIndex, double P, double I, double D) {
-	this->p = p;
-	this->i = i;
-	this->d = d;
-	motors[motorIndex]->SetP(p);
-	motors[motorIndex]->SetI(i);
-	motors[motorIndex]->SetD(d);
+//  Don't use this in a command as SetPIDPreferences used this function
+void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
+	motors[motorIndex]->SetP(this->p);
+	motors[motorIndex]->SetI(this->i);
+	motors[motorIndex]->SetD(this->d);
 }
 
-void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex, std::string PreferencePName, std::string PreferenceIName, std::string PreferenceDName) {
+void PIDLogging::SetPIDPreferences() {
 
-	this->p = preference->GetDouble("P Value is:" + this->m_name, 1.0);
-	this->i = preference->GetDouble(PreferenceIName, 0.0);
-	this->d = preference->GetDouble(PreferenceDName, 0.0);
+	this->p = preference->GetDouble("PValue-" + this->m_name, 1.0);
+	this->i = preference->GetDouble("IValue-" + this->m_name, 0.0);
+	this->d = preference->GetDouble("DValue-" + this->m_name, 0.0);
+
+	for (int i = 0; i < numMotors; i++)
+		UpdateMotorToReflectCurrentPIDValues(i);
+
 }
 
-void LogData::BasedSubsytemCreateFileNameWithPID(std::string Subsystem, std::string Variable, double p, double i, double d) {
+void PIDLogging::BasedSubsytemCreateFileNameWithPID(std::string Variable) {
 	std::stringstream NameofFile;
-	NameofFile << Subsystem << "-" << Variable << "-" << p << "-" << i << "-" << d;
+	NameofFile << this->m_name << "-" << Variable << "-" << this->p << "-" << this->i << "-" << this->d;
 	ChangeFileName(NameofFile.str());
 }
 
@@ -152,6 +154,15 @@ void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 		data << "\t" "DISTANCE";
 }
 
+void PIDLogging::DisplayPIDValuesInLogData() {
+	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
+	this->OpenFile();
+	std::stringstream ss1;
+	ss1 << this->p << "," << this->i << "," << this->d;
+	WriteString(ss1.str());
+	WriteString("---------------------------");
+}
+
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
 	std::cout << "NEW LOGGING!";
 	std::stringstream data;
@@ -164,6 +175,8 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 		data << "\t" << this->GetEncoderVelocity(motorIndex);
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
 		data << "\t" << this->GetDistance(motorIndex);
+	data << "\n";
+
 }
 
 
