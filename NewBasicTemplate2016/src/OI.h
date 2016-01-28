@@ -3,7 +3,7 @@
 
 #include "WPILib.h"
 
-class OI2
+class OI
 {
 protected:
 	static const int JOYSTICKS = 3; //max number of joysticks connected
