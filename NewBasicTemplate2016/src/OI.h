@@ -1,5 +1,5 @@
-#ifndef OI2_H
-#define OI2_H
+#ifndef OI_H
+#define OI_H
 
 #include "WPILib.h"
 
@@ -22,7 +22,7 @@ public:
 	static const int BBOX = 3; // sets buttonbox
 	static constexpr float DEAD_ZONE = .05f; //declares dead zone
 
-	OI2();
+	OI();
 	float GetStickX(int);
 	float GetStickY(int);
 	float GetStickTwist(int);
