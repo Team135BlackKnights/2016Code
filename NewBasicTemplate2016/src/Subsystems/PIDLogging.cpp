@@ -18,7 +18,8 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 	this->numMotors = numMotors;
 	this->radius = radius;
 	this->circumfrence = this->radius * 3.14159;
-	preference.reset(new Preferences());
+	//  preference.reset(new Preferences());
+	preference->GetInstance();
 
 	//CANTalon motorTemps[numMotors];
 	//this->motors = motorTemps;
@@ -131,11 +132,11 @@ void PIDLogging::SetPIDPreferences() {
 
 }
 
-void PIDLogging::BasedSubsytemCreateFileNameWithPID(std::string Variable) {
+/*void PIDLogging::BasedSubsytemCreateFileNameWithPID(std::string Variable) {
 	std::stringstream NameofFile;
-	NameofFile << this->m_name << "-" << Variable << "-" << this->p << "-" << this->i << "-" << this->d;
+	NameofFile <<  this->m_name << "-" << Variable << "-" << this->p << "-" << this->i << "-" << this->d;
 	ChangeFileName(NameofFile.str());
-}
+} */
 
 void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
 	//  int encoderPosition = this->GetEncoderPosition(motorIndex);

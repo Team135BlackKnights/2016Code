@@ -5,7 +5,7 @@
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<Shooter> CommandBase::shooter;
-std::unique_ptr<LogData> CommandBase::logData("/home/lvuser/");
+std::unique_ptr<LogData> CommandBase::logData;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 /*

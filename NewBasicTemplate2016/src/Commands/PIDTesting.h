@@ -4,6 +4,7 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 #include "Subsystems/LogData.h"
+#include "Subsystems/PIDLogging.h"
 
 class PIDTesting: public CommandBase
 {
@@ -36,7 +37,9 @@ private:
 	//  DriveTrain::FrontRight = 1
 	//  DriveTrain::RearRight = 3
 	//  const int MOTOR_FRONT_LEFT	= ID# 10;
-	const int motorIndex = DriveTrain::FRONT_LEFT;
+	//  const int motorIndex = DriveTrain::FRONT_LEFT;
+	const int motorIndex = DriveTrain::REAR_LEFT;
+
 
 	//std::string PIDFileName = "PID.csv";
 

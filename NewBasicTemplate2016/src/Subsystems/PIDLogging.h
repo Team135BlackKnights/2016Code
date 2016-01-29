@@ -35,9 +35,9 @@ protected:
 	static const int DISTANCE = 		0b100;
 	static const int DISTANCE_OFFSET = 2;
 
-	std::unique_ptr<Preferences> preference;
 public:
 	double p, i, d;
+	std::unique_ptr<Preferences> preference;
 
 private:
 	void UpdateMotorToReflectCurrentPIDValues(int);
