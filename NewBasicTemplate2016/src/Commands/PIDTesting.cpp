@@ -27,6 +27,7 @@ void PIDTesting::Initialize()
 
 	//  Creates a File Name Based off of the Current Time
 	driveTrain->BasedTimeCreateFileName();
+	driveTrain->OpenFile();
 
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
 	//  driveTrain->SetPIDPreferences();
@@ -35,6 +36,7 @@ void PIDTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
+	driveTrain->SetMotorValue(motorIndex, .1);
 	int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);

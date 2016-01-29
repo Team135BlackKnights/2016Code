@@ -10,6 +10,7 @@ private:
 	float ROTATION_MULTIPLICATION_CONSTANT = .75f;
 	int index = 0;
 	bool inverted;
+	const int VELOCITY_LOG = 0b010;
 public:
 	DriveJ();
 	void Initialize();

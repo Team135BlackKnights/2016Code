@@ -13,6 +13,8 @@ DriveJ::DriveJ()
 // Called just before this Command runs the first time
 void DriveJ::Initialize() {
 	//this->inverted = Preferences::GetInstance()->GetBoolean("Inverted", false);
+	driveTrain->SetupMotors();
+	driveTrain->ZeroAllEncoders();
 	driveTrain->InvertMotors(this->inverted);
 }
 
@@ -25,8 +27,10 @@ void DriveJ::Execute()
 		//this->inverted = newInvert;
 		//driveTrain->InvertMotors(this->inverted);
 	//}
+	driveTrain->SetMotorValue(DriveTrain::FRONT_RIGHT, .1);
+	driveTrain
 
-	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
+	//  driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 }
 
 // Make this return true when this Command no longer needs to run execute()
