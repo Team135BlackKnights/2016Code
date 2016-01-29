@@ -18,7 +18,6 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 	this->numMotors = numMotors;
 	this->radius = radius;
 	this->circumfrence = this->radius * 3.14159;
-	//  preference.reset(new Preferences());
 	//  preference->GetInstance();
 
 	//CANTalon motorTemps[numMotors];
@@ -42,7 +41,7 @@ void PIDLogging::SetupMotors() {
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
 		//  this->SetPIDValues(i);
-		SetPIDPreferences();
+		this->SetPIDPreferences();
 	}
 }
 
@@ -106,37 +105,22 @@ void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
 	motors[motorIndex]->SetD(this->d);
 }
 
-/*void PIDLogging::SetPIDPreferences() {
+void PIDLogging::SetPIDPreferences() {
 
-	//  this->p = preference->GetDouble("PValue-" + this->m_name, 1.0);
-	//  this->i = preference->GetDouble("IValue-" + this->m_name, 0.0);
-	//  this->d = preference->GetDouble("DValue-" + this->m_name, 0.0);
-
-	if (shooterBool) {
-		this->p = preference->GetDouble("ShooterPValue", 1.0);
-		this->i = preference->GetDouble("ShooterIValue", 0.0);
-		this->d = preference->GetDouble("ShooterDValue", 0.0);
-	}
-	if (driveTrainBool) {
-		this->p = preference->GetDouble("DriveTrainPValue", 1.0);
-		this->i = preference->GetDouble("DriveTrainIValue", 0.0);
-		this->d = preference->GetDouble("DriveTrainDValue", 0.0);
-
-	}
-
-
-
+	this->p = Preferences::GetInstance()->GetDouble("PValue-", 1.0);
+	this->i = Preferences::GetInstance()->GetDouble("IValue-" + this->m_name, 0.0);
+	this->d = Preferences::GetInstance()->GetDouble("DValue-" + this->m_name, 0.0);
 
 	for (int i = 0; i < numMotors; i++)
 		UpdateMotorToReflectCurrentPIDValues(i);
 
-} */
+}
 
-/*void PIDLogging::BasedSubsytemCreateFileNameWithPID(std::string Variable) {
+void PIDLogging::ChangeFileNameWithSubsystemName() {
 	std::stringstream NameofFile;
-	NameofFile <<  this->m_name << "-" << Variable << "-" << this->p << "-" << this->i << "-" << this->d;
+	NameofFile <<  this->m_name << "-" << this->m_name << "-" << this->p << "-" << this->i << "-" << this->d;
 	ChangeFileName(NameofFile.str());
-} */
+}
 
 void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
 	//  int encoderPosition = this->GetEncoderPosition(motorIndex);
@@ -160,6 +144,8 @@ void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double da
 
 void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 	std::stringstream data;
+	data << this->m_name << ": " << this->p << "," << this->i << "," << this->d << '\n';
+
 	data << "TIME";
 
 	if((whatToLog >> POSITION_OFFSET) & 1)
@@ -167,14 +153,15 @@ void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 	if((whatToLog >> VELOCITY_OFFSET) & 1)
 		data << "\t" << "VELOCITY";
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
-		data << "\t" "DISTANCE";
+		data << "\t" << "DISTANCE";
+	this->WriteString(data.str());
 }
 
 void PIDLogging::DisplayPIDValuesInLogData() {
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
 	this->OpenFile();
 	std::stringstream ss1;
-	ss1 << this->p << "," << this->i << "," << this->d;
+	ss1 << this->m_name << ": " << this->p << "," << this->i << "," << this->d;
 	WriteString(ss1.str());
 	WriteString("---------------------------");
 }
@@ -182,9 +169,9 @@ void PIDLogging::DisplayPIDValuesInLogData() {
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
 	std::cout << "NEW LOGGING!";
 	std::stringstream data;
+
 	timerValue = Trunc(timerValue, 4);
 	data << timerValue;
-
 	if((whatToLog >> POSITION_OFFSET) & 1)
 		data << ",\t" << this->GetEncoderPosition(motorIndex);
 	if((whatToLog >> VELOCITY_OFFSET) & 1)
@@ -192,7 +179,7 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
 		data << "\t" << this->GetDistance(motorIndex);
 	data << "\n";
-
+	this->WriteString(data.str());
 }
 
 

@@ -17,7 +17,7 @@ void ShooterCommand::Initialize()
 	shooter->ZeroAllEncoders();
 	timer->Start();
 	//  shooter->SetPIDPreferences();
-	shooter->BasedSubsytemCreateFileNameWithPID("EncoderVelocity");
+	shooter->ChangeFileNameWithSubsystemName();
 	shooter->OpenFile();
 }
 
@@ -31,8 +31,8 @@ void ShooterCommand::Execute()
 
 	encoderVelocity = shooter->GetEncoderVelocity(motorPort);
 
-	SmartDashboard::PutNumber("Time: ", timerValue);
-	SmartDashboard::PutNumber("Encoder Velocoty: ", encoderVelocity);
+	SmartDashboard::PutNumber((std::string)"Time: ", timerValue);
+	SmartDashboard::PutNumber((std::string)"Encoder Velocoty: ", encoderVelocity);
 
 	shooter->LogEncoderData(motorPort, timerValue, VELOCITY_LOG);
 

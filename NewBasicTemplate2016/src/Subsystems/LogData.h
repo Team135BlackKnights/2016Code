@@ -21,7 +21,7 @@ public:
 	void ChangeFilePath(std::string);
 	void ChangeFileName(std::string);
 	void BasedTimeCreateFileName();
-	void DisplayPIDValuesInLogData(double, double, double);
+
 	void CloseFile();
 	void OpenFile();
 };

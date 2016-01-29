@@ -42,7 +42,7 @@ void PIDTesting::Execute()
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
-	SmartDashboard::PutNumber("Timer", timerValue);
+	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
 
 	std::cout << encoderEncPosition << "  " << encoderPosition;
 

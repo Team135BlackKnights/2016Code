@@ -28,16 +28,15 @@ protected:
 
 	double circumfrence;
 
-	static const int POSITION = 		0b001;
-	static const int POSITION_OFFSET = 0;
-	static const int VELOCITY = 		0b010;
-	static const int VELOCITY_OFFSET = 1;
-	static const int DISTANCE = 		0b100;
-	static const int DISTANCE_OFFSET = 2;
-
 public:
+	static const int POSITION = 			0b001;
+	static const int POSITION_OFFSET = 		0;
+	static const int VELOCITY = 			0b010;
+	static const int VELOCITY_OFFSET = 		1;
+	static const int DISTANCE = 			0b100;
+	static const int DISTANCE_OFFSET = 		2;
+
 	double p, i, d;
-	//  std::unique_ptr<Preferences> preference;
 
 private:
 	void UpdateMotorToReflectCurrentPIDValues(int);
@@ -51,6 +50,7 @@ public:
 	void ZeroAllEncoders();
 	double GetDistance(int);
 	double GetVelocity(int);
+
 	void LogTwoEncoderValues(int, double, double, double);
 	void LogOneEncoderValue(int, double, double);
 
@@ -62,7 +62,7 @@ public:
 	void SetPIDPreferences();
 	//  bool shooterBool = false;
 	//  bool driveTrainBool = false;
-	void BasedSubsytemCreateFileNameWithPID(std::string);
+	void ChangeFileNameWithSubsystemName();
 	void DisplayPIDValuesInLogData();
 
 
