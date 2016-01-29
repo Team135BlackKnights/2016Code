@@ -8,7 +8,7 @@ ShooterCommand::ShooterCommand()
 	timer.reset(new Timer());
 	timerValue = 0;
 	encoderVelocity = 0;
-	PIDLogging::shooterBool = true;
+	//  PIDLogging::shooterBool = true;
 }
 
 // Called just before this Command runs the first time
@@ -16,7 +16,7 @@ void ShooterCommand::Initialize()
 {
 	shooter->ZeroAllEncoders();
 	timer->Start();
-	shooter->SetPIDPreferences();
+	//  shooter->SetPIDPreferences();
 	shooter->BasedSubsytemCreateFileNameWithPID("EncoderVelocity");
 	shooter->OpenFile();
 }

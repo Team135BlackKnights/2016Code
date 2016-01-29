@@ -37,7 +37,7 @@ protected:
 
 public:
 	double p, i, d;
-	std::unique_ptr<Preferences> preference;
+	//  std::unique_ptr<Preferences> preference;
 
 private:
 	void UpdateMotorToReflectCurrentPIDValues(int);
@@ -60,8 +60,8 @@ public:
 	void FeedbackPIDOutput(int, double);
 	//  void SetPIDValues(int);
 	void SetPIDPreferences();
-	bool shooterBool = false;
-	bool driveTrainBool = false;
+	//  bool shooterBool = false;
+	//  bool driveTrainBool = false;
 	void BasedSubsytemCreateFileNameWithPID(std::string);
 	void DisplayPIDValuesInLogData();
 

@@ -5,6 +5,7 @@
 #include "WPILib.h"
 #include "Subsystems/LogData.h"
 #include "Subsystems/PIDLogging.h"
+//  #include "Subsystems/DriveTrain.h"
 
 class PIDTesting: public CommandBase
 {
@@ -29,7 +30,7 @@ private:
 
 	static const int VELOCITY_LOG = 0b011;
 
-	std::unique_ptr<Preferences> preference;
+	//  std::unique_ptr<Preferences> preference;
 
 
 	//  DriveTrain::FrontLeft = 0
@@ -37,7 +38,7 @@ private:
 	//  DriveTrain::FrontRight = 1
 	//  DriveTrain::RearRight = 3
 	//  const int MOTOR_FRONT_LEFT	= ID# 10;
-	const int motorIndex = DriveTrain::FRONT_LEFT;
+	const int motorIndex = 0;
 	//  const int motorIndex = DriveTrain::REAR_LEFT;
 
 

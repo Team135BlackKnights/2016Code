@@ -12,7 +12,7 @@ PIDTesting::PIDTesting()
 	timerValue = 0;
 	encoderPosition = 0;
 	encoderEncPosition = 0;
-	PIDLogging::driveTrainBool = true;
+	//  PIDLogging::driveTrainBool = true;
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
 	//SmartDashboard::GetNumber("DValue", DValue);
@@ -37,7 +37,7 @@ void PIDTesting::Initialize()
 void PIDTesting::Execute()
 {
 	driveTrain->SetMotorValue(motorIndex, .1);
-	int index = 0;
+	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();

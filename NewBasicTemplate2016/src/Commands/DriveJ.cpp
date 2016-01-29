@@ -27,8 +27,6 @@ void DriveJ::Execute()
 		//this->inverted = newInvert;
 		//driveTrain->InvertMotors(this->inverted);
 	//}
-	driveTrain->SetMotorValue(DriveTrain::FRONT_RIGHT, .1);
-	driveTrain
 
 	//  driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 }

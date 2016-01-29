@@ -35,7 +35,7 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	SetDefaultCommand(new DriveJ());
+	SetDefaultCommand(new PIDTesting());
 }
 
 void DriveTrain::DriveTank(float left, float right)

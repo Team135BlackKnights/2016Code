@@ -19,7 +19,7 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 	this->radius = radius;
 	this->circumfrence = this->radius * 3.14159;
 	//  preference.reset(new Preferences());
-	preference->GetInstance();
+	//  preference->GetInstance();
 
 	//CANTalon motorTemps[numMotors];
 	//this->motors = motorTemps;
@@ -106,7 +106,7 @@ void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
 	motors[motorIndex]->SetD(this->d);
 }
 
-void PIDLogging::SetPIDPreferences() {
+/*void PIDLogging::SetPIDPreferences() {
 
 	//  this->p = preference->GetDouble("PValue-" + this->m_name, 1.0);
 	//  this->i = preference->GetDouble("IValue-" + this->m_name, 0.0);
@@ -130,7 +130,7 @@ void PIDLogging::SetPIDPreferences() {
 	for (int i = 0; i < numMotors; i++)
 		UpdateMotorToReflectCurrentPIDValues(i);
 
-}
+} */
 
 /*void PIDLogging::BasedSubsytemCreateFileNameWithPID(std::string Variable) {
 	std::stringstream NameofFile;
