@@ -12,7 +12,7 @@ PIDTesting::PIDTesting()
 	Requires(driveTrain.get());
 	timer.reset(new Timer());
 	timerValue = 0;
-	encoderPosition = 0;
+	encoderSpeed = 0;
 	encoderEncPosition = 0;
 	//  PIDLogging::driveTrainBool = true;
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
@@ -41,20 +41,21 @@ void PIDTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
-	driveTrain->SetMotorValue(motorIndex, .4);
+	driveTrain->SetMotorValue(motorIndex, .3);
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
 	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
+	std::cout << driveTrain->GetMotorExpiration(motorIndex);
 	//std::cout << timerValue;
 
 	//  std::cout << encoderEncPosition << "  " << encoderPosition;
 
-	//  encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
-	//  encoderPosition = driveTrain->GetPosition(motorIndex);
-	//driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderPosition);
+	// encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
+	// encoderSpeed = driveTrain->GetEncoderVelocity(motorIndex);
+	//driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderSpeed);
 	driveTrain->LogEncoderData(motorIndex, timerValue, POSITION_AND_VELOCITY_LOG);
 
 

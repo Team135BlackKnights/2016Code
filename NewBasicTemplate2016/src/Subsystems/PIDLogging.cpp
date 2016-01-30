@@ -40,6 +40,8 @@ void PIDLogging::SetupMotors() {
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
+		motors[i]->SetExpiration(.05);
+
 		//  this->SetPIDValues(i);
 		this->SetPIDPreferences();
 	}

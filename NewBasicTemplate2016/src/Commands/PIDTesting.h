@@ -26,9 +26,9 @@ private:
 
 	int encoderEncPosition;
 
-	int encoderPosition;
+	int encoderSpeed;
 
-	static const short int POSITION_AND_VELOCITY_LOG = PIDLogging::POSITION & PIDLogging::VELOCITY;//0b011;
+	static const short int POSITION_AND_VELOCITY_LOG = PIDLogging::POSITION | PIDLogging::VELOCITY;//0b011;
 
 	//  std::unique_ptr<Preferences> preference;
 

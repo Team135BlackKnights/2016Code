@@ -42,6 +42,8 @@ public:
 	void InvertMotors(bool inverted);
 	void ClosePIDFile();
 
+	double GetMotorExpiration(int);
+
 };
 
 #endif

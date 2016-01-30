@@ -22,6 +22,7 @@ DriveTrain::DriveTrain():
 
 		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
 
+		// chassis->SetExpiration(0.5);
 
 		chassis->SetSafetyEnabled(false);
 
@@ -35,7 +36,11 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	//SetDefaultCommand(new PIDTesting());
+	//  SetDefaultCommand(new PIDTesting());
+}
+
+double DriveTrain::GetMotorExpiration(int motorIndex) {
+	return motors[motorIndex]->GetExpiration();
 }
 
 void DriveTrain::DriveTank(float left, float right)
