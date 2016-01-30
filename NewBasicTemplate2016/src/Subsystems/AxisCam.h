@@ -17,9 +17,9 @@ private:
 	double targetArea = -1.0;
 	const int X_IMAGE_RES = 240;
 	const int Y_IMAGE_RES = 320;
-	const int X_WIDTH_GOAL = 20; //in inches
+	const float X_WIDTH_GOAL = 20.0/12.0; //in inches
 	const int Y_HEIGHT_GOAL = 14; //inches
-	const double AXIS_VANGLE = 67;
+	const double AXIS_VANGLE = 45;//67;
 	double x;
 	double y;
 	double width;
@@ -34,8 +34,7 @@ public:
 	double percentArea(double area);
 	double getX();
 	double getY();
-	double getWidth();
-	double getHeight();
+	std::vector<int> getSize();
 	double distanceToBlob(double pixel_width);
 	void setServoY();
 	void setServoX();

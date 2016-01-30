@@ -2,6 +2,7 @@
 #include <math.h>
 #include <Subsystems/AxisCam.h>
 #include "../Commands/CameraTracking.h"
+#include <vector>
 
 AxisCam::AxisCam():
 		Subsystem("AxisCam")
@@ -12,8 +13,8 @@ AxisCam::AxisCam():
 	width = 0;
 	x = 0;
 	y = 0;
-	yServo.reset(new Servo(SERVO_PORT_Y));
-	xServo.reset(new Servo(SERVO_PORT_X));
+	//yServo.reset(new Servo(SERVO_PORT_Y));
+	//xServo.reset(new Servo(SERVO_PORT_X));
 }
 
 void AxisCam::InitDefaultCommand()
@@ -54,16 +55,27 @@ double AxisCam::percentArea(double area)
 	return area/(X_IMAGE_RES*Y_IMAGE_RES);
 }
 
-double AxisCam::getWidth()
+std::vector<int> AxisCam::getSize()
 {
-	return width;
-}
+	std::vector<int> WidthHeight(2);
+	auto width = visionTable->GetNumberArray("WIDTH", llvm::ArrayRef<double>());
+	auto height = visionTable->GetNumberArray("HEIGHT", llvm::ArrayRef<double>());
+	WidthHeight[0] = 0;
+	WidthHeight[1] = 0;
+	if(width.size() == 0 || height.size() == 0){
+		return WidthHeight;
+	}
 
-double AxisCam::getHeight()
-{
-	return height;
+	for(int i = 0; i < width.size(); i++)
+	{
+		if(width[i] >WidthHeight.at(0))
+		{
+			WidthHeight[0] = width[i];
+			WidthHeight[1] = height[i];
+		}
+	}
+	return WidthHeight;
 }
-
 double AxisCam::getX()
 {
 	return x;
@@ -75,12 +87,11 @@ double AxisCam::getY()
 }
 double AxisCam::distanceToBlob(double pixel_width)
 {
-	return X_WIDTH_GOAL * X_IMAGE_RES / (2*pixel_width * tan(AXIS_VANGLE / 2));
+	return (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*pixel_width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
 }
 
 void AxisCam::setServoY()
-{
-	double offset = yDistanceToCenter();
+{	double offset = yDistanceToCenter();
 	if(offset <= -5)
 		std::cout<<"down"<<std::endl;
 		///yServo->Set(yServo->Get() + .005f);

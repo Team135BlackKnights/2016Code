@@ -25,11 +25,12 @@ void CameraTracking::Execute()
 	//std::cout << "distance to blob: " << caMeRa->distanceToBlob(caMeRa->getWidth()) << std::endl;
 	std::cout << "distance to center: X : " << cam->xDistanceToCenter() << " Y: " <<
 			cam->yDistanceToCenter() <<std::endl;
-	if(cam->xServo != NULL && cam->yServo != NULL)
+	/*if(cam->xServo != NULL && cam->yServo != NULL)
 	{
 		cam->setServoY();
 		cam->setServoX();
-	}
+	}*/
+	std::cout << "distance" << cam->distanceToBlob(cam->getSize().at(0));
 }
 
 // Make this return true when this Command no longer needs to run execute()
