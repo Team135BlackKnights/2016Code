@@ -24,6 +24,8 @@ public:
 
 	void CloseFile();
 	void OpenFile();
+
+	std::string ZeroifyNumber(int, int);
 };
 
 #endif

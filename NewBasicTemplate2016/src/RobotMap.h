@@ -2,6 +2,8 @@
 #define ROBOTMAP_H
 
 #include "WPILib.h"
+#include <sstream>
+#include <string>
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -35,6 +37,7 @@
     //  Buttons Declarations
     const int JOYSTICK_BUTTON_TESTER_START = 1;
     const int JOYSTICK_BUTTON_TESTER_STOP = 6;
+
 
 
 #endif

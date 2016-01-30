@@ -36,11 +36,14 @@ void PIDLogging::SetupMotors() {
 	for (int i = 0; i < this->numMotors; i++) {
 		motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 		//  Only need SetControlMode if using Get() or Set() for something other than setting the motor value
-		//  motors[i]->SetControlMode(CANTalon::kPosition);
+		motors[i]->SetControlMode(CANTalon::kSpeed);
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
-		motors[i]->SetExpiration(.01);
+		motors[i]->ChangeMotionControlFramePeriod(15);
+		//  motors[i]->SetExpiration(.01);
+		motors[i]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+
 
 		//  this->SetPIDValues(i);
 		this->SetPIDPreferences();
@@ -62,7 +65,7 @@ int PIDLogging::GetEncoderVelocity(int motorIndex) {
 	//  Gets the Speed Value (Encoder Ticks/.1sec.) of the Encoder
 	//  The value should be Count*4 because it is a quadrature encoder
 	//  This value will also be used for graphing values for PID Tuning
-	return motors[motorIndex]->GetSpeed();
+	return motors[motorIndex]->GetEncVel();
 }
 
 void PIDLogging::ZeroEncoder(int motorIndex) {

@@ -46,8 +46,8 @@ void LogData::BasedTimeCreateFileName() {
 	// current date/time based on current system
 	time_t now = time(0);
 	tm *ltm = localtime(&now);
-	fileName <<  1 + ltm->tm_mon << "-" << ltm->tm_mday << "-" << ltm->tm_year - 100 << " " <<
-				ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec;
+	fileName <<  ZeroifyNumber(1 + ltm->tm_mon, 2) << "-" << ZeroifyNumber(ltm->tm_mday, 2) << "-" << ltm->tm_year - 100 << " " <<
+			ZeroifyNumber(ltm->tm_hour, 2) << ":" << ZeroifyNumber(ltm->tm_min, 2) << ":" << ZeroifyNumber(ltm->tm_sec, 2) << ".csv";
 	ChangeFileName(fileName.str());
 }
 
@@ -69,6 +69,17 @@ void LogData::OpenFile() {
 	if (!logFile.is_open()) {
 		logFile.open(this->filePath + this->fileName, std::fstream::out);
 	}
+}
+
+std::string LogData::ZeroifyNumber(int number, int digits) {
+    std::stringstream num;
+	for (int i = 0; i < digits; i++) {
+		if (number < pow(10, i)) {
+			num << "0";
+		}
+	}
+	num << number;
+	return num.str();
 }
 
 
