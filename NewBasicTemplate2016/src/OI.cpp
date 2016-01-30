@@ -10,6 +10,7 @@
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
 {
+/*
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
 	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
 	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
@@ -17,41 +18,43 @@ OI::OI()
 	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
-
+*/
 }
 
 //OI Functions
 float OI::GetStickX(int controllerNum) //Returns controller's x value
 {
-	float value = joysticksArray[controllerNum]->GetX(); //Gets x value from joystick
+	//float value = joysticksArray[controllerNum]->GetX(); //Gets x value from joystick
 	//makes value equal to the output of GetX() when the parameter is joysticksArray[controllerNum]
 
-	if (abs(value) > DEAD_ZONE)
+	//if (abs(value) > DEAD_ZONE)
 		return 0; //returns 0 if controllers are within the deadzone
-	return value;
+	//return value;
 }
 
 float OI::GetStickY(int controllerNum)
 {
-	float value = joysticksArray[controllerNum]->GetY(); //Gets y value from joystick
+	//float value = joysticksArray[controllerNum]->GetY(); //Gets y value from joystick
 
-	if (abs(value) > DEAD_ZONE)
+	//if (abs(value) > DEAD_ZONE)
 		return 0; //returns 0 if controllers are within the deadzone
-	return value;
+	//return value;
 }
 
 float OI::GetStickTwist(int controllerNum)
 {
-	float value = joysticksArray[controllerNum]->GetTwist(); //Gets twist value from joystick
+	//float value = joysticksArray[controllerNum]->GetTwist(); //Gets twist value from joystick
 	return value;
 }
 
 float OI::GetStickSlider(int controllerNum)
 {
-	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
+	//return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
+	return 0;
 }
 \
 bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
-	return buttonsArray[controllerNum][buttonNum]->Get();
+	//return buttonsArray[controllerNum][buttonNum]->Get();
+	return 0;
 }
