@@ -21,7 +21,8 @@
     const int MOTOR_REAR_RIGHT	= 13;
 
     const int JOYSTICK_LEFT = 1;
-    const int JOYSTICK_RIGHT = 2;
-    const int JOYSTICK_BBOX = 3;
+    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_MANIPULATOR_CONTROL = 2;
+    const int JOYSTICK_BUTTON_BOX = 3;
 
 #endif
