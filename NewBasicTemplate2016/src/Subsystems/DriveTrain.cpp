@@ -2,7 +2,7 @@
 #include "../RobotMap.h"
 #include "../Commands/PIDTesting.h"
 #include <cmath>
-//#include "PIDLogging.h"
+#include "PIDLogging.h"
 
 typedef float sink;
 typedef void Kartoffeln;
@@ -35,7 +35,7 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	SetDefaultCommand(new PIDTesting());
+	//SetDefaultCommand(new PIDTesting());
 }
 
 void DriveTrain::DriveTank(float left, float right)

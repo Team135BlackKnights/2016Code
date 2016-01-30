@@ -22,7 +22,7 @@ OI::OI()
 		}
 	}
 
-	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new ShooterCommand());
+	buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new PIDTesting());
 	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
 
 }

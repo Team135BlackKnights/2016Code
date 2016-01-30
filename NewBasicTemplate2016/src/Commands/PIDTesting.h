@@ -5,7 +5,7 @@
 #include "WPILib.h"
 #include "Subsystems/LogData.h"
 #include "Subsystems/PIDLogging.h"
-#include "Subsystems/DriveTrain.h" //This command was still requring drivetrain
+#include "Subsystems/DriveTrain.h" //This command was still requiring drivetrain
 
 class PIDTesting: public CommandBase
 {
@@ -28,7 +28,7 @@ private:
 
 	int encoderPosition;
 
-	static const int VELOCITY_LOG = PIDLogging::POSITION & PIDLogging::VELOCITY;//0b011;
+	static const short int POSITION_AND_VELOCITY_LOG = PIDLogging::POSITION & PIDLogging::VELOCITY;//0b011;
 
 	//  std::unique_ptr<Preferences> preference;
 

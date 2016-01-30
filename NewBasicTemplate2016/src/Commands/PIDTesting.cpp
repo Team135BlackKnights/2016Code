@@ -1,5 +1,7 @@
 #include "PIDTesting.h"
 #include <sstream>
+#include "Subsystems/PIDLogging.h"
+
 
 
 //  Using this now to test the difference between GetPosition(), GetEncPosition()
@@ -25,9 +27,12 @@ void PIDTesting::Initialize()
 	driveTrain->ZeroAllEncoders();
 	timer->Start();
 
+	//driveTrain->SetupMotors();
+
 	//  Creates a File Name Based off of the Current Time
 	driveTrain->BasedTimeCreateFileName();
 	driveTrain->OpenFile();
+	//driveTrain->LogEncoderDataHeader(this->POSITION_AND_VELOCITY_LOG);
 
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
 	//  driveTrain->SetPIDPreferences();
@@ -36,19 +41,21 @@ void PIDTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
-	driveTrain->SetMotorValue(motorIndex, .1);
+	driveTrain->SetMotorValue(motorIndex, .4);
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
 	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
+	//std::cout << timerValue;
 
-	std::cout << encoderEncPosition << "  " << encoderPosition;
+	//  std::cout << encoderEncPosition << "  " << encoderPosition;
 
-	encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
-	encoderPosition = driveTrain->GetPosition(motorIndex);
-	driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderPosition);
+	//  encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
+	//  encoderPosition = driveTrain->GetPosition(motorIndex);
+	//driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderPosition);
+	driveTrain->LogEncoderData(motorIndex, timerValue, POSITION_AND_VELOCITY_LOG);
 
 
 	//  driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
@@ -74,6 +81,7 @@ void PIDTesting::End()
 	timer->Stop();
 	timer->Reset();
 	std::cout << "Ended" << std::endl;
+	driveTrain->SetMotorValue(motorIndex, 0);
 }
 
 // Called when another command which requires one or more of the same
@@ -81,6 +89,7 @@ void PIDTesting::End()
 void PIDTesting::Interrupted()
 {
 	std::cout << "Interrupted" << std::endl;
+	driveTrain->SetMotorValue(motorIndex, 0);
 	driveTrain->ClosePIDFile();
 	timer->Stop();
 	timer->Reset();

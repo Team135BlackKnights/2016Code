@@ -107,19 +107,19 @@ void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
 
 void PIDLogging::SetPIDPreferences() {
 
-	this->p = Preferences::GetInstance()->GetDouble("PValue-", 1.0);
-	this->i = Preferences::GetInstance()->GetDouble("IValue-" + this->m_name, 0.0);
-	this->d = Preferences::GetInstance()->GetDouble("DValue-" + this->m_name, 0.0);
+	/* this->p = Preferences::GetInstance()->GetDouble("PValue-", 1.0);
+	this->i = Preferences::GetInstance()->GetDouble("IValue-", 0.0);
+	this->d = Preferences::GetInstance()->GetDouble("DValue-", 0.0);
 
 	for (int i = 0; i < numMotors; i++)
-		UpdateMotorToReflectCurrentPIDValues(i);
+		UpdateMotorToReflectCurrentPIDValues(i); */
 
 }
 
-void PIDLogging::ChangeFileNameWithSubsystemName() {
-	std::stringstream NameofFile;
-	NameofFile <<  this->m_name << "-" << this->m_name << "-" << this->p << "-" << this->i << "-" << this->d;
-	ChangeFileName(NameofFile.str());
+ void PIDLogging::ChangeFileNameWithSubsystemName() {
+	/* std::stringstream NameofFile;
+	NameofFile << this->p << "-" << this->i << "-" << this->d;
+	ChangeFileName(NameofFile.str()); */
 }
 
 void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
@@ -144,7 +144,10 @@ void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double da
 
 void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 	std::stringstream data;
-	data << this->m_name << ": " << this->p << "," << this->i << "," << this->d << '\n';
+	//  data << this->m_name << ": " << this->p << "," << this->i << "," << this->d << '\n';
+
+	//data << this->m_name << ": " << this->p << "," << this->i << "," << this->d << '\n';
+
 
 	data << "TIME";
 
@@ -159,25 +162,30 @@ void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 
 void PIDLogging::DisplayPIDValuesInLogData() {
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
-	this->OpenFile();
+	/*this->OpenFile();
 	std::stringstream ss1;
 	ss1 << this->m_name << ": " << this->p << "," << this->i << "," << this->d;
 	WriteString(ss1.str());
-	WriteString("---------------------------");
+	WriteString("---------------------------"); */
 }
 
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
-	std::cout << "NEW LOGGING!";
+	// std::cout << "NEW LOGGING!";
 	std::stringstream data;
 
 	timerValue = Trunc(timerValue, 4);
 	data << timerValue;
-	if((whatToLog >> POSITION_OFFSET) & 1)
+	std::cout << "TIME";
+	if((whatToLog >> POSITION_OFFSET) & 1) {
 		data << ",\t" << this->GetEncoderPosition(motorIndex);
-	if((whatToLog >> VELOCITY_OFFSET) & 1)
-		data << "\t" << this->GetEncoderVelocity(motorIndex);
+		std::cout << "LOGGING POSITION";
+	}
+	if((whatToLog >> VELOCITY_OFFSET) & 1) {
+		data << ",\t" << this->GetEncoderVelocity(motorIndex);
+		std::cout << "LOGGING VELOCITY";
+	}
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
-		data << "\t" << this->GetDistance(motorIndex);
+		data << ",\t" << this->GetDistance(motorIndex);
 	data << "\n";
 	this->WriteString(data.str());
 }
