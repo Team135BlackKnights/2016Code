@@ -43,6 +43,10 @@ double DriveTrain::GetMotorExpiration(int motorIndex) {
 	return motors[motorIndex]->GetExpiration();
 }
 
+void DriveTrain::EnableMotorControl(int motorIndex) {
+	motors[motorIndex]->EnableControl();
+}
+
 void DriveTrain::DriveTank(float left, float right)
 {
 	left = fmax(-1, fmin(1, left));

@@ -41,17 +41,16 @@ void PIDTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
+	driveTrain->EnableMotorControl(motorIndex);
 	driveTrain->SetMotorValue(motorIndex, .3);
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
-	SmartDashboard::PutNumber((std::string)"Timer", timerValue);
+	//  SmartDashboard::PutNumber((std::string)"Timer", timerValue);
 	std::cout << driveTrain->GetMotorExpiration(motorIndex);
 	//std::cout << timerValue;
-
-	//  std::cout << encoderEncPosition << "  " << encoderPosition;
 
 	// encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
 	// encoderSpeed = driveTrain->GetEncoderVelocity(motorIndex);

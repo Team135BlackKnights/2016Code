@@ -43,6 +43,7 @@ public:
 	void ClosePIDFile();
 
 	double GetMotorExpiration(int);
+	void EnableMotorControl(int);
 
 };
 
