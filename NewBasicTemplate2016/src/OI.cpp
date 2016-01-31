@@ -1,60 +1,60 @@
+/*
+	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
+	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
+ */
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
+// OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
 {
-//
-	// Process operator interface input here.
-	//sticks[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //Declares new Joystick
-	//sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
-	//sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
+/*
+	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
+	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
-	/*
-	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //Declares new buttons for Joysticks max # of buttons is 12
-	{
-
-		for (int j = 1; j <= MAX_JOYSTICK_BUTTONS; j++)
-		{
-			buttons[i][j].reset(new JoystickButton(sticks[i].get(), j));
-		}
-	}
-	*/
+	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
+			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
+				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+*/
 }
 
-float OI::GetStickX(int hand)
+//OI Functions
+float OI::GetStickX(int controllerNum) //Returns controller's x value
 {
-	//float value = sticks[hand]->GetX(); // Returns X axis value of Joysticks
-	//if (abs(value) > DEAD_BAND)
-		return 0;
-	//return 0;
+	//float value = joysticksArray[controllerNum]->GetX(); //Gets x value from joystick
+	//makes value equal to the output of GetX() when the parameter is joysticksArray[controllerNum]
+
+	//if (abs(value) > DEAD_ZONE)
+		return 0; //returns 0 if controllers are within the deadzone
+	//return value;
 }
 
-float OI::GetStickY(int hand)
+float OI::GetStickY(int controllerNum)
 {
-	//float value = sticks[hand]->GetY(); // Returns Y axis value of Joysticks
-	//if (abs(value) > DEAD_BAND)
-		return 0;
-	//return 0;
+	//float value = joysticksArray[controllerNum]->GetY(); //Gets y value from joystick
+
+	//if (abs(value) > DEAD_ZONE)
+		return 0; //returns 0 if controllers are within the deadzone
+	//return value;
 }
 
-float OI::GetStickTwist(int hand)
+float OI::GetStickTwist(int controllerNum)
 {
-	//float value = sticks[hand]->GetTwist(); // Returns Twist axis value of Joysticks
-	//if (abs(value) > DEAD_BAND)
-		return 0;
-	//return 0;
+	//float value = joysticksArray[controllerNum]->GetTwist(); //Gets twist value from joystick
+	return value;
 }
 
-float OI::GetStickSlider(int hand)
+float OI::GetStickSlider(int controllerNum)
 {
-	//return 1 - sticks[hand]->GetThrottle();
+	//return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
 	return 0;
 }
-
-bool OI::GetButton(int stick, int button)
+\
+bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
-	//return buttons[stick][button]->Get();
+	//return buttonsArray[controllerNum][buttonNum]->Get();
 	return 0;
 }
