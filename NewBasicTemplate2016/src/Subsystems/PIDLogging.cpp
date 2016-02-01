@@ -36,17 +36,17 @@ void PIDLogging::SetupMotors() {
 	for (int i = 0; i < this->numMotors; i++) {
 		motors[i]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 		//  Only need SetControlMode if using Get() or Set() for something other than setting the motor value
-		motors[i]->SetControlMode(CANTalon::kSpeed);
+		//  motors[i]->SetControlMode(CANTalon::kSpeed);
 		//  motors[i]->SetPosition(0);
 		//  motors[i]->SetEncPosition(0);
 		motors[i]->ConfigEncoderCodesPerRev(COUNT);
-		motors[i]->ChangeMotionControlFramePeriod(15);
+		//  motors[i]->ChangeMotionControlFramePeriod(15);
 		//  motors[i]->SetExpiration(.01);
 		motors[i]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 
 
 		//  this->SetPIDValues(i);
-		this->SetPIDPreferences();
+		//  this->SetPIDPreferences();
 	}
 }
 

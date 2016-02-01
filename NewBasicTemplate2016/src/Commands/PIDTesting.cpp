@@ -42,14 +42,14 @@ void PIDTesting::Initialize()
 void PIDTesting::Execute()
 {
 	//  driveTrain->EnableMotorControl(motorIndex);
-	driveTrain->SetMotorValue(motorIndex, 100000);
+	driveTrain->SetMotorValue(motorIndex, .4);
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
 	timerValue = timer->Get();
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
 	//  SmartDashboard::PutNumber((std::string)"Timer", timerValue);
-	std::cout << driveTrain->GetMotorExpiration(motorIndex);
+	//  std::cout << driveTrain->GetMotorExpiration(motorIndex);
 	//std::cout << timerValue;
 
 	// encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
