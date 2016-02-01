@@ -8,7 +8,7 @@ AxisCam::AxisCam():
 		Subsystem("AxisCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
-	visionTable = NetworkTable::GetTable("SmartDashboard");
+	visionTable.reset(NetworkTable::GetTable("SmartDashboard").get());
 	height = 0;
 	width = 0;
 	x = 0;
@@ -60,20 +60,23 @@ std::vector<int> AxisCam::getSize()
 	std::vector<int> WidthHeight(2);
 	auto width = visionTable->GetNumberArray("WIDTH", llvm::ArrayRef<double>());
 	auto height = visionTable->GetNumberArray("HEIGHT", llvm::ArrayRef<double>());
-	WidthHeight[0] = 0;
+	/*WidthHeight[0] = 0;
 	WidthHeight[1] = 0;
-	if(width.size() == 0 || height.size() == 0){
+	int size = width.size();
+	if(size == 0){
 		return WidthHeight;
 	}
 
-	for(int i = 0; i < width.size(); i++)
+	for(int i = 0; i < size; i++)
 	{
-		if(width[i] >WidthHeight.at(0))
+		if(width[i] >WidthHeight[0])
 		{
 			WidthHeight[0] = width[i];
 			WidthHeight[1] = height[i];
 		}
-	}
+	}*/
+	WidthHeight[0] = width[0];
+	WidthHeight[1] = height[0];
 	return WidthHeight;
 }
 double AxisCam::getX()
@@ -109,4 +112,8 @@ void AxisCam::setServoX()
 	else if(offset >= 5)
 		std::cout<<"left"<<std::endl;
 		//xServo->Set(xServo->Get() - .005f);
+}
+
+double AxisCam::angleToBlob(double dist){
+	return 10.2d;
 }

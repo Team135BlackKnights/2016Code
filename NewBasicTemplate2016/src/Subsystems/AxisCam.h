@@ -6,6 +6,7 @@
 #include <memory>
 #include "WPILib.h"
 #include <unistd.h>
+//#include "Servo.h"
 
 class AxisCam: public Subsystem
 {
@@ -38,6 +39,7 @@ public:
 	double distanceToBlob(double pixel_width);
 	void setServoY();
 	void setServoX();
+	double angleToBlob(double dist);
 	std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
 };
