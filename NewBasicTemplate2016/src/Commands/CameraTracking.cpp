@@ -31,8 +31,8 @@ void CameraTracking::Execute()
 		cam->setServoY();
 		cam->setServoX();
 	}*/
-	std::cout << "distance" << cam->distanceToBlob(cam->getSize().at(0));
-	std::cout << "angle :" <<cam->angleToBlob(10.2);// cam->angleToBlob(cam->distanceToBlob(cam->getSize().at(0)));
+	//std::cout << "distance" << cam->distanceToBlob(cam->getWidth()) << std::endl;
+	std::cout << "angle :" <<cam->angleToBlob(cam->distanceToBlob(cam->getWidth()));// cam->angleToBlob(cam->distanceToBlob(cam->getSize().at(0)));
 }
 
 // Make this return true when this Command no longer needs to run execute()

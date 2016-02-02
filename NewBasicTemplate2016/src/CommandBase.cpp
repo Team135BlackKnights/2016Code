@@ -5,6 +5,7 @@
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<AxisCam> CommandBase::cam;
+std::unique_ptr<USBCam> CommandBase::usbCam;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -26,4 +27,6 @@ void CommandBase::init()
 	oi.reset(new OI());
 
 	cam.reset(new AxisCam());
+
+	usbCam.reset(new USBCam());
 }

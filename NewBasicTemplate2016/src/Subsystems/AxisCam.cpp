@@ -1,14 +1,15 @@
-#include <RobotMap.h>
+#include <Commands/CameraTracking.h>
+#include <llvm/ArrayRef.h>
 #include <math.h>
 #include <Subsystems/AxisCam.h>
-#include "../Commands/CameraTracking.h"
+#include <iostream>
 #include <vector>
 
 AxisCam::AxisCam():
 		Subsystem("AxisCam")
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
-	visionTable.reset(NetworkTable::GetTable("SmartDashboard").get());
+	visionTable = NetworkTable::GetTable("SmartDashboard");
 	height = 0;
 	width = 0;
 	x = 0;
@@ -30,14 +31,18 @@ void AxisCam::InitDefaultCommand()
 void AxisCam::GetCameraValues()
 {
 	//visionTable->
-	auto xys = visionTable->GetNumberArray("BLOB_XY", llvm::ArrayRef<double>());
-	if(xys.size() > 2 || xys.size() == 0)
-		return;
-	x = xys[0];
-	y = xys[1];
+	auto shapes = visionTable->GetNumberArray("SHAPES", llvm::ArrayRef<double>());
 
+	if(shapes.size() == 0)
+		return;
+	width = shapes[4] - shapes[3];
+	height = shapes[6] - shapes[5];
+	x = width / 2 + shapes[3];
+	y = height / 2 + shapes[5];
 	std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
+	std::cout << "Width: " << width << std::endl;
+	std::cout << "Height: " << height << std::endl;
 }
 
 double AxisCam::xDistanceToCenter()
@@ -55,29 +60,14 @@ double AxisCam::percentArea(double area)
 	return area/(X_IMAGE_RES*Y_IMAGE_RES);
 }
 
-std::vector<int> AxisCam::getSize()
+int AxisCam::getWidth()
 {
-	std::vector<int> WidthHeight(2);
-	auto width = visionTable->GetNumberArray("WIDTH", llvm::ArrayRef<double>());
-	auto height = visionTable->GetNumberArray("HEIGHT", llvm::ArrayRef<double>());
-	/*WidthHeight[0] = 0;
-	WidthHeight[1] = 0;
-	int size = width.size();
-	if(size == 0){
-		return WidthHeight;
-	}
+	return width;
+}
 
-	for(int i = 0; i < size; i++)
-	{
-		if(width[i] >WidthHeight[0])
-		{
-			WidthHeight[0] = width[i];
-			WidthHeight[1] = height[i];
-		}
-	}*/
-	WidthHeight[0] = width[0];
-	WidthHeight[1] = height[0];
-	return WidthHeight;
+int AxisCam::getHeight()
+{
+	return height;
 }
 double AxisCam::getX()
 {
@@ -115,5 +105,5 @@ void AxisCam::setServoX()
 }
 
 double AxisCam::angleToBlob(double dist){
-	return 10.2d;
+	return atan((X_WIDTH_GOAL / 2) / dist) * 180 / M_PI;
 }

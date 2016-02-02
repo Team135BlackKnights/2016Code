@@ -35,7 +35,8 @@ public:
 	double percentArea(double area);
 	double getX();
 	double getY();
-	std::vector<int> getSize();
+	int getWidth();
+	int getHeight();
 	double distanceToBlob(double pixel_width);
 	void setServoY();
 	void setServoX();
