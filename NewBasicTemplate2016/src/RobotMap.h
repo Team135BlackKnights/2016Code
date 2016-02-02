@@ -24,4 +24,6 @@
     const int JOYSTICK_RIGHT = 0;
     const int JOYSTICK_BBOX = 2;
 
+    const bool DRIVE_TRAIN_INVERTED = false;
+
 #endif

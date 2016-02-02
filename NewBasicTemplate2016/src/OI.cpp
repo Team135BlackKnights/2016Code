@@ -20,6 +20,12 @@ OI::OI()
 }
 
 //OI Functions
+Joystick* OI::GetStick(int controllerNum)
+{
+	return joysticksArray[controllerNum].get();
+}
+
+
 float OI::GetStickX(int controllerNum) //Returns controller's x value
 {
 	float value = joysticksArray[controllerNum]->GetX(); //Gets x value from joystick
@@ -49,7 +55,7 @@ float OI::GetStickSlider(int controllerNum)
 {
 	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
 }
-\
+
 bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
