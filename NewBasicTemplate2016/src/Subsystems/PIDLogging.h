@@ -36,7 +36,9 @@ public:
 	static const short int DISTANCE = 			0b100;
 	static const int DISTANCE_OFFSET = 			2;
 
-	double p, i, d;
+	double p,
+		   i,
+		   d;
 
 private:
 	void UpdateMotorToReflectCurrentPIDValues(int);

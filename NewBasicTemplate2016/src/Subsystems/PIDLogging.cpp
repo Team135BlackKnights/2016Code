@@ -112,19 +112,23 @@ void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
 
 void PIDLogging::SetPIDPreferences() {
 
-	/* this->p = Preferences::GetInstance()->GetDouble("PValue-", 1.0);
-	this->i = Preferences::GetInstance()->GetDouble("IValue-", 0.0);
-	this->d = Preferences::GetInstance()->GetDouble("DValue-", 0.0);
+	this->p = Preferences::GetInstance()->GetDouble("PValue", 1.0);
+	this->i = Preferences::GetInstance()->GetDouble("IValue", 0.0);
+	this->d = Preferences::GetInstance()->GetDouble("DValue", 0.0);
+
+	//PValue = SmartDashboard::GetNumber("PValue", 1.0);
+	//IValue = SmartDashboard::GetNumber("IValue", 0.0);
+	//DValue = SmartDashboard::GetNumber("DValue", 0.0);
 
 	for (int i = 0; i < numMotors; i++)
-		UpdateMotorToReflectCurrentPIDValues(i); */
+		UpdateMotorToReflectCurrentPIDValues(i);
 
 }
 
  void PIDLogging::ChangeFileNameWithSubsystemName() {
-	/* std::stringstream NameofFile;
-	NameofFile << this->p << "-" << this->i << "-" << this->d;
-	ChangeFileName(NameofFile.str()); */
+	std::stringstream NameofFile;
+	NameofFile << "PID:" << this->p << "," << this->i << "," << this->d << ".csv";
+	ChangeFileName(NameofFile.str());
 }
 
 void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
@@ -159,19 +163,19 @@ void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 	if((whatToLog >> POSITION_OFFSET) & 1)
 		data << ",\t" << "POSITION";
 	if((whatToLog >> VELOCITY_OFFSET) & 1)
-		data << "\t" << "VELOCITY";
+		data << ",\t" << "VELOCITY";
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
-		data << "\t" << "DISTANCE";
+		data << ",\t" << "DISTANCE";
 	this->WriteString(data.str());
 }
 
 void PIDLogging::DisplayPIDValuesInLogData() {
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
-	/*this->OpenFile();
+	//this->OpenFile();
 	std::stringstream ss1;
-	ss1 << this->m_name << ": " << this->p << "," << this->i << "," << this->d;
+	ss1 << "p:" << this->p << ",\ti:" << this->i << ",\td:" << this->d;
 	WriteString(ss1.str());
-	WriteString("---------------------------"); */
+	WriteString("---------------------------");
 }
 
 void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
@@ -191,7 +195,7 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 	}
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
 		data << ",\t" << this->GetDistance(motorIndex);
-	data << "\n";
+	//  data << "\n";
 	this->WriteString(data.str());
 }
 
