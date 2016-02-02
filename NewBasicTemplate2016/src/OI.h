@@ -26,6 +26,7 @@ public:
 	static constexpr float DEAD_BAND = .05f; //declares dead zone
 
 	OI();
+	Joystick* GetStick(int);
 	float GetStickX(int);
 	float GetStickY(int);
 	float GetStickTwist(int);
