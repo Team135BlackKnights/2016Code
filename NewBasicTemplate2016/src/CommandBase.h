@@ -20,6 +20,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<DriveTrain> driveTrain;
 	static std::unique_ptr<OI> oi;
+	static std::unique_ptr<LiftHang> liftHang;
 };
 
 #endif

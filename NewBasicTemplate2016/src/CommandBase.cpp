@@ -4,6 +4,7 @@
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
+std::unique_ptr<LiftHang> CommandBase::liftHang;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -23,4 +24,6 @@ void CommandBase::init()
 	driveTrain.reset(new DriveTrain());
 
 	oi.reset(new OI());
+
+	liftHang.reset(new LiftHang());
 }

@@ -1,17 +1,38 @@
 #include "DriveLiftHang.h"
-#include "../RobotMap.h"
 
-DriveLiftHang::DriveLiftHang() :
-		Subsystem("ExampleSubsystem")
+DriveLiftHang::DriveLiftHang()
+{
+	// Use Requires() here to declare subsystem dependencies
+	// eg. Requires(chassis);
+}
+
+// Called just before this Command runs the first time
+void DriveLiftHang::Initialize()
 {
 
 }
 
-void DriveLiftHang::InitDefaultCommand()
+// Called repeatedly when this Command is scheduled to run
+void DriveLiftHang::Execute()
 {
-	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+
 }
 
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
+// Make this return true when this Command no longer needs to run execute()
+bool DriveLiftHang::IsFinished()
+{
+	return false;
+}
+
+// Called once after isFinished returns true
+void DriveLiftHang::End()
+{
+
+}
+
+// Called when another command which requires one or more of the same
+// subsystems is scheduled to run
+void DriveLiftHang::Interrupted()
+{
+
+}

@@ -24,6 +24,8 @@
     const int JOYSTICK_RIGHT = 0;
     const int JOYSTICK_BBOX = 2;
 
+    const int MOTOR_LIFT_HAnG = 11;
+
     const bool DRIVE_TRAIN_INVERTED = false;
 
 #endif
