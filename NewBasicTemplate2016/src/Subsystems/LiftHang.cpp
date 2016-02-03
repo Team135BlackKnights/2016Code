@@ -1,0 +1,17 @@
+#include "LiftHang.h"
+#include "../RobotMap.h"
+
+LiftHang::LiftHang() :
+		Subsystem("ExampleSubsystem")
+{
+
+}
+
+void LiftHang::InitDefaultCommand()
+{
+	// Set the default command for a subsystem here.
+	//SetDefaultCommand(new MySpecialCommand());
+}
+
+// Put methods for controlling this subsystem
+// here. Call these from Commands.
