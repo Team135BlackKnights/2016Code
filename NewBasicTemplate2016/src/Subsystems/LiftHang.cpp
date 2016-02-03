@@ -2,9 +2,9 @@
 #include "../RobotMap.h"
 
 LiftHang::LiftHang() :
-		Subsystem("ExampleSubsystem")
+		Subsystem("LiftHang")
 {
-	motors.reset(new CANTalon(MOTOR_LIFT_HAnG));
+	motors.reset(new CANTalon(MOTOR_LIFT_HANG));
 
 }
 
@@ -14,8 +14,8 @@ void LiftHang::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void LiftHang::DriveMotorSlider(int motorIndex, double SliderValue) {
-	motors->Set(SliderValue);
+void LiftHang::DriveMotor(float value) {
+	motors->Set(value);
 }
 
 // Put methods for controlling this subsystem

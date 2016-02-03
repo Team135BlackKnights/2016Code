@@ -15,7 +15,7 @@ private:
 public:
 	LiftHang();
 	void InitDefaultCommand();
-	void DriveMotorSlider(int, double);
+	void DriveMotor(float);
 };
 
 #endif
