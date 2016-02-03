@@ -1,6 +1,10 @@
 
-#include "CameraTracking.h"
-#include "Subsystems/AxisCam.h"
+#include <Commands/CameraTracking.h>
+#include <Servo.h>
+#include <Subsystems/AxisCam.h>
+#include <cstdbool>
+#include <iostream>
+#include <memory>
 
 
 CameraTracking::CameraTracking()
@@ -31,8 +35,10 @@ void CameraTracking::Execute()
 		cam->setServoY();
 		cam->setServoX();
 	}*/
-	//std::cout << "distance" << cam->distanceToBlob(cam->getWidth()) << std::endl;
-	std::cout << "angle :" <<cam->angleToBlob(cam->distanceToBlob(cam->getWidth()));// cam->angleToBlob(cam->distanceToBlob(cam->getSize().at(0)));
+	std::cout << "distance" << cam->distanceToBlob(cam->getWidth()) << std::endl;
+	//cam->setServoY();
+	//std::cout << "angle :" <<cam->angleToBlob(cam->distanceToBlob(cam->getWidth()));// cam->angleToBlob(cam->distanceToBlob(cam->getSize().at(0)));
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

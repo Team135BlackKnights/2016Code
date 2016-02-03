@@ -15,7 +15,7 @@ AxisCam::AxisCam():
 	x = 0;
 	y = 0;
 	//yServo.reset(new Servo(SERVO_PORT_Y));
-	//xServo.reset(new Servo(SERVO_PORT_X));
+	yServo.reset(new Servo(SERVO_PORT_X));
 }
 
 void AxisCam::InitDefaultCommand()
@@ -84,24 +84,31 @@ double AxisCam::distanceToBlob(double pixel_width)
 }
 
 void AxisCam::setServoY()
-{	double offset = yDistanceToCenter();
-	if(offset <= -5)
-		std::cout<<"down"<<std::endl;
-		///yServo->Set(yServo->Get() + .005f);
-	else if(offset >= 5)
-		std::cout<<"up"<<std::endl;
-		//yServo->Set(yServo->Get() - .005f);
+{
+	double offset = yDistanceToCenter();
+	if(offset <= -5){
+			if(yServo->Get() < 255.0f)
+				yServo->Set(yServo->Get() + .5f);
+		}
+		else if(offset >= 5){
+			if(xServo->Get() > 0)
+				yServo->Set(yServo->Get() - .5f);
+		}
 }
 
 void AxisCam::setServoX()
 {
 	double offset = xDistanceToCenter();
-	if(offset <= -5)
+	if(offset <= -5){
 		std::cout<<"right"<<std::endl;
-		//xServo->Set(xServo->Get() + .005f);
-	else if(offset >= 5)
+		if(xServo->Get() < 255.0f)
+			xServo->Set(xServo->Get() + .5f);
+	}
+	else if(offset >= 5){
 		std::cout<<"left"<<std::endl;
-		//xServo->Set(xServo->Get() - .005f);
+		if(xServo->Get() > 0)
+			xServo->Set(xServo->Get() - .5f);
+	}
 }
 
 double AxisCam::angleToBlob(double dist){

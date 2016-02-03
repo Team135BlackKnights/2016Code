@@ -6,6 +6,8 @@
 #include <memory>
 #include "WPILib.h"
 #include <unistd.h>
+#include "RobotMap.h"
+
 //#include "Servo.h"
 
 class AxisCam: public Subsystem
@@ -18,8 +20,8 @@ private:
 	double targetArea = -1.0;
 	const int X_IMAGE_RES = 240;
 	const int Y_IMAGE_RES = 320;
-	const float X_WIDTH_GOAL = 20.0/12.0; //in inches
-	const int Y_HEIGHT_GOAL = 14; //inches
+	const float X_WIDTH_GOAL = 20.0/12.0; //in feet
+	const float Y_HEIGHT_GOAL = 1.0; //feet
 	const double AXIS_VANGLE = 45;//67;
 	double x;
 	double y;
