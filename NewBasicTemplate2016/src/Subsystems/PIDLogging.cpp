@@ -173,7 +173,7 @@ void PIDLogging::DisplayPIDValuesInLogData() {
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
 	//this->OpenFile();
 	std::stringstream ss1;
-	ss1 << "p:" << this->p << ",\ti:" << this->i << ",\td:" << this->d;
+	ss1 << "p:" << this->p << ",\ti:" << this->i << ",\td:" << this->d << ",\t" << "VALUE(TRIM(CLEAN(B4)))";
 	WriteString(ss1.str());
 	WriteString("---------------------------");
 }
