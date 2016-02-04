@@ -4,7 +4,7 @@ DriveLiftHang::DriveLiftHang(bool PosNeg)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(LiftHang);
+	Requires(liftHang.get());
 	direction = PosNeg ? 1: -1; //Ternary operator = bae
 }
 

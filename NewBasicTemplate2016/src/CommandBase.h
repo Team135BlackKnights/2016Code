@@ -4,6 +4,7 @@
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/LiftHang.h"
 #include "OI.h"
 #include "WPILib.h"
 /**
