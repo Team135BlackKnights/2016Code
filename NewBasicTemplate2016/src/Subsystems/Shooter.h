@@ -29,7 +29,7 @@ public:
 	*/
 	Shooter();
 	void InitDefaultCommand();
-	void SetMotorValue(int, double);
+	void DriveMotor(int, double);
 
 };
 
