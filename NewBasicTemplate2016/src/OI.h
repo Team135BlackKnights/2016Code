@@ -23,6 +23,8 @@ public:
 	static const int RIGHT = 1; // sets RIGHT controller
 	static const int BBOX = 2;
 	
+	static const int LIFT_HANG_JOYSTICK = RIGHT;
+
 	static constexpr float DEAD_BAND = .05f; //declares dead zone
 
 	OI();

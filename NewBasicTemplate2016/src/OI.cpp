@@ -6,6 +6,7 @@
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
+#include "Commands/DriveLiftHang.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -17,6 +18,9 @@ OI::OI()
 	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+
+	buttonsArray[LIFT_HANG_JOYSTICK][TRIGGER]->WhileHeld(new DriveLiftHang(true));
+	buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
 }
 
 //OI Functions
