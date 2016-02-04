@@ -2,7 +2,7 @@
 #include "../RobotMap.h"
 
 Shooter::Shooter() :
-		PIDLogging("Shooter",)
+	PIDLogging("DriveTrain", "/home/lvuser/", numMotors, radius)
 {
 
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));

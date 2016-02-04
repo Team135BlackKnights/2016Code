@@ -28,6 +28,11 @@
     const int MOTOR_SHOOTER_RIGHT_ID = 8;
     const int MOTOR_SHOOTER_LEFT_ID = 9;
 
+    const int MOTOR_SHOOT_BOULDER = 13;
+
+    const int TRIGGER = 1;
+    const int THUMBS_BUTTON = 2;
+
     //  Joystick Ports
     const int JOYSTICK_LEFT = 0;
     const int JOYSTICK_RIGHT = 1;

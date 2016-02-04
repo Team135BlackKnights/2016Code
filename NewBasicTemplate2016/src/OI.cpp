@@ -24,6 +24,8 @@ OI::OI()
 
 	buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new PIDTesting());
 	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
+	buttons[JOYSTICK_RIGHT][TRIGGER]->WhileHeld(new OperateShooter(true));
+	buttons[JOYSTICK_RIGHT][THUMBS_BUTTON]->WhileHeld(new OperateShooter(false));
 
 }
 

@@ -13,11 +13,13 @@ private:
 
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
-	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 public:
 	Shooter();
 	void InitDefaultCommand();
 	void DriveMotor(int, double);
+
+	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
+
 };
 
 #endif

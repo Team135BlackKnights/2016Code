@@ -4,8 +4,8 @@
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
-std::unique_ptr<Shooter> CommandBase::shooter;
 std::unique_ptr<LogData> CommandBase::logData;
+std::unique_ptr<Shooter> CommandBase::shooter;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 /*
@@ -29,9 +29,9 @@ void CommandBase::init()
 
 	oi.reset(new OI());
 
-	shooter.reset(new Shooter());
-
 	logData.reset(new LogData("/home/lvuser/"));
+
+	shooter.reset(new Shooter());
 
 	//preferences.reset(Preferences::GetInstance());
 }

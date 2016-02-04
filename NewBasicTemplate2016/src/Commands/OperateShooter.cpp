@@ -1,12 +1,14 @@
 #include "OperateShooter.h"
 
-OperateShooter::OperateShooter()
+OperateShooter::OperateShooter(bool PosOrNeg)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(shooter.get());
-	collectionMotorPower = .6;
-	twoWheelShooterPower = 1.0;
+	//  collectionMotorPower = .6;
+	twoWheelShooterPower = .8;
+	positiveOrNegative = PosOrNeg ? 1:-1;
+
 }
 
 // Called just before this Command runs the first time
@@ -18,12 +20,8 @@ void OperateShooter::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void OperateShooter::Execute()
 {
-	joystickYValue = oi->GetStickY(OI::MANIPULATOR_JOYSTICK);
-	shooter->DriveMotor(Shooter::RAISE_OR_LOWER_ARM, joystickYValue);
 
-	shooter->DriveMotor(Shooter::COLLECTION_MOTOR, collectionMotorPower);
-
-	shooter->DriveMotor(Shooter::TWO_WHEEL_SHOOTER_MOTOR, twoWheelShooterPower);
+	shooter->DriveMotor(Shooter::TWO_WHEEL_SHOOTER_MOTOR, twoWheelShooterPower * positiveOrNegative);
 }
 
 // Make this return true when this Command no longer needs to run execute()

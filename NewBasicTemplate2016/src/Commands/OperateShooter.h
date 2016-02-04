@@ -8,11 +8,10 @@
 class OperateShooter: public CommandBase
 {
 private:
-	int joystickYValue;
-	double collectionMotorPower;
 	double twoWheelShooterPower;
+	int positiveOrNegative;
 public:
-	OperateShooter();
+	OperateShooter(bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
