@@ -18,8 +18,8 @@ private:
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
-	const int X_IMAGE_RES = 240;
-	const int Y_IMAGE_RES = 320;
+	const int X_IMAGE_RES = 320;
+	const int Y_IMAGE_RES = 240;
 	const float X_WIDTH_GOAL = 20.0/12.0; //in feet
 	const float Y_HEIGHT_GOAL = 1.0; //feet
 	const double AXIS_VANGLE = 45;//67;

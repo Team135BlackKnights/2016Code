@@ -5,7 +5,6 @@
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/AxisCam.h"
-#include "Subsystems/usbCam.h"
 #include "OI.h"
 #include "WPILib.h"
 
@@ -24,7 +23,6 @@ public:
 	static std::unique_ptr<DriveTrain> driveTrain;
 	static std::unique_ptr<OI> oi;
 	static std::unique_ptr<AxisCam> cam;
-	static std::unique_ptr<USBCam> usbCam;
 };
 
 #endif

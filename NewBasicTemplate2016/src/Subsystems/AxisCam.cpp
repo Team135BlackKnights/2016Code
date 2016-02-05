@@ -14,8 +14,8 @@ AxisCam::AxisCam():
 	width = 0;
 	x = 0;
 	y = 0;
-	//yServo.reset(new Servo(SERVO_PORT_Y));
-	yServo.reset(new Servo(SERVO_PORT_X));
+	yServo.reset(new Servo(SERVO_PORT_Y));
+	xServo.reset(new Servo(SERVO_PORT_X));
 }
 
 void AxisCam::InitDefaultCommand()
@@ -34,7 +34,14 @@ void AxisCam::GetCameraValues()
 	auto shapes = visionTable->GetNumberArray("SHAPES", llvm::ArrayRef<double>());
 
 	if(shapes.size() == 0)
+	{
+		x = 666;
+		y = 666;
+		width = 666;
+		height = 666;
 		return;
+	}
+
 	width = shapes[4] - shapes[3];
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
@@ -47,11 +54,15 @@ void AxisCam::GetCameraValues()
 
 double AxisCam::xDistanceToCenter()
 {
+	if(x == 666)
+		return 666;
 	return x - X_IMAGE_RES /2;
 }
 
 double AxisCam::yDistanceToCenter()
 {
+	if(y == 666)
+			return 666;
 	return y - Y_IMAGE_RES/2;
 }
 
@@ -86,29 +97,27 @@ double AxisCam::distanceToBlob(double pixel_width)
 void AxisCam::setServoY()
 {
 	double offset = yDistanceToCenter();
-	if(offset <= -5){
-			if(yServo->Get() < 255.0f)
-				yServo->Set(yServo->Get() + .5f);
-		}
-		else if(offset >= 5){
-			if(xServo->Get() > 0)
-				yServo->Set(yServo->Get() - .5f);
-		}
+	float value = yServo->Get();
+	if(offset <= -5)
+		value -= .0005f;
+	else if(offset >= 5)
+		value += .0005f;
+	value = fmin(fmax(value,.99f),.01f);
+	yServo->Set(value);
 }
 
 void AxisCam::setServoX()
 {
 	double offset = xDistanceToCenter();
-	if(offset <= -5){
-		std::cout<<"right"<<std::endl;
-		if(xServo->Get() < 255.0f)
-			xServo->Set(xServo->Get() + .5f);
-	}
-	else if(offset >= 5){
-		std::cout<<"left"<<std::endl;
-		if(xServo->Get() > 0)
-			xServo->Set(xServo->Get() - .5f);
-	}
+	if(offset == 666)
+		return;
+	float value = xServo->Get();
+	if(offset <= -50)
+		value += .01f;
+	else if(offset >= 50)
+		value -= .01f;
+	value = fmin(fmax(value,.99f),.01f);
+	xServo->Set(value);
 }
 
 double AxisCam::angleToBlob(double dist){

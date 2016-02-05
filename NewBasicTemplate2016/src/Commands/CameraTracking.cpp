@@ -1,6 +1,6 @@
 
 #include <Commands/CameraTracking.h>
-#include <Servo.h>
+#include <OI.h>
 #include <Subsystems/AxisCam.h>
 #include <cstdbool>
 #include <iostream>
@@ -36,6 +36,13 @@ void CameraTracking::Execute()
 		cam->setServoX();
 	}*/
 	std::cout << "distance" << cam->distanceToBlob(cam->getWidth()) << std::endl;
+	//float value = Preferences::GetInstance()->GetFloat("ServoX", .5);
+	//float xValue = oi->GetStickX(OI::RIGHT);
+	std::cout << "offset x: " << cam->xDistanceToCenter() << std::endl;
+	cam->setServoX();
+
+	//float yValue = oi->GetStickY(OI::RIGHT) / 2.0f;
+	//cam->setServoY();
 	//cam->setServoY();
 	//std::cout << "angle :" <<cam->angleToBlob(cam->distanceToBlob(cam->getWidth()));// cam->angleToBlob(cam->distanceToBlob(cam->getSize().at(0)));
 
