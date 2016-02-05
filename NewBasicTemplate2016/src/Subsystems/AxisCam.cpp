@@ -24,6 +24,8 @@ void AxisCam::InitDefaultCommand()
 	//CameraServer::GetInstance()->SetQuality(50);
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
+	xServo->Set(.5f);
+	yServo->Set(.1f);
 	SetDefaultCommand(new CameraTracking());
 }
 
@@ -52,74 +54,92 @@ void AxisCam::GetCameraValues()
 	std::cout << "Height: " << height << std::endl;
 }
 
-double AxisCam::xDistanceToCenter()
+float AxisCam::xDistanceToCenter()
 {
 	if(x == 666)
 		return 666;
+	//return Preferences::GetInstance()->GetFloat("Offset", 0);
 	return x - X_IMAGE_RES /2;
 }
 
-double AxisCam::yDistanceToCenter()
+float AxisCam::yDistanceToCenter()
 {
 	if(y == 666)
 			return 666;
 	return y - Y_IMAGE_RES/2;
 }
 
-double AxisCam::percentArea(double area)
+float AxisCam::percentArea(double area)
 {
 	return area/(X_IMAGE_RES*Y_IMAGE_RES);
 }
 
-int AxisCam::getWidth()
+float AxisCam::getWidth()
 {
 	return width;
 }
 
-int AxisCam::getHeight()
+float AxisCam::getHeight()
 {
 	return height;
 }
-double AxisCam::getX()
+float AxisCam::getX()
 {
 	return x;
 }
 
-double AxisCam::getY()
+float AxisCam::getY()
 {
 	return y;
 }
-double AxisCam::distanceToBlob(double pixel_width)
+float AxisCam::distanceToBlob(double pixel_width)
 {
 	return (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*pixel_width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
 }
 
 void AxisCam::setServoY()
 {
-	double offset = yDistanceToCenter();
+	float offset = yDistanceToCenter();
 	float value = yServo->Get();
-	if(offset <= -5)
-		value -= .0005f;
-	else if(offset >= 5)
-		value += .0005f;
-	value = fmin(fmax(value,.99f),.01f);
+	if (offset == 666)
+		return;
+	if(offset <= -Preferences::GetInstance()->GetInt("WiggleRoom", 5))
+		value -= .001f;
+	else if(offset >= Preferences::GetInstance()->GetInt("WiggleRoom", 5))
+		value += .001f;
+	//value = fmin(fmax(value,.99f),.01f);
 	yServo->Set(value);
 }
 
 void AxisCam::setServoX()
 {
-	double offset = xDistanceToCenter();
-	if(offset == 666)
-		return;
+	float offset = xDistanceToCenter();
 	float value = xServo->Get();
-	if(offset <= -50)
-		value += .01f;
-	else if(offset >= 50)
-		value -= .01f;
-	value = fmin(fmax(value,.99f),.01f);
+	if (offset == 666)
+		return;
+	if(offset <= -Preferences::GetInstance()->GetInt("WiggleRoom", 5))
+		value -= .001f;
+	else if(offset >= Preferences::GetInstance()->GetInt("WiggleRoom", 5))
+		value += .001f;
+	//value = fmin(fmax(value,.01f),.99f);
+	std::cout << "SETTING VALUE TO " << value << std::endl;
 	xServo->Set(value);
 }
 
-double AxisCam::angleToBlob(double dist){
+void AxisCam::SetServoY(float value)
+{
+	SetServo(yServo.get(), value);
+}
+
+void AxisCam::setServoX(float value) {
+	this->SetServo(xServo.get(), value);
+}
+
+void AxisCam::SetServo(Servo* servo, float value)
+{
+	servo->Set(value);
+}
+
+float AxisCam::angleToBlob(double dist){
 	return atan((X_WIDTH_GOAL / 2) / dist) * 180 / M_PI;
 }

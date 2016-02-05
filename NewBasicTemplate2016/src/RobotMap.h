@@ -13,6 +13,8 @@
 // For example to map the left and right motors, you could define the
 // following variables to use with your drivetrain subsystem.
 
+	#define map(x, in_min, in_max, out_min, out_max) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+
 	//constexpr bool ROBOT_MAIN = false;
 
     const int MOTOR_FRONT_LEFT	= 11;

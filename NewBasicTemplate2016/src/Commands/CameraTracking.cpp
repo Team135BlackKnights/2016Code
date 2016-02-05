@@ -5,6 +5,7 @@
 #include <cstdbool>
 #include <iostream>
 #include <memory>
+#include "../RobotMap.h"
 
 
 CameraTracking::CameraTracking()
@@ -39,7 +40,9 @@ void CameraTracking::Execute()
 	//float value = Preferences::GetInstance()->GetFloat("ServoX", .5);
 	//float xValue = oi->GetStickX(OI::RIGHT);
 	std::cout << "offset x: " << cam->xDistanceToCenter() << std::endl;
+	//cam->setServoX((float)map(oi->GetStickX(OI::RIGHT), -1, 1, 0, 1));
 	cam->setServoX();
+	cam->setServoY();
 
 	//float yValue = oi->GetStickY(OI::RIGHT) / 2.0f;
 	//cam->setServoY();
