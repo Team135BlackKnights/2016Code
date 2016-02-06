@@ -45,7 +45,8 @@ void PIDTesting::Execute()
 	//  driveTrain->EnableMotorControl(motorIndex);
 	for (int i = 0; i < DriveTrain::NUM_MOTORS; i++) {
 		driveTrain->SetMotorValue(i, .5);
-		std::cout << driveTrain->GetPosition(i) << ",";
+		std::cout << driveTrain->GetEncoderPosition(i) << ",";
+		//  encoderValue[i] =
 	}
 	std::cout << std::endl;
 	//  int index = 0;
