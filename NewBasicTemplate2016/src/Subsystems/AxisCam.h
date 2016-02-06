@@ -7,6 +7,8 @@
 #include "WPILib.h"
 #include <unistd.h>
 #include "RobotMap.h"
+#include <PIDController.h>
+
 
 //#include "Servo.h"
 
@@ -25,6 +27,8 @@ private:
 	struct Gimbal tilt;
 	void UpdateGimbal(struct Gimbal * gimbal, int32_t error);
 	void Update();
+	PIDController* panCont;
+	PIDController* tiltCont;
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
@@ -60,8 +64,8 @@ public:
 	void setServoY();
 	void setServoX();
 	void SetServo(Servo* servo, float value);
-	void setServoX(int32_t value);
-	void SetServoY(int32_t value);
+	void setServoX(float value);
+	void SetServoY(float value);
 	float angleToBlob(double dist);
 	float GetMotorValues();
 	float GetXMultiplier(float offset);

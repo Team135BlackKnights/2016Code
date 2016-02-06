@@ -23,7 +23,7 @@ OI::OI()
 		}
 	}
 
-	buttons[RIGHT][1]->WhileHeld(new MoveFromCameraValue());
+	//buttons[RIGHT][1]->WhileHeld(new MoveFromCameraValue());
 }
 
 float OI::GetStickX(int hand)

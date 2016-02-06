@@ -41,6 +41,7 @@ void CameraTracking::Execute()
 	//float xValue = oi->GetStickX(OI::RIGHT);
 	std::cout << "offset x: " << cam->xDistanceToCenter() << std::endl;
 	//cam->setServoX((float)map(oi->GetStickX(OI::RIGHT), -1, 1, 0, 1));
+	//cam->setServoX();
 	cam->setServoX();
 	cam->setServoY();
 

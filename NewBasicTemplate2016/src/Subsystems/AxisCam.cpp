@@ -1,6 +1,8 @@
 #include <Commands/CameraTracking.h>
 #include <llvm/ArrayRef.h>
 #include <math.h>
+#include <Preferences.h>
+#include <Servo.h>
 #include <Subsystems/AxisCam.h>
 #include <iostream>
 #include <vector>
@@ -26,7 +28,7 @@ void AxisCam::InitDefaultCommand()
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 	xServo->Set(.5f);
-	yServo->Set(.1f);
+	yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
 
@@ -143,9 +145,9 @@ void AxisCam::setServoY()
 	if (offset == 666)
 		return;
 	if(offset <= -Preferences::GetInstance()->GetInt("WiggleRoom", 5))
-		value -= .001f + GetYMultiplier(offset);
+		value -= .001f;// + GetYMultiplier(offset);
 	else if(offset >= Preferences::GetInstance()->GetInt("WiggleRoom", 5))
-		value += .001f + GetYMultiplier(offset);
+		value += .001f;// + GetYMultiplier(offset);
 	//value = fmin(fmax(value,.99f),.01f);
 	yServo->Set(value);
 }
@@ -157,20 +159,20 @@ void AxisCam::setServoX()
 	if (offset == 666)
 		return;
 	if(offset <= -Preferences::GetInstance()->GetInt("WiggleRoom", 5))
-		value -= .001f + GetXMultiplier(offset);
+		value += (GetXMultiplier(offset));
 	else if(offset >= Preferences::GetInstance()->GetInt("WiggleRoom", 5))
-		value += .001f + GetXMultiplier(offset);
+		value += (GetXMultiplier(offset));
 	//value = fmin(fmax(value,.01f),.99f);
 	std::cout << "SETTING VALUE TO " << value << std::endl;
 	xServo->Set(value);
 }
 
-void AxisCam::SetServoY(int32_t value)
+void AxisCam::SetServoY(float value)
 {
 	SetServo(yServo.get(), value);
 }
 
-void AxisCam::setServoX(int32_t value) {
+void AxisCam::setServoX(float value) {
 	this->SetServo(xServo.get(), value);
 }
 
@@ -183,7 +185,7 @@ float AxisCam::angleToBlob(double dist){
 	return atan((X_WIDTH_GOAL / 2) / dist) * 180 / M_PI;
 }
 
-void AxisCam::Update()
+/*void AxisCam::Update()
 {
 	int pan_error;
 	int tilt_error;
@@ -191,14 +193,13 @@ void AxisCam::Update()
 	pan_error = X_IMAGE_RES /2 - x;
 	tilt_error = y - Y_IMAGE_RES / 2;
 
-	UpdateGimbal(&pan, pan_error);
-	UpdateGimbal(&tilt, tilt_error);
+	UpdateGimbal(&pan, pan_error);	UpdateGimbal(&tilt, tilt_error);
 
 	setServoX(pan.position);
 	SetServoY(tilt.position);
 
 }
-
+*/
 float AxisCam::GetMotorValues()
 {
 	float MAX = 1;
@@ -211,10 +212,10 @@ float AxisCam::GetMotorValues()
 
 float AxisCam::GetXMultiplier(float offset)
 {
-	return offset * .2;
+	return (offset / (X_IMAGE_RES / 2.0f));
 }
 
 float AxisCam::GetYMultiplier(float offset)
 {
-	return offset * .2;
+	return (offset / ( Y_IMAGE_RES / 2.0f))/Preferences::GetInstance()->GetFloat("P", 100.0f);
 }

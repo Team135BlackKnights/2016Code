@@ -9,7 +9,7 @@ DriveJ::DriveJ()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	inverted = false;
+	inverted = true;
 	Requires(driveTrain.get());
 }
 

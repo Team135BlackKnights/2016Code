@@ -59,8 +59,8 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 
 void DriveTrain::Invert(bool inverted)
 {
-	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, !inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, !inverted);
+	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, inverted);
+	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, inverted);
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, inverted);
 }
