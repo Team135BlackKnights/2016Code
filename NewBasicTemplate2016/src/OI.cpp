@@ -1,6 +1,10 @@
-#include "OI.h"
-#include "RobotMap.h"
-#include "Commands/DriveJ.h"
+#include <Buttons/JoystickButton.h>
+#include <Commands/MoveFromCameraValue.h>
+#include <Joystick.h>
+#include <OI.h>
+#include <RobotMap.h>
+#include <cstdbool>
+#include <memory>
 
 OI::OI()
 {
@@ -18,6 +22,8 @@ OI::OI()
 			buttons[i][j].reset(new JoystickButton(sticks[i].get(), j));
 		}
 	}
+
+	buttons[RIGHT][1]->WhileHeld(new MoveFromCameraValue());
 }
 
 float OI::GetStickX(int hand)

@@ -11,7 +11,6 @@ DriveJ::DriveJ()
 	// eg. Requires(chassis);
 	inverted = false;
 	Requires(driveTrain.get());
-
 }
 
 // Called just before this Command runs the first time
@@ -28,6 +27,7 @@ void DriveJ::Execute()
 		//driveTrain->Invert(newInvert);
 
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
+
 
 }
 
