@@ -6,6 +6,7 @@ class Robot: public IterativeRobot
 {
 private:
 
+	CommandGroup *autonomousToRun;
 	LiveWindow *LiveWin;
 	SendableChooser *Defense;
 
@@ -25,6 +26,9 @@ private:
 		Defense->AddObject("Portcullis", new Autonomous(5)); //Runs Autonomous with parameter of 5
 
 		SmartDashboard::PutData("Defenses", Defense); //Displays Defense Choices
+
+
+
 	}
 	
 	void DisabledPeriodic()
@@ -34,6 +38,8 @@ private:
 
 	void AutonomousInit()
 	{
+		autonomousToRun = (CommandGroup*) Defense->GetSelected();
+		autonomousToRun->Start();
 	}
 
 	void AutonomousPeriodic()
