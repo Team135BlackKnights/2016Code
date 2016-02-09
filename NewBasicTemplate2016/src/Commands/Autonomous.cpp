@@ -11,15 +11,15 @@ Autonomous::Autonomous(int defenseNum, int driveTime)
 				//AddSequential(new RobotDrive(driveTime));
 				break;
 			case "2" : // Portcullis
-				//AddSequential(new Manipulator(1));
+				//AddSequential(new Manipulator(2));
 				//AddSequential(new RobotDrive(driveTime));
 				break;
 			case "3" : // Sally Port
-				//AddSequential(new Manipulator(1));
+				//AddSequential(new Manipulator(3));
 				//AddSequential(new RobotDrive(driveTime));
 				break;
 			case "4" : // Drawbridge
-				//AddSequential(new Manipulator(1));
+				//AddSequential(new Manipulator(4));
 				//AddSequential(new RobotDrive(driveTime));
 					break;
 			case "5" : // Other
