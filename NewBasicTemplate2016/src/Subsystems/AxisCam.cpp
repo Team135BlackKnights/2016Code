@@ -32,44 +32,6 @@ void AxisCam::InitDefaultCommand()
 	SetDefaultCommand(new CameraTracking());
 }
 
-void AxisCam::InitGimbals()
-{
-
-	pan.position = CAMERA_CENTER_X;
-	pan.proportional_gain = PAN_PROPORTIONAL_GAIN;
-	pan.previous_error = 0x80000000L;
-	pan.derivative_gain = PAN_DERIVATIVE_GAIN;
-
-	tilt.position = CAMERA_CENTER_Y;
-	tilt.derivative_gain = TILT_DERIVATIVE_GAIN;
-	tilt.previous_error = 0x80000000L;
-	tilt.proportional_gain = TILT_PROPORTIONAL_GAIN;
-}
-
-void AxisCam::UpdateGimbal(struct Gimbal * gimbal, int32_t error)
-{
-	long int velocity;
-	int32_t error_delta;
-	int32_t P_gain;
-	int32_t D_gain;
-	int32_t newPosMax =  CAMERA_CENTER_X + Preferences::GetInstance()->GetInt("WiggleRoom", 5);
-	int32_t newPosMin =  CAMERA_CENTER_X - Preferences::GetInstance()->GetInt("WiggleRoom", 5);
-	if(gimbal->previous_error != 0x80000000L) {
-		error_delta = error - gimbal->previous_error;
-		P_gain = gimbal->proportional_gain;
-		D_gain = gimbal->derivative_gain;
-
-		velocity = (error * P_gain + error_delta * D_gain) >> 10;
-
-		gimbal->position += velocity;
-
-		if(gimbal->position > newPosMax)
-			gimbal->position = newPosMax;//could be error
-		else if(gimbal->position < newPosMin)
-			gimbal->position = newPosMin;
-	}
-	gimbal->previous_error = error;
-}
 
 void AxisCam::GetCameraValues()
 {
@@ -185,21 +147,6 @@ float AxisCam::angleToBlob(double dist){
 	return atan((X_WIDTH_GOAL / 2) / dist) * 180 / M_PI;
 }
 
-/*void AxisCam::Update()
-{
-	int pan_error;
-	int tilt_error;
-
-	pan_error = X_IMAGE_RES /2 - x;
-	tilt_error = y - Y_IMAGE_RES / 2;
-
-	UpdateGimbal(&pan, pan_error);	UpdateGimbal(&tilt, tilt_error);
-
-	setServoX(pan.position);
-	SetServoY(tilt.position);
-
-}
-*/
 float AxisCam::GetMotorValues()
 {
 	float MAX = 1;
@@ -212,7 +159,7 @@ float AxisCam::GetMotorValues()
 
 float AxisCam::GetXMultiplier(float offset)
 {
-	return (offset / (X_IMAGE_RES / 2.0f));
+	return (offset / (X_IMAGE_RES / 2.0f))/Preferences::GetInstance()->GetFloat("P", 100.0f);
 }
 
 float AxisCam::GetYMultiplier(float offset)
