@@ -8,6 +8,9 @@
 #include <unistd.h>
 #include "RobotMap.h"
 #include <PIDController.h>
+#include "Subsystems/ServoPID.h"
+
+
 
 
 //#include "Servo.h"
@@ -17,23 +20,13 @@ class AxisCam: public Subsystem
 private:
 	const char* CAMERA_NAME = "cam2";
 	std::shared_ptr<NetworkTable> visionTable;
-	struct Gimbal {
-		int32_t position;
-		int32_t previous_error;
-		int32_t proportional_gain;
-		int32_t derivative_gain;
-	};
-	struct Gimbal pan;
-	struct Gimbal tilt;
-	void UpdateGimbal(struct Gimbal * gimbal, int32_t error);
-	void Update();
-	PIDController* panCont;
-	PIDController* tiltCont;
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
 	const float X_IMAGE_RES = 320;
 	const float Y_IMAGE_RES = 240;
+	ServoPID* pidServoX;
+	PIDController* pidX;
 	const int CAMERA_CENTER_X = X_IMAGE_RES / 2;
 	const int CAMERA_CENTER_Y = Y_IMAGE_RES / 2;
 	const int PAN_PROPORTIONAL_GAIN = 400;
@@ -70,8 +63,8 @@ public:
 	float GetMotorValues();
 	float GetXMultiplier(float offset);
 	float GetYMultiplier(float offset);
-
-	std::unique_ptr<Servo> yServo;
+	void UpdateServo();
+	//std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
 };
 

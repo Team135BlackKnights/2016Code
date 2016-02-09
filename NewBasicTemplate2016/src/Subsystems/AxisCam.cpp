@@ -16,9 +16,16 @@ AxisCam::AxisCam():
 	width = 0;
 	x = 0;
 	y = 0;
-	yServo.reset(new Servo(SERVO_PORT_Y));
+	//yServo.reset(new Servo(SERVO_PORT_Y));
 	xServo.reset(new Servo(SERVO_PORT_X));
-	//InitGimbals();
+	pidServoX = new ServoPID(xServo.get());
+	pidX = new PIDController(Preferences::GetInstance()->GetFloat("Px", .01),
+		   Preferences::GetInstance()->GetFloat("Ix", 0), Preferences::GetInstance()->GetFloat("Dx", 0),
+		   pidServoX, pidServoX);
+	pidX->SetContinuous(true);
+	pidX->SetInputRange(0,1);
+	pidX->SetOutputRange(-1,1);
+
 }
 
 void AxisCam::InitDefaultCommand()
@@ -28,7 +35,7 @@ void AxisCam::InitDefaultCommand()
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 	xServo->Set(.5f);
-	yServo->Set(.2f);
+	//yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
 
@@ -100,7 +107,7 @@ float AxisCam::distanceToBlob(double pixel_width)
 	return (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*pixel_width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
 }
 
-void AxisCam::setServoY()
+/*void AxisCam::setServoY()
 {
 	float offset = yDistanceToCenter();
 	float value = yServo->Get();
@@ -112,7 +119,7 @@ void AxisCam::setServoY()
 		value += .001f;// + GetYMultiplier(offset);
 	//value = fmin(fmax(value,.99f),.01f);
 	yServo->Set(value);
-}
+}*/
 
 void AxisCam::setServoX()
 {
@@ -129,10 +136,10 @@ void AxisCam::setServoX()
 	xServo->Set(value);
 }
 
-void AxisCam::SetServoY(float value)
+/*void AxisCam::SetServoY(float value)
 {
 	SetServo(yServo.get(), value);
-}
+}*/
 
 void AxisCam::setServoX(float value) {
 	this->SetServo(xServo.get(), value);
@@ -165,4 +172,9 @@ float AxisCam::GetXMultiplier(float offset)
 float AxisCam::GetYMultiplier(float offset)
 {
 	return (offset / ( Y_IMAGE_RES / 2.0f))/Preferences::GetInstance()->GetFloat("P", 100.0f);
+}
+
+void AxisCam::UpdateServo()
+{
+	pidX->SetSetpoint(x / X_IMAGE_RES);
 }
