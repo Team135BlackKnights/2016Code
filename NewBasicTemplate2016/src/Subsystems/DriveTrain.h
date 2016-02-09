@@ -36,6 +36,7 @@ public:
 	void DriveTank(float, float);
 	void RotateTank(float);
 	void SetMotorValue(int, double);
+	void SetAllMotorValues(double);
 
 	void SetSafetyEnabled(bool);
 

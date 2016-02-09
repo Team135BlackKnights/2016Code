@@ -19,10 +19,10 @@
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
 	//  Talon Motor ID's
-    const int MOTOR_FRONT_LEFT	= 10;
-    const int MOTOR_REAR_LEFT	= 11;
-    const int MOTOR_FRONT_RIGHT	= 12;
-    const int MOTOR_REAR_RIGHT	= 13;
+    const int MOTOR_FRONT_LEFT	= 12;
+    const int MOTOR_REAR_LEFT	= 13;
+    const int MOTOR_FRONT_RIGHT	= 11;
+    const int MOTOR_REAR_RIGHT	= 10;
 
     //  Inaccurate ID Values for the Talon
     const int MOTOR_SHOOTER_RIGHT_ID = 8;

@@ -12,6 +12,10 @@ PIDTesting::PIDTesting()
 	Requires(driveTrain.get());
 	  timer.reset(new Timer());
 	  timerValue = 0;
+
+
+	  inverted = false;
+	  driveTrain->InvertMotors(this->inverted);
 	//  PIDLogging::driveTrainBool = true;
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
@@ -43,11 +47,12 @@ void PIDTesting::Initialize()
 void PIDTesting::Execute()
 {
 	//  driveTrain->EnableMotorControl(motorIndex);
+	driveTrain->SetAllMotorValues(.5);
 	for (int i = 0; i < DriveTrain::NUM_MOTORS; i++) {
-		driveTrain->SetMotorValue(i, .5);
 		std::cout << driveTrain->GetEncoderPosition(i) << ",";
 		//  encoderValue[i] =
 	}
+
 	std::cout << std::endl;
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
@@ -83,11 +88,11 @@ bool PIDTesting::IsFinished()
 // Called once after isFinished returns true
 void PIDTesting::End()
 {
-	driveTrain->ClosePIDFile();
+	//driveTrain->ClosePIDFile();
 	timer->Stop();
 	timer->Reset();
 	std::cout << "Ended" << std::endl;
-	driveTrain->SetMotorValue(motorIndex, 0);
+	driveTrain->SetAllMotorValues(0);
 }
 
 // Called when another command which requires one or more of the same
@@ -95,8 +100,8 @@ void PIDTesting::End()
 void PIDTesting::Interrupted()
 {
 	std::cout << "Interrupted" << std::endl;
-	driveTrain->SetMotorValue(motorIndex, 0);
-	driveTrain->ClosePIDFile();
+	driveTrain->SetAllMotorValues(0);
+	//driveTrain->ClosePIDFile();
 	timer->Stop();
 	timer->Reset();
 }

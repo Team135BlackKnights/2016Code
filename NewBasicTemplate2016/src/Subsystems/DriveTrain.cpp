@@ -60,6 +60,14 @@ void DriveTrain::SetMotorValue(int MotorPort, double MotorPower) {
 	motors[MotorPort]->Set(MotorPower);
 }
 
+void DriveTrain::SetAllMotorValues(double motorPower) {
+	motors[FRONT_LEFT]->Set(motorPower);
+	motors[REAR_LEFT]->Set(motorPower);
+	motors[FRONT_RIGHT]->Set(motorPower);
+	motors[REAR_RIGHT]->Set(motorPower);
+
+}
+
 void DriveTrain::RotateTank(float power)
 {
 	chassis->TankDrive(power, -power);
