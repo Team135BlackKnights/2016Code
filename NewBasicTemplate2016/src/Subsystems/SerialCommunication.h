@@ -12,12 +12,16 @@ private:
 	static const int BAUD_RATE = 9600;
 	static const int COUNT = 10;
 	static const int DATA_BITS = 8;
-	static const int TIMEOUT_TIME = ((COUNT * DATA_BITS)/BAUD_RATE);
+	//  static const int TIMEOUT_TIME = ((COUNT * DATA_BITS)/BAUD_RATE);
+	static const int TIMEOUT_TIME = .1;
 
 	//  std::unique<SerialPort> serialPort;
 	SerialPort *serialPort;
 
-	char* data[COUNT] = new char;
+	char* data[COUNT];
+
+	double doubleData;
+
 public:
 	SerialCommunication();
 	void InitDefaultCommand();

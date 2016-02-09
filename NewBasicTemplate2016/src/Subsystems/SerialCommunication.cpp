@@ -9,6 +9,8 @@ SerialCommunication::SerialCommunication() :
 	serialPort = new SerialPort(BAUD_RATE, SerialPort::kMXP, DATA_BITS);
 	serialPort->SetReadBufferSize(COUNT);
 	serialPort->SetTimeout(TIMEOUT_TIME);
+	data[COUNT] = new char;
+	doubleData = 0;
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -30,9 +32,10 @@ double SerialCommunication::GetSerialValues() {
 		for (int i = 0; i < COUNT; i++) {
 			serialPort->Read(data[i], COUNT);
 			//  Need to convert from string to double
-			return data[i];
+			doubleData = strtod(data[i], NULL);
 		}
 	}
+	return doubleData;
 }
 
 void SerialCommunication::StopSerialCommunication() {
