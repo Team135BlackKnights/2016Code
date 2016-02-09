@@ -63,5 +63,4 @@ float OI::GetStickSlider(int controllerNum)
 bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
->>>>>>> refs/remotes/origin/master
 }

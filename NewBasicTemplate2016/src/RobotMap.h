@@ -39,7 +39,3 @@
 
 #endif
 
-
-
-#endif
->>>>>>> refs/remotes/origin/master
