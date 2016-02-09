@@ -16,7 +16,6 @@ private:
 
 	std::unique_ptr<RobotDrive> chassis;
 
-
 public:
 
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
@@ -27,12 +26,13 @@ public:
 	DriveTrain();
 	void InitDefaultCommand();
 
-	void DriveTank(float, float);
+	void DriveTank(Joystick*, Joystick*); //Drive with given joysticks
+	void DriveTank(float, float); //Drive with specific given values
 	void RotateTank(float);
 
 	void SetSafetyEnabled(bool);
 
-	void Invert(bool inverted);
+	void InvertMotors();
 };
 
 #endif

@@ -1,3 +1,4 @@
+
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 
@@ -22,12 +23,23 @@
     const int MOTOR_FRONT_RIGHT	= 11;
     const int MOTOR_REAR_RIGHT	= 10;
 
+    const int MOTOR_LIFT_HANG = 11;
+
     const int JOYSTICK_LEFT = 1;
     const int JOYSTICK_RIGHT = 0;
-    const int JOYSTICK_MANIPULATOR_CONTROL = 2;
-    const int JOYSTICK_BUTTON_BOX = 3;
+    const int JOYSTICK_BBOX = 2;
+
+    const int TRIGGER = 1;
+    const int THUMB_BUTTON = 2;
+
+    const bool DRIVE_TRAIN_INVERTED = true;
 
     const int SERVO_PORT_Y = 1;
     const int SERVO_PORT_X = 0;
 
 #endif
+
+
+
+#endif
+>>>>>>> refs/remotes/origin/master
