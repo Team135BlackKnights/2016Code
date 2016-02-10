@@ -28,6 +28,9 @@ public:
 
 	static constexpr float DEAD_BAND = .05f; //declares dead zone
 
+	static const bool FORWARD = true;
+	static const bool REVERSE = false;
+
 	OI();
 	Joystick* GetStick(int);
 	float GetStickX(int);

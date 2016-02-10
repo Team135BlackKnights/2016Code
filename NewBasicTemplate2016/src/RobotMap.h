@@ -32,6 +32,9 @@
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
+    const int BBOX_FORWARD = 1;
+    const int BBOX_REVERSE = 2;
+
     const bool DRIVE_TRAIN_INVERTED = true;
 
     const int SERVO_PORT_Y = 1;
