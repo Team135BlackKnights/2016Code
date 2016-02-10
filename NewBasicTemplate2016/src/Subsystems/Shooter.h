@@ -22,8 +22,8 @@ private:
 public:
 	Shooter();
 	void InitDefaultCommand();
-	void ShootBoulder();
-	void StopShootBoulder();
+	void DriveShooterMotors();
+	void StopShooterMotors();
 	void RaiseLowerArm(double);
 
 };

@@ -18,11 +18,11 @@ void Shooter::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void Shooter::ShootBoulder() {
+void Shooter::DriveShooterMotors() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(shooterMotorPower);
 }
 
-void Shooter::StopShootBoulder() {
+void Shooter::StopShooterMotors() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
 }
 

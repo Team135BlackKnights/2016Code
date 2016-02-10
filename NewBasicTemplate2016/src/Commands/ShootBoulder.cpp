@@ -20,7 +20,7 @@ void ShootBoulder::Execute()
 {
 	encoderVelocity = shooter->GetEncoderPosition(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
 
-	shooter->ShootBoulder();
+	shooter->DriveShooterMotors();
 
 	if (encoderVelocity >= setEncoderVelocity) {
 		speedSet = true;
@@ -43,7 +43,7 @@ bool ShootBoulder::IsFinished()
 void ShootBoulder::End()
 {
 	speedSet = false;
-	shooter->StopShootBoulder();
+	shooter->StopShooterMotors();
 }
 
 // Called when another command which requires one or more of the same
