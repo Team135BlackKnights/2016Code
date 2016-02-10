@@ -64,6 +64,7 @@ public:
 	float GetXMultiplier(float offset);
 	float GetYMultiplier(float offset);
 	void UpdateServo();
+	void TogglePID(bool);
 	//std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
 };

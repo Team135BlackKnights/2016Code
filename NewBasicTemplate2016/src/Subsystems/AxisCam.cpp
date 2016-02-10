@@ -19,13 +19,11 @@ AxisCam::AxisCam():
 	//yServo.reset(new Servo(SERVO_PORT_Y));
 	xServo.reset(new Servo(SERVO_PORT_X));
 	pidServoX = new ServoPID(xServo.get());
-	pidX = new PIDController(Preferences::GetInstance()->GetFloat("Px", .01),
-		   Preferences::GetInstance()->GetFloat("Ix", 0), Preferences::GetInstance()->GetFloat("Dx", 0),
+	pidX = new PIDController(Preferences::GetInstance()->GetFloat("P", .01), 0.0f, 0.0f,
 		   pidServoX, pidServoX);
-	pidX->SetContinuous(true);
-	pidX->SetInputRange(0,1);
-	pidX->SetOutputRange(-1,1);
-
+	pidX->SetSetpoint(.5);
+	//pidX->SetInputRange(0,1);
+	//pidX->SetOutputRange(-1,1);
 }
 
 void AxisCam::InitDefaultCommand()
@@ -34,7 +32,8 @@ void AxisCam::InitDefaultCommand()
 	//CameraServer::GetInstance()->SetQuality(50);
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
-	xServo->Set(.5f);
+	pidX->SetContinuous(true);
+	pidX->Enable();
 	//yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
@@ -58,16 +57,16 @@ void AxisCam::GetCameraValues()
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
 	y = height / 2 + shapes[5];
-	std::cout << "x: " << x << std::endl;
+	/*std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
 	std::cout << "Width: " << width << std::endl;
-	std::cout << "Height: " << height << std::endl;
+	std::cout << "Height: " << height << std::endl;*/
 }
 
 float AxisCam::xDistanceToCenter()
 {
 	if(x == 666)
-		return 666;
+		return 0;
 	//return Preferences::GetInstance()->GetFloat("Offset", 0);
 	return x - X_IMAGE_RES /2;
 }
@@ -176,5 +175,15 @@ float AxisCam::GetYMultiplier(float offset)
 
 void AxisCam::UpdateServo()
 {
-	pidX->SetSetpoint(x / X_IMAGE_RES);
+	float setpoint = xServo->Get() + (.2 * (xDistanceToCenter() / (X_IMAGE_RES / 2)));
+	std::cout << setpoint << std::endl;
+	pidX->SetSetpoint(setpoint);
+	//xServo->Set(Preferences::GetInstance()->GetFloat("ServoX", .5f));
+}
+
+void AxisCam::TogglePID(bool toggle) {
+	if (toggle)
+		pidX->Enable();
+	else
+		pidX->Disable();
 }

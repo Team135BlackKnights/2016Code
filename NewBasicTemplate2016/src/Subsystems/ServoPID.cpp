@@ -23,5 +23,6 @@ double ServoPID::PIDGet()
 }
 void ServoPID::PIDWrite(float output)
 {
-	/*"*/servo->Set(servo->Get() + output); /*... don't quote me on that" - eddie atkinson*/
+	std::cout << "output: " << output << std::endl;
+	/*"*/servo->Set(servo->Get()  + output); /*... don't quote me on that" - eddie atkinson*/
 }
