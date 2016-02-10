@@ -9,8 +9,12 @@ SerialCommunication::SerialCommunication() :
 	serialPort = new SerialPort(BAUD_RATE, SerialPort::kMXP, DATA_BITS);
 	serialPort->SetReadBufferSize(COUNT);
 	serialPort->SetTimeout(TIMEOUT_TIME);
-	data[COUNT] = new char;
-	doubleData = 0;
+
+	readings = new char;
+
+	data[numberOfValues] = new char;
+
+	readData = 0;
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -19,35 +23,51 @@ void SerialCommunication::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void SerialCommunication::ReadSerialValues() {
+//  LEFT_SONAR_VALUE = 0;
+//  RIGHT_SONAR_VALUE = 1;
+double SerialCommunication::GetSerialValues(int typeOfValue) {
 	if (serialPort->GetBytesReceived() > 0) {
+		serialPort->Read(readings, COUNT);
+		for (int j = 0; j < numberOfValues; j++) {
+			data[j] = strtok(readings, ",");
+		}
+		readData = strtod(data[typeOfValue], NULL);
+	}
+	return readData;
+
+	/* if (serialPort->GetBytesReceived() > 0) {
 		for (int i = 0; i < COUNT; i++) {
-			serialPort->Read(data[i], COUNT);
-			std::cout  <<  data[i] << std::endl;
+			serialPort->Read(readings[i], COUNT);
+			for (int j = 0; j < numberOfValues; j++) {
+				data[j] = strtok(readings[i], ",");
+			}
+			std::cout << data[typeOfValue] << std::endl;
+			readData = strtod(data[typeOfValue], NULL);
 		}
 	}
-}
-double SerialCommunication::GetSerialValues() {
-	if (serialPort->GetBytesReceived() > 0) {
-		for (int i = 0; i < COUNT; i++) {
-			serialPort->Read(data[i], COUNT);
-			//  Need to convert from string to double
-			doubleData = strtod(data[i], NULL);
-		}
-	}
-	return doubleData;
+	return readData; */
 }
 
-void SerialCommunication::StopSerialCommunication() {
+double SerialCommunication::StopSerialCommunicationAndReturnLastValue(int typeOfValue) {
 	serialPort->EnableTermination('\n');
+
 	if (serialPort->GetBytesReceived() > 0) {
+		serialPort->Read(readings, COUNT);
+		for (int j = 0; j < numberOfValues; j++) {
+			data[j] = strtok(readings, ",");
+		}
+		readData = strtod(data[typeOfValue], NULL);
+	}
+	return readData;
+
+	/*if (serialPort->GetBytesReceived() > 0) {
 		for (int i = 0; i < COUNT; i++) {
-			serialPort->Read(data[i], COUNT);
-			if (data[i] > 0) {
-				std::cout  <<  data[i] << std::endl;
+			serialPort->Read(readings[i], COUNT);
+			if (readings[i] > 0) {
+				std::cout  <<  readings[i] << std::endl;
 			}
 		}
-	}
+	} */
 }
 
 // Put methods for controlling this subsystem
