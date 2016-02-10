@@ -1,21 +1,20 @@
 #ifndef Autonomous_H
 #define Autonomous_H
 
-#include "../CommandBase.h"
+#include "Commands/CommandGroup.h"
 #include "WPILib.h"
-#include "OI.h"
 
-class Autonomous: public CommandBase
+class Autonomous: public CommandGroup
 {
-private:
-	bool IsDone = false;
+	const int NOTHING = 0;
+	const int LOWBAR = 1;
+	const int CHEVALDEFRISE = 2;
+	const int DRAWBRIDGE = 3;
+	const int SALLYPORT = 4;
+	const int PORTCULLIS = 5;
+
 public:
 	Autonomous(int);
-	void Initialize();
-	void Execute();
-	bool IsFinished();
-	void End();
-	void Interrupted();
 };
 
 #endif
