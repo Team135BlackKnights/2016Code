@@ -18,11 +18,12 @@ private:
 	static const int RAISE_LOWER_ARM = 1;
 
 	//  Not defined yet
-	static const double shooterMotorPower = .8;
+	const float shooterMotorPower = .8f;
 public:
 	Shooter();
 	void InitDefaultCommand();
 	void ShootBoulder();
+	void StopShootBoulder();
 	void RaiseLowerArm(double);
 
 };

@@ -22,6 +22,10 @@ void Shooter::ShootBoulder() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(shooterMotorPower);
 }
 
+void Shooter::StopShootBoulder() {
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
+}
+
 void Shooter::RaiseLowerArm(double motorPower) {
 	motors[RAISE_LOWER_ARM]->Set(motorPower);
 }

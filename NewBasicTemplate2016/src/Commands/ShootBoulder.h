@@ -6,6 +6,12 @@
 
 class ShootBoulder: public CommandBase
 {
+private:
+	//  Still To Be Determined
+	const int setEncoderVelocity = 100;
+
+	int encoderVelocity;
+	bool speedSet;
 public:
 	ShootBoulder();
 	void Initialize();
