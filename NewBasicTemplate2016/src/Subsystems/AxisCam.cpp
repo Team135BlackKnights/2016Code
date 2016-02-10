@@ -50,6 +50,7 @@ void AxisCam::GetCameraValues()
 		y = 666;
 		width = 666;
 		height = 666;
+		pidX->Disable();
 		return;
 	}
 
@@ -57,6 +58,7 @@ void AxisCam::GetCameraValues()
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
 	y = height / 2 + shapes[5];
+	pidX->Enable();
 	/*std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
 	std::cout << "Width: " << width << std::endl;
@@ -175,10 +177,16 @@ float AxisCam::GetYMultiplier(float offset)
 
 void AxisCam::UpdateServo()
 {
-	float setpoint = xServo->Get() + (.2 * (xDistanceToCenter() / (X_IMAGE_RES / 2)));
-	std::cout << setpoint << std::endl;
-	pidX->SetSetpoint(setpoint);
-	//xServo->Set(Preferences::GetInstance()->GetFloat("ServoX", .5f));
+	if(pidX->IsEnabled())
+	{
+		float setpoint = xServo->Get() + (.2 * (xDistanceToCenter() / (X_IMAGE_RES / 2)));
+		std::cout << setpoint << std::endl;
+		pidX->SetSetpoint(setpoint);
+	}
+	else
+	{
+		Scan(xServo.get());
+	}
 }
 
 void AxisCam::TogglePID(bool toggle) {
@@ -186,4 +194,11 @@ void AxisCam::TogglePID(bool toggle) {
 		pidX->Enable();
 	else
 		pidX->Disable();
+}
+
+void AxisCam::Scan(Servo* servo)
+{
+	if(servo->Get() <= 0 || servo->Get() >= 1)
+		searchSize = -searchSize;
+	servo->Set(servo->Get() + searchSize);
 }

@@ -40,6 +40,7 @@ private:
 	float y;
 	float width;
 	float height;
+	float searchSize = 0.05f;
 
 public:
 	AxisCam();
@@ -65,6 +66,7 @@ public:
 	float GetYMultiplier(float offset);
 	void UpdateServo();
 	void TogglePID(bool);
+	void Scan(Servo* servo);
 	//std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
 };
