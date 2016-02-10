@@ -10,7 +10,7 @@ class Autonomous: public CommandBase
 private:
 	bool IsDone = false;
 public:
-	Autonomous(int, int);
+	Autonomous(int);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

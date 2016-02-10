@@ -3,28 +3,28 @@
 
 bool IsDone = true;
 
-Autonomous::Autonomous(int defenseNum, int driveTime)
+Autonomous::Autonomous(int defenseNum)
 {
-	//AddSequential(new RobotDrive(driveTime));
+	//AddSequential(new RobotDrive());
 	switch(defenseNum){
 			case "1" : // Cheval de Frise
 				//AddSequential(new Manipulator(1));
-				//AddSequential(new RobotDrive(driveTime));
+				//AddSequential(new RobotDrive());
 				break;
 			case "2" : // Portcullis
 				//AddSequential(new Manipulator(2));
-				//AddSequential(new RobotDrive(driveTime));
+				//AddSequential(new RobotDrive());
 				break;
 			case "3" : // Sally Port
 				//AddSequential(new Manipulator(3));
-				//AddSequential(new RobotDrive(driveTime));
+				//AddSequential(new RobotDrive());
 				break;
 			case "4" : // Drawbridge
 				//AddSequential(new Manipulator(4));
-				//AddSequential(new RobotDrive(driveTime));
+				//AddSequential(new RobotDrive());
 					break;
 			case "5" : // Other
-				//AddSequential(new RobotDrive(driveTime));
+				//AddSequential(new RobotDrive());
 				break;
 
 	IsDone = true;
