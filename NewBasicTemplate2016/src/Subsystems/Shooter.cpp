@@ -2,11 +2,13 @@
 #include "../RobotMap.h"
 
 Shooter::Shooter() :
-	PIDLogging("DriveTrain", "/home/lvuser/", numMotors, radius)
+	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
 {
 
-	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
-	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+	//  shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
+	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+	motors[TWO_WHEEL_SHOOTER_MOTOR] = new CANTalon(MOTOR_SHOOT_BOULDER);
+	motors[RAISE_LOWER_ARM] = new CANTalon(MOTOR_RAISE_LOWER_ARM);
 
 }
 
@@ -16,8 +18,12 @@ void Shooter::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void Shooter::DriveMotor(int motorIndex, double motorPower) {
-	motors[motorIndex]->Set(motorPower);
+void Shooter::ShootBoulder() {
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(shooterMotorPower);
+}
+
+void Shooter::RaiseLowerArm(double motorPower) {
+	motors[RAISE_LOWER_ARM]->Set(motorPower);
 }
 
 // Put methods for controlling this subsystem

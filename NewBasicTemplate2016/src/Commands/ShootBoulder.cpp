@@ -1,44 +1,38 @@
-#include "OperateShooter.h"
+#include "ShootBoulder.h"
 
-OperateShooter::OperateShooter(bool PosOrNeg)
+ShootBoulder::ShootBoulder()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(shooter.get());
-	//  collectionMotorPower = .6;
-	twoWheelShooterPower = .8;
-	positiveOrNegative = PosOrNeg ? 1:-1;
-
 }
 
 // Called just before this Command runs the first time
-void OperateShooter::Initialize()
+void ShootBoulder::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void OperateShooter::Execute()
+void ShootBoulder::Execute()
 {
 
-	shooter->DriveMotor(Shooter::TWO_WHEEL_SHOOTER_MOTOR, twoWheelShooterPower * positiveOrNegative);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool OperateShooter::IsFinished()
+bool ShootBoulder::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void OperateShooter::End()
+void ShootBoulder::End()
 {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void OperateShooter::Interrupted()
+void ShootBoulder::Interrupted()
 {
 
 }
