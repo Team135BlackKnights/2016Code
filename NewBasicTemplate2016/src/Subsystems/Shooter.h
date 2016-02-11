@@ -24,8 +24,6 @@ public:
 	void RaiseLowerArm(double);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
-	static const int RAISE_LOWER_ARM = 1;
-
 };
 
 #endif

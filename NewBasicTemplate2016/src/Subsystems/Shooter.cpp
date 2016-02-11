@@ -8,8 +8,6 @@ Shooter::Shooter() :
 	//  shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = new CANTalon(MOTOR_SHOOT_BOULDER);
-	motors[RAISE_LOWER_ARM] = new CANTalon(MOTOR_RAISE_LOWER_ARM);
-
 }
 
 void Shooter::InitDefaultCommand()
@@ -24,10 +22,6 @@ void Shooter::ShootBoulder() {
 
 void Shooter::StopShootBoulder() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
-}
-
-void Shooter::RaiseLowerArm(double motorPower) {
-	motors[RAISE_LOWER_ARM]->Set(motorPower);
 }
 
 // Put methods for controlling this subsystem
