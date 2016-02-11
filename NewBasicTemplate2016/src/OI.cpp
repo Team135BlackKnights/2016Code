@@ -5,6 +5,7 @@
 #include "Commands/JoystickTesting.h"
 #include "Commands/PIDTesting.h"
 #include "Commands/ShootBoulder.h"
+#include "Commands/RaiseAndLowerArm.h"
 
 OI::OI()
 {
@@ -27,6 +28,9 @@ OI::OI()
 	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
 
 	buttons[JOYSTICK_RIGHT][TRIGGER]->WhileHeld(new ShootBoulder());
+
+	buttons[SHOOTER_JOYSTICK][TRIGGER]->WhileHeld(new RaiseAndLowerArm(forwardDirection));
+	buttons[SHOOTER_JOYSTICK][THUMBS_BUTTON]->WhileHeld(new RaiseAndLowerArm(backwardsDirection));
 
 }
 

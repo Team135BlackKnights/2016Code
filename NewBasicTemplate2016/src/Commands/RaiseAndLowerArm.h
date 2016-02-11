@@ -6,8 +6,12 @@
 
 class RaiseAndLowerArm: public CommandBase
 {
+private:
+	double sliderValue;
+
+	int direction;
 public:
-	RaiseAndLowerArm();
+	RaiseAndLowerArm(bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
