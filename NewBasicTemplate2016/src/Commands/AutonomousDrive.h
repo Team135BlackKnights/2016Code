@@ -7,12 +7,16 @@
 class AutonomousDrive: public CommandBase
 {
 public:
-	AutonomousDrive();
+	AutonomousDrive(float x, float y);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+private:
+	Timer* timer;
+	float x, y;
 };
 
 #endif
