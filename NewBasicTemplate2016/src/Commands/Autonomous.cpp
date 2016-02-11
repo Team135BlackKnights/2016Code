@@ -21,7 +21,7 @@ Autonomous::Autonomous(int defenseNum)
 					break;
 
 				case "LOWBAR" : // Other
-					AddSequential(new AutonomousDrive());
+					AddSequential(new AutonomousDrive(.01, .01, 5));
 					break;
 
 				default: //Invalid Values
