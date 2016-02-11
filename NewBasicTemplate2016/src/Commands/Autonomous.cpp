@@ -4,7 +4,7 @@ Autonomous::Autonomous(int defenseNum)
 {
 	//AddSequential(new RobotDrive());
 		switch(defenseNum){
-				case "CHEVALDEFRISE" : // Cheval de Frise
+				case "CHEVAL_DE_FRISE" : // Cheval de Frise
 					AddSequential(new ChevalDeFrise());
 					break;
 
@@ -12,7 +12,7 @@ Autonomous::Autonomous(int defenseNum)
 					AddSequential(new Portcullis());
 					break;
 
-				case "SALLYPORT" : // Sally Port
+				case "SALLY_PORT" : // Sally Port
 					AddSequential(new SallyPort());
 					break;
 
@@ -20,11 +20,9 @@ Autonomous::Autonomous(int defenseNum)
 					AddSequential(new Drawbridge());
 					break;
 
-				case "LOWBAR" : // Other
+				case "LOW_BAR" : // Other
 					AddSequential(new AutonomousDrive(.01, .01, 5));
 					break;
 
-				default: //Invalid Values
-					break;
 		}
 }

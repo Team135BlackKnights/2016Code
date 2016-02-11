@@ -1,7 +1,7 @@
 #include "AutonomousDrive.h"
 #include <algorithm>
 
-AutonomousDrive::AutonomousDrive(float x, float y, int time = ALONGTIME)
+AutonomousDrive::AutonomousDrive(float x, float y, int time = DEFAULT_TIME)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -24,7 +24,7 @@ void AutonomousDrive::Initialize()
 void AutonomousDrive::Execute()
 {
 	if(timer)
-	DriveTrain(x,y);
+	driveTrain->DriveTank(x,y);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -43,5 +43,5 @@ void AutonomousDrive::End()
 // subsystems is scheduled to run
 void AutonomousDrive::Interrupted()
 {
-
+	End();
 }

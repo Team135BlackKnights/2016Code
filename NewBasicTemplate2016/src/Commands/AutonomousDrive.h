@@ -18,7 +18,7 @@ private:
 	Timer* timer;
 	float x, y;
 	int targetTime;
-	const int ALONGTIME = 99999999;
+	const int DEFAULT_TIME = 10;
 };
 
 #endif
