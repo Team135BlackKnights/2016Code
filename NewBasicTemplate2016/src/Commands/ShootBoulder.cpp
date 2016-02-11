@@ -7,12 +7,20 @@ ShootBoulder::ShootBoulder()
 	Requires(shooter.get());
 	speedSet = false;
 	encoderVelocity = 0;
+
+	timer.reset(new Timer());
+	initalTimerValue = 0;
+	finalTimerValue = 0;
+	timeWait = .2;
+
+	placer = 0;
 }
 
 // Called just before this Command runs the first time
 void ShootBoulder::Initialize()
 {
 	shooter->ZeroAllEncoders();
+	timer->Reset();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -23,10 +31,20 @@ void ShootBoulder::Execute()
 	shooter->DriveShooterMotors();
 
 	if (encoderVelocity >= setEncoderVelocity) {
+		placer = placer + 1;
 		speedSet = true;
 		SmartDashboard::PutBoolean("Shooter Up to Speed: ", speedSet);
+
+		if (placer == 1) {
+			initalTimerValue = timer->Get();
+			finalTimerValue = initalTimerValue + timeWait;
+		}
+		if (finalTimerValue >= timer->Get()) {
+			shooter->MoveServo();
+		}
 	}
 	else {
+		placer = 0;
 		speedSet = false;
 		SmartDashboard::PutBoolean("Shooter Up to Speed: ", speedSet);
 	}
@@ -44,6 +62,7 @@ void ShootBoulder::End()
 {
 	speedSet = false;
 	shooter->StopShooterMotors();
+	shooter->ResetServoPosition();
 }
 
 // Called when another command which requires one or more of the same

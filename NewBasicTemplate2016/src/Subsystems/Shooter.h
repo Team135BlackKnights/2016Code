@@ -14,6 +14,8 @@ private:
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
 
+	std::unique_ptr<Servo> servo;
+
 	//  Not defined yet
 	const float shooterMotorPower = .8f;
 public:
@@ -22,6 +24,10 @@ public:
 	void DriveShooterMotors();
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
+
+	void MoveServo();
+	void ResetServoPosition();
+	double GetServoPosition();
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 };

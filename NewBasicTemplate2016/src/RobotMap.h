@@ -28,6 +28,9 @@
     const int MOTOR_SHOOT_BOULDER = 14;
     const int MOTOR_RAISE_LOWER_ARM = 15;
 
+    //  Inacuurate PWM Port
+    const int SERVO_SHOOTER = 5;
+
     const int TRIGGER = 1;
     const int THUMBS_BUTTON = 2;
 
