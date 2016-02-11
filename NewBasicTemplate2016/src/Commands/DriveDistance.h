@@ -6,8 +6,10 @@
 
 class DriveDistance: public CommandBase
 {
+private:
+	double inchesDistance;
 public:
-	DriveDistance();
+	DriveDistance(double);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

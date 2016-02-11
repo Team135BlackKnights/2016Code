@@ -13,9 +13,6 @@ PIDTesting::PIDTesting()
 	  timer.reset(new Timer());
 	  timerValue = 0;
 
-
-	  inverted = false;
-	  driveTrain->InvertMotors(this->inverted);
 	//  PIDLogging::driveTrainBool = true;
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);

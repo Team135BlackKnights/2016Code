@@ -40,11 +40,8 @@ public:
 
 	void SetSafetyEnabled(bool);
 
-	void InvertMotors(bool inverted);
+	void InvertMotors();
 	void ClosePIDFile();
-
-	double GetMotorExpiration(int);
-	void EnableMotorControl(int);
 
 };
 

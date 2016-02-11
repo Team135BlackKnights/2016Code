@@ -29,8 +29,6 @@ private:
 
 	double encoderValue[4];
 
-	bool inverted;
-
 
 	//  std::unique_ptr<Preferences> preference;
 

@@ -29,10 +29,14 @@
     const int MOTOR_SHOOTER_LEFT_ID = 9;
 
     //  Joystick Ports
-    const int JOYSTICK_LEFT = 0;
-    const int JOYSTICK_RIGHT = 1;
-    const int JOYSTICK_MANIPULATOR_CONTROL = 2;
-    const int JOYSTICK_BUTTON_BOX = 3;
+    const int JOYSTICK_LEFT = 1;
+    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_BBOX = 2;
+
+    const int TRIGGER = 1;
+    const int THUMB_BUTTON = 2;
+
+    const bool DRIVE_TRAIN_INVERTED = true;
 
     //  Buttons Declarations
     const int JOYSTICK_BUTTON_TESTER_START = 1;

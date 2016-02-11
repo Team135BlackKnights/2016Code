@@ -1,15 +1,17 @@
 #include "DriveDistance.h"
 
-DriveDistance::DriveDistance()
+DriveDistance::DriveDistance(double inchesDistance)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
+	Requires(driveTrain.get());
+	this->inchesDistance = inchesDistance;
 }
 
 // Called just before this Command runs the first time
 void DriveDistance::Initialize()
 {
-
+	// driveTrain->DriveTank()
 }
 
 // Called repeatedly when this Command is scheduled to run

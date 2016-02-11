@@ -15,7 +15,6 @@ void DriveJ::Initialize() {
 	//this->inverted = Preferences::GetInstance()->GetBoolean("Inverted", false);
 	driveTrain->SetupMotors();
 	driveTrain->ZeroAllEncoders();
-	driveTrain->InvertMotors(this->inverted);
 }
 
 // Called repeatedly when this Command is scheduled to run

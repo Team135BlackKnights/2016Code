@@ -24,6 +24,8 @@ DriveTrain::DriveTrain():
 
 		// chassis->SetExpiration(0.5);
 
+		this->InvertMotors();
+
 		chassis->SetSafetyEnabled(false);
 
 		this->SetupMotors();
@@ -37,14 +39,6 @@ Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
 	//  SetDefaultCommand(new PIDTesting());
-}
-
-double DriveTrain::GetMotorExpiration(int motorIndex) {
-	return motors[motorIndex]->GetExpiration();
-}
-
-void DriveTrain::EnableMotorControl(int motorIndex) {
-	motors[motorIndex]->EnableControl();
 }
 
 void DriveTrain::DriveTank(float left, float right)
@@ -78,12 +72,12 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 	chassis->SetSafetyEnabled(enabled);
 }
 
-void DriveTrain::InvertMotors(bool inverted)
+void DriveTrain::InvertMotors()
 {
-	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, inverted);
+	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, DRIVE_TRAIN_INVERTED);
+	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, DRIVE_TRAIN_INVERTED);
+	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, DRIVE_TRAIN_INVERTED);
+	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, DRIVE_TRAIN_INVERTED);
 }
 
 void DriveTrain::ClosePIDFile() {
