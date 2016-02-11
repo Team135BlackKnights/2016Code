@@ -6,6 +6,10 @@
 
 class UltrasonicTesting: public CommandBase
 {
+private:
+	double leftSonarDistance,
+		   rightSonarDistance,
+		   lightSensorDistance;
 public:
 	UltrasonicTesting();
 	void Initialize();

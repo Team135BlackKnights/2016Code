@@ -10,7 +10,7 @@ SerialCommunication::SerialCommunication() :
 	serialPort->SetReadBufferSize(COUNT);
 	serialPort->SetTimeout(TIMEOUT_TIME);
 
-	readings = new char;
+	readings[numberOfValues] = new char;
 
 	data[numberOfValues] = new char;
 
@@ -25,15 +25,30 @@ void SerialCommunication::InitDefaultCommand()
 
 //  LEFT_SONAR_VALUE = 0;
 //  RIGHT_SONAR_VALUE = 1;
+//  LIGHT_SENSOR_VALUE = 2;
 double SerialCommunication::GetSerialValues(int typeOfValue) {
-	if (serialPort->GetBytesReceived() > 0) {
+	if (serialPort->GetBytesReceived() >= numberOfValues) {
+		for (int j = 0; j < numberOfValues; j++) {
+			serialPort->Read(readings[j], COUNT);
+		}
+		readData = strtod(readings[typeOfValue], NULL);
+		return readData;
+	}
+	else {
+		return 0;
+	}
+
+	/*if (serialPort->GetBytesReceived() > 0) {
 		serialPort->Read(readings, COUNT);
 		for (int j = 0; j < numberOfValues; j++) {
 			data[j] = strtok(readings, ",");
 		}
 		readData = strtod(data[typeOfValue], NULL);
+		return readData;
 	}
-	return readData;
+	else {
+		return 0;
+	}*/
 
 	/* if (serialPort->GetBytesReceived() > 0) {
 		for (int i = 0; i < COUNT; i++) {
@@ -51,14 +66,28 @@ double SerialCommunication::GetSerialValues(int typeOfValue) {
 double SerialCommunication::StopSerialCommunicationAndReturnLastValue(int typeOfValue) {
 	serialPort->EnableTermination('\n');
 
-	if (serialPort->GetBytesReceived() > 0) {
+	if (serialPort->GetBytesReceived() >= (typeOfValue + 1)) {
+		for (int j = 0; j < numberOfValues; j++) {
+			serialPort->Read(readings[j], COUNT);
+		}
+		readData = strtod(readings[typeOfValue], NULL);
+		return readData;
+	}
+	else {
+		return 0;
+	}
+
+	/*if (serialPort->GetBytesReceived() > 0) {
 		serialPort->Read(readings, COUNT);
 		for (int j = 0; j < numberOfValues; j++) {
 			data[j] = strtok(readings, ",");
 		}
 		readData = strtod(data[typeOfValue], NULL);
+		return readData;
 	}
-	return readData;
+	else {
+		return 0;
+	} */
 
 	/*if (serialPort->GetBytesReceived() > 0) {
 		for (int i = 0; i < COUNT; i++) {
