@@ -27,13 +27,17 @@
 
     const int JOYSTICK_LEFT = 1;
     const int JOYSTICK_RIGHT = 0;
-    const int JOYSTICK_BBOX = 2;
+    const int JOYSTICK_MANIP = 2;
+    const int JOYSTICK_BBOX = 3;
+
+    const int JOYSTICK_TURNLEFT = 11;
+    const int JOYSTICK_TURNRIGHT = 12;
 
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
-    const int BBOX_FORWARD = 1;
-    const int BBOX_REVERSE = 2;
+    const int BBOX_FORWARD = 2;
+    const int BBOX_REVERSE = 1;
 
     const bool DRIVE_TRAIN_INVERTED = true;
 

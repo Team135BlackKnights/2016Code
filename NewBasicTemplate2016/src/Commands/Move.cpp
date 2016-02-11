@@ -1,41 +1,47 @@
-#include "DriveBox.h"
+#include <Commands/Move.h>
 
-DriveBox::DriveBox(bool PosNeg)
+Move::Move(bool forward)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
+	Move(forward, forward);
+}
+
+Move::Move(bool leftForward, bool rightForward)
+{
 	Requires(driveTrain.get());
-	direction = (PosNeg == true) ? 1 : -1;
+	this->directionLeft = (leftForward == true) ? 1 : -1;
+	this->directionRight = (rightForward == true) ? 1 : -1;
 }
 
 // Called just before this Command runs the first time
-void DriveBox::Initialize()
+void Move::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveBox::Execute()
+void Move::Execute()
 {
-	float speed = motorSpeed * direction;
-	driveTrain->DriveTank(speed, speed);
+	float speed = oi->GetStickSlider(OI::MANIP);
+	driveTrain->DriveTank(speed * directionLeft, speed * directionRight);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveBox::IsFinished()
+bool Move::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void DriveBox::End()
+void Move::End()
 {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveBox::Interrupted()
+void Move::Interrupted()
 {
 
 }

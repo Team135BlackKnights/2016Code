@@ -7,7 +7,7 @@ class OI
 {
 protected:
 
-	static const int JOYSTICKS = 3; //max number of joysticks connected
+	static const int JOYSTICKS = 4; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
 	//unique_ptr creates a(n) unique pointer  ask Eddie if confused
 	//Joystick array starts at index 0
@@ -22,14 +22,15 @@ protected:
 public:
 	static const int LEFT = 0; // sets LEFT controller
 	static const int RIGHT = 1; // sets RIGHT controller
-	static const int BBOX = 2;
+	static const int MANIP = 2;
+	static const int BBOX = 3;
 	
 	static const int LIFT_HANG_JOYSTICK = RIGHT;
 
 	static constexpr float DEAD_BAND = .05f; //declares dead zone
 
-	static const bool FORWARD = true;
-	static const bool REVERSE = false;
+	static const bool FORWARD = false;
+	static const bool REVERSE = true;
 
 	OI();
 	Joystick* GetStick(int);

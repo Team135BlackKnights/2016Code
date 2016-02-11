@@ -2,6 +2,7 @@
 	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
 	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
+#include <Commands/Move.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
@@ -13,6 +14,7 @@ OI::OI()
 {
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
 	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
 	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
 	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
@@ -22,8 +24,10 @@ OI::OI()
 	buttonsArray[LIFT_HANG_JOYSTICK][TRIGGER]->WhileHeld(new DriveLiftHang(true));
 	buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
 
-//	buttonsArray[BBOX][BBOX_FORWARD]->WhileHeld(new DriveBox(FORWARD));
-	//buttonsArray[BBOX][BBOX_REVERSE]->WhileHeld(new DriveBox(REVERSE));
+	buttonsArray[BBOX][BBOX_FORWARD]->WhileHeld(new Move(FORWARD, FORWARD));
+	buttonsArray[BBOX][BBOX_REVERSE]->WhileHeld(new Move(REVERSE, REVERSE));
+	buttonsArray[MANIP][JOYSTICK_TURNLEFT]->WhileHeld(new Move(REVERSE,FORWARD));
+	buttonsArray[MANIP][JOYSTICK_TURNRIGHT]->WhileHeld(new Move(FORWARD,REVERSE));
 }
 
 //OI Functions

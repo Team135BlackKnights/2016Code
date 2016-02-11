@@ -4,14 +4,14 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveBox: public CommandBase
+class Move: public CommandBase
 {
 private:
-	const int motorSpeed = .5;
-
-	int direction;
+	int directionLeft;
+	int directionRight;
 public:
-	DriveBox(bool);
+	Move(bool);
+	Move(bool, bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
