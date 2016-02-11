@@ -11,10 +11,15 @@ protected:
 	std::unique_ptr<Joystick> sticks[NUMBER_O_JOYSTICKS];
 	std::unique_ptr<JoystickButton> buttons[NUMBER_O_JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1];
 
+	bool forwardDirection = true;
+	bool backwardsDirection = false;
+
 public:
 	static const int LEFT = 0;
 	static const int RIGHT = 1;
 	static const int MANIPULATOR_CONTROL = 2;
+
+	static const int SHOOTER_JOYSTICK = LEFT;
 
 	static constexpr float DEAD_BAND = .05f;
 

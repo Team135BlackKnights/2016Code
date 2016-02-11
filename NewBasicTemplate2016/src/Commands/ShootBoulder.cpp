@@ -18,7 +18,7 @@ void ShootBoulder::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ShootBoulder::Execute()
 {
-	encoderVelocity = shooter->GetEncoderPosition(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
+	encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
 
 	shooter->DriveShooterMotors();
 
