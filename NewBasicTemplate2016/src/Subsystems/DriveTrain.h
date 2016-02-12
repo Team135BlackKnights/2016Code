@@ -33,6 +33,8 @@ public:
 	void SetSafetyEnabled(bool);
 
 	void InvertMotors();
+
+	void SetNeutralMode(bool coast);
 };
 
 #endif
