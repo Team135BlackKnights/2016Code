@@ -41,6 +41,10 @@ private:
 	float width;
 	float height;
 	float searchSize = 0.05f;
+	float lastSetPointDelta;
+	const float KU = .262f;
+	const float TU = .909862f;
+	Timer* timer;
 
 public:
 	AxisCam();

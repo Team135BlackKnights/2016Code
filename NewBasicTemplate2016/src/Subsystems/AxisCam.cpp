@@ -16,11 +16,16 @@ AxisCam::AxisCam():
 	width = 0;
 	x = 0;
 	y = 0;
+	lastSetPointDelta = 0;
+	timer = new Timer();
 	//yServo.reset(new Servo(SERVO_PORT_Y));
 	xServo.reset(new Servo(SERVO_PORT_X));
 	pidServoX = new ServoPID(xServo.get());
-	pidX = new PIDController(Preferences::GetInstance()->GetFloat("P", .01), 0.0f, 0.0f,
+	/*pidX = new PIDController(Preferences::GetInstance()->GetFloat("P", .01), Preferences::GetInstance()->GetFloat("I", 0.0f),
+		   Preferences::GetInstance()->GetFloat("D", 0.0f),
 		   pidServoX, pidServoX);
+	//pidX = new PIDController(.26, 0, 2.6, pidServoX,pidServoX);
+	*/pidX = new PIDController(KU * .4, 0, TU / 2.0f, pidServoX, pidServoX);
 	pidX->SetSetpoint(.5);
 	//pidX->SetInputRange(0,1);
 	//pidX->SetOutputRange(-1,1);
@@ -33,7 +38,7 @@ void AxisCam::InitDefaultCommand()
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 	pidX->SetContinuous(true);
-	pidX->Enable();
+	this->TogglePID(true);
 	//yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
@@ -44,7 +49,7 @@ void AxisCam::GetCameraValues()
 	//visionTable->
 	auto shapes = visionTable->GetNumberArray("SHAPES", llvm::ArrayRef<double>());
 
-	if(shapes.size() == 0)
+	if(shapes.empty())
 	{
 		x = 666;
 		y = 666;
@@ -58,7 +63,7 @@ void AxisCam::GetCameraValues()
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
 	y = height / 2 + shapes[5];
-	pidX->Enable();
+	//pidX->Enable();
 	/*std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
 	std::cout << "Width: " << width << std::endl;
@@ -182,6 +187,14 @@ void AxisCam::UpdateServo()
 		float setpoint = xServo->Get() + (.2 * (xDistanceToCenter() / (X_IMAGE_RES / 2)));
 		std::cout << setpoint << std::endl;
 		pidX->SetSetpoint(setpoint);
+
+		float currentSetPointDelta = pidX->GetDeltaSetpoint();
+		if ((lastSetPointDelta > 0 && currentSetPointDelta < 0) || (lastSetPointDelta < 0 && currentSetPointDelta > 0))
+		{
+			std::cout << "Time between ocsilation: " << timer->Get() << std::endl;
+			timer->Reset();
+		}
+		lastSetPointDelta = currentSetPointDelta;
 	}
 	else
 	{
@@ -190,8 +203,10 @@ void AxisCam::UpdateServo()
 }
 
 void AxisCam::TogglePID(bool toggle) {
-	if (toggle)
+	if (toggle){
 		pidX->Enable();
+		timer->Start();
+	}
 	else
 		pidX->Disable();
 }
