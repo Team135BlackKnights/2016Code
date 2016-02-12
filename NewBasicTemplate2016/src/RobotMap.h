@@ -27,6 +27,7 @@
     //  Inaccurate ID Values for the Talon
     const int MOTOR_SHOOT_BOULDER = 14;
     const int MOTOR_RAISE_LOWER_ARM = 15;
+    const int MOTOR_COLLECTION = 16;
 
     //  Inacuurate PWM Port
     const int SERVO_SHOOTER = 5;

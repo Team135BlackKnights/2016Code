@@ -2,15 +2,20 @@
 #include "../RobotMap.h"
 
 Collection::Collection() :
-		Subsystem("ExampleSubsystem")
+		Subsystem("Collection")
 {
-
+	collectionMotor.reset(new CANTalon(MOTOR_COLLECTION));
 }
 
 void Collection::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
+}
+
+
+void Collection::PowerCollection() {
+	collectionMotor->Set(motorPower);
 }
 
 // Put methods for controlling this subsystem
