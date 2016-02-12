@@ -9,6 +9,7 @@
 #include "WPILib.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Arm.h"
+#include "Subsystems/Collection.h"
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -27,6 +28,7 @@ public:
 	static std::unique_ptr<LogData> logData;
 	static std::unique_ptr<Shooter> shooter;
 	static std::unique_ptr<Arm> arm;
+	static std::unique_ptr<Collection> collection;
 	//static std::unique_ptr<Preferences> preferences;
 };
 

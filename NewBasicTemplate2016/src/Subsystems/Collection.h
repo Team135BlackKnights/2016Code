@@ -10,12 +10,10 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 	std::unique_ptr<CANTalon> collectionMotor;
-
-	double motorPower = .8;
 public:
 	Collection();
 	void InitDefaultCommand();
-	void PowerCollection();
+	void PowerCollection(double);
 };
 
 #endif

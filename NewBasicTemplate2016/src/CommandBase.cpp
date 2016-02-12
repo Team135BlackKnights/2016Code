@@ -7,6 +7,7 @@ std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<LogData> CommandBase::logData;
 std::unique_ptr<Shooter> CommandBase::shooter;
 std::unique_ptr<Arm> CommandBase::arm;
+std::unique_ptr<Collection> CommandBase::collection;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 /*
@@ -35,6 +36,8 @@ void CommandBase::init()
 	shooter.reset(new Shooter());
 
 	arm.reset(new Arm());
+
+	collection.reset(new Collection());
 
 	//preferences.reset(Preferences::GetInstance());
 }

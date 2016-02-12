@@ -6,8 +6,12 @@
 
 class DriveCollection: public CommandBase
 {
+private:
+	double motorPower = .8;
+
+	int direction;
 public:
-	DriveCollection();
+	DriveCollection(bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

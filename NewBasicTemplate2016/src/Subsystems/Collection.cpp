@@ -14,7 +14,7 @@ void Collection::InitDefaultCommand()
 }
 
 
-void Collection::PowerCollection() {
+void Collection::PowerCollection(double motorPower) {
 	collectionMotor->Set(motorPower);
 }
 

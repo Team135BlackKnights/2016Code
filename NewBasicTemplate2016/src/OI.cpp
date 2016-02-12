@@ -6,6 +6,7 @@
 #include "Commands/PIDTesting.h"
 #include "Commands/ShootBoulder.h"
 #include "Commands/RaiseAndLowerArm.h"
+#include "Commands/DriveCollection.h"
 
 OI::OI()
 {
@@ -27,10 +28,13 @@ OI::OI()
 	buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_START]->WhenPressed(new PIDTesting());
 	//  buttons[JOYSTICK_LEFT][JOYSTICK_BUTTON_TESTER_STOP]->CancelWhenPressed(new JoystickTesting());
 
-	buttons[JOYSTICK_RIGHT][TRIGGER]->WhileHeld(new ShootBoulder());
+	buttons[SHOOTER_JOYSTICK][3]->WhileHeld(new ShootBoulder());
 
 	buttons[SHOOTER_JOYSTICK][TRIGGER]->WhileHeld(new RaiseAndLowerArm(forwardDirection));
 	buttons[SHOOTER_JOYSTICK][THUMBS_BUTTON]->WhileHeld(new RaiseAndLowerArm(backwardsDirection));
+
+	buttons[SHOOTER_JOYSTICK][4]->WhileHeld(new DriveCollection(forwardDirection));
+	buttons[SHOOTER_JOYSTICK][5]->WhileHeld(new DriveCollection(backwardsDirection));
 
 }
 
