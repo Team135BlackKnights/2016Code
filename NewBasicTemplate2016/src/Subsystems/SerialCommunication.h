@@ -13,7 +13,7 @@ private:
 	static const int COUNT = 3;
 	static const int DATA_BITS = 8;
 	//  static const int TIMEOUT_TIME = ((COUNT * DATA_BITS)/BAUD_RATE);
-	static const float TIMEOUT_TIME = .15f;
+	const float TIMEOUT_TIME = .15f;
 
 	//  Number of Values that are going to be combined into a CSV (Comma Separated Value)
 	static const int numberOfValues = 3;
@@ -25,7 +25,7 @@ private:
 
 	double data[numberOfValues];
 
-	double readData;
+	char*  buffer;
 
 
 public:
@@ -33,6 +33,7 @@ public:
 	void InitDefaultCommand();
 	void StopSerialCommunicationAndReturnLastValue();
 	double GetSerialValues(int);
+	void ReadSerialValues();
 
 
 	static const int LEFT_SONAR_VALUE = 0;

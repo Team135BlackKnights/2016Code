@@ -23,7 +23,7 @@ OI::OI()
 	//  buttonsArray[LIFT_HANG_JOYSTICK][TRIGGER]->WhileHeld(new DriveLiftHang(true));
 	//  buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
 
-	//buttonsArray[LEFT][TRIGGER]->WhileHeld(new UltrasonicTesting());
+	//  buttonsArray[LEFT][TRIGGER]->WhileHeld(new UltrasonicTesting());
 }
 
 //OI Functions

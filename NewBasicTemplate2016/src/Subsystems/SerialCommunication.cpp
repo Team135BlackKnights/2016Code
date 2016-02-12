@@ -8,16 +8,14 @@ SerialCommunication::SerialCommunication() :
 
 	//  serialPort.reset(new SerialPort);
 	serialPort = new SerialPort(BAUD_RATE, SerialPort::kMXP, DATA_BITS);
-	serialPort->SetReadBufferSize(COUNT);
+	serialPort->SetReadBufferSize(8);
 	serialPort->EnableTermination('\n');
 
 	serialPort->SetTimeout(TIMEOUT_TIME);
 
 	readings[numberOfValues] = new char;
 
-	data[numberOfValues] = new char;
-
-	readData = 0;
+	buffer = new char;
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -30,8 +28,21 @@ void SerialCommunication::InitDefaultCommand()
 //  LEFT_SONAR_VALUE = 0;
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
-double SerialCommunication::GetSerialValues(int typeOfValue) {
-	return data[typeOfValue];
+void SerialCommunication::ReadSerialValues() {
+	if (serialPort->GetBytesReceived() == 0)
+		//return 0;
+
+	while (serialPort->GetBytesReceived() >= 0) {
+		serialPort->Read(buffer, 8);
+	}
+		readings[0] = strtok(buffer, ",");
+		for (int j = 1; j < numberOfValues; j++) {
+			readings[j] = strtok(NULL, ",");
+		}
+		for (int i = 0; i < numberOfValues; i++) {
+			data[i] = strtod(readings[i], NULL);
+		}
+	//return data[typeOfValue];
 	/*
 	if (serialPort->GetBytesReceived() >= numberOfValues) {
 		for (int j = 0; j < numberOfValues; j++) {
@@ -69,22 +80,14 @@ double SerialCommunication::GetSerialValues(int typeOfValue) {
 	return readData; */
 }
 
-void SerialCommunication::StopSerialCommunicationAndReturnLastValue() {
-	if (!serialPort->GetBytesReceived() > 0)
-		return;
+double SerialCommunication::GetSerialValues(int TypeOfValue) {
+	//  ReadSerialValues();
+	return data[TypeOfValue];
+}
 
-	char* buffer;
-	while (serialPort->GetBytesReceived() >= 0) {
-		serialPort->Read(buffer, 8);
-	}
-		readings[0] = strtok(buffer, ",");
-		for (int j = 1; j < numberOfValues; j++) {
-			readings[j] = strtok(NULL, ",");
-		}
-		for (int i = 0; i < numberOfValues; i++) {
-			data[i] = strtod(readings[i], NULL);
-		}
-	}
+void SerialCommunication::StopSerialCommunicationAndReturnLastValue() {
+
+
 
 	/*if (serialPort->GetBytesReceived() > 0) {
 		serialPort->Read(readings, COUNT);
