@@ -21,7 +21,8 @@ protected:
 	CANTalon* motors[10];
 
 	int numMotors;
-	static const int COUNT = 256;
+	static const int COUNT = 64;
+	static const int QUADRATURE_COUNT = (COUNT * 4);
 	//int quadratureCOUNT;
 
 	double radius; //  In inches, assuming ALL wheels have the same radius

@@ -89,7 +89,7 @@ void PIDLogging::ZeroAllEncoders() {
 double PIDLogging::GetDistanceInches(int motorIndex) {
 
 	int encoderPosition = GetEncoderPosition(motorIndex);
-	double REVS = (encoderPosition/COUNT);
+	double REVS = (encoderPosition/QUADRATURE_COUNT);
 	double DISTANCE_TRAVELED = REVS * this->circumfrence;
 	return DISTANCE_TRAVELED;
 }
@@ -97,7 +97,7 @@ double PIDLogging::GetDistanceInches(int motorIndex) {
 double PIDLogging::GetVelocity(int motorIndex) {
 
 	int encoderVelocity = GetEncoderVelocity(motorIndex);
-	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(COUNT);
+	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(QUADRATURE_COUNT);
 	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * circumfrence;
 	return DISTANCE_PER_SEC;  //  Units: Inches per second
 

@@ -8,6 +8,10 @@ class DriveDistance: public CommandBase
 {
 private:
 	double inchesDistance;
+	double distanceFromLeftEncoder,
+		   distanceFromRightEncoder;
+
+	double motorPower = .6;
 public:
 	DriveDistance(double);
 	void Initialize();
