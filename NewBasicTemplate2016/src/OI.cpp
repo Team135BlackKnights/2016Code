@@ -8,6 +8,7 @@
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 #include "Commands/DriveLiftHang.h"
+#include "Commands/ChangeNeutralMode.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -21,13 +22,15 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[LIFT_HANG_JOYSTICK][TRIGGER]->WhileHeld(new DriveLiftHang(true));
-	buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
+	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LIFT_HANG_UP));
+	buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LIFT_HANG_DOWN));
 
-	buttonsArray[BBOX][BBOX_FORWARD]->WhileHeld(new Move(FORWARD, FORWARD));
-	buttonsArray[BBOX][BBOX_REVERSE]->WhileHeld(new Move(REVERSE, REVERSE));
-	buttonsArray[MANIP][JOYSTICK_TURNLEFT]->WhileHeld(new Move(REVERSE,FORWARD));
-	buttonsArray[MANIP][JOYSTICK_TURNRIGHT]->WhileHeld(new Move(FORWARD,REVERSE));
+	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(FORWARD, FORWARD));
+	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(REVERSE, REVERSE));
+	buttonsArray[CONTROL_TURN_LEFT[0]][CONTROL_TURN_LEFT[1]]->WhileHeld(new Move(REVERSE,FORWARD));
+	buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(FORWARD,REVERSE));
+	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(true));
+	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(false));
 }
 
 //OI Functions

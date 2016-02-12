@@ -16,8 +16,8 @@ void DriveLiftHang::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHang::Execute()
 {
-	float sliderValue = oi->GetStickSlider(OI::LIFT_HANG_JOYSTICK);
-	float power;
+	float sliderValue = oi->GetStickSlider(OI::CONTROL_LIFT_HANG_UP);
+	//float power;
 	liftHang->DriveMotor(sliderValue * direction);
 }
 
