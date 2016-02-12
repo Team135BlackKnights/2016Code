@@ -2,25 +2,35 @@
 	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
 	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
+#include <Commands/Move.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 #include "Commands/DriveLiftHang.h"
+#include "Commands/ChangeNeutralMode.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
 {
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
 	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
 	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
 	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[LIFT_HANG_JOYSTICK][TRIGGER]->WhileHeld(new DriveLiftHang(true));
-	buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
+	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LIFT_HANG_UP));
+	buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LIFT_HANG_DOWN));
+
+	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(FORWARD, FORWARD));
+	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(REVERSE, REVERSE));
+	buttonsArray[CONTROL_TURN_LEFT[0]][CONTROL_TURN_LEFT[1]]->WhileHeld(new Move(REVERSE,FORWARD));
+	buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(FORWARD,REVERSE));
+	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(true));
+	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(false));
 }
 
 //OI Functions

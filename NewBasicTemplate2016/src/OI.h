@@ -7,7 +7,7 @@ class OI
 {
 protected:
 
-	static const int JOYSTICKS = 3; //max number of joysticks connected
+	static const int JOYSTICKS = 4; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
 	//unique_ptr creates a(n) unique pointer  ask Eddie if confused
 	//Joystick array starts at index 0
@@ -20,13 +20,41 @@ protected:
 		  	 Controller [2]
 		 */
 public:
+	//USB JOYSTICK VALUES
+    const int JOYSTICK_LEFT = 1;
+    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_MANIP = 2;
+    const int JOYSTICK_BBOX = 3;
+
+	//ARRAY JOYSTICK CONSTANTS
 	static const int LEFT = 0; // sets LEFT controller
 	static const int RIGHT = 1; // sets RIGHT controller
-	static const int BBOX = 2;
-	
-	static const int LIFT_HANG_JOYSTICK = RIGHT;
+	static const int MANIP = 2;
+	static const int BBOX = 3;
 
+	//VARIOUS JOYSTICK AND OI CONSTANTS
 	static constexpr float DEAD_BAND = .05f; //declares dead zone
+
+	static const bool FORWARD = false;
+	static const bool REVERSE = true;
+
+	static const bool LIFT_HANG_UP = true;
+	static const bool LIFT_HANG_DOWN = false;
+
+    static const int TRIGGER = 1;
+    static const int THUMB_BUTTON = 2;
+
+	//BUTTON CONTROL CONSTANTS
+	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
+	const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
+
+	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
+	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
+
+	const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, 1);
+	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, 2);
+
+	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, 1);
 
 	OI();
 	Joystick* GetStick(int);
