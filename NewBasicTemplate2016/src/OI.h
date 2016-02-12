@@ -45,16 +45,16 @@ public:
     static const int THUMB_BUTTON = 2;
 
 	//BUTTON CONTROL CONSTANTS
-	static const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
-	static const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
+	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
+	const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
 
-	static const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
-	static const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
+	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
+	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
 
-	static const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, TRIGGER);
-	static const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, THUMB_BUTTON);
+	const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, 1);
+	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, 2);
 
-	static const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, TRIGGER);
+	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, 1);
 
 	OI();
 	Joystick* GetStick(int);

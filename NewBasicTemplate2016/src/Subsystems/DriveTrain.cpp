@@ -16,6 +16,7 @@ DriveTrain::DriveTrain():
 	this->InvertMotors();
 
 	chassis->SetSafetyEnabled(false);
+	this->SetNeutralMode(false);
 }
 
 void DriveTrain::InitDefaultCommand()
