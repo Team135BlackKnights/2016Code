@@ -1,13 +1,16 @@
 #include "SerialCommunication.h"
 #include "../RobotMap.h"
+#include "Commands/UltrasonicTesting.h"
 
 SerialCommunication::SerialCommunication() :
-		Subsystem("ExampleSubsystem")
+		Subsystem("SerialCommunication")
 {
 
 	//  serialPort.reset(new SerialPort);
 	serialPort = new SerialPort(BAUD_RATE, SerialPort::kMXP, DATA_BITS);
 	serialPort->SetReadBufferSize(COUNT);
+	serialPort->EnableTermination('\n');
+
 	serialPort->SetTimeout(TIMEOUT_TIME);
 
 	readings[numberOfValues] = new char;
@@ -21,17 +24,20 @@ void SerialCommunication::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new UltrasonicTesting());
 }
 
 //  LEFT_SONAR_VALUE = 0;
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 double SerialCommunication::GetSerialValues(int typeOfValue) {
+	return data[typeOfValue];
+	/*
 	if (serialPort->GetBytesReceived() >= numberOfValues) {
 		for (int j = 0; j < numberOfValues; j++) {
-			serialPort->Read(readings[j], COUNT);
+			serialPort->Read(readings[j], 8);
 		}
-		readData = strtod(readings[typeOfValue], NULL);
+		dat = strtod(readings[typeOfValue], NULL);
 		return readData;
 	}
 	else {
@@ -63,18 +69,21 @@ double SerialCommunication::GetSerialValues(int typeOfValue) {
 	return readData; */
 }
 
-double SerialCommunication::StopSerialCommunicationAndReturnLastValue(int typeOfValue) {
-	serialPort->EnableTermination('\n');
+void SerialCommunication::StopSerialCommunicationAndReturnLastValue() {
+	if (!serialPort->GetBytesReceived() > 0)
+		return;
 
-	if (serialPort->GetBytesReceived() >= (typeOfValue + 1)) {
-		for (int j = 0; j < numberOfValues; j++) {
-			serialPort->Read(readings[j], COUNT);
-		}
-		readData = strtod(readings[typeOfValue], NULL);
-		return readData;
+	char* buffer;
+	while (serialPort->GetBytesReceived() >= 0) {
+		serialPort->Read(buffer, 8);
 	}
-	else {
-		return 0;
+		readings[0] = strtok(buffer, ",");
+		for (int j = 1; j < numberOfValues; j++) {
+			readings[j] = strtok(NULL, ",");
+		}
+		for (int i = 0; i < numberOfValues; i++) {
+			data[i] = strtod(readings[i], NULL);
+		}
 	}
 
 	/*if (serialPort->GetBytesReceived() > 0) {
