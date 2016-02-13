@@ -9,6 +9,9 @@ DriveDistance::DriveDistance(double inchesDistance)
 
 	distanceFromRightEncoder = 0;
 	distanceFromLeftEncoder = 0;
+
+	leftDone = false;
+	rightDone = false;
 }
 
 // Called just before this Command runs the first time
@@ -23,21 +26,25 @@ void DriveDistance::Execute()
 	distanceFromLeftEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_LEFT);
 	distanceFromRightEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_RIGHT);
 
+	if (distanceFromLeftEncoder >= this->inchesDistance) {
+		leftDone = true;
+	}
+
+	if (distanceFromRightEncoder >= this->inchesDistance) {
+		rightDone = true;
+	}
+
 	driveTrain->DriveTank(motorPower, motorPower);
+
+	if (rightDone == true && distanceFromLeftEncoder >= this->inchesDistance) {
+
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveDistance::IsFinished()
 {
-	if (distanceFromLeftEncoder >= this->inchesDistance) {
-		return true;
-	}
-	else if (distanceFromRightEncoder >= this->inchesDistance) {
-		return true;
-	}
-	else {
-		return false;
-	}
+
 }
 
 // Called once after isFinished returns true

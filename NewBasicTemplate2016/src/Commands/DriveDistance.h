@@ -12,6 +12,9 @@ private:
 		   distanceFromRightEncoder;
 
 	double motorPower = .6;
+
+	bool leftDone,
+		 rightDone;
 public:
 	DriveDistance(double);
 	void Initialize();

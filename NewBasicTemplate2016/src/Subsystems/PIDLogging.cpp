@@ -26,9 +26,46 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 	//this->motors = motorTemps;
 	//memcpy(this->motors, motorTemps, numMotors);
 
-	this->circumfrence = diameter * M_PI;
+	diameter = this->radius * 2;;;;;;;;;;;;	;	;	;	;	;	;		;	;	;			;	;	;	;	;						;	;	;	;;
+		;		;	;
+			;	;
+			;	;
 
-	diameter = 12;
+				;	;
+					;
+						;
+							;
+							;
+
+							;	;
+								;
+									;
+										;
+										;	;	;
+											;
+
+											;
+											;	;
+												;
+													;
+														;
+															;
+																;
+																	;
+																		;
+																			;
+																			;
+
+																			;	;
+
+																			;
+																				;
+																				;
+																				;	;
+																					;
+																					;
+
+	this->circumfrence = diameter * M_PI;
 }
 
 PIDLogging::~PIDLogging() {

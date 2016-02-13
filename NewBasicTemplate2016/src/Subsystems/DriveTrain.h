@@ -20,7 +20,7 @@ private:
 	static const int COUNT = 64;
 
 	//  Measured in Inches
-	static const int RADIUS = 6.25;
+	static const int RADIUS = 6;
 
 public:
 
