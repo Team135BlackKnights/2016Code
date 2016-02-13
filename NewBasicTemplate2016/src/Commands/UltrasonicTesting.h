@@ -10,6 +10,8 @@ private:
 	double leftSonarDistance,
 		   rightSonarDistance,
 		   lightSensorDistance;
+
+	//  int i;
 public:
 	UltrasonicTesting();
 	void Initialize();

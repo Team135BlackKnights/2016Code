@@ -8,6 +8,7 @@ UltrasonicTesting::UltrasonicTesting()
 	leftSonarDistance = 0;
 	rightSonarDistance = 0;
 	lightSensorDistance = 0;
+	//  i = 1;
 }
 
 // Called just before this Command runs the first time
@@ -19,12 +20,19 @@ void UltrasonicTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void UltrasonicTesting::Execute()
 {
+	//  if (i % 10 == 0) {
 	serialCommunication->ReadSerialValues();
+
 	leftSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::LEFT_SONAR_VALUE);
 	rightSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::RIGHT_SONAR_VALUE);
 	lightSensorDistance = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
 
-	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "Light: " << lightSensorDistance << std::endl;
+	//  SmartDashboard::PutString("LEFT SONAR", data);
+
+	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
+	//  i = 0;
+	//  }
+	//  i++;
 }
 
 // Make this return true when this Command no longer needs to run execute()

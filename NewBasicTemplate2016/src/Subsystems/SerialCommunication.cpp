@@ -1,21 +1,24 @@
 #include "SerialCommunication.h"
 #include "../RobotMap.h"
 #include "Commands/UltrasonicTesting.h"
+#include <sstream>
 
 SerialCommunication::SerialCommunication() :
 		Subsystem("SerialCommunication")
 {
 
 	//  serialPort.reset(new SerialPort);
-	serialPort = new SerialPort(BAUD_RATE, SerialPort::kMXP, DATA_BITS);
-	serialPort->SetReadBufferSize(8);
+	//serialPort->Reset();
+	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kMXP);
+	//serialPort->SetReadBufferSize(10);
+
 	serialPort->EnableTermination('\n');
+	serialPort->SetTimeout(10);
+	//serialPort->SetReadBufferSize(16);
 
-	serialPort->SetTimeout(TIMEOUT_TIME);
+	buffer = new char('\a');
 
-	readings[numberOfValues] = new char;
-
-	buffer = new char;
+	bytesReceived = 0;
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -29,20 +32,50 @@ void SerialCommunication::InitDefaultCommand()
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
-	if (serialPort->GetBytesReceived() == 0)
-		//return 0;
-
-	while (serialPort->GetBytesReceived() >= 0) {
-		serialPort->Read(buffer, 8);
+	if (serialPort->GetBytesReceived() == 0) {
+		//std::cout << "Hello";
+		return;
 	}
-		readings[0] = strtok(buffer, ",");
-		for (int j = 1; j < numberOfValues; j++) {
-			readings[j] = strtok(NULL, ",");
+	while (serialPort->GetBytesReceived() > 0) {
+		buffer = new char('\a');
+		int index = -1;
+		serialPort->Read(buffer, 8);
+		if (buffer[0] == 'L') {
+			index = LEFT_SONAR_VALUE;
 		}
-		for (int i = 0; i < numberOfValues; i++) {
-			data[i] = strtod(readings[i], NULL);
+		else if (buffer[0] == 'R') {
+			index = RIGHT_SONAR_VALUE;
 		}
-	//return data[typeOfValue];
+		else if (buffer[0] == 'B') {
+			index = LIGHT_SENSOR_VALUE;
+		}
+		else
+			continue;
+
+		//std::cout << index;
+		std::stringstream dataThing;
+		int length = strlen(buffer);
+		for (int i = 1; i < length; ++i)
+		{
+			dataThing << buffer[i];
+			//std::cout << dataThing << std::endl;
+		}
+		data[index] = strtod(dataThing.str().c_str(), NULL);
+	}
+	/*
+	char* newBuffer = strtok(buffer, ",");
+	int j = 0;
+	while (newBuffer) {
+		std::cout << newBuffer << std::endl;
+		readings[j] = strtok(NULL, ",");
+		j++;
+	}
+
+	for (int i = 0; i < numberOfValues; i++) {
+		data[i] = strtod(readings[i], NULL);
+	}
+	*/
+
 	/*
 	if (serialPort->GetBytesReceived() >= numberOfValues) {
 		for (int j = 0; j < numberOfValues; j++) {
@@ -53,7 +86,7 @@ void SerialCommunication::ReadSerialValues() {
 	}
 	else {
 		return 0;
-	}
+	} */
 
 	/*if (serialPort->GetBytesReceived() > 0) {
 		serialPort->Read(readings, COUNT);
@@ -81,8 +114,25 @@ void SerialCommunication::ReadSerialValues() {
 }
 
 double SerialCommunication::GetSerialValues(int TypeOfValue) {
-	//  ReadSerialValues();
 	return data[TypeOfValue];
+	/*
+	if (serialPort->GetBytesReceived() == 0)
+			return 0;
+
+		while (serialPort->GetBytesReceived() >= 0) {
+			serialPort->Read(buffer, 8);
+		}
+			readings[0] = strtok(buffer, ",");
+			for (int j = 1; j < numberOfValues; j++) {
+				readings[j] = strtok(NULL, ",");
+			}
+			for (int i = 0; i < numberOfValues; i++) {
+				data[i] = strtod(readings[i], NULL);
+			}
+		return data[TypeOfValue];
+	//  ReadSerialValues();
+	//  return data[TypeOfValue];
+	 */
 }
 
 void SerialCommunication::StopSerialCommunicationAndReturnLastValue() {
