@@ -19,6 +19,8 @@ SerialCommunication::SerialCommunication() :
 	buffer = new char('\a');
 
 	bytesReceived = 0;
+
+	isCrooked = 0;
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -159,6 +161,22 @@ void SerialCommunication::StopSerialCommunicationAndReturnLastValue() {
 			}
 		}
 	} */
+}
+
+int SerialCommunication::IsCrookedAndOffCenter(){
+	if (LEFT_SONAR_VALUE < RIGHT_SONAR_VALUE){
+		isCrooked = CROOKED_LEFT;
+	}
+
+	else if (LEFT_SONAR_VALUE > RIGHT_SONAR_VALUE){
+		isCrooked = CROOKED_RIGHT;
+		}
+
+	else {
+		isCrooked = NOT_CROOKED;
+	}
+
+	return isCrooked;
 }
 
 // Put methods for controlling this subsystem

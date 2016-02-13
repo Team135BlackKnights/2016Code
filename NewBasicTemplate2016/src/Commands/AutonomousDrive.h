@@ -14,6 +14,8 @@ public:
 		DEFENSE = 3
 	};
 
+
+
 	AutonomousDrive(float, float, MODE, int, float);
 	void Initialize();
 	void Execute();
@@ -24,8 +26,9 @@ public:
 private:
 	Timer* timer;
 	float left, right;
-	int driveMode, time, lightSensorCounter;
-	float leftSonarDistance, rightSonarDistance, lightSensorBrightness;
+	int driveMode, time, crookedDirection;
+
+	static constexpr float CROOKED_ADJUST = .9f;
 
 };
 

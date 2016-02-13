@@ -29,6 +29,8 @@ private:
 
 	int bytesReceived;
 
+	int isCrooked;
+
 
 public:
 	SerialCommunication();
@@ -36,11 +38,23 @@ public:
 	void StopSerialCommunicationAndReturnLastValue();
 	double GetSerialValues(int);
 	void ReadSerialValues();
+	int IsCrookedAndOffCenter();
 
 
-	static const int LEFT_SONAR_VALUE = 0;
-	static const int RIGHT_SONAR_VALUE = 1;
-	static const int LIGHT_SENSOR_VALUE = 2;
+	enum SENSOR_VALUES {
+		LEFT_SONAR_VALUE = 0,
+		RIGHT_SONAR_VALUE = 1,
+		LIGHT_SENSOR_VALUE = 2,
+	};
+
+
+	enum DIRECTION {
+			NOT_CROOKED = 1,
+			CROOKED_LEFT = 2,
+			CROOKED_RIGHT = 3
+		};
+
+
 };
 
 #endif

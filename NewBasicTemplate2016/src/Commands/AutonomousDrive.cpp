@@ -1,4 +1,5 @@
 #include "AutonomousDrive.h"
+#include "Subsystems/SerialCommunication.h"
 #include <algorithm>
 
 AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int time, float distance)
@@ -13,6 +14,9 @@ AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int ti
 	this->right = right;
 	this->driveMode = driveMode;
 	this->time = time;
+	crookedDirection = 0;
+
+	this->SetTimeout(time); // Sets timeout to parameter time
 
 
 }
@@ -21,47 +25,39 @@ AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int ti
 void AutonomousDrive::Initialize()
 {
 	timer->Start();
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousDrive::Execute(){
 
-	switch (MODE) {
+	float left = this->left, right = this->right;
+	switch (driveMode) {
 		case MODE::TIME: // Starts TIME mode
-			this->SetTimeout(time); // Sets timeout to parameter time
-			driveTrain->DriveTank(left,right); // Drives robot with private left and right values
-
-			break;
-			//////////////////////////////////////////////////////
-
 		case MODE::DISTANCE: // Starts DISTANCE mode
-			//PUT CODE HERE EVENTUALLY!!!!!!!!!!
 			break;
-			//////////////////////////////////////////////////////
-
 		case MODE::DEFENSE: // Starts DEFENSE mode
-			//Gets Sonar and Light sensor values
-			leftSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::LEFT_SONAR_VALUE);
-			rightSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::RIGHT_SONAR_VALUE);
-			lightSensorBrightness = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
 
-			if (lightSensorValue >)
+			//Check if Robot is crooked
+			crookedDirection = serialCommunication->IsCrookedAndOffCenter();
 
-			this->SetTimeout(time);
-			driveTrain->DriveTank(left,right);
+			switch (crookedDirection){
+				case SerialCommunication::DIRECTION::CROOKED_LEFT : //Robot is crooked left
+					right *= CROOKED_ADJUST;
+					break;
 
-			//Checks if robot is out of defense
-			//if(leftSonarDistance > MAX_SHIELD_DISTANCE && rightSonarDistance > MAX_SHIELD_DISTANCE && LightSensorCounter = 2)
-				//driveTrain->DriveTank(0,0);
+				case SerialCommunication::DIRECTION::CROOKED_RIGHT : //Robot is crooked Right
+					//driveTrain->DriveTank(left * CROOKED_ADJUST, right);
+					left *= CROOKED_ADJUST;
+					break;
 
-			//Checks if robot is sideways
-			//if(SonarSensor1 > MAX_SHIELD_DISTANCE && SonarSensor2 > MAX_SHIELD_DISTANCE && lightSensorCounter = 1)
-				//driveTrain->DriveTank(0,0);
-
-			//ADD CODE TO DETECT WHICH WAY THE ROBOT IS TURNED
+				case SerialCommunication::DIRECTION::NOT_CROOKED : //Robot is not crooked
+					break;
+				}
 			break;
+	}
 
-		}
+	driveTrain->DriveTank(left,right);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -73,7 +69,7 @@ bool AutonomousDrive::IsFinished()
 // Called once after isFinished returns true
 void AutonomousDrive::End()
 {
-	driveTrain->DriveTank(0.0f,0.0f); // Stops robot movement
+	driveTrain->DriveTank(0.0f, 0.0f); // Stops robot movement
 }
 
 // Called when another command which requires one or more of the same
