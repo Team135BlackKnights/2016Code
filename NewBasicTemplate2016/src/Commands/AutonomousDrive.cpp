@@ -54,6 +54,9 @@ void AutonomousDrive::Execute(){
 				case SerialCommunication::DIRECTION::NOT_CROOKED : //Robot is not crooked
 					break;
 				}
+
+
+
 			break;
 	}
 
@@ -63,7 +66,18 @@ void AutonomousDrive::Execute(){
 // Make this return true when this Command no longer needs to run execute()
 bool AutonomousDrive::IsFinished()
 {
-	return this->IsTimedOut(); // Returns true and ends instance if the command has timed out
+	switch (driveMode) {
+			case MODE::TIME: // Starts TIME mode
+				return this->IsTimedOut();  // Returns true and ends instance if the command has timed out
+				break;
+			case MODE::DISTANCE: // Starts DISTANCE mode
+				//return distanceReached
+				break;
+			case MODE::DEFENSE:
+				overDefense = serialCommunication->OverDefense(); //Checks if the Robot is over the defense
+				return overDefense; // Returns true and ends instance if the Robot has crossed the defense
+	}
+	return false;
 }
 
 // Called once after isFinished returns true

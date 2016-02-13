@@ -27,6 +27,7 @@ private:
 	Timer* timer;
 	float left, right;
 	int driveMode, time, crookedDirection;
+	bool overDefense;
 
 	static constexpr float CROOKED_ADJUST = .9f;
 

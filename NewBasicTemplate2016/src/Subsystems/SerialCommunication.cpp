@@ -179,5 +179,14 @@ int SerialCommunication::IsCrookedAndOffCenter(){
 	return isCrooked;
 }
 
+bool SerialCommunication::OverDefense() {
+	if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

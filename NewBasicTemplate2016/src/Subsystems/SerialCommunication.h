@@ -39,7 +39,11 @@ public:
 	double GetSerialValues(int);
 	void ReadSerialValues();
 	int IsCrookedAndOffCenter();
+	bool OverDefense();
 
+	double leftSonarBarrierDistance = 20,
+			rightSonarBarrierDistance = 20,
+			lightValue = 10;
 
 	enum SENSOR_VALUES {
 		LEFT_SONAR_VALUE = 0,
