@@ -45,7 +45,7 @@ float OI::GetStickY(int controllerNum)
 	float value = joysticksArray[controllerNum]->GetY(); //Gets y value from joystick
 
 	//if (abs(value) > DEAD_ZONE)
-		return value; //returns 0 if controllers are within the deadzone
+		return -value; //returns 0 if controllers are within the deadzone
 	//return value;
 }
 

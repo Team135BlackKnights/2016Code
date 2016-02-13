@@ -1,3 +1,4 @@
+
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 
@@ -13,12 +14,14 @@
 // For example to map the left and right motors, you could define the
 // following variables to use with your drivetrain subsystem.
 
+	#define map(x, in_min, in_max, out_min, out_max) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+
 	//constexpr bool ROBOT_MAIN = false;
 
-    const int MOTOR_FRONT_LEFT	= 11;
+    const int MOTOR_FRONT_LEFT	= 12;
     const int MOTOR_REAR_LEFT	= 13;
-    const int MOTOR_FRONT_RIGHT	= 10;
-    const int MOTOR_REAR_RIGHT	= 12;
+    const int MOTOR_FRONT_RIGHT	= 11;
+    const int MOTOR_REAR_RIGHT	= 10;
 
     const int MOTOR_LIFT_HANG = 11;
 
@@ -29,6 +32,10 @@
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
-    const bool DRIVE_TRAIN_INVERTED = true;
+    const bool DRIVE_TRAIN_INVERTED = false;
+
+    const int SERVO_PORT_Y = 1;
+    const int SERVO_PORT_X = 0;
 
 #endif
+
