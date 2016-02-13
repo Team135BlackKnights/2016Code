@@ -21,14 +21,12 @@ AxisCam::AxisCam():
 	//yServo.reset(new Servo(SERVO_PORT_Y));
 	xServo.reset(new Servo(SERVO_PORT_X));
 	pidServoX = new ServoPID(xServo.get());
-	/*pidX = new PIDController(Preferences::GetInstance()->GetFloat("P", .01), Preferences::GetInstance()->GetFloat("I", 0.0f),
-		   Preferences::GetInstance()->GetFloat("D", 0.0f),
-		   pidServoX, pidServoX);
-	//pidX = new PIDController(.26, 0, 2.6, pidServoX,pidServoX);
-	*/pidX = new PIDController(KU * .4, 0, TU / 2.0f, pidServoX, pidServoX);
+	pidX = new PIDController(KU * .4, 0, TU / 2.0f, pidServoX, pidServoX);
+
+	//pidX = new PIDController(KU * Preferences::GetInstance()->GetFloat("KUMult",.4f),0, TU / Preferences::GetInstance()->GetFloat("TUMULT", 2.0f),
+	//					 pidServoX, pidServoX);
+
 	pidX->SetSetpoint(.5);
-	//pidX->SetInputRange(0,1);
-	//pidX->SetOutputRange(-1,1);
 }
 
 void AxisCam::InitDefaultCommand()
@@ -58,12 +56,11 @@ void AxisCam::GetCameraValues()
 		pidX->Disable();
 		return;
 	}
-
 	width = shapes[4] - shapes[3];
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
 	y = height / 2 + shapes[5];
-	//pidX->Enable();
+	pidX->Enable();
 	/*std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
 	std::cout << "Width: " << width << std::endl;
@@ -182,6 +179,8 @@ float AxisCam::GetYMultiplier(float offset)
 
 void AxisCam::UpdateServo()
 {
+	//std::cout << pidX->IsEnabled() << std::endl;
+	//SmartDashboard::PutBoolean("PID is enabled", pidX->IsEnabled());
 	if(pidX->IsEnabled())
 	{
 		float setpoint = xServo->Get() + (.2 * (xDistanceToCenter() / (X_IMAGE_RES / 2)));
@@ -213,7 +212,15 @@ void AxisCam::TogglePID(bool toggle) {
 
 void AxisCam::Scan(Servo* servo)
 {
-	if(servo->Get() <= 0 || servo->Get() >= 1)
-		searchSize = -searchSize;
+	if(servo->Get() <= 0)
+		searchSize = fabs(searchSize);
+	else if (servo->Get() >= 1)
+		searchSize = -fabs(searchSize);
+
 	servo->Set(servo->Get() + searchSize);
+}
+
+float AxisCam::GetTurnSpeed()
+{
+
 }

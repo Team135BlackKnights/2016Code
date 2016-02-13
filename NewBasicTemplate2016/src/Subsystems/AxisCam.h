@@ -40,10 +40,11 @@ private:
 	float y;
 	float width;
 	float height;
-	float searchSize = 0.05f;
+	float searchSize = 0.006f;
 	float lastSetPointDelta;
 	const float KU = .262f;
 	const float TU = .909862f;
+
 	Timer* timer;
 
 public:
@@ -70,6 +71,7 @@ public:
 	float GetYMultiplier(float offset);
 	void UpdateServo();
 	void TogglePID(bool);
+	float GetTurnSpeed();
 	void Scan(Servo* servo);
 	//std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
