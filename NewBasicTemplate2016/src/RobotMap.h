@@ -30,6 +30,7 @@
     const int MOTOR_SHOOT_BOULDER = 14;
     const int MOTOR_RAISE_LOWER_ARM = 15;
     const int MOTOR_COLLECTION = 16;
+    const int MOTOR_LIFT_HANG = 17;
 
     //  Inacuurate PWM Port
     const int SERVO_SHOOTER = 5;
@@ -46,7 +47,7 @@
     const int JOYSTICK_BUTTON_TESTER_START = 1;
     const int JOYSTICK_BUTTON_TESTER_STOP = 6;
 
-    const bool DRIVE_TRAIN_INVERTED = true;
+    const bool DRIVE_TRAIN_INVERTED = false;
 
     const int SERVO_PORT_Y = 1;
     const int SERVO_PORT_X = 0;

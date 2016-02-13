@@ -7,9 +7,6 @@ class OI
 {
 protected:
 
-	bool forwardDirection = true;
-	bool backwardsDirection = false;
-
 
 	static const int JOYSTICKS = 4; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
@@ -39,14 +36,8 @@ public:
 	//VARIOUS JOYSTICK AND OI CONSTANTS
 	static constexpr float DEAD_BAND = .05f; //declares dead zone
 
-	static const bool FORWARD = false;
-	static const bool REVERSE = true;
-
-	static const bool LIFT_HANG_UP = true;
-	static const bool LIFT_HANG_DOWN = false;
-
-    static const int TRIGGER = 1;
-    static const int THUMB_BUTTON = 2;
+    const int TRIGGER = 1;
+    const int THUMB_BUTTON = 2;
 
 	//BUTTON CONTROL CONSTANTS
 	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
@@ -55,10 +46,18 @@ public:
 	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
 	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
 
-	const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, 1);
-	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, 2);
+	const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, TRIGGER);
+	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, THUMB_BUTTON);
 
-	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, 1);
+	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, TRIGGER);
+
+	const std::vector<int> CONTROL_COLLECTION_IN = std::vector<int>(MANIP, 9);
+	const std::vector<int> CONTROL_COLLECTION_OUT = std::vector<int>(MANIP, 10);
+
+	const std::vector<int> CONTROL_ARM_UP = std::vector<int>(MANIP, 5);
+	const std::vector<int> CONTROL_ARM_DOWN = std::vector<int>(MANIP, 6);
+
+	const std::vector<int> CONTROL_SHOOT = std::vector<int>(MANIP, TRIGGER);
 
 	OI();
 	Joystick* GetStick(int);

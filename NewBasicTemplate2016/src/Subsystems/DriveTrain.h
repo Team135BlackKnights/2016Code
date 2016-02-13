@@ -29,6 +29,9 @@ public:
 						FRONT_RIGHT = RobotDrive::kFrontRightMotor,
 						REAR_RIGHT = RobotDrive::kRearRightMotor;
 
+	static const bool COAST = true;
+	static const bool BRAKE = false;
+
 	DriveTrain();
 	~DriveTrain();
 	void InitDefaultCommand();

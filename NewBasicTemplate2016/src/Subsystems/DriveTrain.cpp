@@ -86,7 +86,7 @@ void DriveTrain::InvertMotors()
 
 void DriveTrain::SetNeutralMode(bool coast)
 {
-	CANTalon::NeutralMode mode = coast ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
+	CANTalon::NeutralMode mode = (coast == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
 	for (int i = 0; i < NUM_MOTORS; i++) {
 		motors[i]->ConfigNeutralMode(mode);
 	}

@@ -16,6 +16,9 @@ public:
 	LiftHang();
 	void InitDefaultCommand();
 	void DriveMotor(float);
+
+	static const bool UP = true;
+	static const bool DOWN = false;
 };
 
 #endif

@@ -18,8 +18,8 @@ void Shooter::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void Shooter::DriveShooterMotors() {
-	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(shooterMotorPower);
+void Shooter::DriveShooterMotors(float power) {
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
 void Shooter::StopShooterMotors() {

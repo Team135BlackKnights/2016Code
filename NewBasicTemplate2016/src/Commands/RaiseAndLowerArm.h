@@ -17,6 +17,9 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+	static const bool UP = true;
+	static const bool DOWN = false;
 };
 
 #endif

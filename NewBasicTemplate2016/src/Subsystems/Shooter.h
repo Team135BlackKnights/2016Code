@@ -17,11 +17,10 @@ private:
 	std::unique_ptr<Servo> servo;
 
 	//  Not defined yet
-	const float shooterMotorPower = .8f;
 public:
 	Shooter();
 	void InitDefaultCommand();
-	void DriveShooterMotors();
+	void DriveShooterMotors(float=.8f);
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
 
