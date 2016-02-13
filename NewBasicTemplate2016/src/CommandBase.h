@@ -8,6 +8,7 @@
 #include "Subsystems/LiftHang.h"
 #include "OI.h"
 #include "WPILib.h"
+#include "Subsystems/SerialCommunication.h"
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -24,6 +25,7 @@ public:
 	static std::unique_ptr<OI> oi;
 	static std::unique_ptr<AxisCam> cam;
 	static std::unique_ptr<LiftHang> liftHang;
+	static std::unique_ptr<SerialCommunication> serialCommunication;
 };
 
 #endif

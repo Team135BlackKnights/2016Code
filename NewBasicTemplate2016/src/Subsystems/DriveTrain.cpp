@@ -21,7 +21,7 @@ DriveTrain::DriveTrain():
 void DriveTrain::InitDefaultCommand()
 {
 
-	SetDefaultCommand(new DriveJ());
+	//  SetDefaultCommand(new DriveJ());
 }
 
 void DriveTrain::DriveTank(Joystick* left, Joystick* right) {
