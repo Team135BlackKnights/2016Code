@@ -29,13 +29,11 @@ private:
 
 	//  Values Still To Be Determined
 	double leftSonarBarrierDistance = 20,
-		   rightSoanrBarrierDistance = 20,
+		   rightSonarBarrierDistance = 20,
 		   lightValue = 10;
 
 
 public:
-
-	TypeOfMethod typeOfMethod;
 
 	SerialCommunication();
 	void InitDefaultCommand();
@@ -43,7 +41,7 @@ public:
 	double GetSerialValues(int);
 	void ReadSerialValues();
 
-	bool OverDefense(TypeOfMethod);
+	bool OverDefense();
 
 
 	static const int LEFT_SONAR_VALUE = 0;

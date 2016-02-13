@@ -14,12 +14,10 @@ private:
 		   rightSonarDistance,
 		   lightValueReceived;
 
-	TypeOfMethod typeOfMethod;
-
 	bool overDefense;
 
 public:
-	RunningOverDefense(TypeOfMethod);
+	RunningOverDefense();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -1,6 +1,6 @@
 #include "RunningOverDefense.h"
 
-RunningOverDefense::RunningOverDefense(TypeOfMethod typeOfMethod)
+RunningOverDefense::RunningOverDefense()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -8,7 +8,6 @@ RunningOverDefense::RunningOverDefense(TypeOfMethod typeOfMethod)
 	leftSonarDistance = 0;
 	rightSonarDistance = 0;
 	lightValueReceived = 0;
-	this->typeOfMethod = typeOfMethod;
 
 	overDefense = false;
 
@@ -23,13 +22,13 @@ void RunningOverDefense::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void RunningOverDefense::Execute()
 {
-
+	overDefense = serialCommunication->OverDefense();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool RunningOverDefense::IsFinished()
 {
-	overDefense = serialCommunication->OverDefense(this->typeOfMethod);
+	return overDefense;
 }
 
 // Called once after isFinished returns true

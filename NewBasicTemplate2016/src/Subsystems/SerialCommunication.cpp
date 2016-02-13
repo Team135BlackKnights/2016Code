@@ -156,41 +156,13 @@ double SerialCommunication::GetSerialValues(int TypeOfValue) {
 
 }
 
-bool SerialCommunication::OverDefense(TypeOfMethod typeOfMethod) {
-	this->typeOfMethod = typeOfMethod;
-	switch (this->typeOfMethod) {
-		case CASE_TWO_SONARS_AND_LIGHT:
-			if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSoanrBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-				return true;
-			}
-		break;
-
-		case CASE_LEFT_SONAR_AND_LIGHT:
-			if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-				return true;
-			}
-		break;
-
-		case CASE_RIGHT_SONAR_AND_LIGHT:
-			if (data[RIGHT_SONAR_VALUE] > rightSoanrBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-				return true;
-			}
-
-		break;
-
-		case CASE_LIGHT:
-			if (data[LIGHT_SENSOR_VALUE] > lightValue) {
-				return true;
-			}
-
-		break;
-
-		default:
-			return false;
-		break;
+bool SerialCommunication::OverDefense() {
+	if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
+		return true;
 	}
-
-	return false;
+	else {
+		return false;
+	}
 }
 
 

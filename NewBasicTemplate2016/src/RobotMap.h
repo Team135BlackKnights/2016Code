@@ -31,11 +31,4 @@
 
     const bool DRIVE_TRAIN_INVERTED = true;
 
-	enum TypeOfMethod {
-		CASE_LIGHT = 0,
-		CASE_RIGHT_SONAR_AND_LIGHT = 1,
-		CASE_LEFT_SONAR_AND_LIGHT = 2,
-		CASE_TWO_SONARS_AND_LIGHT = 3
-	};
-
 #endif
