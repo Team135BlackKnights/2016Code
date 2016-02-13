@@ -1,17 +1,17 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef DriveBox_H
+#define DriveBox_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class Move: public CommandBase
 {
 private:
-	int index = 0;
-	bool inverted;
-	const int VELOCITY_LOG = 0b010;
+	int directionLeft;
+	int directionRight;
 public:
-	DriveJ();
+	Move(bool);
+	Move(bool, bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

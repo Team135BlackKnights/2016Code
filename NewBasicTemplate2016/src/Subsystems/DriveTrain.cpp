@@ -27,6 +27,7 @@ DriveTrain::DriveTrain():
 		chassis->SetSafetyEnabled(false);
 
 		this->SetupMotors();
+		this->SetNeutralMode(false);
 
 
 }
@@ -70,14 +71,23 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 	chassis->SetSafetyEnabled(enabled);
 }
 
-void DriveTrain::InvertMotors(bool inverted)
-{
-	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, inverted);
-	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, inverted);
-}
-
 void DriveTrain::ClosePIDFile() {
 	this->CloseFile();
+}
+
+
+void DriveTrain::InvertMotors()
+{
+	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, DRIVE_TRAIN_INVERTED);
+	this->chassis->SetInvertedMotor(RobotDrive::kRearLeftMotor, DRIVE_TRAIN_INVERTED);
+	this->chassis->SetInvertedMotor(RobotDrive::kFrontRightMotor, DRIVE_TRAIN_INVERTED);
+	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, DRIVE_TRAIN_INVERTED);
+}
+
+void DriveTrain::SetNeutralMode(bool coast)
+{
+	CANTalon::NeutralMode mode = coast ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
+	for (int i = 0; i < NUM_MOTORS; i++) {
+		motors[i]->ConfigNeutralMode(mode);
+	}
 }

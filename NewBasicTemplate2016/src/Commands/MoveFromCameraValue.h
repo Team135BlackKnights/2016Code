@@ -1,17 +1,13 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef MoveFromCameraValue_H
+#define MoveFromCameraValue_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class MoveFromCameraValue: public CommandBase
 {
-private:
-	int index = 0;
-	bool inverted;
-	const int VELOCITY_LOG = 0b010;
 public:
-	DriveJ();
+	MoveFromCameraValue();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

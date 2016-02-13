@@ -6,24 +6,62 @@
 class OI
 {
 protected:
-	static const int NUMBER_O_JOYSTICKS = 3;
-	static const int MAX_JOYSTICK_BUTTONS = 12;
-	std::unique_ptr<Joystick> sticks[NUMBER_O_JOYSTICKS];
-	std::unique_ptr<JoystickButton> buttons[NUMBER_O_JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1];
 
 	bool forwardDirection = true;
 	bool backwardsDirection = false;
 
+
+	static const int JOYSTICKS = 4; //max number of joysticks connected
+	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
+	//unique_ptr creates a(n) unique pointer  ask Eddie if confused
+	//Joystick array starts at index 0
+	std::unique_ptr<Joystick> joysticksArray[JOYSTICKS]; //creates an array of the joysticks
+	//JoystickButton array starts at index 1 (index 0 is not used)
+	std::unique_ptr<JoystickButton> buttonsArray[JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1]; //creates an array of the joysticks vs the buttons starting with buttons at 1
+		 /*	 	 	 	 	 	 Buttons * 0 is invalid *
+		  	 Controller [0][1][2][3][4][5][6][7]...
+		  	 Controller [1]
+		  	 Controller [2]
+		 */
 public:
-	static const int LEFT = 0;
-	static const int RIGHT = 1;
-	static const int MANIPULATOR_CONTROL = 2;
+	//USB JOYSTICK VALUES
+    const int JOYSTICK_LEFT = 1;
+    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_MANIP = 2;
+    const int JOYSTICK_BBOX = 3;
 
-	static const int SHOOTER_JOYSTICK = LEFT;
+	//ARRAY JOYSTICK CONSTANTS
+	static const int LEFT = 0; // sets LEFT controller
+	static const int RIGHT = 1; // sets RIGHT controller
+	static const int MANIP = 2;
+	static const int BBOX = 3;
 
-	static constexpr float DEAD_BAND = .05f;
+	//VARIOUS JOYSTICK AND OI CONSTANTS
+	static constexpr float DEAD_BAND = .05f; //declares dead zone
+
+	static const bool FORWARD = false;
+	static const bool REVERSE = true;
+
+	static const bool LIFT_HANG_UP = true;
+	static const bool LIFT_HANG_DOWN = false;
+
+    static const int TRIGGER = 1;
+    static const int THUMB_BUTTON = 2;
+
+	//BUTTON CONTROL CONSTANTS
+	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
+	const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
+
+	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
+	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
+
+	const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, 1);
+	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, 2);
+
+	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, 1);
 
 	OI();
+	Joystick* GetStick(int);
 	float GetStickX(int);
 	float GetStickY(int);
 	float GetStickTwist(int);
