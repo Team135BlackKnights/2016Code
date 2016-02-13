@@ -7,7 +7,14 @@
 class AutonomousDrive: public CommandBase
 {
 public:
-	AutonomousDrive(float, float, int);
+
+	enum MODE {
+		TIME = 0,
+		DISTANCE = 1,
+		DEFENSE = 3
+	};
+
+	AutonomousDrive(float, float, MODE, int, float);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -17,8 +24,7 @@ public:
 private:
 	Timer* timer;
 	float left, right;
-	int targetTime;
-	const int DEFAULT_TIME = 10;
+
 };
 
 #endif

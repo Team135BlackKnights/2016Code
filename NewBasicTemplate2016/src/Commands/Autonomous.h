@@ -6,12 +6,14 @@
 
 class Autonomous: public CommandGroup
 {
-	const int NOTHING = 0;
-	const int LOW_BAR = 1;
-	const int CHEVAL_DE_FRISE = 2;
-	const int DRAWBRIDGE = 3;
-	const int SALLY_PORT = 4;
-	const int PORTCULLIS = 5;
+	enum DEFENSE {
+		NOTHING = 0,
+		LOW_BAR = 1,
+		CHEVAL_DE_FRISE = 2,
+		DRAWBRIDGE = 3,
+		SALLY_PORT = 4,
+		PORTCULLIS = 5
+	};
 
 public:
 	Autonomous(int);

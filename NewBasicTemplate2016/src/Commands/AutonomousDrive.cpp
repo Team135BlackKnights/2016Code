@@ -1,17 +1,26 @@
 #include "AutonomousDrive.h"
 #include <algorithm>
 
-AutonomousDrive::AutonomousDrive(float left, float right, int time = DEFAULT_TIME)
+AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int time, float distance)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 
-	timer = new Timer();
-
 	this->left = left;
 	this->right = right;
-	this->targetTime = time;
+
+	if (driveMode == MODE::TIME){
+		timer = new Timer();
+		//this->targetTime = time;
+		this->SetTimeout(time);
+	}
+
+	else if (driveMode == MODE::DISTANCE){}
+	else if (driveMode == DEFENSE){}
+
+	this->SetTimeout(time);
+
 }
 
 // Called just before this Command runs the first time
@@ -23,20 +32,20 @@ void AutonomousDrive::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void AutonomousDrive::Execute()
 {
-	if(timer)
+
 	driveTrain->DriveTank(left,right);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutonomousDrive::IsFinished()
 {
-	return timer->HasPeriodPassed(targetTime);
+	return this->IsTimedOut();
 }
 
 // Called once after isFinished returns true
 void AutonomousDrive::End()
 {
-	driveTrain->DriveTank(0f,0f);
+	driveTrain->DriveTank(0.0f,0.0f);
 }
 
 // Called when another command which requires one or more of the same
