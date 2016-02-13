@@ -23,6 +23,8 @@ public:
 	static const int LEFT = 0; // sets LEFT controller
 	static const int RIGHT = 1; // sets RIGHT controller
 	static const int BBOX = 2;
+
+	static const int SWITCH = 1;
 	
 	static const int LIFT_HANG_JOYSTICK = RIGHT;
 

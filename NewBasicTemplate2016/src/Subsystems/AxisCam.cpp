@@ -222,5 +222,13 @@ void AxisCam::Scan(Servo* servo)
 
 float AxisCam::GetTurnSpeed()
 {
+	//float speed = (-xDistanceToCenter() / (X_IMAGE_RES / 2));
+	if(xDistanceToCenter() < 5)
+		return -0.25f;
+	else if(xDistanceToCenter() > 5)
+		return 0.25f;
+	else
+		return 0;
 
+	float speed = (-xDistanceToCenter() / (X_IMAGE_RES / 2));
 }

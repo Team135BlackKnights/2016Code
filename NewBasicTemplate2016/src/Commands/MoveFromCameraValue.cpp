@@ -11,15 +11,14 @@ MoveFromCameraValue::MoveFromCameraValue()
 }
 
 // Called just before this Command runs the first time
-void MoveFromCameraValue::Initialize()
-{
+void MoveFromCameraValue::Initialize(){
 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void MoveFromCameraValue::Execute()
 {
-	float speed = cam.get()->GetMotorValues();
+	float speed = cam.get()->GetTurnSpeed();
 	driveTrain->DriveTank(speed, -speed);
 }
 
