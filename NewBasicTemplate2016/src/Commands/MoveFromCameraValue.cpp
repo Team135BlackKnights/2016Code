@@ -1,11 +1,9 @@
 #include <Commands/DriveJ.h>
-#include <OI.h>
-#include <Subsystems/AxisCam.h>
-#include <Subsystems/DriveTrain.h>
+#include <Commands/MoveFromCameraValue.h>
+#include <Commands/Subsystem.h>
 #include <cstdbool>
-#include <memory>
 
-DriveJ::DriveJ()
+MoveFromCameraValue::MoveFromCameraValue()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -13,26 +11,33 @@ DriveJ::DriveJ()
 }
 
 // Called just before this Command runs the first time
-void DriveJ::Initialize() {
+void MoveFromCameraValue::Initialize()
+{
+
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveJ::Execute()
+void MoveFromCameraValue::Execute()
 {
-
-	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
-	driveTrain->DriveTank(oi->GetStick(OI::LEFT), oi->GetStick(OI::RIGHT));
+	float speed = cam.get()->GetMotorValues();
+	driveTrain->DriveTank(speed, -speed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveJ::IsFinished()
+bool MoveFromCameraValue::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void DriveJ::End() {}
+void MoveFromCameraValue::End()
+{
+
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveJ::Interrupted() {}
+void MoveFromCameraValue::Interrupted()
+{
+
+}
