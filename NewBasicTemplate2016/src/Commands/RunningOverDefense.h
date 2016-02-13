@@ -4,6 +4,7 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 #include "Subsystems/SerialCommunication.h"
+#include "RobotMap.h"
 
 class RunningOverDefense: public CommandBase
 {
@@ -14,6 +15,8 @@ private:
 		   lightValueReceived;
 
 	TypeOfMethod typeOfMethod;
+
+	bool overDefense;
 
 public:
 	RunningOverDefense(TypeOfMethod);

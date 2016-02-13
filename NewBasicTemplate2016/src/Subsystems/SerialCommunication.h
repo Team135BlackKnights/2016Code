@@ -32,17 +32,11 @@ private:
 		   rightSoanrBarrierDistance = 20,
 		   lightValue = 10;
 
-	enum TypeOfMethod {
-		CASE_LIGHT = 0,
-		CASE_RIGHT_SONAR_AND_LIGHT = 1,
-		CASE_LEFT_SONAR_AND_LIGHT = 2,
-		CASE_TWO_SONARS_AND_LIGHT = 3
-	};
+
+public:
 
 	TypeOfMethod typeOfMethod;
 
-
-public:
 	SerialCommunication();
 	void InitDefaultCommand();
 	void StopSerialCommunicationAndReturnLastValue();
