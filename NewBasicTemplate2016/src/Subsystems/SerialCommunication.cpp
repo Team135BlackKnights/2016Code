@@ -33,7 +33,7 @@ void SerialCommunication::InitDefaultCommand()
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
 	if (serialPort->GetBytesReceived() == 0) {
-		//std::cout << "Hello";
+		std::cout << -1;
 		return;
 	}
 	while (serialPort->GetBytesReceived() > 0) {
@@ -51,6 +51,7 @@ void SerialCommunication::ReadSerialValues() {
 		}
 		else
 			continue;
+
 
 		//std::cout << index;
 		std::stringstream dataThing;
