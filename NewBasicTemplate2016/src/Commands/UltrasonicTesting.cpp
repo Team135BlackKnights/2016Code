@@ -23,13 +23,13 @@ void UltrasonicTesting::Execute()
 	//  if (i % 10 == 0) {
 	serialCommunication->ReadSerialValues();
 
-	leftSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::LEFT_SONAR_VALUE);
-	rightSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::RIGHT_SONAR_VALUE);
-	lightSensorDistance = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
+	//leftSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::LEFT_SONAR_VALUE);
+	//rightSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::RIGHT_SONAR_VALUE);
+	//lightSensorDistance = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
 
 	//  SmartDashboard::PutString("LEFT SONAR", data);
 
-	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
+	//std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
 	//  i = 0;
 	//  }
 	//  i++;

@@ -27,7 +27,19 @@ private:
 
 	char*  buffer;
 
-	int bytesReceived;
+	//  Values Still To Be Determined
+	double leftSonarBarrierDistance = 20,
+		   rightSoanrBarrierDistance = 20,
+		   lightValue = 10;
+
+	enum TypeOfMethod {
+		CASE_LIGHT = 0,
+		CASE_RIGHT_SONAR_AND_LIGHT = 1,
+		CASE_LEFT_SONAR_AND_LIGHT = 2,
+		CASE_TWO_SONARS_AND_LIGHT = 3
+	};
+
+	TypeOfMethod typeOfMethod;
 
 
 public:
@@ -36,6 +48,8 @@ public:
 	void StopSerialCommunicationAndReturnLastValue();
 	double GetSerialValues(int);
 	void ReadSerialValues();
+
+	bool OverDefense(TypeOfMethod);
 
 
 	static const int LEFT_SONAR_VALUE = 0;
