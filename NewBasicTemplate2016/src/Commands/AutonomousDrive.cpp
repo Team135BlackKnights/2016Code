@@ -7,20 +7,12 @@ AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int ti
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 
+	timer = new Timer(); // Creates a new timer
+
 	this->left = left; //Assigns parameters to private floats
 	this->right = right;
-
-	if (driveMode == MODE::TIME){ // Starts TIME mode
-		timer = new Timer(); // Creates a new timer
-		//this->targetTime = time;
-		this->SetTimeout(time); // Sets timeout to parameter time
-	}
-
-	else if (driveMode == MODE::DISTANCE){} // Starts DISTANCE mode
-
-	else if (driveMode == DEFENSE){ // Starts DEFENSE mode
-
-	}
+	this->driveMode = driveMode;
+	this->time = time;
 
 
 }
@@ -32,10 +24,44 @@ void AutonomousDrive::Initialize()
 }
 
 // Called repeatedly when this Command is scheduled to run
-void AutonomousDrive::Execute()
-{
+void AutonomousDrive::Execute(){
 
-	driveTrain->DriveTank(left,right); // Drives robot with private left and right values
+	switch (MODE) {
+		case MODE::TIME: // Starts TIME mode
+			this->SetTimeout(time); // Sets timeout to parameter time
+			driveTrain->DriveTank(left,right); // Drives robot with private left and right values
+
+			break;
+			//////////////////////////////////////////////////////
+
+		case MODE::DISTANCE: // Starts DISTANCE mode
+			//PUT CODE HERE EVENTUALLY!!!!!!!!!!
+			break;
+			//////////////////////////////////////////////////////
+
+		case MODE::DEFENSE: // Starts DEFENSE mode
+			//Gets Sonar and Light sensor values
+			leftSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::LEFT_SONAR_VALUE);
+			rightSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::RIGHT_SONAR_VALUE);
+			lightSensorBrightness = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
+
+			if (lightSensorValue >)
+
+			this->SetTimeout(time);
+			driveTrain->DriveTank(left,right);
+
+			//Checks if robot is out of defense
+			//if(leftSonarDistance > MAX_SHIELD_DISTANCE && rightSonarDistance > MAX_SHIELD_DISTANCE && LightSensorCounter = 2)
+				//driveTrain->DriveTank(0,0);
+
+			//Checks if robot is sideways
+			//if(SonarSensor1 > MAX_SHIELD_DISTANCE && SonarSensor2 > MAX_SHIELD_DISTANCE && lightSensorCounter = 1)
+				//driveTrain->DriveTank(0,0);
+
+			//ADD CODE TO DETECT WHICH WAY THE ROBOT IS TURNED
+			break;
+
+		}
 }
 
 // Make this return true when this Command no longer needs to run execute()

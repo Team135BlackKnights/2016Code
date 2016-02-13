@@ -24,6 +24,8 @@ public:
 private:
 	Timer* timer;
 	float left, right;
+	int driveMode, time, lightSensorCounter;
+	float leftSonarDistance, rightSonarDistance, lightSensorBrightness;
 
 };
 
