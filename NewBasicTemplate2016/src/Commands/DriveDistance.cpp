@@ -28,23 +28,26 @@ void DriveDistance::Execute()
 
 	if (distanceFromLeftEncoder >= this->inchesDistance) {
 		leftDone = true;
+		leftMotorPower = 0;
 	}
 
 	if (distanceFromRightEncoder >= this->inchesDistance) {
 		rightDone = true;
+		rightMotorPower = 0;
 	}
 
-	driveTrain->DriveTank(motorPower, motorPower);
-
-	if (rightDone == true && distanceFromLeftEncoder >= this->inchesDistance) {
-
-	}
+	driveTrain->DriveTank(leftMotorPower, rightMotorPower);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveDistance::IsFinished()
 {
-
+	if (leftDone == true && rightDone == true) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // Called once after isFinished returns true
