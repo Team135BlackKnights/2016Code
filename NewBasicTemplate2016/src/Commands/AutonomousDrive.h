@@ -15,7 +15,7 @@ public:
 	};
 
 	enum DEFAULT {
-		D_SPEED = 0f,
+		D_SPEED = 0,
 		D_TIME = 0,
 		D_DISTANCE = 0
 	};
