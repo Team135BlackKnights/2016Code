@@ -14,19 +14,17 @@ AutonomousDrive::AutonomousDrive(float left = DEFAULT::D_SPEED, float right = DE
 	this->right = right;
 	this->driveMode = driveMode;
 	this->time = time;
+
 	crookedDirection = 0;
 	overDefense = false;
 
 	this->SetTimeout(time); // Sets timeout to parameter time
-
-
 }
 
 // Called just before this Command runs the first time
 void AutonomousDrive::Initialize()
 {
 	timer->Start();
-
 }
 
 // Called repeatedly when this Command is scheduled to run
