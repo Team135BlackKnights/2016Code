@@ -19,7 +19,8 @@ void MoveFromCameraValue::Initialize(){
 void MoveFromCameraValue::Execute()
 {
 	float speed = cam.get()->GetTurnSpeed();
-	driveTrain->DriveTank(speed, -speed);
+	std::cout << "speed: " << speed << std::endl;
+	//driveTrain->DriveTank(speed, -speed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
