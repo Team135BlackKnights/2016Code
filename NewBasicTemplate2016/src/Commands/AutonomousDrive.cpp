@@ -2,7 +2,7 @@
 #include "Subsystems/SerialCommunication.h"
 #include <algorithm>
 
-AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int time, float distance)
+AutonomousDrive::AutonomousDrive(float left = DEFAULT::D_SPEED, float right = DEFAULT::D_SPEED, MODE driveMode = MODE::TIME, int time = DEFAULT::D_TIME, float distance = DEFAULT::D_DISTANCE)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -15,6 +15,7 @@ AutonomousDrive::AutonomousDrive(float left, float right, MODE driveMode, int ti
 	this->driveMode = driveMode;
 	this->time = time;
 	crookedDirection = 0;
+	overDefense = false;
 
 	this->SetTimeout(time); // Sets timeout to parameter time
 

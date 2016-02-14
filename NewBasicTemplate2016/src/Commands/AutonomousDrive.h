@@ -14,6 +14,12 @@ public:
 		DEFENSE = 3
 	};
 
+	enum DEFAULT {
+		D_SPEED = 0f,
+		D_TIME = 0,
+		D_DISTANCE = 0
+	};
+
 
 
 	AutonomousDrive(float, float, MODE, int, float);
