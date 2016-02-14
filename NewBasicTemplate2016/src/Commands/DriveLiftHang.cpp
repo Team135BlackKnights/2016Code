@@ -17,7 +17,6 @@ void DriveLiftHang::Initialize()
 void DriveLiftHang::Execute()
 {
 	float sliderValue = oi->GetStickSlider(OI::LIFT_HANG_JOYSTICK);
-	float power;
 	liftHang->DriveMotor(sliderValue * direction);
 }
 
