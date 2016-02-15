@@ -8,6 +8,8 @@
 #include "CommandBase.h"
 #include "Commands/DriveLiftHang.h"
 #include "Commands/UltrasonicTesting.h"
+#include "Commands/RunningOverDefense.h"
+#include "Subsystems/SerialCommunication.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -24,6 +26,9 @@ OI::OI()
 	//  buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
 
 	//  buttonsArray[LEFT][TRIGGER]->WhileHeld(new UltrasonicTesting());
+
+	buttonsArray[LEFT][TRIGGER]->WhenPressed(new RunningOverDefense(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
+
 }
 
 //OI Functions

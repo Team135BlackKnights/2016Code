@@ -41,7 +41,12 @@ public:
 	double GetSerialValues(int);
 	void ReadSerialValues();
 
-	bool OverDefense();
+	bool OverDefense(int);
+
+	static const int CASE_LIGHT = 0,
+					 CASE_LEFT_AND_LIGHT = 1,
+					 CASE_RIGHT_AND_LIGHT = 2,
+					 CASE_LEFT_RIGHT_AND_LIGHT = 3;
 
 
 	static const int LEFT_SONAR_VALUE = 0;

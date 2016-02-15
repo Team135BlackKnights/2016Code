@@ -156,12 +156,47 @@ double SerialCommunication::GetSerialValues(int TypeOfValue) {
 
 }
 
-bool SerialCommunication::OverDefense() {
-	if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-		return true;
-	}
-	else {
+bool SerialCommunication::OverDefense(int typeOfMethod) {
+	switch (typeOfMethod) {
+	case CASE_LIGHT:
+		if (data[LIGHT_SENSOR_VALUE] > lightValue) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	break;
+
+	case CASE_LEFT_AND_LIGHT:
+		if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	break;
+
+	case CASE_RIGHT_AND_LIGHT:
+		if (data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	break;
+
+	case CASE_LEFT_RIGHT_AND_LIGHT:
+		if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	break;
+
+	default:
 		return false;
+	break;
 	}
 }
 

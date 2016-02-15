@@ -16,8 +16,18 @@ private:
 
 	bool overDefense;
 
+	int typeOfMethod;
+
+	std::unique_ptr<Timer> timer;
+
+	double initialTimerValue,
+		   setTimerValue,
+		   waitTimerValue = .5;
+
+	const double motorPower = .8;
+
 public:
-	RunningOverDefense();
+	RunningOverDefense(int);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
