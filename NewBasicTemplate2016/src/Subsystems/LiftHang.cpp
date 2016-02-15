@@ -4,7 +4,8 @@
 LiftHang::LiftHang() :
 		Subsystem("LiftHang")
 {
-	motors.reset(new CANTalon(MOTOR_LIFT_HANG));
+	liftMotor.reset(new CANTalon(MOTOR_LIFT_HANG_LIFT));
+	flipperMotor.reset(new CANTalon(MOTOR_LIFT_HANG_FLIPPER));
 
 }
 
@@ -14,8 +15,12 @@ void LiftHang::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void LiftHang::DriveMotor(float value) {
-	motors->Set(value);
+void LiftHang::DriveLiftMotor(float value) {
+	liftMotor->Set(value);
+}
+
+void LiftHang::DriveFlipperMotor(float value) {
+	flipperMotor->Set(value);
 }
 
 // Put methods for controlling this subsystem

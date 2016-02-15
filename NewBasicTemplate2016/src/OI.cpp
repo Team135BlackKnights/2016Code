@@ -14,6 +14,7 @@
 #include "Commands/RaiseAndLowerArm.h"
 #include "Commands/DriveCollection.h"
 #include "Commands/DriveLiftHang.h"
+#include "Commands/DriveLiftHangFlipper.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
 
@@ -32,6 +33,9 @@ OI::OI()
 
 	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LiftHang::UP));
 	buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LiftHang::DOWN));
+
+	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_UP[0]][CONTROL_LIFT_HANG_FLIPPER_UP[1]]->WhileHeld(new DriveLiftHangFlipper(.2f));
+	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_DOWN[0]][CONTROL_LIFT_HANG_FLIPPER_DOWN[1]]->WhileHeld(new DriveLiftHangFlipper(-.2f));
 
 	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
 

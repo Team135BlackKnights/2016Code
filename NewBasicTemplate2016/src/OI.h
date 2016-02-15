@@ -42,6 +42,8 @@ public:
 	//BUTTON CONTROL CONSTANTS
 	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
 	const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
+	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_UP = std::vector<int>(MANIP, 7);
+	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_DOWN = std::vector<int>(MANIP, 8);
 
 	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
 	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);

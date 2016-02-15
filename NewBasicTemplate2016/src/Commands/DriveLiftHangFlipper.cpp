@@ -1,41 +1,39 @@
-#include "DriveLiftHang.h"
+#include "DriveLiftHangFlipper.h"
 
-DriveLiftHang::DriveLiftHang(bool PosNeg)
+DriveLiftHangFlipper::DriveLiftHangFlipper(float power)
 {
 	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(chassis);
+	this->power = power;
 	Requires(liftHang.get());
-	direction = PosNeg ? 1: -1; //Ternary operator = bae
 }
 
 // Called just before this Command runs the first time
-void DriveLiftHang::Initialize()
+void DriveLiftHangFlipper::Initialize()
 {
+
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveLiftHang::Execute()
+void DriveLiftHangFlipper::Execute()
 {
-	float sliderValue = oi->GetStickSlider(OI::MANIP);
-	//float power;
-	liftHang->DriveLiftMotor(sliderValue * direction);
+	liftHang->DriveFlipperMotor(power);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveLiftHang::IsFinished()
+bool DriveLiftHangFlipper::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void DriveLiftHang::End()
+void DriveLiftHangFlipper::End()
 {
-	liftHang->DriveLiftMotor(0);
+	liftHang->DriveFlipperMotor(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveLiftHang::Interrupted()
+void DriveLiftHangFlipper::Interrupted()
 {
 	this->End();
 }
