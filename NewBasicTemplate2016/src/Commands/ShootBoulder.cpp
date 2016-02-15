@@ -40,7 +40,7 @@ void ShootBoulder::Execute()
 			finalTimerValue = initalTimerValue + timeWait;
 		}
 		if (finalTimerValue >= timer->Get()) {
-			shooter->MoveServo();
+			shooter->DriveKicker(.5f);
 		}
 	}
 	else {
@@ -62,7 +62,6 @@ void ShootBoulder::End()
 {
 	speedSet = false;
 	shooter->StopShooterMotors();
-	shooter->ResetServoPosition();
 }
 
 // Called when another command which requires one or more of the same

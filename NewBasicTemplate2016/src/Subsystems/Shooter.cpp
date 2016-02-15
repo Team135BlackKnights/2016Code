@@ -5,11 +5,11 @@ Shooter::Shooter() :
 	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
 {
 
-	//  shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
+	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
-	motors[TWO_WHEEL_SHOOTER_MOTOR] = new CANTalon(MOTOR_SHOOT_BOULDER);
+	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 
-	servo.reset(new Servo(SERVO_SHOOTER));
+	kicker.reset(new VictorSP(MOTOR_SHOOTER_KICKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -26,16 +26,8 @@ void Shooter::StopShooterMotors() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
 }
 
-void Shooter::MoveServo() {
-	servo->Set(1);
-}
-
-void Shooter::ResetServoPosition() {
-	servo->Set(0);
-}
-
-double Shooter::GetServoPosition() {
-	return servo->Get();
+void Shooter::DriveKicker(float power) {
+	kicker->Set(power);
 }
 
 // Put methods for controlling this subsystem

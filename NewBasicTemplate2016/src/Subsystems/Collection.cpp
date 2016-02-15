@@ -4,7 +4,7 @@
 Collection::Collection() :
 		Subsystem("Collection")
 {
-	collectionMotor.reset(new CANTalon(MOTOR_COLLECTION));
+	collectionMotor.reset(new VictorSP(MOTOR_COLLECTION));
 }
 
 void Collection::InitDefaultCommand()

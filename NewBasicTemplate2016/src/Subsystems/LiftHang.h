@@ -10,8 +10,8 @@ class LiftHang: public Subsystem
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	std::unique_ptr<CANTalon> liftMotor;
-	std::unique_ptr<CANTalon> flipperMotor;
+	std::unique_ptr<VictorSP> liftMotor;
+	std::unique_ptr<VictorSP> flipperMotor;
 
 
 public:
