@@ -42,8 +42,8 @@ public:
 	//BUTTON CONTROL CONSTANTS
 	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
 	const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
-	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_UP = std::vector<int>(MANIP, 7);
-	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_DOWN = std::vector<int>(MANIP, 8);
+	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_UP = std::vector<int>(MANIP, 5);
+	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_DOWN = std::vector<int>(MANIP, 6);
 
 	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
 	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
@@ -56,8 +56,8 @@ public:
 	const std::vector<int> CONTROL_COLLECTION_IN = std::vector<int>(MANIP, 9);
 	const std::vector<int> CONTROL_COLLECTION_OUT = std::vector<int>(MANIP, 10);
 
-	const std::vector<int> CONTROL_ARM_UP = std::vector<int>(MANIP, 5);
-	const std::vector<int> CONTROL_ARM_DOWN = std::vector<int>(MANIP, 6);
+	const std::vector<int> CONTROL_ARM_UP = std::vector<int>(MANIP, 7);
+	const std::vector<int> CONTROL_ARM_DOWN = std::vector<int>(MANIP, 8);
 
 	const std::vector<int> CONTROL_SHOOT = std::vector<int>(MANIP, TRIGGER);
 
