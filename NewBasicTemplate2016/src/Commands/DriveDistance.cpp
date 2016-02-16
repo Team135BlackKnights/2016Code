@@ -53,7 +53,7 @@ bool DriveDistance::IsFinished()
 // Called once after isFinished returns true
 void DriveDistance::End()
 {
-	driveTrain->DriveTank(0, 0);
+	driveTrain->DriveTank(0.0, 0.0);
 	distanceFromRightEncoder = 0;
 	distanceFromLeftEncoder = 0;
 }
