@@ -24,6 +24,8 @@
     const int MOTOR_FRONT_RIGHT	= 11;
     const int MOTOR_REAR_RIGHT	= 10;
 
+    const int MOTOR_LIFT_HANG = 11;
+
     //  Inaccurate ID Values for the Talon
     const int MOTOR_SHOOTER_RIGHT_ID = 8;
     const int MOTOR_SHOOTER_LEFT_ID = 9;
