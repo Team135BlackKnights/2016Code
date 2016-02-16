@@ -4,6 +4,7 @@
 #include "CommandBase.h"
 #include "Commands/JoystickTesting.h"
 #include "Commands/PIDTesting.h"
+#include "Commands/RunningOverDefense.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
