@@ -34,12 +34,16 @@ OI::OI()
 	buttonsArray[CONTROL_NEUTRAL_MODE.at(0)][CONTROL_NEUTRAL_MODE.at(1)]->WhenReleased(new ChangeNeutralMode(false));
 	*/
 
-	buttonsArray[RIGHT][1]->WhileHeld(new Move(FORWARD, FORWARD));
-	buttonsArray[RIGHT][2]->WhileHeld(new Move(REVERSE, REVERSE));
-	//buttonsArray[CONTROL_TURN_LEFT.at(0)][CONTROL_TURN_LEFT.at(1)]->WhileHeld(new Move(REVERSE,FORWARD));
-	//buttonsArray[CONTROL_TURN_RIGHT.at(0)][CONTROL_TURN_RIGHT.at(1)]->WhileHeld(new Move(FORWARD,REVERSE));
-	buttonsArray[LEFT][1]->WhenPressed(new ChangeNeutralMode(true));
-	buttonsArray[LEFT][1]->WhenReleased(new ChangeNeutralMode(false));
+	buttonsArray[LEFT][1]->WhileHeld(new Move(FORWARD, FORWARD));
+	buttonsArray[LEFT][2]->WhileHeld(new Move(REVERSE, REVERSE));
+	buttonsArray[LEFT][3]->WhileHeld(new Move(REVERSE,FORWARD));
+	buttonsArray[LEFT][4]->WhileHeld(new Move(FORWARD,REVERSE));
+	buttonsArray[RIGHT][1]->WhenPressed(new ChangeNeutralMode(true));
+	buttonsArray[RIGHT][1]->WhenReleased(new ChangeNeutralMode(false));
+	buttonsArray[MANIP][1]->WhileHeld(new DriveLiftHang(LIFT_HANG_UP));
+	buttonsArray[MANIP][2]->WhileHeld(new DriveLiftHang(LIFT_HANG_DOWN));
+
+
 }
 
 //OI Functions

@@ -23,7 +23,7 @@
     const int MOTOR_FRONT_RIGHT	= 12;
     const int MOTOR_REAR_RIGHT	= 13;
 
-    const int MOTOR_LIFT_HANG = 11;
+    const int MOTOR_LIFT_HANG = 2;
 
     const bool DRIVE_TRAIN_INVERTED = true;
 
