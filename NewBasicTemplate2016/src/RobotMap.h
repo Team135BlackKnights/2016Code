@@ -21,38 +21,29 @@
 	//constexpr bool ROBOT_MAIN = false;
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
-    const int MOTOR_FRONT_LEFT	= 12;
-    const int MOTOR_REAR_LEFT	= 13;
-    const int MOTOR_FRONT_RIGHT	= 11;
-    const int MOTOR_REAR_RIGHT	= 10;
+    const int MOTOR_FRONT_LEFT	= 11;
+    const int MOTOR_REAR_LEFT	= 10;
+    const int MOTOR_FRONT_RIGHT	= 12;
+    const int MOTOR_REAR_RIGHT	= 13;
 
     //  Inaccurate ID Values for the Talon
     const int MOTOR_SHOOT_BOULDER = 14;
     const int MOTOR_RAISE_LOWER_ARM = 15;
 
 
-    //  Inacuurate PWM Port
+    //  Inacuurate PWM Ports
     const int MOTOR_SHOOTER_KICKER = 1;
-    const int MOTOR_COLLECTION = 2;
-    const int MOTOR_LIFT_HANG_LIFT = 3;
+    const int MOTOR_COLLECTION = 3;
+    const int MOTOR_LIFT_HANG_LIFT = 2;
     const int MOTOR_LIFT_HANG_FLIPPER = 4;
-
-    const int TRIGGER = 1;
-    const int THUMBS_BUTTON = 2;
-
-    //  Joystick Ports
-    const int JOYSTICK_LEFT = 1;
-    const int JOYSTICK_RIGHT = 0;
-    const int JOYSTICK_BBOX = 2;
+    const int SERVO_PORT_Y = 1;
+    const int SERVO_PORT_X = 0;
 
     //  Buttons Declarations
     const int JOYSTICK_BUTTON_TESTER_START = 1;
     const int JOYSTICK_BUTTON_TESTER_STOP = 6;
 
     const bool DRIVE_TRAIN_INVERTED = false;
-
-    const int SERVO_PORT_Y = 1;
-    const int SERVO_PORT_X = 0;
 
 #endif
 

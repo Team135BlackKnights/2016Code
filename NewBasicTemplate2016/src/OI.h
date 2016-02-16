@@ -50,29 +50,27 @@ public:
     const int THUMB_BUTTON = 2;
 
 	//BUTTON CONTROL CONSTANTS
-	//const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
-	//const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
-	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_UP = std::vector<int>(MANIP, 5);
-	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_DOWN = std::vector<int>(MANIP, 6);
+	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 5};
+	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 6};
 
-	const std::vector<int> CONTROL_TURN_LEFT = std::vector<int>(MANIP, 11);
-	const std::vector<int> CONTROL_TURN_RIGHT = std::vector<int>(MANIP, 12);
+	const int CONTROL_TURN_LEFT[2] = {MANIP, 11};
+	const int CONTROL_TURN_RIGHT[2] = {MANIP, 12};
 
-	const std::vector<int> CONTROL_FORWARD = std::vector<int>(LEFT, TRIGGER);
-	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, THUMB_BUTTON);
+	const int CONTROL_FORWARD[2] = {LEFT, TRIGGER};
+	const int CONTROL_REVERSE[2] = {LEFT, THUMB_BUTTON};
 
-	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, TRIGGER);
+	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
 
-	const std::vector<int> CONTROL_COLLECTION_IN = std::vector<int>(MANIP, 9);
-	const std::vector<int> CONTROL_COLLECTION_OUT = std::vector<int>(MANIP, 10);
+	const int CONTROL_COLLECTION_IN[2] = {MANIP, 9};
+	const int CONTROL_COLLECTION_OUT[2] = {MANIP, 10};
 
-	const std::vector<int> CONTROL_ARM_UP = std::vector<int>(MANIP, 7);
-	const std::vector<int> CONTROL_ARM_DOWN = std::vector<int>(MANIP, 8);
+	const int CONTROL_ARM_UP[2] = {MANIP, 7};
+	const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
 
-	const std::vector<int> CONTROL_SHOOT = std::vector<int>(MANIP, TRIGGER);
+	const int CONTROL_SHOOT[2] = {MANIP, TRIGGER};
 
-	POV* CONTROL_LIFT_HANG_UP = new POV(2, 0);
-	POV* CONTROL_LIFT_HANG_DOWN = new POV(2, 180);
+	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 0};
+	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 180};
 };
 
 #endif

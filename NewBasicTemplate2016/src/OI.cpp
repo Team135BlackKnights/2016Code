@@ -7,8 +7,6 @@
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
-
-#include "Commands/JoystickTesting.h"
 #include "Commands/PIDTesting.h"
 #include "Commands/ShootBoulder.h"
 #include "Commands/RaiseAndLowerArm.h"
@@ -33,8 +31,8 @@ OI::OI()
 
 	//buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LiftHang::UP));
 	//buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LiftHang::DOWN));
-	CONTROL_LIFT_HANG_UP->WhileActive(new DriveLiftHang(LiftHang::UP));
-	CONTROL_LIFT_HANG_DOWN->WhileActive(new DriveLiftHang(LiftHang::DOWN));
+	(new POV(CONTROL_LIFT_HANG_UP[0], CONTROL_LIFT_HANG_UP[1]))->WhileActive(new DriveLiftHang(LiftHang::UP));
+	(new POV(CONTROL_LIFT_HANG_DOWN[0], CONTROL_LIFT_HANG_DOWN[1]))->WhileActive(new DriveLiftHang(LiftHang::DOWN));
 
 	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_UP[0]][CONTROL_LIFT_HANG_FLIPPER_UP[1]]->WhileHeld(new DriveLiftHangFlipper(.2f));
 	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_DOWN[0]][CONTROL_LIFT_HANG_FLIPPER_DOWN[1]]->WhileHeld(new DriveLiftHangFlipper(-.2f));
