@@ -55,7 +55,6 @@ public:
 	const std::vector<int> CONTROL_REVERSE = std::vector<int>(LEFT, 2);
 
 	const std::vector<int> CONTROL_NEUTRAL_MODE = std::vector<int>(RIGHT, 1);
-
 	OI();
 	Joystick* GetStick(int);
 	float GetStickX(int);

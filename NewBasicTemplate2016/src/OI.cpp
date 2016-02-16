@@ -22,15 +22,24 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LIFT_HANG_UP));
-	buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LIFT_HANG_DOWN));
+	/*
+	buttonsArray[CONTROL_LIFT_HANG_UP.at(0)][CONTROL_LIFT_HANG_UP.at(1)]->WhileHeld(new DriveLiftHang(LIFT_HANG_UP));
+	buttonsArray[CONTROL_LIFT_HANG_DOWN.at(0)][CONTROL_LIFT_HANG_DOWN.at(1)]->WhileHeld(new DriveLiftHang(LIFT_HANG_DOWN));
 
-	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(FORWARD, FORWARD));
-	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(REVERSE, REVERSE));
-	buttonsArray[CONTROL_TURN_LEFT[0]][CONTROL_TURN_LEFT[1]]->WhileHeld(new Move(REVERSE,FORWARD));
-	buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(FORWARD,REVERSE));
-	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(true));
-	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(false));
+	buttonsArray[CONTROL_FORWARD.at(0)][CONTROL_FORWARD.at(1)]->WhileHeld(new Move(FORWARD, FORWARD));
+	buttonsArray[CONTROL_REVERSE.at(0)][CONTROL_REVERSE.at(1)]->WhileHeld(new Move(REVERSE, REVERSE));
+	buttonsArray[CONTROL_TURN_LEFT.at(0)][CONTROL_TURN_LEFT.at(1)]->WhileHeld(new Move(REVERSE,FORWARD));
+	buttonsArray[CONTROL_TURN_RIGHT.at(0)][CONTROL_TURN_RIGHT.at(1)]->WhileHeld(new Move(FORWARD,REVERSE));
+	buttonsArray[CONTROL_NEUTRAL_MODE.at(0)][CONTROL_NEUTRAL_MODE.at(1)]->WhenPressed(new ChangeNeutralMode(true));
+	buttonsArray[CONTROL_NEUTRAL_MODE.at(0)][CONTROL_NEUTRAL_MODE.at(1)]->WhenReleased(new ChangeNeutralMode(false));
+	*/
+
+	buttonsArray[RIGHT][1]->WhileHeld(new Move(FORWARD, FORWARD));
+	buttonsArray[RIGHT][2]->WhileHeld(new Move(REVERSE, REVERSE));
+	//buttonsArray[CONTROL_TURN_LEFT.at(0)][CONTROL_TURN_LEFT.at(1)]->WhileHeld(new Move(REVERSE,FORWARD));
+	//buttonsArray[CONTROL_TURN_RIGHT.at(0)][CONTROL_TURN_RIGHT.at(1)]->WhileHeld(new Move(FORWARD,REVERSE));
+	buttonsArray[LEFT][1]->WhenPressed(new ChangeNeutralMode(true));
+	buttonsArray[LEFT][1]->WhenReleased(new ChangeNeutralMode(false));
 }
 
 //OI Functions
