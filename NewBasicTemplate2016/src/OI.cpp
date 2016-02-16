@@ -31,8 +31,10 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LiftHang::UP));
-	buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LiftHang::DOWN));
+	//buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LiftHang::UP));
+	//buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LiftHang::DOWN));
+	CONTROL_LIFT_HANG_UP->WhileActive(new DriveLiftHang(LiftHang::UP));
+	CONTROL_LIFT_HANG_DOWN->WhileActive(new DriveLiftHang(LiftHang::DOWN));
 
 	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_UP[0]][CONTROL_LIFT_HANG_FLIPPER_UP[1]]->WhileHeld(new DriveLiftHangFlipper(.2f));
 	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_DOWN[0]][CONTROL_LIFT_HANG_FLIPPER_DOWN[1]]->WhileHeld(new DriveLiftHangFlipper(-.2f));
@@ -52,6 +54,7 @@ OI::OI()
 
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
+
 }
 
 //OI Functions
@@ -94,4 +97,9 @@ float OI::GetStickSlider(int controllerNum)
 bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
+}
+
+int OI::GetPOV(int stick)
+{
+	return joysticksArray[stick]->GetPOV();
 }

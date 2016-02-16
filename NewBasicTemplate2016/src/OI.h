@@ -2,6 +2,7 @@
 #define OI_H
 
 #include "WPILib.h"
+#include "Triggers/POV.h"
 
 class OI
 {
@@ -21,6 +22,15 @@ protected:
 		  	 Controller [2]
 		 */
 public:
+	OI();
+	Joystick* GetStick(int);
+	float GetStickX(int);
+	float GetStickY(int);
+	float GetStickTwist(int);
+	float GetStickSlider(int);
+	bool GetButton(int stick, int);
+	int GetPOV(int);
+
 	//USB JOYSTICK VALUES
     const int JOYSTICK_LEFT = 1;
     const int JOYSTICK_RIGHT = 0;
@@ -40,8 +50,8 @@ public:
     const int THUMB_BUTTON = 2;
 
 	//BUTTON CONTROL CONSTANTS
-	const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
-	const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
+	//const std::vector<int> CONTROL_LIFT_HANG_UP = std::vector<int>(MANIP, 3);
+	//const std::vector<int> CONTROL_LIFT_HANG_DOWN = std::vector<int>(MANIP, 4);
 	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_UP = std::vector<int>(MANIP, 5);
 	const std::vector<int> CONTROL_LIFT_HANG_FLIPPER_DOWN = std::vector<int>(MANIP, 6);
 
@@ -61,13 +71,8 @@ public:
 
 	const std::vector<int> CONTROL_SHOOT = std::vector<int>(MANIP, TRIGGER);
 
-	OI();
-	Joystick* GetStick(int);
-	float GetStickX(int);
-	float GetStickY(int);
-	float GetStickTwist(int);
-	float GetStickSlider(int);
-	bool GetButton(int stick, int);
+	POV* CONTROL_LIFT_HANG_UP = new POV(2, 0);
+	POV* CONTROL_LIFT_HANG_DOWN = new POV(2, 180);
 };
 
 #endif
