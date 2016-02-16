@@ -1,9 +1,9 @@
 #include "DriveTrainTurnPID.h"
 #include "../RobotMap.h"
 
-DriveTrainTurnPID::DriveTrainTurnPID(DriveTrain* driveTrain, Servo* servo)
+DriveTrainTurnPID::DriveTrainTurnPID(Servo* servo)
 {
-	this->driveTrain = driveTrain;
+	this->driveTrain = CommandBase::driveTrain.get();
 	this->servo = servo;
 }
 

@@ -22,11 +22,13 @@ AxisCam::AxisCam():
 	xServo.reset(new Servo(SERVO_PORT_X));
 	pidServoX = new ServoPID(xServo.get());
 	pidX = new PIDController(KU * .4, 0, TU / 2.0f, pidServoX, pidServoX);
-
 	//pidX = new PIDController(KU * Preferences::GetInstance()->GetFloat("KUMult",.4f),0, TU / Preferences::GetInstance()->GetFloat("TUMULT", 2.0f),
 	//					 pidServoX, pidServoX);
 
 	pidX->SetSetpoint(.5);
+
+	driveTrainTurnPID = new DriveTrainTurnPID(xServo.get());
+	driveTurn = new PIDController(0,0,0, driveTrainTurnPID,driveTrainTurnPID);
 }
 
 void AxisCam::InitDefaultCommand()
@@ -222,13 +224,26 @@ void AxisCam::Scan(Servo* servo)
 
 float AxisCam::GetTurnSpeed()
 {
-	//float speed = (-xDistanceToCenter() / (X_IMAGE_RES / 2));
+	/*float speed = (-xDistanceToCenter() / (X_IMAGE_RES / 2));
 	if(xDistanceToCenter() < 5)
 		return -0.25f;
 	else if(xDistanceToCenter() > 5)
 		return 0.25f;
 	else
 		return 0;
+*/
+	if(driveTurn->IsEnabled())
+	{
+		float speed = (.2f * (-xDistanceToCenter() / (X_IMAGE_RES / 2.0f)));
+		driveTurn->SetSetpoint(speed);
+	}
+	return 1.0f;
+}
 
-	float speed = (-xDistanceToCenter() / (X_IMAGE_RES / 2));
+void AxisCam::ToggleTurnPID(bool toggle)
+{
+	if(toggle)
+		driveTurn->Enable();
+	else
+		driveTurn->Disable();
 }

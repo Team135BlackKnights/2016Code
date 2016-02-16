@@ -2,14 +2,18 @@
 #define AxisCam_H
 
 #include <Commands/Subsystem.h>
-#include <networktables/NetworkTable.h>
+#include <cstdbool>
 #include <memory>
-#include "WPILib.h"
-#include <unistd.h>
-#include "RobotMap.h"
-#include <PIDController.h>
-#include "Subsystems/ServoPID.h"
 
+class DriveTrainTurnPID;
+class ServoPID;
+
+class NetworkTable;
+class PIDController;
+class Servo;
+class Timer;
+#include "DriveTrainTurnPID.h"
+#include "ServoPID.h"
 
 
 
@@ -26,6 +30,9 @@ private:
 	const float X_IMAGE_RES = 320;
 	const float Y_IMAGE_RES = 240;
 	ServoPID* pidServoX;
+	//DriveTrainTurnPID* driveTrainTurnPID;
+	DriveTrainTurnPID* driveTrainTurnPID;
+	PIDController* driveTurn;
 	PIDController* pidX;
 	const int CAMERA_CENTER_X = X_IMAGE_RES / 2;
 	const int CAMERA_CENTER_Y = Y_IMAGE_RES / 2;
@@ -75,6 +82,7 @@ public:
 	void Scan(Servo* servo);
 	//std::unique_ptr<Servo> yServo;
 	std::unique_ptr<Servo> xServo;
+	void ToggleTurnPID(bool toggle);
 };
 
 #endif
