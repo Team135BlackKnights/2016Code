@@ -33,6 +33,7 @@ public:
 	~DriveTrain();
 	void InitDefaultCommand();
 
+	void DriveTank(Joystick*, Joystick*); //Drive with given joysticks
 	void DriveTank(float, float);
 	void RotateTank(float);
 	void SetMotorValue(int, double);
@@ -44,5 +45,3 @@ public:
 	void ClosePIDFile();
 
 };
-
-#endif

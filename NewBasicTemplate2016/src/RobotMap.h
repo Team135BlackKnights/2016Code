@@ -42,6 +42,4 @@
     const int JOYSTICK_BUTTON_TESTER_START = 1;
     const int JOYSTICK_BUTTON_TESTER_STOP = 6;
 
-
-
 #endif

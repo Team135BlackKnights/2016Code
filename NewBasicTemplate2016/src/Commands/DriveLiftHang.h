@@ -1,16 +1,16 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef DriveLiftHang_H
+#define DriveLiftHang_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
+#include "OI.h"
 
-class DriveJ: public CommandBase
+class DriveLiftHang: public CommandBase
 {
 private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
+	int direction;
 public:
-	DriveJ();
+	DriveLiftHang(bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

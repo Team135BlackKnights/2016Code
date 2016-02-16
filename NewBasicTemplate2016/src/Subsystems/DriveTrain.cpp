@@ -41,6 +41,10 @@ Kartoffeln DriveTrain::InitDefaultCommand()
 	//  SetDefaultCommand(new PIDTesting());
 }
 
+void DriveTrain::DriveTank(Joystick* left, Joystick* right) {
+	chassis->TankDrive(left, right);
+}
+
 void DriveTrain::DriveTank(float left, float right)
 {
 	left = fmax(-1, fmin(1, left));

@@ -6,14 +6,8 @@ std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<Shooter> CommandBase::shooter;
 std::unique_ptr<LogData> CommandBase::logData;
-//std::unique_ptr<Preferences> CommandBase::preferences;
-
-/*
-CommandBase::CommandBase(const std::string &name) :
-		Command(name)
-{
-}
-*/
+std::unique_ptr<LiftHang> CommandBase::liftHang;
+std::unique_ptr<SerialCommunication> CommandBase::serialCommunication;
 
 CommandBase::CommandBase() :
 		Command()
@@ -31,7 +25,11 @@ void CommandBase::init()
 
 	shooter.reset(new Shooter());
 
+	liftHang.reset(new LiftHang());
+
 	logData.reset(new LogData("/home/lvuser/"));
+
+	serialCommunication.reset(new SerialCommunication());
 
 	//preferences.reset(Preferences::GetInstance());
 }
