@@ -26,6 +26,8 @@ private:
 
 	const double motorPower = .8;
 
+	int placer;
+
 public:
 	RunningOverDefense(int);
 	void Initialize();

@@ -19,6 +19,8 @@ RunningOverDefense::RunningOverDefense(int typeOfMethod)
 	initialTimerValue = 0;
 	setTimerValue = 0;
 
+	placer = 0;
+
 }
 
 // Called just before this Command runs the first time
@@ -33,10 +35,12 @@ void RunningOverDefense::Execute()
 	driveTrain->DriveTank(motorPower, motorPower);
 	if (overDefense == false) {
 		overDefense = serialCommunication->OverDefense(this->typeOfMethod);
+		placer = 1;
 	}
-	if (overDefense == true) {
+	if (overDefense == true && placer == 1) {
 		initialTimerValue = timer->Get();
 		setTimerValue = initialTimerValue + waitTimerValue;
+		placer = 2;
 	}
 }
 
