@@ -17,7 +17,7 @@ private:
 
 	int direction;
 
-	static constexpr double motorPower = 1;
+	double motorPower;
 
 	//std::unique_ptr<CANTalon> cantalonMotor;
 	//std::unique_ptr<Victor> victorMotor;

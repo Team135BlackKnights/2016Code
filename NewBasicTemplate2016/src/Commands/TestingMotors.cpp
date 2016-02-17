@@ -1,4 +1,5 @@
 #include "TestingMotors.h"
+#include "OI.h"
 
 TestingMotors::TestingMotors(bool PosNeg)
 {
@@ -10,6 +11,8 @@ TestingMotors::TestingMotors(bool PosNeg)
 
 	this->invertTalon = false;
 	this->invertVictor = false;
+
+	motorPower = 0;
 
 	direction = PosNeg ? 1: -1;
 
@@ -30,17 +33,15 @@ void TestingMotors::Initialize()
 	//motorTesting->InvertTalonMotor(talonMotorID, this->invertTalon);
 	//motorTesting->InvertVictorMotor(victorMotorID, this->invertVictor);
 
-	std::cout << "Initializing" << std::endl;
-
 }
 
 // Called repeatedly when this Command is scheduled to run
 void TestingMotors::Execute()
 {
+	motorPower = oi->GetStickSlider(OI::LEFT);
+
 	motorTesting->RunTalonMotor(talonMotorID, motorPower * direction);
 	motorTesting->RunVictorMotor(victorMotorID, motorPower * direction);
-
-	std::cout << victorMotorID << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
