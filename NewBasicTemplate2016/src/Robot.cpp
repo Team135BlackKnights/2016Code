@@ -2,22 +2,22 @@
 #include "Commands/Command.h"
 #include "CommandBase.h"
 #include "Subsystems/SerialCommunication.h"
-#include "Commands/RunningOverDefense.h"
+#include "Commands/GetRobotOverDefenseIntoPosition.h"
 
 class Robot: public IterativeRobot
 {
 private:
 	SendableChooser* sonarAndLightChooser;
-	Command* sonarAndLightCommand;
+	CommandGroup* sonarAndLightCommand;
 	void RobotInit()
 	{
 		CommandBase::init();
 
 		sonarAndLightChooser = new SendableChooser();
-		sonarAndLightChooser->AddDefault("Both Sonars and Light", new RunningOverDefense(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
-		sonarAndLightChooser->AddObject("Right Sonar and Light", new RunningOverDefense(SerialCommunication::CASE_RIGHT_AND_LIGHT));
-		sonarAndLightChooser->AddObject("Left Sonar and Light", new RunningOverDefense(SerialCommunication::CASE_LEFT_AND_LIGHT));
-		sonarAndLightChooser->AddObject("Only Light", new RunningOverDefense(SerialCommunication::CASE_LIGHT));
+		sonarAndLightChooser->AddDefault("Both Sonars and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
+		sonarAndLightChooser->AddObject("Right Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_RIGHT_AND_LIGHT));
+		sonarAndLightChooser->AddObject("Left Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_AND_LIGHT));
+		sonarAndLightChooser->AddObject("Only Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LIGHT));
 
 		SmartDashboard::PutData("Sonars and Light Chooser", sonarAndLightChooser);
 	}
@@ -29,7 +29,7 @@ private:
 
 	void AutonomousInit()
 	{
-		sonarAndLightCommand = (Command*) sonarAndLightChooser->GetSelected();
+		sonarAndLightCommand = (CommandGroup*) sonarAndLightChooser->GetSelected();
 		sonarAndLightCommand->Start();
 	}
 

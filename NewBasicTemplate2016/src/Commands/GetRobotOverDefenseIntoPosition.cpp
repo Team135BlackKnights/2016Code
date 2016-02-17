@@ -1,9 +1,15 @@
 #include "GetRobotOverDefenseIntoPosition.h"
 #include "RunningOverDefense.h"
+#include "DriveDistance.h"
 
 
-GetRobotOverDefenseIntoPosition::GetRobotOverDefenseIntoPosition()
+GetRobotOverDefenseIntoPosition::GetRobotOverDefenseIntoPosition(int typeOfMethod)
 {
+	this->typeOfMethod = typeOfMethod;
+
+	AddSequential(new DriveDistance(DISTANCE_NEED_TO_TRAVEL));
+	AddSequential(new RunningOverDefense(this->typeOfMethod));
+
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

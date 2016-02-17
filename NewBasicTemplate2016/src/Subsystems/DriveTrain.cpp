@@ -38,7 +38,7 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	//  SetDefaultCommand(new PIDTesting());
+	SetDefaultCommand(new DriveJ());
 }
 
 void DriveTrain::DriveTank(Joystick* left, Joystick* right) {
