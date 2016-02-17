@@ -29,7 +29,7 @@ void AxisCam::InitDefaultCommand()
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 	xServo->Set(.5f);
 	yServo->Set(.2f);
-	SetDefaultCommand(new CameraTracking());
+	//  SetDefaultCommand(new CameraTracking());
 }
 
 

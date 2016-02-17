@@ -13,9 +13,9 @@ void MotorTesting::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
-void MotorTesting::RunTalonMotor(int motorID) {
+void MotorTesting::RunTalonMotor(int motorID, double motorPower) {
 	cantalonMotor.reset(new CANTalon(motorID));
-	cantalonMotor->Set(this->motorPower);
+	cantalonMotor->Set(motorPower);
 }
 
 void MotorTesting::InvertTalonMotor(int motorID, bool inverted) {
@@ -28,9 +28,9 @@ void MotorTesting::StopTalonMotor(int motorID) {
 	cantalonMotor->Set(0.0);
 }
 
-void MotorTesting::RunVictorMotor(int motorID) {
+void MotorTesting::RunVictorMotor(int motorID, double motorPower) {
 	victorMotor.reset(new VictorSP(motorID));
-	victorMotor->Set(this->motorPower);
+	victorMotor->Set(motorPower);
 }
 
 void MotorTesting::InvertVictorMotor(int motorID, bool inverted) {

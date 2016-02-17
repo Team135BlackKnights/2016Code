@@ -1,37 +1,46 @@
 #include "TestingMotors.h"
 
-TestingMotors::TestingMotors()
+TestingMotors::TestingMotors(bool PosNeg)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(motorTesting.get());
-	preferences.reset(new Preferences());
 	talonMotorID = 0;
 	victorMotorID = 0;
 
 	this->invertTalon = false;
 	this->invertVictor = false;
+
+	direction = PosNeg ? 1: -1;
+
+	//victorMotor.reset(new VictorSP(1));
+
+	//victorMotor = new VictorSP(2);
 }
 
 // Called just before this Command runs the first time
 void TestingMotors::Initialize()
 {
-	this->invertTalon = preferences->GetBoolean("Invert Talon", false);
-	this->invertVictor = preferences->GetBoolean("Invert Victor", false);
+	//this->invertTalon = Preferences::GetInstance()->GetBoolean("Invert Talon", false);
+	//this->invertVictor = Preferences::GetInstance()->GetBoolean("Invert Victor", false);
 
-	talonMotorID = preferences->GetInt("Talon Motor ID", 0);
-	victorMotorID = preferences->GetInt("Victor Motor ID", 0);
+	talonMotorID = Preferences::GetInstance()->GetInt("Talon Motor ID", 0);
+	victorMotorID = Preferences::GetInstance()->GetInt("Victor Motor ID", 0);
 
-	motorTesting->InvertTalonMotor(talonMotorID, this->invertTalon);
-	motorTesting->InvertVictorMotor(victorMotorID, this->invertVictor);
+	//motorTesting->InvertTalonMotor(talonMotorID, this->invertTalon);
+	//motorTesting->InvertVictorMotor(victorMotorID, this->invertVictor);
+
+	std::cout << "Initializing" << std::endl;
 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void TestingMotors::Execute()
 {
-	motorTesting->RunTalonMotor(talonMotorID);
-	motorTesting->RunVictorMotor(victorMotorID);
+	motorTesting->RunTalonMotor(talonMotorID, motorPower * direction);
+	motorTesting->RunVictorMotor(victorMotorID, motorPower * direction);
+
+	std::cout << victorMotorID << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

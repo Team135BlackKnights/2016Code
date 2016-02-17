@@ -7,15 +7,23 @@
 class TestingMotors: public CommandBase
 {
 private:
-	std::unique_ptr<Preferences> preferences;
+	//  std::unique_ptr<Preferences> preferences;
 
 	int talonMotorID,
 		victorMotorID;
 
 	bool invertTalon,
 		 invertVictor;
+
+	int direction;
+
+	static constexpr double motorPower = 1;
+
+	//std::unique_ptr<CANTalon> cantalonMotor;
+	//std::unique_ptr<Victor> victorMotor;
+	//  VictorSP* victorMotor;
 public:
-	TestingMotors();
+	TestingMotors(bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

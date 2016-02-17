@@ -13,17 +13,17 @@ private:
 	std::unique_ptr<CANTalon> cantalonMotor;
 	std::unique_ptr<VictorSP> victorMotor;
 
-	static constexpr float motorPower = 1.0f;
+	//  static constexpr float motorPower = 1.0f;
 
 public:
 	MotorTesting();
 	void InitDefaultCommand();
 
-	void RunTalonMotor(int);
+	void RunTalonMotor(int, double);
 	void StopTalonMotor(int);
 	void InvertTalonMotor(int, bool);
 
-	void RunVictorMotor(int);
+	void RunVictorMotor(int, double);
 	void StopVictorMotor(int);
 	void InvertVictorMotor(int, bool);
 };

@@ -4,6 +4,8 @@ Move::Move(bool forward)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
+	directionRight = 0;
+	directionLeft = 0;
 	Move(forward, forward);
 }
 

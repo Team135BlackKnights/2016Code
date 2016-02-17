@@ -33,7 +33,8 @@ OI::OI()
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(true));
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(false)); */
 
-	buttonsArray[LEFT][TRIGGER]->WhileHeld(new TestingMotors());
+	buttonsArray[LEFT][TRIGGER]->WhileHeld(new TestingMotors(true));
+	buttonsArray[LEFT][THUMB_BUTTON]->WhileHeld(new TestingMotors(false));
 }
 
 //OI Functions
