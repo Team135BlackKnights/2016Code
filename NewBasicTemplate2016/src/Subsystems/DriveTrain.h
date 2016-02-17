@@ -1,18 +1,19 @@
 #ifndef MecanumDrive_H
 #define MecanumDrive_H
 
-#include "PIDLogging.h"
 #include "WPILib.h"
 #include "../OI.h"
 #include <fstream>
-//#include "Commands/PIDTesting.h"
+#include "Commands/Subsystem.h"
 
-class DriveTrain: public PIDLogging
+class DriveTrain: public Subsystem//public PIDLogging
 {
 public:
 	static const int NUM_MOTORS = 4;
 private:
 	//std::unique_ptr<CANTalon> motors[NUM_MOTORS];
+
+	CANTalon* motors[4];
 
 	std::unique_ptr<RobotDrive> chassis;
 

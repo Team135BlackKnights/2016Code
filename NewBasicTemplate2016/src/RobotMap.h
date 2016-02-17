@@ -32,12 +32,12 @@
 
 
     //  Inacuurate PWM Ports
-    const int MOTOR_SHOOTER_KICKER = 1;
+    const int MOTOR_SHOOTER_KICKER = 5;
     const int MOTOR_COLLECTION = 3;
-    const int MOTOR_LIFT_HANG_LIFT = 2;
-    const int MOTOR_LIFT_HANG_FLIPPER = 4;
-    const int SERVO_PORT_Y = 1;
-    const int SERVO_PORT_X = 0;
+    const int MOTOR_LIFT_HANG_LIFT = 1;
+    const int MOTOR_LIFT_HANG_FLIPPER = 2;
+    const int SERVO_PORT_Y = 8;
+    const int SERVO_PORT_X = 9;
 
     //  Buttons Declarations
     const int JOYSTICK_BUTTON_TESTER_START = 1;

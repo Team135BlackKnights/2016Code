@@ -16,11 +16,11 @@ void LiftHang::InitDefaultCommand()
 }
 
 void LiftHang::DriveLiftMotor(float value) {
-	liftMotor->Set(value);
+	liftMotor.get()->Set(value);
 }
 
 void LiftHang::DriveFlipperMotor(float value) {
-	flipperMotor->Set(value);
+	flipperMotor.get()->Set(value);
 }
 
 // Put methods for controlling this subsystem

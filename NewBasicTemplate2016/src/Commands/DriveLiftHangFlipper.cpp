@@ -1,10 +1,11 @@
 #include "DriveLiftHangFlipper.h"
+#include "OI.h"
 
-DriveLiftHangFlipper::DriveLiftHangFlipper(float power)
+DriveLiftHangFlipper::DriveLiftHangFlipper(bool direction)
 {
 	// Use Requires() here to declare subsystem dependencies
-	this->power = power;
-	Requires(liftHang.get());
+	this->direction = direction ? 1 : -1;
+	//Requires(liftHang.get());
 }
 
 // Called just before this Command runs the first time
@@ -16,7 +17,8 @@ void DriveLiftHangFlipper::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHangFlipper::Execute()
 {
-	liftHang->DriveFlipperMotor(power);
+	float power = oi->GetStickSlider(OI::MANIP);
+	liftHang->DriveFlipperMotor(power * direction);
 }
 
 // Make this return true when this Command no longer needs to run execute()

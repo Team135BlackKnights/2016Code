@@ -1,10 +1,12 @@
 #include "DriveLiftHang.h"
+#include <Subsystems/LiftHang.h>
+#include "OI.h"
 
 DriveLiftHang::DriveLiftHang(bool PosNeg)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(liftHang.get());
+	//Requires(liftHang.get());
 	direction = PosNeg ? 1: -1; //Ternary operator = bae
 }
 
@@ -16,9 +18,9 @@ void DriveLiftHang::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHang::Execute()
 {
-	float sliderValue = oi->GetStickSlider(OI::MANIP);
+	float sliderValue = oi->GetStickY(OI::MANIP);
 	//float power;
-	liftHang->DriveLiftMotor(sliderValue * direction);
+	liftHang->DriveLiftMotor(sliderValue);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -7,7 +7,6 @@
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
-#include "Commands/PIDTesting.h"
 #include "Commands/ShootBoulder.h"
 #include "Commands/RaiseAndLowerArm.h"
 #include "Commands/DriveCollection.h"
@@ -15,6 +14,7 @@
 #include "Commands/DriveLiftHangFlipper.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
+#include "Subsystems/LiftHang.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -29,13 +29,13 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	//buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(LiftHang::UP));
-	//buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(LiftHang::DOWN));
-	(new POV(CONTROL_LIFT_HANG_UP[0], CONTROL_LIFT_HANG_UP[1]))->WhileActive(new DriveLiftHang(LiftHang::UP));
-	(new POV(CONTROL_LIFT_HANG_DOWN[0], CONTROL_LIFT_HANG_DOWN[1]))->WhileActive(new DriveLiftHang(LiftHang::DOWN));
+	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(true));
+	//buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(false));
+	//(new POV(CONTROL_LIFT_HANG_UP[0], CONTROL_LIFT_HANG_UP[1]))->WhileActive(new DriveLiftHang(LiftHang::UP));
+	//(new POV(CONTROL_LIFT_HANG_DOWN[0], CONTROL_LIFT_HANG_DOWN[1]))->WhileActive(new DriveLiftHang(LiftHang::DOWN));
 
-	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_UP[0]][CONTROL_LIFT_HANG_FLIPPER_UP[1]]->WhileHeld(new DriveLiftHangFlipper(.2f));
-	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_DOWN[0]][CONTROL_LIFT_HANG_FLIPPER_DOWN[1]]->WhileHeld(new DriveLiftHangFlipper(-.2f));
+	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_UP[0]][CONTROL_LIFT_HANG_FLIPPER_UP[1]]->WhileHeld(new DriveLiftHangFlipper(true));
+	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_DOWN[0]][CONTROL_LIFT_HANG_FLIPPER_DOWN[1]]->WhileHeld(new DriveLiftHangFlipper(false));
 
 	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
 
@@ -52,7 +52,6 @@ OI::OI()
 
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
-
 }
 
 //OI Functions

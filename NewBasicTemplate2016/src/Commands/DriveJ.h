@@ -8,7 +8,6 @@ class DriveJ: public CommandBase
 {
 private:
 	int index = 0;
-	bool inverted;
 	const int VELOCITY_LOG = 0b010;
 public:
 	DriveJ();

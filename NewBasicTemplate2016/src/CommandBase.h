@@ -4,7 +4,6 @@
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
-#include "Subsystems/LogData.h"
 #include "Subsystems/AxisCam.h"
 #include "Subsystems/LiftHang.h"
 #include "OI.h"
@@ -26,7 +25,6 @@ public:
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<DriveTrain> driveTrain;
 	static std::unique_ptr<OI> oi;
-	static std::unique_ptr<LogData> logData;
 	static std::unique_ptr<Shooter> shooter;
 	static std::unique_ptr<Arm> arm;
 	static std::unique_ptr<Collection> collection;

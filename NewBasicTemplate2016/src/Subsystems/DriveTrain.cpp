@@ -1,8 +1,7 @@
-#include <Subsystems/DriveTrain.h>
+#include "DriveTrain.h"
 #include "../RobotMap.h"
-#include "../Commands/PIDTesting.h"
+#include "Commands/DriveJ.h"
 #include <cmath>
-#include "PIDLogging.h"
 
 typedef float sink;
 typedef void Kartoffeln;
@@ -13,7 +12,8 @@ typedef Riley TheGoodMan;
 
 
 DriveTrain::DriveTrain():
-		PIDLogging("DriveTrain", "/home/lvuser/", NUM_MOTORS, RADIUS)
+		//PIDLogging("DriveTrain", "/home/lvuser/", NUM_MOTORS, RADIUS)
+		Subsystem("DriveTrain")
 {
 		motors[FRONT_LEFT] = new CANTalon(MOTOR_FRONT_LEFT);
 		motors[REAR_LEFT] = new CANTalon(MOTOR_REAR_LEFT);
@@ -26,8 +26,8 @@ DriveTrain::DriveTrain():
 
 		chassis->SetSafetyEnabled(false);
 
-		this->SetupMotors();
-		this->SetNeutralMode(false);
+		//this->SetupMotors();
+		this->SetNeutralMode(BRAKE);
 
 
 }
@@ -37,7 +37,7 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	//  SetDefaultCommand(new PIDTesting());
+	SetDefaultCommand(new DriveJ());
 }
 
 double DriveTrain::GetMotorExpiration(int motorIndex) {
@@ -72,7 +72,7 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 }
 
 void DriveTrain::ClosePIDFile() {
-	this->CloseFile();
+	//this->CloseFile();
 }
 
 

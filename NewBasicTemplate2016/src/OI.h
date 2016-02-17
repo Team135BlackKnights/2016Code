@@ -2,7 +2,7 @@
 #define OI_H
 
 #include "WPILib.h"
-#include "Triggers/POV.h"
+//#include "Triggers/POV.h"
 
 class OI
 {
@@ -50,8 +50,8 @@ public:
     const int THUMB_BUTTON = 2;
 
 	//BUTTON CONTROL CONSTANTS
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 5};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 6};
+	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 6};
+	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 4};
 
 	const int CONTROL_TURN_LEFT[2] = {MANIP, 11};
 	const int CONTROL_TURN_RIGHT[2] = {MANIP, 12};
@@ -69,8 +69,8 @@ public:
 
 	const int CONTROL_SHOOT[2] = {MANIP, TRIGGER};
 
-	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 0};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 180};
+	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 1};
+	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 2};
 };
 
 #endif

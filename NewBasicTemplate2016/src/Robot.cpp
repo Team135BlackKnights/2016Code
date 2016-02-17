@@ -5,7 +5,6 @@
 class Robot: public IterativeRobot
 {
 private:
-	std::unique_ptr<Command> autoCommand;
 
 	void RobotInit()
 	{
@@ -21,7 +20,6 @@ private:
 
 	void AutonomousInit()
 	{
-		//  autoCommand->Start();
 	}
 
 	void AutonomousPeriodic()
