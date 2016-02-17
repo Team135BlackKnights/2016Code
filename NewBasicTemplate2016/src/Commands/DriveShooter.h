@@ -1,19 +1,21 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef DriveShooter_H
+#define DriveShooter_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class DriveShooter: public CommandBase
 {
-private:
 public:
-	DriveLiftHang();
+	DriveShooter();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+private:
+	float motorPower = 1.0f;
 };
 
 #endif

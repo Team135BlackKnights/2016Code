@@ -1,5 +1,6 @@
 #include "Collection.h"
 #include "../RobotMap.h"
+#include "../Commands/DriveCollection.h"
 
 Collection::Collection() :
 		Subsystem("Collection")
@@ -10,7 +11,7 @@ Collection::Collection() :
 void Collection::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new DriveCollection());
 }
 
 

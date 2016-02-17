@@ -1,12 +1,10 @@
 #include "DriveCollection.h"
 
-DriveCollection::DriveCollection(bool PosNeg)
+DriveCollection::DriveCollection()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(collection.get());
-
-	direction = PosNeg ? 1: -1;
 }
 
 // Called just before this Command runs the first time
@@ -18,7 +16,12 @@ void DriveCollection::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCollection::Execute()
 {
-	collection->PowerCollection(motorPower * direction);
+	float power = 0;
+	if (oi->GetButton(oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
+		power = motorPower * Collection::IN;
+	else 	if (oi->GetButton(oi->CONTROL_COLLECTION_OUT[0], oi->CONTROL_COLLECTION_OUT[1]))
+		power = motorPower * Collection::OUT;
+	collection->PowerCollection(motorPower);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -13,9 +13,10 @@ private:
 public:
 	Arm();
 	void InitDefaultCommand();
-	void RaiseLowerArm(double);
+	void RaiseLowerArm(float);
 
 	static const int RAISE_LOWER_ARM = 0;
+	static const int ARM_INVERSION = 1;
 };
 
 #endif

@@ -27,6 +27,8 @@ public:
 	void DriveKicker(float);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
+	static const int IN = -1;
+	static const int OUT = -IN;
 };
 
 #endif

@@ -30,6 +30,7 @@ public:
 	float GetStickSlider(int);
 	bool GetButton(int stick, int);
 	int GetPOV(int);
+	float GetAxis(int, Joystick::AxisType);
 
 	//USB JOYSTICK VALUES
     const int JOYSTICK_LEFT = 1;
@@ -50,8 +51,6 @@ public:
     const int THUMB_BUTTON = 2;
 
 	//BUTTON CONTROL CONSTANTS
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 6};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 4};
 
 	const int CONTROL_TURN_LEFT[2] = {MANIP, 11};
 	const int CONTROL_TURN_RIGHT[2] = {MANIP, 12};
@@ -61,16 +60,19 @@ public:
 
 	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
 
-	const int CONTROL_COLLECTION_IN[2] = {MANIP, 9};
+	const int CONTROL_COLLECTION_IN[2] = {MANIP, 2};
 	const int CONTROL_COLLECTION_OUT[2] = {MANIP, 10};
 
-	const int CONTROL_ARM_UP[2] = {MANIP, 7};
-	const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
+	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
+	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
 
 	const int CONTROL_SHOOT[2] = {MANIP, TRIGGER};
 
-	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 1};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 2};
+	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 5};
+	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 3};
+
+	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 6};
+	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 4};
 };
 
 #endif

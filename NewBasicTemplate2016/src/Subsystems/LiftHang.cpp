@@ -1,5 +1,6 @@
 #include "LiftHang.h"
 #include "../RobotMap.h"
+#include "../Commands/DriveLiftHang.h"
 
 LiftHang::LiftHang() :
 		Subsystem("LiftHang")
@@ -12,7 +13,7 @@ LiftHang::LiftHang() :
 void LiftHang::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new DriveLiftHang());
 }
 
 void LiftHang::DriveLiftMotor(float value) {

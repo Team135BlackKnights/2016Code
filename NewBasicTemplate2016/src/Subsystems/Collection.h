@@ -14,6 +14,9 @@ public:
 	Collection();
 	void InitDefaultCommand();
 	void PowerCollection(double);
+
+	static const int IN = 1;
+	static const int OUT = -IN;
 };
 
 #endif

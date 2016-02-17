@@ -2,16 +2,15 @@
 	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
 	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
+#include <Commands/DriveArm.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
 #include "Commands/ShootBoulder.h"
-#include "Commands/RaiseAndLowerArm.h"
 #include "Commands/DriveCollection.h"
 #include "Commands/DriveLiftHang.h"
-#include "Commands/DriveLiftHangFlipper.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
 #include "Subsystems/LiftHang.h"
@@ -29,18 +28,11 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[CONTROL_LIFT_HANG_UP[0]][CONTROL_LIFT_HANG_UP[1]]->WhileHeld(new DriveLiftHang(true));
-	//buttonsArray[CONTROL_LIFT_HANG_DOWN[0]][CONTROL_LIFT_HANG_DOWN[1]]->WhileHeld(new DriveLiftHang(false));
-	//(new POV(CONTROL_LIFT_HANG_UP[0], CONTROL_LIFT_HANG_UP[1]))->WhileActive(new DriveLiftHang(LiftHang::UP));
-	//(new POV(CONTROL_LIFT_HANG_DOWN[0], CONTROL_LIFT_HANG_DOWN[1]))->WhileActive(new DriveLiftHang(LiftHang::DOWN));
-
-	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_UP[0]][CONTROL_LIFT_HANG_FLIPPER_UP[1]]->WhileHeld(new DriveLiftHangFlipper(true));
-	buttonsArray[CONTROL_LIFT_HANG_FLIPPER_DOWN[0]][CONTROL_LIFT_HANG_FLIPPER_DOWN[1]]->WhileHeld(new DriveLiftHangFlipper(false));
-
+	/*
 	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
 
-	buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new RaiseAndLowerArm(RaiseAndLowerArm::UP));
-	buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new RaiseAndLowerArm(RaiseAndLowerArm::DOWN));
+	buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
+	buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));
 
 	buttonsArray[CONTROL_COLLECTION_IN[0]][CONTROL_COLLECTION_IN[1]]->WhileHeld(new DriveCollection(DriveCollection::IN));
 	buttonsArray[CONTROL_COLLECTION_OUT[0]][CONTROL_COLLECTION_OUT[1]]->WhileHeld(new DriveCollection(DriveCollection::OUT));
@@ -52,6 +44,7 @@ OI::OI()
 
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
 	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
+	*/
 }
 
 //OI Functions
@@ -99,4 +92,9 @@ bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a but
 int OI::GetPOV(int stick)
 {
 	return joysticksArray[stick]->GetPOV();
+}
+
+float OI::GetAxis(int stick, Joystick::AxisType axis)
+{
+	return joysticksArray[stick]->GetAxis(axis);
 }

@@ -1,5 +1,6 @@
 #include "Shooter.h"
 #include "../RobotMap.h"
+#include "../Commands/DriveShooter.h"
 
 Shooter::Shooter() :
 	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
@@ -15,7 +16,7 @@ Shooter::Shooter() :
 void Shooter::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new DriveShooter());
 }
 
 void Shooter::DriveShooterMotors(float power) {

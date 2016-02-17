@@ -1,5 +1,6 @@
 #include "Arm.h"
 #include "../RobotMap.h"
+#include "../Commands/DriveArm.h"
 
 Arm::Arm() :
 	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
@@ -10,10 +11,10 @@ Arm::Arm() :
 void Arm::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new DriveArm());
 }
 
-void Arm::RaiseLowerArm(double motorPower) {
+void Arm::RaiseLowerArm(float motorPower) {
 	motors[RAISE_LOWER_ARM]->Set(motorPower);
 }
 

@@ -4,22 +4,15 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class RaiseAndLowerArm: public CommandBase
+class DriveArm: public CommandBase
 {
-private:
-	double sliderValue;
-
-	int direction;
 public:
-	RaiseAndLowerArm(bool);
+	DriveArm();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
-
-	static const bool UP = true;
-	static const bool DOWN = false;
 };
 
 #endif
