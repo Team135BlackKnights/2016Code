@@ -14,7 +14,7 @@ private:
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
 
-	std::unique_ptr<VictorSP> kicker;
+	std::unique_ptr<Servo> kicker;
 
 	//  Not defined yet
 public:
@@ -29,6 +29,9 @@ public:
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 	static const int IN = -1;
 	static const int OUT = -IN;
+
+	static constexpr float KICKER_KICKED = 1.0f;
+	static constexpr float KICKER_RESET = KICKER_KICKED == 1.0f ? 0.0f : 1.0f;
 };
 
 #endif

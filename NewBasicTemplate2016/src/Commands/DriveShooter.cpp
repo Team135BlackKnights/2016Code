@@ -34,6 +34,7 @@ bool DriveShooter::IsFinished()
 void DriveShooter::End()
 {
 	shooter->DriveShooterMotors(0);
+	shooter->DriveKicker(Shooter::KICKER_RESET);
 }
 
 // Called when another command which requires one or more of the same

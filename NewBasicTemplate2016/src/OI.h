@@ -52,8 +52,8 @@ public:
 
 	//BUTTON CONTROL CONSTANTS
 
-	const int CONTROL_TURN_LEFT[2] = {MANIP, 11};
-	const int CONTROL_TURN_RIGHT[2] = {MANIP, 12};
+	//const int CONTROL_TURN_LEFT[2] = {MANIP, 11};
+	//const int CONTROL_TURN_RIGHT[2] = {MANIP, 12};
 
 	const int CONTROL_FORWARD[2] = {LEFT, TRIGGER};
 	const int CONTROL_REVERSE[2] = {LEFT, THUMB_BUTTON};
@@ -66,7 +66,7 @@ public:
 	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
 	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
 
-	const int CONTROL_SHOOT[2] = {MANIP, TRIGGER};
+	const int CONTROL_SHOOT[2] = {MANIP, 12};
 
 	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 5};
 	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 3};

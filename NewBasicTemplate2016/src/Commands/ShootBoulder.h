@@ -11,15 +11,11 @@ private:
 	const int setEncoderVelocity = 100;
 
 	int encoderVelocity;
-	bool speedSet;
 
 	std::unique_ptr<Timer> timer;
-	double initalTimerValue,
-		   finalTimerValue;
 
 	double timeWait;
-
-	int placer;
+	bool timerStarted;
 public:
 	ShootBoulder();
 	void Initialize();
