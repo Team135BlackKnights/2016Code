@@ -4,7 +4,6 @@
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 #include "PIDLogging.h"
-#include "LogData.h"
 
 class Shooter: public PIDLogging
 {
@@ -12,25 +11,22 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	static const int RADIUS = 6;
-	static const int NUM_MOTORS = 2;
+	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
+	std::unique_ptr<CANTalon> shooter;
 
-	/* double PValue,
-		   IValue,
-		   DValue; */
+	std::unique_ptr<VictorSP> kicker;
 
+	//  Not defined yet
 public:
-	static const int MOTOR_SHOOTER_RIGHT = 0;
-	static const int MOTOR_SHOOTER_LEFT = 1;
-
-	/*double PValue,
-		   IValue,
-		   DValue;
-	*/
 	Shooter();
 	void InitDefaultCommand();
-	void SetMotorValue(int, double);
+	void DriveShooterMotors(float=.8f);
+	void StopShooterMotors();
+	void RaiseLowerArm(double);
 
+	void DriveKicker(float);
+
+	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 };
 
 #endif

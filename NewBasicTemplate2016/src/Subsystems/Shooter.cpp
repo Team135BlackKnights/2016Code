@@ -2,13 +2,14 @@
 #include "../RobotMap.h"
 
 Shooter::Shooter() :
-	PIDLogging("Shooter", "/home/lvuser/",NUM_MOTORS, RADIUS)
+	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
 {
 
-	//  The motor ID's still need to be configured
-	motors[MOTOR_SHOOTER_RIGHT] = new CANTalon(MOTOR_SHOOTER_RIGHT_ID);
-	motors[MOTOR_SHOOTER_LEFT] = new CANTalon(MOTOR_SHOOTER_LEFT_ID);
-	this->SetupMotors();
+	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
+	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+
+	kicker.reset(new VictorSP(MOTOR_SHOOTER_KICKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -17,14 +18,17 @@ void Shooter::InitDefaultCommand()
 	//SetDefaultCommand(new MySpecialCommand());
 }
 
+void Shooter::DriveShooterMotors(float power) {
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
+}
+
+void Shooter::StopShooterMotors() {
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
+}
+
+void Shooter::DriveKicker(float power) {
+	kicker->Set(power);
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-
-void Shooter::SetMotorValue(int motorPort, double motorPower) {
-
-	//  Do I need to change the control mode to set the motor speed if the motors are currently in kPosition mode?
-	//  motors[motorPort]->SetControlMode(CANTalon::kPercentVbus);
-
-	//  Set() is determined upon what mode the CANTalon is in
-	motors[motorPort]->Set(motorPower);
-}
