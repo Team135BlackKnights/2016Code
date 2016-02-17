@@ -32,7 +32,7 @@ PIDTesting::PIDTesting()
 void PIDTesting::Initialize()
 {
 	//driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
-	driveTrain->SetPIDPreferences();
+	shooter->SetPIDPreferences();
 	shooter->ZeroAllEncoders();
 	timer->Reset();
 	timer->Start();
