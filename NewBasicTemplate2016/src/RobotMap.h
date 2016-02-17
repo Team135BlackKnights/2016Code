@@ -18,10 +18,10 @@
 
 	//constexpr bool ROBOT_MAIN = false;
 
-    const int MOTOR_FRONT_LEFT	= 12;
-    const int MOTOR_REAR_LEFT	= 13;
-    const int MOTOR_FRONT_RIGHT	= 11;
-    const int MOTOR_REAR_RIGHT	= 10;
+    const int MOTOR_FRONT_LEFT	= 11;
+    const int MOTOR_REAR_LEFT	= 10;
+    const int MOTOR_FRONT_RIGHT	= 12;
+    const int MOTOR_REAR_RIGHT	= 13;
 
     const int MOTOR_LIFT_HANG = 11;
 

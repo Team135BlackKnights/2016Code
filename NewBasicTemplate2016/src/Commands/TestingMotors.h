@@ -12,9 +12,6 @@ private:
 	int talonMotorID,
 		victorMotorID;
 
-	bool invertTalon,
-		 invertVictor;
-
 	int direction;
 
 	double motorPower;

@@ -9,9 +9,6 @@ TestingMotors::TestingMotors(bool PosNeg)
 	talonMotorID = 0;
 	victorMotorID = 0;
 
-	this->invertTalon = false;
-	this->invertVictor = false;
-
 	motorPower = 0;
 
 	direction = PosNeg ? 1: -1;
