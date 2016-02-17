@@ -4,68 +4,64 @@
 
 AutonomousDrive::AutonomousDrive(float left = DEFAULT::D_SPEED, float right = DEFAULT::D_SPEED, MODE driveMode = MODE::TIME, int time = DEFAULT::D_TIME, float distance = DEFAULT::D_DISTANCE)
 {
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 
 	timer = new Timer(); // Creates a new timer
 
-	this->left = left; //Assigns parameters to private floats
-	this->right = right;
-	this->driveMode = driveMode;
-	this->time = time;
+	//Assigns parameters to private floats
+	this->left = left, this->right = right, this->driveMode = driveMode, this->time = time;
 
-	crookedDirection = 0;
-	overDefense = false;
+	//Assigns default values
+	crookedDirection = 0, overDefense = false;
 
-	this->SetTimeout(time); // Sets timeout to parameter time
+	//Sets timeout to time
+	this->SetTimeout(time);
 }
 
-// Called just before this Command runs the first time
+
 void AutonomousDrive::Initialize()
 {
 	timer->Start();
 }
 
-// Called repeatedly when this Command is scheduled to run
+
 void AutonomousDrive::Execute(){
 
 	float left = this->left, right = this->right;
+
 	switch (driveMode) {
+
 		case MODE::TIME: // Starts TIME mode
+
 		case MODE::DISTANCE: // Starts DISTANCE mode
 			break;
-		case MODE::DEFENSE: // Starts DEFENSE mode
 
-			//Check if Robot is crooked
+		case MODE::DEFENSE: // Starts DEFENSE mode
 			crookedDirection = serialCommunication->IsCrookedAndOffCenter();
 
 			switch (crookedDirection){
-				case SerialCommunication::DIRECTION::CROOKED_LEFT : //Robot is crooked left
+
+				case SerialCommunication::DIRECTION::CROOKED_LEFT : //Left
 					right *= CROOKED_ADJUST;
 					break;
-
-				case SerialCommunication::DIRECTION::CROOKED_RIGHT : //Robot is crooked Right
-					//driveTrain->DriveTank(left * CROOKED_ADJUST, right);
+				case SerialCommunication::DIRECTION::CROOKED_RIGHT : //Right
 					left *= CROOKED_ADJUST;
 					break;
-
-				case SerialCommunication::DIRECTION::NOT_CROOKED : //Robot is not crooked
+				case SerialCommunication::DIRECTION::NOT_CROOKED : //Centered
 					break;
 				}
-
-
-
-			break;
+		break;
 	}
 
 	driveTrain->DriveTank(left,right);
+
 }
 
-// Make this return true when this Command no longer needs to run execute()
+
 bool AutonomousDrive::IsFinished()
 {
 	switch (driveMode) {
+
 			case MODE::TIME: // Starts TIME mode
 				return this->IsTimedOut();  // Returns true and ends instance if the command has timed out
 				break;
@@ -75,19 +71,19 @@ bool AutonomousDrive::IsFinished()
 			case MODE::DEFENSE:
 				overDefense = serialCommunication->OverDefense(); //Checks if the Robot is over the defense
 				return overDefense; // Returns true and ends instance if the Robot has crossed the defense
-	}
+				break;
+			}
 	return false;
 }
 
-// Called once after isFinished returns true
+
 void AutonomousDrive::End()
 {
-	driveTrain->DriveTank(0.0f, 0.0f); // Stops robot movement
+	driveTrain->DriveTank(0.0f, 0.0f);
 }
 
-// Called when another command which requires one or more of the same
-// subsystems is scheduled to run
+
 void AutonomousDrive::Interrupted()
 {
-	End(); // Calls end() if command is interrupted
+	End();
 }
