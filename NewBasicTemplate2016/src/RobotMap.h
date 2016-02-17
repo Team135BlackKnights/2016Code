@@ -19,22 +19,23 @@
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
 	//  Talon Motor ID's
-    const int MOTOR_FRONT_LEFT	= 12;
-    const int MOTOR_REAR_LEFT	= 13;
-    const int MOTOR_FRONT_RIGHT	= 11;
-    const int MOTOR_REAR_RIGHT	= 10;
-
-    const int MOTOR_LIFT_HANG = 11;
+    const int MOTOR_FRONT_LEFT	= 11;
+    const int MOTOR_REAR_LEFT	= 10;
+    const int MOTOR_FRONT_RIGHT	= 12;
+    const int MOTOR_REAR_RIGHT	= 13;
 
     //  Inaccurate ID Values for the Talon
-    const int MOTOR_SHOOTER_RIGHT_ID = 8;
-    const int MOTOR_SHOOTER_LEFT_ID = 9;
+    const int MOTOR_SHOOT_BOULDER = 14;
+    const int MOTOR_RAISE_LOWER_ARM = 15;
 
-    //  Joystick Ports
-    const int JOYSTICK_LEFT = 1;
-    const int JOYSTICK_RIGHT = 0;
-    const int JOYSTICK_BBOX = 2;
 
+    //  Inacuurate PWM Ports
+    const int MOTOR_SHOOTER_KICKER = 1;
+    const int MOTOR_COLLECTION = 3;
+    const int MOTOR_LIFT_HANG_LIFT = 2;
+    const int MOTOR_LIFT_HANG_FLIPPER = 4;
+
+    //  Buttons on Joysticks
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 

@@ -16,7 +16,7 @@ private:
 	//	IValue,
 	//	DValue;
 
-	//int power = .5;
+	int motorPower = .5;
 
 	//double encoderValue;
 

@@ -9,7 +9,7 @@ PIDTesting::PIDTesting()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(driveTrain.get());
+	Requires(shooter.get());
 	  timer.reset(new Timer());
 	  timerValue = 0;
 
@@ -24,37 +24,31 @@ void PIDTesting::Initialize()
 {
 	//driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
 	//  driveTrain->SetPIDPreferences();
-	driveTrain->ZeroAllEncoders();
-	//  timer->Start();
+	shooter->ZeroAllEncoders();
+	timer->Start();
 
-	//driveTrain->SetupMotors();
+	shooter->SetupMotors();
 
 	//  Creates a File Name Based off of the Current Time
-	//  driveTrain->ChangeFileNameWithSubsystemName();
+	shooter->ChangeFileNameWithSubsystemName();
 	//  driveTrain->BasedTimeCreateFileName();
-	//  driveTrain->OpenFile();
-	//  driveTrain->DisplayPIDValuesInLogData();
-	//  driveTrain->LogEncoderDataHeader(this->VELOCITY_LOG);
+	shooter->OpenFile();
+	shooter->DisplayPIDValuesInLogData();
+	shooter->LogEncoderDataHeader(this->VELOCITY_LOG);
 
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
-	//  driveTrain->SetPIDPreferences();
+	shooter->SetPIDPreferences();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void PIDTesting::Execute()
 {
 	//  driveTrain->EnableMotorControl(motorIndex);
-	driveTrain->SetAllMotorValues(.5);
-	for (int i = 0; i < DriveTrain::NUM_MOTORS; i++) {
-		std::cout << driveTrain->GetEncoderPosition(i) << ",";
-		//  encoderValue[i] =
-	}
-
-	std::cout << std::endl;
+	shooter->DriveShooterMotors(motorPower);
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
-	//encoderValue = driveTrain->GetEncoderVelocity(PortNumber);
-	//  timerValue = timer->Get();
+	timerValue = timer->Get();
+	encoderValue = shooter->GetEncoderVelocity(motorIndex);
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
 	//  SmartDashboard::PutNumber((std::string)"Timer", timerValue);
 	//  std::cout << driveTrain->GetMotorExpiration(motorIndex);
@@ -63,7 +57,7 @@ void PIDTesting::Execute()
 	// encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
 	// encoderSpeed = driveTrain->GetEncoderVelocity(motorIndex);
 	//driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderSpeed);
-	//driveTrain->LogEncoderData(motorIndex, timerValue, PIDLogging::VELOCITY);
+	shooter->LogEncoderData(motorIndex, timerValue, PIDLogging::VELOCITY);
 
 
 	//  driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
@@ -74,7 +68,7 @@ void PIDTesting::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PIDTesting::IsFinished()
 {
-	if (timerValue <= -5) {
+	if (timerValue <= 5) {
 		return true;
 	}
 	else {
@@ -89,7 +83,7 @@ void PIDTesting::End()
 	timer->Stop();
 	timer->Reset();
 	std::cout << "Ended" << std::endl;
-	driveTrain->SetAllMotorValues(0);
+	shooter->StopShooterMotors();
 }
 
 // Called when another command which requires one or more of the same
@@ -97,7 +91,7 @@ void PIDTesting::End()
 void PIDTesting::Interrupted()
 {
 	std::cout << "Interrupted" << std::endl;
-	driveTrain->SetAllMotorValues(0);
+	shooter->StopShooterMotors();
 	//driveTrain->ClosePIDFile();
 	timer->Stop();
 	timer->Reset();

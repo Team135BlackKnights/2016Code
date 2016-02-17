@@ -9,9 +9,9 @@
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
 {
-	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
-	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
-	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
+	joysticksArray[LEFT].reset(new Joystick(LEFT)); //creates a left joystick object
+	joysticksArray[RIGHT].reset(new Joystick(RIGHT)); //creates a right joystick object
+	joysticksArray[BBOX].reset(new Joystick(BBOX)); // creates buttbox object
 
 	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
