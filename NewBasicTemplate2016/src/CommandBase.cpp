@@ -7,6 +7,7 @@ std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<LiftHang> CommandBase::liftHang;
 std::unique_ptr<AxisCam> CommandBase::cam;
+std::unique_ptr<MotorTesting> CommandBase::motorTesting;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -30,4 +31,6 @@ void CommandBase::init()
 	liftHang.reset(new LiftHang());
 
 	cam.reset(new AxisCam());
+
+	motorTesting.reset(new MotorTesting());
 }

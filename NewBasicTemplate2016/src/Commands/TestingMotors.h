@@ -6,6 +6,14 @@
 
 class TestingMotors: public CommandBase
 {
+private:
+	std::unique_ptr<Preferences> preferences;
+
+	int talonMotorID,
+		victorMotorID;
+
+	bool invertTalon,
+		 invertVictor;
 public:
 	TestingMotors();
 	void Initialize();
