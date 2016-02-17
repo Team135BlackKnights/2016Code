@@ -1,41 +1,41 @@
-#include <Commands/MoveFromCameraValue.h>
-#include <cstdbool>
+#include "DriveCollection.h"
 
-MoveFromCameraValue::MoveFromCameraValue()
+DriveCollection::DriveCollection(bool PosNeg)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(driveTrain.get());
+	Requires(collection.get());
+
+	direction = PosNeg ? 1: -1;
 }
 
 // Called just before this Command runs the first time
-void MoveFromCameraValue::Initialize()
+void DriveCollection::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveFromCameraValue::Execute()
+void DriveCollection::Execute()
 {
-	float speed = cam.get()->GetMotorValues();
-	driveTrain->DriveTank(speed, -speed);
+	collection->PowerCollection(motorPower * direction);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveFromCameraValue::IsFinished()
+bool DriveCollection::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void MoveFromCameraValue::End()
+void DriveCollection::End()
 {
-
+	collection->PowerCollection(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveFromCameraValue::Interrupted()
+void DriveCollection::Interrupted()
 {
-
+	End();
 }

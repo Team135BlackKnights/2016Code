@@ -1,41 +1,44 @@
-#include <Commands/MoveFromCameraValue.h>
-#include <cstdbool>
+#include "RaiseAndLowerArm.h"
 
-MoveFromCameraValue::MoveFromCameraValue()
+RaiseAndLowerArm::RaiseAndLowerArm(bool PosNeg)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(driveTrain.get());
+	Requires(arm.get());
+	sliderValue = 0;
+
+	direction = PosNeg ? 1: -1;
 }
 
 // Called just before this Command runs the first time
-void MoveFromCameraValue::Initialize()
+void RaiseAndLowerArm::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveFromCameraValue::Execute()
+void RaiseAndLowerArm::Execute()
 {
-	float speed = cam.get()->GetMotorValues();
-	driveTrain->DriveTank(speed, -speed);
+	sliderValue = oi->GetStickSlider(OI::LEFT);
+	arm->RaiseLowerArm(sliderValue * direction);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveFromCameraValue::IsFinished()
+bool RaiseAndLowerArm::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void MoveFromCameraValue::End()
+void RaiseAndLowerArm::End()
 {
-
+	arm->RaiseLowerArm(0);
+	sliderValue = 0;
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveFromCameraValue::Interrupted()
+void RaiseAndLowerArm::Interrupted()
 {
-
+	End();
 }

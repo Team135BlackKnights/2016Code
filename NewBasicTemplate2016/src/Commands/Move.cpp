@@ -10,8 +10,8 @@ Move::Move(bool forward)
 Move::Move(bool leftForward, bool rightForward)
 {
 	Requires(driveTrain.get());
-	this->directionLeft = (leftForward == true) ? 1 : -1;
-	this->directionRight = (rightForward == true) ? 1 : -1;
+	this->directionLeft = (leftForward == FORWARD) ? 1 : -1;
+	this->directionRight = (rightForward == REVERSE) ? 1 : -1;
 }
 
 // Called just before this Command runs the first time
@@ -23,7 +23,7 @@ void Move::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Move::Execute()
 {
-	float speed = oi->GetStickSlider(OI::MANIP);
+	float speed = oi->GetStickSlider(OI::LEFT);
 	driveTrain->DriveTank(speed * directionLeft, speed * directionRight);
 }
 

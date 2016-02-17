@@ -1,16 +1,15 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef DriveLiftHangFlipper_H
+#define DriveLiftHangFlipper_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class DriveLiftHangFlipper: public CommandBase
 {
 private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
+	float direction;
 public:
-	DriveJ();
+	DriveLiftHangFlipper(bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
