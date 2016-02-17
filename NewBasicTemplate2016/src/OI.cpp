@@ -6,8 +6,6 @@
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
-#include "Commands/DriveLiftHang.h"
-#include "Commands/UltrasonicTesting.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()

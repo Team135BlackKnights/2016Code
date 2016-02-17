@@ -1,6 +1,5 @@
 #include "SerialCommunication.h"
 #include "../RobotMap.h"
-#include "Commands/UltrasonicTesting.h"
 #include <sstream>
 
 SerialCommunication::SerialCommunication() :
@@ -25,16 +24,13 @@ SerialCommunication::SerialCommunication() :
 
 void SerialCommunication::InitDefaultCommand()
 {
-	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
-	SetDefaultCommand(new UltrasonicTesting());
 }
 
 //  LEFT_SONAR_VALUE = 0;
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
-	if (serialPort->GetBytesReceived() == 0) {
+	/*if (serialPort->GetBytesReceived() == 0) {
 		//std::cout << "Hello";
 		return;
 	}
@@ -63,7 +59,7 @@ void SerialCommunication::ReadSerialValues() {
 			//std::cout << dataThing << std::endl;
 		}
 		data[index] = strtod(dataThing.str().c_str(), NULL);
-	}
+	}*/
 	/*
 	char* newBuffer = strtok(buffer, ",");
 	int j = 0;
