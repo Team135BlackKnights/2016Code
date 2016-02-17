@@ -23,6 +23,7 @@ OI::OI()
 	//  buttonsArray[LEFT][TRIGGER]->WhileHeld(new UltrasonicTesting());
 
 	buttonsArray[LEFT][TRIGGER]->WhenPressed(new RunningOverDefense(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
+	buttonsArray[RIGHT][TRIGGER]->WhenPressed(new PIDTesting());
 
 }
 

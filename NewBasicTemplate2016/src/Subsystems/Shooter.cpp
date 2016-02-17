@@ -10,6 +10,8 @@ Shooter::Shooter() :
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 
 	kicker.reset(new VictorSP(MOTOR_SHOOTER_KICKER));
+
+	this->SetupMotors();
 }
 
 void Shooter::InitDefaultCommand()

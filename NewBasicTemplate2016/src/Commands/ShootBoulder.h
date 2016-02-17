@@ -17,7 +17,7 @@ private:
 	double initalTimerValue,
 		   finalTimerValue;
 
-	double timeWait;
+	double timeWait = .2;
 
 	int placer;
 public:

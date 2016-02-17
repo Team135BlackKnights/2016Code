@@ -16,7 +16,11 @@ private:
 	//	IValue,
 	//	DValue;
 
-	int motorPower = .5;
+	//  This value is still To Be Determined
+	const int setEncoderVelocity = 100;
+
+	int encoderVelocity;
+	bool speedSet;
 
 	//double encoderValue;
 
@@ -27,7 +31,14 @@ private:
 	static const short int POSITION_AND_VELOCITY_LOG = PIDLogging::POSITION | PIDLogging::VELOCITY;//0b011;
 	static const short int VELOCITY_LOG = PIDLogging::VELOCITY;
 
-	double encoderValue[4];
+	//  double encoderValue[4];
+
+	double initalTimerValue,
+		   finalTimerValue;
+
+	double timeWait = .2;
+
+	int placer;
 
 
 	//  std::unique_ptr<Preferences> preference;
@@ -38,7 +49,6 @@ private:
 	//  DriveTrain::FrontRight = 1
 	//  DriveTrain::RearRight = 3
 	//  const int MOTOR_FRONT_LEFT	= ID# 10;
-	const int motorIndex = 0;
 	//  const int motorIndex = DriveTrain::REAR_LEFT;
 
 

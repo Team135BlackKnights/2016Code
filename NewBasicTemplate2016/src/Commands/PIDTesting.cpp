@@ -13,6 +13,15 @@ PIDTesting::PIDTesting()
 	  timer.reset(new Timer());
 	  timerValue = 0;
 
+	  initalTimerValue = 0;
+	  finalTimerValue = 0;
+
+	  encoderVelocity = 0;
+	  speedSet = false;
+
+	  placer = 0;
+
+
 	//  PIDLogging::driveTrainBool = true;
 	//PValue = SmartDashboard::GetNumber("PValue", PValue);
 	//SmartDashboard::GetNumber("IValue", IValue);
@@ -23,11 +32,10 @@ PIDTesting::PIDTesting()
 void PIDTesting::Initialize()
 {
 	//driveTrain->SetPIDValues(PortNumber, PValue, IValue, DValue);
-	//  driveTrain->SetPIDPreferences();
+	driveTrain->SetPIDPreferences();
 	shooter->ZeroAllEncoders();
+	timer->Reset();
 	timer->Start();
-
-	shooter->SetupMotors();
 
 	//  Creates a File Name Based off of the Current Time
 	shooter->ChangeFileNameWithSubsystemName();
@@ -44,11 +52,32 @@ void PIDTesting::Initialize()
 void PIDTesting::Execute()
 {
 	//  driveTrain->EnableMotorControl(motorIndex);
-	shooter->DriveShooterMotors(motorPower);
+	shooter->DriveShooterMotors();
 	//  int index = 0;
 	//std::cout << "Executing?" << std::endl;
 	timerValue = timer->Get();
-	encoderValue = shooter->GetEncoderVelocity(motorIndex);
+	encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
+
+	shooter->LogEncoderData(Shooter::TWO_WHEEL_SHOOTER_MOTOR, timerValue, PIDLogging::VELOCITY);
+
+	if (encoderVelocity >= setEncoderVelocity) {
+			placer = placer + 1;
+			speedSet = true;
+			SmartDashboard::PutBoolean("Shooter Up to Speed: ", speedSet);
+
+			if (placer == 1) {
+				initalTimerValue = timer->Get();
+				finalTimerValue = initalTimerValue + timeWait;
+			}
+			if (finalTimerValue >= timer->Get()) {
+				shooter->DriveKicker(.5f);
+			}
+		}
+		else {
+			placer = 0;
+			speedSet = false;
+			SmartDashboard::PutBoolean("Shooter Up to Speed: ", speedSet);
+		}
 	//  SmartDashboard::PutNumber("Encoder Velocity", encoderEncPosition);
 	//  SmartDashboard::PutNumber((std::string)"Timer", timerValue);
 	//  std::cout << driveTrain->GetMotorExpiration(motorIndex);
@@ -57,7 +86,6 @@ void PIDTesting::Execute()
 	// encoderEncPosition = driveTrain->GetEncoderPosition(motorIndex);
 	// encoderSpeed = driveTrain->GetEncoderVelocity(motorIndex);
 	//driveTrain->LogTwoEncoderValues(motorIndex, timerValue, encoderEncPosition, encoderSpeed);
-	shooter->LogEncoderData(motorIndex, timerValue, PIDLogging::VELOCITY);
 
 
 	//  driveTrain->LogTwoEncoderValues(index, timerValue, encoderEncPosition, encoderPosition);
@@ -68,7 +96,7 @@ void PIDTesting::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool PIDTesting::IsFinished()
 {
-	if (timerValue <= 5) {
+	if (timerValue >= 5) {
 		return true;
 	}
 	else {
@@ -82,6 +110,7 @@ void PIDTesting::End()
 	//driveTrain->ClosePIDFile();
 	timer->Stop();
 	timer->Reset();
+	speedSet = false;
 	std::cout << "Ended" << std::endl;
 	shooter->StopShooterMotors();
 }
@@ -95,4 +124,5 @@ void PIDTesting::Interrupted()
 	//driveTrain->ClosePIDFile();
 	timer->Stop();
 	timer->Reset();
+	speedSet = false;
 }

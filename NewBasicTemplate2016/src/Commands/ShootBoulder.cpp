@@ -11,7 +11,6 @@ ShootBoulder::ShootBoulder()
 	timer.reset(new Timer());
 	initalTimerValue = 0;
 	finalTimerValue = 0;
-	timeWait = .2;
 
 	placer = 0;
 }
@@ -21,6 +20,7 @@ void ShootBoulder::Initialize()
 {
 	shooter->ZeroAllEncoders();
 	timer->Reset();
+	timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run

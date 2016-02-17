@@ -25,7 +25,7 @@ void ShooterCommand::Initialize()
 void ShooterCommand::Execute()
 {
 
-	shooter->SetMotorValue(motorPort, motorPower);
+	shooter->DriveShooterMotors();
 	//  encoderVelocity = shooter->GetEncoderVelocity(Shooter::MOTOR_SHOOTER_RIGHT);
 	timerValue = timer->Get();
 
@@ -48,7 +48,7 @@ bool ShooterCommand::IsFinished()
 void ShooterCommand::End()
 {
 	shooter->CloseFile();
-	shooter->SetMotorValue(motorPort, 0);
+	shooter->StopShooterMotors();
 	timer->Stop();
 	timer->Reset();
 }
