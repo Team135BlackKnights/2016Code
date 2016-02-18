@@ -28,7 +28,7 @@ AxisCam::AxisCam():
 	pidX->SetSetpoint(.5);
 
 	driveTrainTurnPID = new DriveTrainTurnPID(xServo.get());
-	driveTurn = new PIDController(0,0,0, driveTrainTurnPID,driveTrainTurnPID);
+	driveTurn = new PIDController(Preferences::GetInstance()->GetFloat("PP", 1.0f),Preferences::GetInstance()->GetFloat("II", 0.0f),Preferences::GetInstance()->GetFloat("DD", 0.0f), driveTrainTurnPID,driveTrainTurnPID);
 }
 
 void AxisCam::InitDefaultCommand()
@@ -39,6 +39,7 @@ void AxisCam::InitDefaultCommand()
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 	pidX->SetContinuous(true);
 	this->TogglePID(true);
+	driveTurn->SetSetpoint(0.0f);
 	//yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
@@ -74,7 +75,7 @@ float AxisCam::xDistanceToCenter()
 	if(x == 666)
 		return 0;
 	//return Preferences::GetInstance()->GetFloat("Offset", 0);
-	return x - X_IMAGE_RES /2;
+	return x - X_IMAGE_RES /2.0f;
 }
 
 float AxisCam::yDistanceToCenter()
@@ -232,9 +233,10 @@ float AxisCam::GetTurnSpeed()
 	else
 		return 0;
 */
+	std::cout << driveTurn->IsEnabled() << std::endl;
 	if(driveTurn->IsEnabled())
 	{
-		float speed = (.2f * (-xDistanceToCenter() / (X_IMAGE_RES / 2.0f)));
+		float speed = (.2f * (xDistanceToCenter() / (X_IMAGE_RES / 2.0f)));
 		driveTurn->SetSetpoint(speed);
 	}
 	return 1.0f;

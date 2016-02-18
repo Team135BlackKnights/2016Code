@@ -26,7 +26,7 @@ void CameraTracking::Execute()
 {
 	cam->GetCameraValues();
 
-	cam->UpdateServo();
+	//cam->UpdateServo();
 
 }
 

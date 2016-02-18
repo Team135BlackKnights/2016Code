@@ -14,10 +14,11 @@ DriveTrainTurnPID::~DriveTrainTurnPID()
 
 double DriveTrainTurnPID::PIDGet()
 {
-	return (double) servo->Get();
+	return (double) CommandBase::cam.get()->xDistanceToCenter();
 }
 
 void DriveTrainTurnPID::PIDWrite(float output)
 {
+	std::cout << "output: " << output <<std::endl;
 	driveTrain->RotateTank(output);
 }

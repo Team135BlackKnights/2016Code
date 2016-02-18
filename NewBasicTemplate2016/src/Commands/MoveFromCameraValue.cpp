@@ -18,8 +18,8 @@ void MoveFromCameraValue::Initialize(){
 // Called repeatedly when this Command is scheduled to run
 void MoveFromCameraValue::Execute()
 {
-	float speed = cam.get()->GetTurnSpeed();
-	std::cout << "speed: " << speed << std::endl;
+	//float speed = cam.get()->GetTurnSpeed();
+	//std::cout << "speed: " << speed << std::endl;
 	//driveTrain->DriveTank(speed, -speed);
 }
 
@@ -39,4 +39,4 @@ void MoveFromCameraValue::End()
 // subsystems is scheduled to run
 void MoveFromCameraValue::Interrupted()
 {
-}
+	cam.get()->ToggleTurnPID(false);}

@@ -22,7 +22,7 @@ void DriveJ::Execute()
 
 	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 	driveTrain->DriveTank(oi->GetStick(OI::LEFT), oi->GetStick(OI::RIGHT));
-	std::cout << "driving" << std::endl;
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
