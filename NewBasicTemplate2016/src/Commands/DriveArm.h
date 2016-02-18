@@ -1,14 +1,13 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef RaiseAndLowerArm_H
+#define RaiseAndLowerArm_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class DriveArm: public CommandBase
 {
-private:
 public:
-	DriveLiftHang();
+	DriveArm();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

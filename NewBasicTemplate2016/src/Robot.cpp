@@ -5,9 +5,12 @@
 class Robot: public IterativeRobot
 {
 private:
+
 	void RobotInit()
 	{
 		CommandBase::init();
+		//  autoCommand.reset(new PIDTesting());
+
 	}
 	
 	void DisabledPeriodic()

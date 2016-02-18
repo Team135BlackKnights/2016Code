@@ -1,3 +1,9 @@
 /Debug/
-*.xml
+<<<<<<< HEAD
 /.settings/
+/*.xml
+=======
+*.xml
+/.settings/language.settings.xml
+/.settings/
+>>>>>>> refs/remotes/origin/master

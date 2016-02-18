@@ -149,8 +149,6 @@ float AxisCam::angleToBlob(double dist){
 
 float AxisCam::GetMotorValues()
 {
-	float MAX = 1;
-	float MIN = 0;
 	float MIDDLE = .5;
 	float angle = xServo->Get();
 	return  (MIDDLE - angle);

@@ -1,14 +1,13 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef ChangeNeutralMode_H
+#define ChangeNeutralMode_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class ChangeNeutralMode: public CommandBase
 {
-private:
 public:
-	DriveLiftHang();
+	ChangeNeutralMode(bool coast);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
