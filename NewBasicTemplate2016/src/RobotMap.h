@@ -21,10 +21,10 @@
 	//constexpr bool ROBOT_MAIN = false;
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
-    const int MOTOR_FRONT_LEFT	= 11;
-    const int MOTOR_REAR_LEFT	= 10;
-    const int MOTOR_FRONT_RIGHT	= 12;
-    const int MOTOR_REAR_RIGHT	= 13;
+    const int MOTOR_FRONT_LEFT	= 13;
+    const int MOTOR_REAR_LEFT	= 11;
+    const int MOTOR_FRONT_RIGHT	= 10;
+    const int MOTOR_REAR_RIGHT	= 12;
 
     //  Inaccurate ID Values for the Talon
     const int MOTOR_SHOOT_BOULDER = 14;
