@@ -12,7 +12,7 @@ private:
 	int joystick;
 	int pov;
 public:
-	POV(const int&, int);
+	POV(int, int);
 	bool Get();
 };
 

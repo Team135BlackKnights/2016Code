@@ -7,19 +7,19 @@
 class Move: public CommandBase
 {
 private:
-	int directionLeft;
-	int directionRight;
+	float speedLeft;
+	int speedRight;
 public:
-	Move(bool);
-	Move(bool, bool);
+	Move(float);
+	Move(float, float);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
 
-	static const bool FORWARD = true;
-	static const bool REVERSE = false;
+	static const int FORWARD = 1;
+	static const int REVERSE = -1;
 };
 
 #endif

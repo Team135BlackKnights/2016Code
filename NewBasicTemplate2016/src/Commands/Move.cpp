@@ -1,17 +1,17 @@
 #include <Commands/Move.h>
 
-Move::Move(bool forward)
+Move::Move(float speed)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Move(forward, forward);
+	Move(speed, speed);
 }
 
-Move::Move(bool leftForward, bool rightForward)
+Move::Move(float left, float right)
 {
 	Requires(driveTrain.get());
-	this->directionLeft = (leftForward == FORWARD) ? 1 : -1;
-	this->directionRight = (rightForward == REVERSE) ? 1 : -1;
+	this->speedLeft = left;
+	this->speedRight = right;
 }
 
 // Called just before this Command runs the first time
@@ -24,7 +24,7 @@ void Move::Initialize()
 void Move::Execute()
 {
 	float speed = oi->GetStickSlider(OI::LEFT);
-	driveTrain->DriveTank(speed * directionLeft, speed * directionRight);
+	driveTrain->DriveTank(speed * speedLeft, speed * speedRight);
 }
 
 // Make this return true when this Command no longer needs to run execute()

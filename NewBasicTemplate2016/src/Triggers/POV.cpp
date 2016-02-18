@@ -1,7 +1,7 @@
 #include "POV.h"
-#include "CommandBase.h"
+#include "../CommandBase.h"
 
-POV::POV(const int& joystick,int pov)
+POV::POV(int joystick,int pov)
 {
 	this->joystick = joystick;
 	this->pov = pov;
