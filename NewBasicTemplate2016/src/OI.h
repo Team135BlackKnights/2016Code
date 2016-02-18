@@ -50,6 +50,16 @@ public:
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
+    static const int SILVER_TOGGLE = 1;
+    static const int RED_TOGGLE = 2;
+    static const int BUTTON = 3;
+    static const int LEFTARROW_BUMPUP = 10;
+    static const int LEFTARROW_BUMPDOWN = 11;
+    static const int MIDDLE_BUMPUP = 6;
+    static const int MIDDLE_BUMPDOWN = 7;
+    static const int LINE_BUMPUP = 9;
+    static const int LINE_BUMPDOWN = 8;
+
 	//BUTTON CONTROL CONSTANTS
 
 	const int CONTROL_TURN_LEFT[2] = {LEFT, 3};
@@ -60,19 +70,19 @@ public:
 
 	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
 
-	const int CONTROL_COLLECTION_IN[2] = {MANIP, 2};
-	const int CONTROL_COLLECTION_OUT[2] = {MANIP, 10};
+	const int CONTROL_COLLECTION_IN[2] = {BBOX, LINE_BUMPDOWN};
+	const int CONTROL_COLLECTION_OUT[2] = {BBOX, LINE_BUMPUP};
 
 	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
 	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
 
-	const int CONTROL_SHOOT[2] = {MANIP, 12};
+	const int CONTROL_SHOOT[2] = {BBOX, BUTTON};
 
-	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 5};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 3};
+	const int CONTROL_LIFT_HANG_UP[2] = {BBOX, LEFTARROW_BUMPUP};
+	const int CONTROL_LIFT_HANG_DOWN[2] = {BBOX, LEFTARROW_BUMPDOWN};
 
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 6};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 4};
+	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {BBOX, MIDDLE_BUMPUP};
+	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {BBOX, MIDDLE_BUMPDOWN};
 
 	const float CONTROL_POV[8][2] = {
 		{1, 1},
