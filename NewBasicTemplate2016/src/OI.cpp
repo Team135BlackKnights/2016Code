@@ -37,17 +37,12 @@ OI::OI()
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
 	}
 	*/
-	POV* forward;
-	forward = new POV(0, 0);
-	forward->WhileActive(new Move(Move::FORWARD, Move::REVERSE));
 
-	/*
-	buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
-	buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));
+	//buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
+	//buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));
 
-	buttonsArray[CONTROL_COLLECTION_IN[0]][CONTROL_COLLECTION_IN[1]]->WhileHeld(new DriveCollection(DriveCollection::IN));
-	buttonsArray[CONTROL_COLLECTION_OUT[0]][CONTROL_COLLECTION_OUT[1]]->WhileHeld(new DriveCollection(DriveCollection::OUT));
-	*/
+	//buttonsArray[CONTROL_COLLECTION_IN[0]][CONTROL_COLLECTION_IN[1]]->WhileHeld(new DriveCollection(Collection::IN));
+	//buttonsArray[CONTROL_COLLECTION_OUT[0]][CONTROL_COLLECTION_OUT[1]]->WhileHeld(new DriveCollection(Collection::OUT));
 
 	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
 	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
