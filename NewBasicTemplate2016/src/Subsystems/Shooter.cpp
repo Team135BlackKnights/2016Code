@@ -10,7 +10,7 @@ Shooter::Shooter() :
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 
-	kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
+	kicker.reset(new Relay(RELAY_SHOOTER_KICKER, Relay::Direction::kForwardOnly));
 }
 
 void Shooter::InitDefaultCommand()
@@ -27,8 +27,8 @@ void Shooter::StopShooterMotors() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
 }
 
-void Shooter::DriveKicker(float power) {
-	kicker->Set(power);
+void Shooter::DriveKicker(Relay::Value value) {
+	kicker->Set(value);
 }
 
 // Put methods for controlling this subsystem
