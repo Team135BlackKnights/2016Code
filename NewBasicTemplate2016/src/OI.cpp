@@ -28,7 +28,7 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	//buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
+	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
 
 	/*
 	for (int i = 0; i < 8; i++) {
