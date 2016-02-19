@@ -75,7 +75,13 @@ float AxisCam::xDistanceToCenter()
 	if(x == 666)
 		return 0;
 	//return Preferences::GetInstance()->GetFloat("Offset", 0);
-	return x - X_IMAGE_RES /2.0f;
+	return (x - X_IMAGE_RES /2.0f) / 2;
+}
+
+float AxisCam::xDistanceToCenter(float max)
+{
+
+	return std::min((x- X_IMAGE_RES / 2.0f), max);
 }
 
 float AxisCam::yDistanceToCenter()

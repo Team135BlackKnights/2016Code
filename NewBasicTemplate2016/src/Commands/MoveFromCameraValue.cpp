@@ -12,7 +12,7 @@ MoveFromCameraValue::MoveFromCameraValue()
 
 // Called just before this Command runs the first time
 void MoveFromCameraValue::Initialize(){
-	cam.get()->ToggleTurnPID(true);
+	//cam.get()->ToggleTurnPID(true);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -32,11 +32,12 @@ bool MoveFromCameraValue::IsFinished()
 // Called once after isFinished returns true
 void MoveFromCameraValue::End()
 {
-	cam.get()->ToggleTurnPID(false);
+	//cam.get()->ToggleTurnPID(false);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void MoveFromCameraValue::Interrupted()
 {
-	cam.get()->ToggleTurnPID(false);}
+	//cam.get()->ToggleTurnPID(false);}
+}

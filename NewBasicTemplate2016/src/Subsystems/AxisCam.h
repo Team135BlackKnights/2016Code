@@ -36,6 +36,7 @@ private:
 	PIDController* pidX;
 	const int CAMERA_CENTER_X = X_IMAGE_RES / 2;
 	const int CAMERA_CENTER_Y = Y_IMAGE_RES / 2;
+
 	const int PAN_PROPORTIONAL_GAIN = 400;
 	const int PAN_DERIVATIVE_GAIN = 300;
 	const int TILT_PROPORTIONAL_GAIN = 500;
@@ -60,6 +61,8 @@ public:
 	void GetCameraValues();
 	void InitGimbals();
 	float xDistanceToCenter();
+	float xDistanceToCenter(float max);
+	const float TURN_SPEED = Preferences::GetInstance()->GetFloat("turn",.2);
 	float yDistanceToCenter();
 	float percentArea(double area);
 	float getX();
