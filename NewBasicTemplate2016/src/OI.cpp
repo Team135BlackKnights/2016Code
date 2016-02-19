@@ -24,11 +24,9 @@ OI::OI()
 	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
 	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
-
 	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
-
 
 	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
 
@@ -58,7 +56,6 @@ Joystick* OI::GetStick(int controllerNum)
 {
 	return joysticksArray[controllerNum].get();
 }
-
 
 float OI::GetStickX(int controllerNum) //Returns controller's x value
 {
