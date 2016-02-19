@@ -11,8 +11,8 @@ private:
 	double distanceFromLeftEncoder,
 		   distanceFromRightEncoder;
 
-	double leftMotorPower = .6,
-		   rightMotorPower = .6;
+	double leftMotorPower = .5,
+		   rightMotorPower = .5;
 
 	bool leftDone,
 		 rightDone;
