@@ -29,7 +29,7 @@ private:
 	void AutonomousInit()
 	{
 		sonarAndLightCommand = (Command*) sonarAndLightChooser->GetSelected();
-		sonarAndLightCommand->Start();
+		//sonarAndLightCommand->Start();
 	}
 
 	void AutonomousPeriodic()
