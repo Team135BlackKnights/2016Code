@@ -16,12 +16,17 @@ void DriveShooter::Initialize()
 void DriveShooter::Execute()
 {
 	float power = 0;
-	motorPower = Preferences::GetInstance()->GetFloat("Shooter Power", motorPower);
-	if (oi->GetButton(oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
+	motorPower = oi->GetStickSlider(oi->MANIP);//Preferences::GetInstance()->GetFloat("Shooter Power", motorPower);
+	if (oi->GetButton(oi->MANIP, 1))//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
 		power = motorPower * Shooter::OUT;
-	else if (oi->GetButton(oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
+	else if (oi->GetButton(oi->MANIP, 2))//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
 		power = motorPower * Shooter::IN;
 	shooter->DriveShooterMotors(power);
+
+	if (oi->GetButton(oi->MANIP, 3))
+		shooter->DriveKicker(Shooter::KICKER_KICKED);
+	else if (oi->GetButton(oi->MANIP, 4))
+		shooter->DriveKicker(Shooter::KICKER_RESET);
 }
 
 // Make this return true when this Command no longer needs to run execute()
