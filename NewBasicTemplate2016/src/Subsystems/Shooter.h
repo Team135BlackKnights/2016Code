@@ -27,7 +27,7 @@ public:
 	void DriveKicker(Relay::Value);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
-	static const int IN = -1;
+	static const int IN = 1;
 	static const int OUT = -IN;
 
 	static const Relay::Value KICKER_KICKED = Relay::Value::kForward;
