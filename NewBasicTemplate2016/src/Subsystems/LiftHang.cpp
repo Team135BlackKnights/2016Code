@@ -4,7 +4,7 @@
 LiftHang::LiftHang() :
 		Subsystem("LiftHang")
 {
-	motors.reset(new CANTalon(MOTOR_LIFT_HANG));
+	motors.reset(new CANTalon(MOTOR_LIFT_HANG_LIFT));
 
 }
 

@@ -23,9 +23,9 @@ void DriveDistance::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveDistance::Execute()
 {
-	distanceFromLeftEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_LEFT);
-	distanceFromRightEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_RIGHT);
-
+	distanceFromLeftEncoder = driveTrain->GetDistanceInches(DriveTrain::FRONT_LEFT);
+	distanceFromRightEncoder = driveTrain->GetDistanceInches(DriveTrain::FRONT_RIGHT);
+	std::cout << distanceFromLeftEncoder << "  " << distanceFromRightEncoder << std::endl;
 	if (distanceFromLeftEncoder >= this->inchesDistance) {
 		leftDone = true;
 		leftMotorPower = 0;

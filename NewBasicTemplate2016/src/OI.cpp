@@ -5,6 +5,7 @@
 #include "Commands/JoystickTesting.h"
 #include "Commands/PIDTesting.h"
 #include "Commands/RunningOverDefense.h"
+#include "Commands/DriveDistance.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -22,8 +23,8 @@ OI::OI()
 
 	//  buttonsArray[LEFT][TRIGGER]->WhileHeld(new UltrasonicTesting());
 
-	buttonsArray[LEFT][TRIGGER]->WhenPressed(new RunningOverDefense(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
-	buttonsArray[RIGHT][TRIGGER]->WhenPressed(new PIDTesting());
+	buttonsArray[LEFT][TRIGGER]->WhenPressed(new DriveDistance(12));
+	//buttonsArray[RIGHT][TRIGGER]->WhenPressed(new PIDTesting());
 
 }
 

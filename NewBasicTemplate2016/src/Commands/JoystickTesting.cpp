@@ -16,8 +16,8 @@ void JoystickTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void JoystickTesting::Execute()
 {
-		joystickX = oi->GetStickX(JOYSTICK_LEFT);
-		joystickY = oi->GetStickY(JOYSTICK_LEFT);
+		//joystickX = oi->GetStickX(JOYSTICK_LEFT);
+		//joystickY = oi->GetStickY(JOYSTICK_LEFT);
 
 		SmartDashboard::PutNumber("JoystickX Value:", joystickX);
 		SmartDashboard::PutNumber("JoystickY Value", joystickY);
