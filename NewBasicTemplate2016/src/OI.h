@@ -73,10 +73,16 @@ public:
 	const int CONTROL_COLLECTION_IN[2] = {BBOX, LINE_BUMPDOWN};
 	const int CONTROL_COLLECTION_OUT[2] = {BBOX, LINE_BUMPUP};
 
+	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
+	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
+
 	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
 	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
 	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 9};
 	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 10};
+
+	const int CONTROL_SHOOTER_IN[2] = {MANIP, 2};
+	const int CONTROL_SHOOTER_OUT[2] = {MANIP, 1};
 
 	const int CONTROL_SHOOT[2] = {MANIP, 7};
 
