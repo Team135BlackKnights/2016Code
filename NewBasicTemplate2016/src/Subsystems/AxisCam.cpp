@@ -39,7 +39,7 @@ void AxisCam::InitDefaultCommand()
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 	pidX->SetContinuous(true);
 	this->TogglePID(true);
-	driveTurn->SetSetpoint(0.0f);
+	driveTurn->SetSetpoint(-32.0f);
 	//yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
@@ -75,7 +75,7 @@ float AxisCam::xDistanceToCenter()
 	if(x == 666)
 		return 0;
 	//return Preferences::GetInstance()->GetFloat("Offset", 0);
-	return (x - X_IMAGE_RES /2.0f) / 2;
+	return (x - X_IMAGE_RES /2.0f) / 1.0f;
 }
 
 float AxisCam::xDistanceToCenter(float max)

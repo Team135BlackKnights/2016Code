@@ -21,4 +21,5 @@ void DriveTrainTurnPID::PIDWrite(float output)
 {
 	std::cout << "output: " << output <<std::endl;
 	driveTrain->RotateTank(output);
+	//driveTrain->DriveTank(output * 1.01f, -output * 1.01f);
 }

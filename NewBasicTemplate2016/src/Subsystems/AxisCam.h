@@ -27,7 +27,7 @@ private:
 	double targetX = 0.0;
 	double targetY = 0.0;
 	double targetArea = -1.0;
-	const float X_IMAGE_RES = 320;
+
 	const float Y_IMAGE_RES = 240;
 	ServoPID* pidServoX;
 	//DriveTrainTurnPID* driveTrainTurnPID;
@@ -57,6 +57,7 @@ private:
 
 public:
 	AxisCam();
+	const float X_IMAGE_RES = 320;
 	void InitDefaultCommand();
 	void GetCameraValues();
 	void InitGimbals();

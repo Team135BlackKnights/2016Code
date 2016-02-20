@@ -6,6 +6,8 @@
 
 class MoveFromCameraValue: public CommandBase
 {
+private:
+	bool isgood = false;
 public:
 	MoveFromCameraValue();
 	void Initialize();
