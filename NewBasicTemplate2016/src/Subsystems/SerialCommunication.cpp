@@ -9,7 +9,7 @@ SerialCommunication::SerialCommunication() :
 
 	//  serialPort.reset(new SerialPort);
 	//serialPort->Reset();
-	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kMXP);
+	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kUSB);
 	//serialPort->SetReadBufferSize(10);
 
 	serialPort->EnableTermination('\n');
