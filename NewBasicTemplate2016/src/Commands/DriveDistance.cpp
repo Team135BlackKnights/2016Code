@@ -25,17 +25,17 @@ void DriveDistance::Execute()
 {
 	distanceFromLeftEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_LEFT);
 	distanceFromRightEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_RIGHT);
-	std::cout << distanceFromLeftEncoder << "  " << distanceFromRightEncoder << std::endl;
+	//std::cout << distanceFromLeftEncoder << "  " << distanceFromRightEncoder << std::endl;
 	if (distanceFromLeftEncoder >= this->inchesDistance) {
 		leftDone = true;
 		leftMotorPower = 0;
-		std::cout << "DOne";
+		//std::cout << "DOne";
 	}
 
 	if (distanceFromRightEncoder >= this->inchesDistance) {
 		rightDone = true;
 		rightMotorPower = 0;
-		std::cout << "DOne2";
+		//std::cout << "DOne2";
 	}
 
 	driveTrain->DriveTank(leftMotorPower, rightMotorPower);

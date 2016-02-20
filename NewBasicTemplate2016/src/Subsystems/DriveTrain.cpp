@@ -3,6 +3,7 @@
 #include "../Commands/PIDTesting.h"
 #include <cmath>
 #include "PIDLogging.h"
+#include "Commands/DriveJ.h"
 
 typedef float sink;
 typedef void Kartoffeln;
@@ -38,7 +39,7 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	//SetDefaultCommand(new DriveJ());
+	SetDefaultCommand(new DriveJ());
 }
 
 void DriveTrain::DriveTank(Joystick* left, Joystick* right) {

@@ -7,19 +7,19 @@
 class Robot: public IterativeRobot
 {
 private:
-	SendableChooser* sonarAndLightChooser;
-	CommandGroup* sonarAndLightCommand;
+	//SendableChooser* sonarAndLightChooser;
+	//CommandGroup* sonarAndLightCommand;
 	void RobotInit()
 	{
 		CommandBase::init();
 
-		sonarAndLightChooser = new SendableChooser();
-		sonarAndLightChooser->AddDefault("Both Sonars and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
-		sonarAndLightChooser->AddObject("Right Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_RIGHT_AND_LIGHT));
-		sonarAndLightChooser->AddObject("Left Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_AND_LIGHT));
-		sonarAndLightChooser->AddObject("Only Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LIGHT));
+		//sonarAndLightChooser = new SendableChooser();
+		//sonarAndLightChooser->AddDefault("Both Sonars and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
+		//sonarAndLightChooser->AddObject("Right Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_RIGHT_AND_LIGHT));
+		//sonarAndLightChooser->AddObject("Left Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_AND_LIGHT));
+		//sonarAndLightChooser->AddObject("Only Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LIGHT));
 
-		SmartDashboard::PutData("Sonars and Light Chooser", sonarAndLightChooser);
+		//SmartDashboard::PutData("Sonars and Light Chooser", sonarAndLightChooser);
 	}
 	
 	void DisabledPeriodic()
@@ -29,8 +29,8 @@ private:
 
 	void AutonomousInit()
 	{
-		sonarAndLightCommand = (CommandGroup*) sonarAndLightChooser->GetSelected();
-		sonarAndLightCommand->Start();
+		//sonarAndLightCommand = (CommandGroup*) sonarAndLightChooser->GetSelected();
+		//sonarAndLightCommand->Start();
 	}
 
 	void AutonomousPeriodic()

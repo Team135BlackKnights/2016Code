@@ -28,7 +28,7 @@ OI::OI()
 		//buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
 
 
-	buttonsArray[LEFT][TRIGGER]->WhenPressed(new DriveDistance(12));
+	buttonsArray[LEFT][12]->WhenPressed(new DriveDistance(12));
 	//buttonsArray[RIGHT][TRIGGER]->WhenPressed(new PIDTesting());
 
 }
