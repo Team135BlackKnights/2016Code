@@ -13,9 +13,9 @@ AutomationOfArm::AutomationOfArm()
 // Called just before this Command runs the first time
 void AutomationOfArm::Initialize()
 {
-	arm->ZeroEncoder();
 
-	desiredArmEncoderValue = arm->GetEncoderValueForAngle();
+	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
+	std::cout << "encoder value : "<<desiredArmEncoderValue << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -29,6 +29,7 @@ void AutomationOfArm::Execute()
 	else if (currentArmEncoderValue > desiredArmEncoderValue) {
 		arm->RaiseLowerArm(motorPower * Arm::DOWN);
 	}
+	//std::cout << currentArmEncoderValue << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -17,10 +17,10 @@ private:
 	std::unique_ptr<CANTalon> armMotor;
 
 	//  32 COUNT over 45 degrees
-	static constexpr float ENCODER_MULTIPLYING_CONSTANT = (32/45);
+	static constexpr float ENCODER_MULTIPLYING_CONSTANT = (256/90);
 
 	//  85 inches
-	static const int HEIGHT_OF_TOWER = 85;
+	static const int HEIGHT_OF_TOWER = 97;
 
 	static const int COUNT = 64;
 public:
@@ -31,10 +31,10 @@ public:
 	bool GetTopLimitSwitchValue();
 	bool GetBottomLimitSwitchValue();
 
-	int GetEncoderValueForAngle();
+	int GetEncoderValueForAngle(double inchesHypotenuse);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = 1;
+	static const int UP = -1;
 	static const int DOWN = -UP;
 
 	const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);

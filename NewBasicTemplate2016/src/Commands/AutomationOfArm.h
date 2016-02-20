@@ -12,7 +12,7 @@ private:
 
 	double inchesHypotenuse;
 
-	double motorPower = .2;
+	double motorPower = .8;
 
 public:
 	AutomationOfArm();
