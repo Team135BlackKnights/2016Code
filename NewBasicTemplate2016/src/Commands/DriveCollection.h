@@ -1,14 +1,15 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef DriveCollection_H
+#define DriveCollection_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class DriveCollection: public CommandBase
 {
 private:
+	float motorPower = 1.0f;
 public:
-	DriveLiftHang();
+	DriveCollection();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

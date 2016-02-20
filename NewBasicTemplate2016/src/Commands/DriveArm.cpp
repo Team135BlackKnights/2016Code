@@ -1,47 +1,40 @@
-#include <Commands/Move.h>
+#include <Commands/DriveArm.h>
 
-Move::Move(float speed)
+DriveArm::DriveArm()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Move(speed, speed);
-}
-
-Move::Move(float left, float right)
-{
-	Requires(driveTrain.get());
-	this->speedLeft = left;
-	this->speedRight = right;
+	Requires(arm.get());
 }
 
 // Called just before this Command runs the first time
-void Move::Initialize()
+void DriveArm::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Move::Execute()
+void DriveArm::Execute()
 {
-	float speed = oi->GetStickSlider(OI::LEFT);
-	driveTrain->DriveTank(speed * speedLeft, speed * speedRight);
+	float y = oi->GetStickY(OI::MANIP);
+	arm->RaiseLowerArm(y * Arm::ARM_INVERSION);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Move::IsFinished()
+bool DriveArm::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void Move::End()
+void DriveArm::End()
 {
-
+	arm->RaiseLowerArm(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Move::Interrupted()
+void DriveArm::Interrupted()
 {
-
+	End();
 }
