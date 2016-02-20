@@ -22,6 +22,11 @@ OI::OI()
 	//  buttonsArray[LIFT_HANG_JOYSTICK][THUMB_BUTTON]->WhileHeld(new DriveLiftHang(false));
 
 	//  buttonsArray[LEFT][TRIGGER]->WhileHeld(new UltrasonicTesting());
+	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
+		buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
+		buttonsArray[CONTROL_TURN_LEFT[0]][CONTROL_TURN_LEFT[1]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
+		buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+
 
 	buttonsArray[LEFT][TRIGGER]->WhenPressed(new DriveDistance(12));
 	//buttonsArray[RIGHT][TRIGGER]->WhenPressed(new PIDTesting());
