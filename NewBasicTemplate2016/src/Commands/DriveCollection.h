@@ -1,16 +1,15 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef DriveCollection_H
+#define DriveCollection_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class DriveCollection: public CommandBase
 {
 private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
+	float motorPower = 1.0f;
 public:
-	DriveJ();
+	DriveCollection();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
