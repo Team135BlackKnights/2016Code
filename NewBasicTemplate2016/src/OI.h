@@ -76,8 +76,6 @@ public:
 	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
 	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
 
-	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
-	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
 	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 8};
 	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 8};
 
@@ -86,21 +84,12 @@ public:
 
 	const int CONTROL_SHOOT[2] = {MANIP, 7};
 
+	//Lift power is controlled of the MANIP slider
 	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 12};
 	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 11};
 
+	//Flipper power is controlled off the RIGHT slider
 	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
 	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
-
-	const float CONTROL_POV[8][2] = {
-		{1, 1},
-		{1, 0},
-		{1, -1},
-		{-1, 0},
-		{-1, -1},
-		{0, -1},
-		{-1, 1},
-		{0, 1}
-	};
 };
 #endif
