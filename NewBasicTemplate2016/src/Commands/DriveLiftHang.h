@@ -3,14 +3,12 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
-#include "OI.h"
 
 class DriveLiftHang: public CommandBase
 {
 private:
-	int direction;
 public:
-	DriveLiftHang(bool);
+	DriveLiftHang();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
