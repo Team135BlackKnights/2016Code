@@ -70,29 +70,26 @@ public:
 
 	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
 
-	const int CONTROL_COLLECTION_IN[2] = {BBOX, LINE_BUMPDOWN};
-	const int CONTROL_COLLECTION_OUT[2] = {BBOX, LINE_BUMPUP};
+	const int CONTROL_COLLECTION_IN[2] = {MANIP, 6};
+	const int CONTROL_COLLECTION_OUT[2] = {MANIP, 5};
 
-	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
-	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
+	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
+	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
 
-	const int CONTROL_SHOOT[2] = {BBOX, BUTTON};
+	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 8};
+	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 8};
 
-	const int CONTROL_LIFT_HANG_UP[2] = {BBOX, LEFTARROW_BUMPUP};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {BBOX, LEFTARROW_BUMPDOWN};
+	const int CONTROL_SHOOTER_IN[2] = {MANIP, 2};
+	const int CONTROL_SHOOTER_OUT[2] = {MANIP, 1};
 
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {BBOX, MIDDLE_BUMPUP};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {BBOX, MIDDLE_BUMPDOWN};
+	const int CONTROL_SHOOT[2] = {MANIP, 7};
 
-	const float CONTROL_POV[8][2] = {
-		{1, 1},
-		{1, 0},
-		{1, -1},
-		{-1, 0},
-		{-1, -1},
-		{0, -1},
-		{-1, 1},
-		{0, 1}
-	};
+	//Lift power is controlled of the MANIP slider
+	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 12};
+	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 11};
+
+	//Flipper power is controlled off the RIGHT slider
+	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
+	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
 };
 #endif

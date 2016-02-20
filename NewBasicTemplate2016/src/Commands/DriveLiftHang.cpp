@@ -17,19 +17,20 @@ void DriveLiftHang::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHang::Execute()
 {
-	float slider = oi->GetStickSlider(OI::MANIP);
+	float liftPowerSlider = oi->GetStickSlider(OI::MANIP);
+	float flipperPowerSlider = oi->GetStickSlider(oi->RIGHT);
 	float liftPower = 0, flipperPower = 0;
 
 	if (oi->GetButton(oi->CONTROL_LIFT_HANG_UP[0], oi->CONTROL_LIFT_HANG_UP[1]))
-		liftPower = slider * LiftHang::LIFT_UP;
+		liftPower = liftPowerSlider * LiftHang::LIFT_UP;
 	if (oi->GetButton(oi->CONTROL_LIFT_HANG_DOWN[0], oi->CONTROL_LIFT_HANG_DOWN[1]))
-		liftPower = slider * LiftHang::LIFT_DOWN;
+		liftPower = liftPowerSlider * LiftHang::LIFT_DOWN;
 	liftHang->DriveLiftMotor(liftPower);
 
 	if (oi->GetButton(oi->CONTROL_LIFT_HANG_FLIPPER_UP[0], oi->CONTROL_LIFT_HANG_FLIPPER_UP[1]))
-		flipperPower = slider * LiftHang::FLIPPER_UP;
+		flipperPower = flipperPowerSlider * LiftHang::FLIPPER_UP;
 	if (oi->GetButton(oi->CONTROL_LIFT_HANG_FLIPPER_DOWN[0], oi->CONTROL_LIFT_HANG_FLIPPER_DOWN[1]))
-		flipperPower = slider * LiftHang::FLIPPER_DOWN;
+		flipperPower = flipperPowerSlider * LiftHang::FLIPPER_DOWN;
 	liftHang->DriveFlipperMotor(flipperPower);
 
 

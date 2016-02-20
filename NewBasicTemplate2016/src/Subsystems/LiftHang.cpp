@@ -5,7 +5,7 @@
 LiftHang::LiftHang() :
 		Subsystem("LiftHang")
 {
-	liftMotor.reset(new VictorSP(MOTOR_LIFT_HANG_LIFT));
+	liftMotor.reset(new CANTalon(MOTOR_LIFT_HANG_LIFT));
 	flipperMotor.reset(new VictorSP(MOTOR_LIFT_HANG_FLIPPER));
 
 }

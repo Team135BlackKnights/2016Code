@@ -9,8 +9,7 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
-
-	kicker.reset(new Relay(RELAY_SHOOTER_KICKER, Relay::Direction::kForwardOnly));
+	kicker.reset(new Servo(Servo_SHOOTER_KICKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -27,7 +26,7 @@ void Shooter::StopShooterMotors() {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
 }
 
-void Shooter::DriveKicker(Relay::Value value) {
+void Shooter::DriveKicker(float value) {
 	kicker->Set(value);
 }
 

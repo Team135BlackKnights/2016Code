@@ -15,7 +15,7 @@
 #include "Commands/Move.h"
 #include "Subsystems/LiftHang.h"
 #include "Commands/AimBot.h"
-//#include "Triggers/POV.h"
+#include "Triggers/POV.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -29,13 +29,14 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[MANIP][2]->WhenPressed(new AimBot());
+	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->WhenPressed(new AimBot());
 
 	/*
 	for (int i = 0; i < 8; i++) {
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
 	}
 	*/
+
 
 	//buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
 	//buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));
@@ -92,7 +93,7 @@ bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a but
 {
 	return buttonsArray[controllerNum][buttonNum]->Get();
 }
-/*
+
 int OI::GetPOV(int stick)
 {
 	return joysticksArray[stick]->GetPOV();
@@ -102,4 +103,3 @@ float OI::GetAxis(int stick, Joystick::AxisType axis)
 {
 	return joysticksArray[stick]->GetAxis(axis);
 }
-*/
