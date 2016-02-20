@@ -19,7 +19,7 @@ AxisCam::AxisCam():
 	lastSetPointDelta = 0;
 	timer = new Timer();
 	//yServo.reset(new Servo(SERVO_PORT_Y));
-	xServo.reset(new Servo(SERVO_PORT_X));
+	xServo.reset(new Servo(0));
 	pidServoX = new ServoPID(xServo.get());
 	pidX = new PIDController(KU * .4, 0, TU / 2.0f, pidServoX, pidServoX);
 	//pidX = new PIDController(KU * Preferences::GetInstance()->GetFloat("KUMult",.4f),0, TU / Preferences::GetInstance()->GetFloat("TUMULT", 2.0f),

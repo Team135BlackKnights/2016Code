@@ -8,6 +8,8 @@ class MoveFromCameraValue: public CommandBase
 {
 private:
 	bool isgood = false;
+	float motorSpeed = Preferences::GetInstance()->GetFloat("motorSpeed", 0);
+	Timer* timer;
 public:
 	MoveFromCameraValue();
 	void Initialize();
