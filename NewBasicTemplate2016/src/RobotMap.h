@@ -32,10 +32,11 @@
 
 
     //  Inacuurate PWM Ports
-    const int RELAY_SHOOTER_KICKER = 5;
-    const int MOTOR_COLLECTION = 3;
+    const int Servo_SHOOTER_KICKER = 3;
+    const int MOTOR_COLLECTION = 4;
     const int MOTOR_LIFT_HANG_LIFT = 1;
-    const int MOTOR_LIFT_HANG_FLIPPER = 2;
+    const int MOTOR_LIFT_HANG_FLIPPER = 5; //2;
+    const int MOTOR_DEFENSE_ARM = 2;
     const int SERVO_PORT_Y = 8;
     const int SERVO_PORT_X = 9;
 

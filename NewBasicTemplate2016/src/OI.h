@@ -75,6 +75,8 @@ public:
 
 	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
 	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
+	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 9};
+	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 10};
 
 	const int CONTROL_SHOOT[2] = {BBOX, BUTTON};
 
