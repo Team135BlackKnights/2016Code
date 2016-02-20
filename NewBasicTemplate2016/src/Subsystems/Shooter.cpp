@@ -9,7 +9,7 @@ Shooter::Shooter() :
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 
-	kicker.reset(new VictorSP(MOTOR_SHOOTER_KICKER));
+	kicker.reset(new Relay(RELAY_SHOOTER_KICKER, Relay::Direction::kForwardOnly));
 
 	this->SetupMotors();
 }
