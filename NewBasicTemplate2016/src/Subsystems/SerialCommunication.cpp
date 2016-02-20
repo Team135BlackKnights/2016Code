@@ -30,7 +30,7 @@ void SerialCommunication::InitDefaultCommand()
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
-	if (serialPort->GetBytesReceived() == 0) {
+	if (serialPort->GetBytesReceived()== 0) {
 		std::cout << -1;
 		return;
 	}
