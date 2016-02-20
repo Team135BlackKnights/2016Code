@@ -17,7 +17,7 @@ void DriveArm::Initialize()
 void DriveArm::Execute()
 {
 	float y = oi->GetStickY(OI::MANIP);
-	arm->RaiseLowerArm(y * Arm::ARM_INVERSION);
+	arm->RaiseLowerArm(y * Arm::UP);
 }
 
 // Make this return true when this Command no longer needs to run execute()

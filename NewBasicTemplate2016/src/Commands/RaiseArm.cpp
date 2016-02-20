@@ -18,7 +18,7 @@ void RaiseArm::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void RaiseArm::Execute()
 {
-	arm->RaiseLowerArm(.25 * arm->ARM_INVERSION);
+	arm->RaiseLowerArm(.25 * arm->UP);
 }
 
 // Make this return true when this Command no longer needs to run execute()

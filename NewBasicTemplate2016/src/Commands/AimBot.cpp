@@ -2,11 +2,13 @@
 #include "MoveFromCameraValue.h"
 #include "RaiseArm.h"
 #include "ShootBoulder.h"
+#include "AutomationOfArm.h"
+
 
 AimBot::AimBot()
 {
 	AddSequential(new MoveFromCameraValue());
-	AddSequential(new RaiseArm());
+	AddSequential(new AutomationOfArm());
 	AddSequential(new ShootBoulder());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
