@@ -35,6 +35,7 @@ void SerialCommunication::ReadSerialValues() {
 		return;
 	}
 	while (serialPort->GetBytesReceived() > 0) {
+		std::cout << "bad";
 		buffer = new char('\a');
 		int index = -1;
 		serialPort->Read(buffer, 8);
