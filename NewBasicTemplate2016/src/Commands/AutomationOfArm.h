@@ -7,11 +7,16 @@
 class AutomationOfArm: public CommandBase
 {
 private:
-	//int armEncoderValue;
-	//int desiredArmEncoderValue;
+	int currentArmEncoderValue;
+	int desiredArmEncoderValue;
+
+	double inchesHypotenuse;
+
+	double motorPowerUp = .2;
+	double motorPowerDown = -.2;
 
 public:
-	AutomationOfArm();
+	AutomationOfArm(double);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

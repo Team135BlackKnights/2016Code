@@ -10,6 +10,7 @@
 #include "Subsystems/LiftHang.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/SerialCommunication.h"
+#include "Subsystems/Arm.h"
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -28,6 +29,7 @@ public:
 	static std::unique_ptr<Shooter> shooter;
 	static std::unique_ptr<LiftHang> liftHang;
 	static std::unique_ptr<SerialCommunication> serialCommunication;
+	static std::unique_ptr<Arm> arm;
 };
 
 #endif

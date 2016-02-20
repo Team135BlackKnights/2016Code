@@ -8,6 +8,7 @@ std::unique_ptr<Shooter> CommandBase::shooter;
 std::unique_ptr<LogData> CommandBase::logData;
 std::unique_ptr<LiftHang> CommandBase::liftHang;
 std::unique_ptr<SerialCommunication> CommandBase::serialCommunication;
+std::unique_ptr<Arm> CommandBase::arm;
 
 CommandBase::CommandBase() :
 		Command()
@@ -30,6 +31,8 @@ void CommandBase::init()
 	logData.reset(new LogData("/home/lvuser/"));
 
 	serialCommunication.reset(new SerialCommunication());
+
+	arm.reset(new Arm());
 
 	//preferences.reset(Preferences::GetInstance());
 }

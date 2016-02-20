@@ -34,7 +34,7 @@ bool Arm::GetBottomLimitSwitchValue() {
 int Arm::GetEncoderValueForAngle(double inchesHypotenuse) {
 	double radians = asin(HEIGHT_OF_TOWER/inchesHypotenuse);
 	double angle = radians * (180/M_PI);
-	int encoderPosition = (int)(angle * ENCODER_MULTIPLYING_CONSTANT);
+	int encoderPosition = round((int)(angle * ENCODER_MULTIPLYING_CONSTANT));
 	return encoderPosition;
 }
 
