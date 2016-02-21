@@ -1,3 +1,4 @@
+#include <Commands/WaitTime.h>
 #include "AimBot.h"
 #include "MoveFromCameraValue.h"
 #include "RaiseArm.h"
@@ -8,8 +9,9 @@
 AimBot::AimBot()
 {
 	AddSequential(new MoveFromCameraValue());
+	AddSequential(new WaitTime(1.0f));
 	AddSequential(new AutomationOfArm());
-	//AddSequential(new ShootBoulder());
+	AddSequential(new ShootBoulder());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

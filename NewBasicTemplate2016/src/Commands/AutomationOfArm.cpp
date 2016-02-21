@@ -15,7 +15,7 @@ void AutomationOfArm::Initialize()
 {
 
 	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
-	std::cout << "encoder value : "<<desiredArmEncoderValue << std::endl;
+	std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run

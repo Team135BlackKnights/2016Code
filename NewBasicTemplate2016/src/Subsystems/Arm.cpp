@@ -34,14 +34,23 @@ bool Arm::GetBottomLimitSwitchValue() {
 
 //  HEIGHT and hypotenuse in inches
 int Arm::GetEncoderValueForAngle(double inchesHypotenuse) {
-	std::cout << "distance: " << inchesHypotenuse << std::endl;
-	double radians = asin(HEIGHT_OF_TOWER/((float)inchesHypotenuse * 12.0f));
+	std::cout << "camera to goal distance: " << inchesHypotenuse << std::endl;
+	//double radians = asin((HEIGHT_OF_TOWER)/((float)feetHypotenuse * 12.0f));
+	double radians = GetAngleForArm(inchesHypotenuse);
 	std::cout << "rad: " << radians << std::endl;
 	double angle = radians * (180.0D/M_PI);
 	std::cout << "angle: " << angle << std::endl;
-	int encoderPosition = (int)round((angle * ENCODER_MULTIPLYING_CONSTANT));
+	int encoderPosition = (angle * ENCODER_MULTIPLYING_CONSTANT);
 	return encoderPosition;
 	//return Preferences::GetInstance()->GetInt("encoderPos", 0);
+}
+
+//cameraDist is in inches
+double Arm::GetAngleForArm(double cameraDist)
+{
+	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist)));
+	std::cout << "Ground distance: " << groundDist << std::endl;
+	return atan((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {

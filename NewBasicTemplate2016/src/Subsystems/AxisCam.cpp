@@ -114,11 +114,20 @@ float AxisCam::getY()
 {
 	return y;
 }
+
+//NOW IN INCHES
 float AxisCam::distanceToBlob(double pixel_width)
 {
-	return (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*pixel_width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
+	this->GetCameraValues();
+	double width = this->getWidth();
+	float value = 0;
+	for (int i = 0; i < 5; i++) {
+		value = 12.0f * (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
+		std::cout << "Width " << i << ": " << width << std::endl;
+		std::cout << "CamDist take " << i << ": " << value << std::endl;
+	}
+	return value;
 }
-
 /*void AxisCam::setServoY()
 {
 	float offset = yDistanceToCenter();
