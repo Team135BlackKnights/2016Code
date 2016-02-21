@@ -27,7 +27,9 @@ void Shooter::StopShooterMotors() {
 }
 
 void Shooter::DriveKicker(float value) {
-	kicker->Set(value);
+	//Kicker shouldn't fight itself now!
+	if (this->kicker->Get() != value)
+		kicker->Set(value);
 }
 
 // Put methods for controlling this subsystem

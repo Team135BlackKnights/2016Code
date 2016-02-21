@@ -45,5 +45,8 @@
 
     const bool DRIVE_TRAIN_INVERTED = false;
 
+    const int DIGITAL_ARM_RESET = 0;
+    const int UP_ARM_POSITION = 155;
+
 #endif
 

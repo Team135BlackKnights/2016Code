@@ -15,7 +15,7 @@
 #include "Commands/Move.h"
 #include "Subsystems/LiftHang.h"
 #include "Commands/AimBot.h"
-#include "Triggers/POV.h"
+//#include "Triggers/ArmResetOnButton.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -36,7 +36,8 @@ OI::OI()
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
 	}
 	*/
-
+	resetArm = new ArmResetOnButton();
+	resetArm->WhenActive(new ArmReset());
 
 	//buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
 	//buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));

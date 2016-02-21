@@ -2,7 +2,7 @@
 #define OI_H
 
 #include "WPILib.h"
-//#include "Triggers/POV.h"
+#include "Triggers/ArmResetOnButton.h"
 
 class OI
 {
@@ -21,6 +21,9 @@ protected:
 		  	 Controller [1]
 		  	 Controller [2]
 		 */
+
+	ArmResetOnButton* resetArm;
+
 public:
 	OI();
 	Joystick* GetStick(int);
