@@ -6,7 +6,7 @@ SerialCommunication::SerialCommunication() :
 		Subsystem("SerialCommunication")
 {
 
-	//  serialPort.reset(new SerialPort);
+	/*  //serialPort.reset(new SerialPort);
 	//serialPort->Reset();
 	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kMXP);
 	//serialPort->SetReadBufferSize(10);
@@ -24,7 +24,7 @@ SerialCommunication::SerialCommunication() :
 	placer = 0;
 
 	initialEncoderPosition = 0;
-	finalEncoderPosition = 0;
+	finalEncoderPosition = 0; */
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -38,7 +38,7 @@ void SerialCommunication::InitDefaultCommand()
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
-	std::cout << "Bad" << std::endl;
+	/*std::cout << "Bad" << std::endl;
 	if (serialPort->GetBytesReceived()== 0) {
 		std::cout << -1;
 		return;
@@ -70,7 +70,7 @@ void SerialCommunication::ReadSerialValues() {
 			//std::cout << dataThing << std::endl;
 		}
 		data[index] = strtod(dataThing.str().c_str(), NULL);
-	}
+	} */
 	/*
 	char* newBuffer = strtok(buffer, ",");
 	int j = 0;
@@ -123,7 +123,8 @@ void SerialCommunication::ReadSerialValues() {
 }
 
 double SerialCommunication::GetSerialValues(int TypeOfValue) {
-	return data[TypeOfValue];
+	return 0;
+	//return data[TypeOfValue];
 	/*
 	if (serialPort->GetBytesReceived() == 0)
 			return 0;
@@ -167,7 +168,8 @@ double SerialCommunication::GetSerialValues(int TypeOfValue) {
 }
 
 bool SerialCommunication::OverDefense(int typeOfMethod, int driveTrainEncoderPosition) {
-	this->typeOfMethod = typeOfMethod;
+	return false;
+	/*this->typeOfMethod = typeOfMethod;
 	this->driveTrainEncoderPosition = driveTrainEncoderPosition;
 
 	if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && placer == 0) {
@@ -181,7 +183,7 @@ bool SerialCommunication::OverDefense(int typeOfMethod, int driveTrainEncoderPos
 	}
 	else {
 		return false;
-	}
+	} */
 	/*this->encoderPosition = encoderPosition;
 		switch (typeOfMethod) {
 		case CASE_LIGHT:
