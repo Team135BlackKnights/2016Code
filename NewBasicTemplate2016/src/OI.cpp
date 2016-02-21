@@ -14,6 +14,7 @@
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
 #include "Subsystems/LiftHang.h"
+#include "Commands/AimBot.h"
 #include "Triggers/POV.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
@@ -28,7 +29,7 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->ToggleWhenPressed(new ShootBoulder());
+	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->WhenPressed(new AimBot());
 
 	/*
 	for (int i = 0; i < 8; i++) {

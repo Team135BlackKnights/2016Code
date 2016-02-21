@@ -13,7 +13,6 @@ private:
 
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
-
 	std::unique_ptr<Servo> kicker;
 
 	//  Not defined yet

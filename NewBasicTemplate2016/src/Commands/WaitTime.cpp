@@ -1,41 +1,40 @@
-#include <Commands/DriveArm.h>
+#include <Commands/WaitTime.h>
 
-DriveArm::DriveArm()
+WaitTime::WaitTime(float time)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(arm.get());
+	this->time = time;
+	this->timer.reset(new Timer());
 }
 
 // Called just before this Command runs the first time
-void DriveArm::Initialize()
+void WaitTime::Initialize()
 {
-
+	this->timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveArm::Execute()
+void WaitTime::Execute()
 {
-	float y = oi->GetStickY(OI::MANIP);
-	arm->RaiseLowerArm(y * Arm::UP);
-	//std::cout << arm->GetEncoderPosition() << std::endl;
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveArm::IsFinished()
+bool WaitTime::IsFinished()
 {
-	return false;
+	return this->timer->HasPeriodPassed(this->time);
 }
 
 // Called once after isFinished returns true
-void DriveArm::End()
+void WaitTime::End()
 {
-	arm->RaiseLowerArm(0);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveArm::Interrupted()
+void WaitTime::Interrupted()
 {
-	End();
+
 }

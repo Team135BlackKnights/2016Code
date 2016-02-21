@@ -31,7 +31,6 @@
     const int MOTOR_RAISE_LOWER_ARM = 15;
     const int MOTOR_LIFT_HANG_LIFT = 16;
 
-
     //  Inacuurate PWM Ports
     const int Servo_SHOOTER_KICKER = 3;
     const int MOTOR_COLLECTION = 2;
