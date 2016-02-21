@@ -15,6 +15,7 @@ std::unique_ptr<Collection> CommandBase::collection;
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<AxisCam> CommandBase::cam;
 std::unique_ptr<DefenseArm> CommandBase::defenseArm;
+std::unique_ptr<AnalogSensors> CommandBase::analogSensors;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -50,6 +51,8 @@ void CommandBase::init()
 	defenseArm.reset(new DefenseArm());
 
 	serialCommunication.reset(new SerialCommunication());
+
+	analogSensors.reset(new AnalogSensors());
 
 	//preferences.reset(Preferences::GetInstance());
 
