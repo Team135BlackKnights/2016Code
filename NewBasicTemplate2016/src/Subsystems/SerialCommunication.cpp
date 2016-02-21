@@ -9,28 +9,28 @@ SerialCommunication::SerialCommunication() :
 
 	//  serialPort.reset(new SerialPort);
 	//serialPort->Reset();
-	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kUSB);
+	/*serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kUSB);
 	//serialPort->SetReadBufferSize(10);
 
 	serialPort->EnableTermination('\n');
 	serialPort->SetTimeout(10);
 	//serialPort->SetReadBufferSize(16);
 
-	buffer = new char('\a');
+	buffer = new char('\a'); */
 }
 
 void SerialCommunication::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
-	SetDefaultCommand(new UltrasonicTesting());
+	//SetDefaultCommand(new UltrasonicTesting());
 }
 
 //  LEFT_SONAR_VALUE = 0;
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
-	if (serialPort->GetBytesReceived() == 0) {
+	/*if (serialPort->GetBytesReceived() == 0) {
 		std::cout << -1;
 		return;
 	}
@@ -61,7 +61,7 @@ void SerialCommunication::ReadSerialValues() {
 			//std::cout << dataThing << std::endl;
 		}
 		data[index] = strtod(dataThing.str().c_str(), NULL);
-	}
+	} */
 	/*
 	char* newBuffer = strtok(buffer, ",");
 	int j = 0;
@@ -114,7 +114,8 @@ void SerialCommunication::ReadSerialValues() {
 }
 
 double SerialCommunication::GetSerialValues(int TypeOfValue) {
-	return data[TypeOfValue];
+	//return data[TypeOfValue];
+	return 5;
 	/*
 	if (serialPort->GetBytesReceived() == 0)
 			return 0;
@@ -158,7 +159,8 @@ double SerialCommunication::GetSerialValues(int TypeOfValue) {
 }
 
 bool SerialCommunication::OverDefense(int typeOfMethod) {
-	switch (typeOfMethod) {
+	return false;
+	/*switch (typeOfMethod) {
 	case CASE_LIGHT:
 		if (data[LIGHT_SENSOR_VALUE] > lightValue) {
 			return true;
@@ -198,7 +200,7 @@ bool SerialCommunication::OverDefense(int typeOfMethod) {
 	default:
 		return false;
 	break;
-	}
+	} */
 }
 
 

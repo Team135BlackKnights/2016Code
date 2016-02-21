@@ -9,7 +9,7 @@ class SerialCommunication: public Subsystem
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	static const int BAUD_RATE = 115200;
+	/*static const int BAUD_RATE = 115200;
 	static const int COUNT = 3;
 	static const int DATA_BITS = 100;
 	//  static const int TIMEOUT_TIME = ((COUNT * DATA_BITS)/BAUD_RATE);
@@ -30,7 +30,7 @@ private:
 	//  Values Still To Be Determined
 	double leftSonarBarrierDistance = 20,
 		   rightSonarBarrierDistance = 20,
-		   lightValue = 10;
+		   lightValue = 10; */
 
 
 public:
@@ -43,7 +43,7 @@ public:
 
 	bool OverDefense(int);
 
-	static const int CASE_LIGHT = 0,
+	/*static const int CASE_LIGHT = 0,
 					 CASE_LEFT_AND_LIGHT = 1,
 					 CASE_RIGHT_AND_LIGHT = 2,
 					 CASE_LEFT_RIGHT_AND_LIGHT = 3;
@@ -51,7 +51,7 @@ public:
 
 	static const int LEFT_SONAR_VALUE = 0;
 	static const int RIGHT_SONAR_VALUE = 1;
-	static const int LIGHT_SENSOR_VALUE = 2;
+	static const int LIGHT_SENSOR_VALUE = 2; */
 };
 
 #endif

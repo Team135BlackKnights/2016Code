@@ -8,6 +8,9 @@ AnalogSensors::AnalogSensors() :
 	leftSonar.reset(new AnalogInput(LEFT_SONAR_ANALOG_PORT));
 	rightSonar.reset(new AnalogInput(RIGHT_SONAR_ANALOG_PORT));
 	light.reset(new AnalogInput(LIGHT_ANALOG_PORT));
+
+	leftDistanceInches = 0;
+	rightDistanceInches = 0;
 }
 
 void AnalogSensors::InitDefaultCommand()
@@ -21,10 +24,12 @@ void AnalogSensors::InitDefaultCommand()
 float AnalogSensors::GetSonarDistance(int rightOrLeft) {
 	if (rightOrLeft == LEFT_SONAR_ANALOG_PORT) {
 		//  Value for Left Sonar Sensor
-		return leftSonar->GetValue();
+		leftDistanceInches = leftSonar->GetVoltage()/(VOLTS_PER_INCH);
+		return leftDistanceInches;
 	}
 	else {
-		return rightSonar->GetValue();
+		rightDistanceInches = rightSonar->GetVoltage()/(VOLTS_PER_INCH);
+		return rightDistanceInches;
 	}
 }
 

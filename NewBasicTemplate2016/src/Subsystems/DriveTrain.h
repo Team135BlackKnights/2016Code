@@ -10,18 +10,18 @@
 class DriveTrain: public Subsystem
 {
 public:
-	static const int NUM_MOTORS = 4;
+	//static const int NUM_MOTORS = 4;
 private:
-	std::unique_ptr<CANTalon> motors[NUM_MOTORS];
+	//std::unique_ptr<CANTalon> motors[NUM_MOTORS];
 
-	std::unique_ptr<RobotDrive> chassis;
+	//std::unique_ptr<RobotDrive> chassis;
 
 public:
 
-	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
+	/*static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
 						REAR_LEFT = RobotDrive::kRearLeftMotor,
 						FRONT_RIGHT = RobotDrive::kFrontRightMotor,
-						REAR_RIGHT = RobotDrive::kRearRightMotor;
+						REAR_RIGHT = RobotDrive::kRearRightMotor; */
 
 	DriveTrain();
 	void InitDefaultCommand();

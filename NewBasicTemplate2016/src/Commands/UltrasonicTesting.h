@@ -7,9 +7,10 @@
 class UltrasonicTesting: public CommandBase
 {
 private:
-	double leftSonarDistance,
-		   rightSonarDistance,
-		   lightSensorDistance;
+	float leftSonarDistance,
+		   rightSonarDistance;
+
+	int lightSensorDistance;
 
 	//  int i;
 public:

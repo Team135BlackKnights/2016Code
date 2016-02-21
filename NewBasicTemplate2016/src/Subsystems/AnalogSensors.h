@@ -13,6 +13,11 @@ private:
 	std::unique_ptr<AnalogInput> leftSonar;
 	std::unique_ptr<AnalogInput> rightSonar;
 	std::unique_ptr<AnalogInput> light;
+
+	float leftDistanceInches,
+		  rightDistanceInches;
+
+	static constexpr float VOLTS_PER_INCH = 5.0f/512.0f;
 public:
 	AnalogSensors();
 	void InitDefaultCommand();
