@@ -6,6 +6,7 @@ std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<LiftHang> CommandBase::liftHang;
 std::unique_ptr<SerialCommunication> CommandBase::serialCommunication;
+std::unique_ptr<AnalogSensors> CommandBase::analogSensors;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -30,4 +31,6 @@ void CommandBase::init()
 	liftHang.reset(new LiftHang());
 
 	serialCommunication.reset(new SerialCommunication());
+
+	analogSensors.reset(new AnalogSensors());
 }

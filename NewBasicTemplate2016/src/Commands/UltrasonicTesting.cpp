@@ -4,7 +4,7 @@ UltrasonicTesting::UltrasonicTesting()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(serialCommunication.get());
+	Requires(analogSensors.get());
 	leftSonarDistance = 0;
 	rightSonarDistance = 0;
 	lightSensorDistance = 0;
@@ -20,16 +20,17 @@ void UltrasonicTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void UltrasonicTesting::Execute()
 {
+
+	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
 	//  if (i % 10 == 0) {
-	serialCommunication->ReadSerialValues();
+	/*serialCommunication->ReadSerialValues();
 
 	leftSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::LEFT_SONAR_VALUE);
 	rightSonarDistance = serialCommunication->GetSerialValues(SerialCommunication::RIGHT_SONAR_VALUE);
 	lightSensorDistance = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
 
-	//  SmartDashboard::PutString("LEFT SONAR", data);
+	//  SmartDashboard::PutString("LEFT SONAR", data); */
 
-	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
 	//  i = 0;
 	//  }
 	//  i++;
