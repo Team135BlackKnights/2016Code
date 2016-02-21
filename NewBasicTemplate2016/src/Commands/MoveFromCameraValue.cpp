@@ -23,12 +23,14 @@ void MoveFromCameraValue::Execute()
 	//driveTrain->DriveTank(speed, -speed); -32
 	float dist = cam.get()->xDistanceToCenter() + 32;
 	std::cout << dist << std::endl;
-	if(dist <= -5)
+	if(dist <= -5 && !isgood)
 		driveTrain.get()->RotateTank(-motorSpeed);
-	else if(dist >= 5)
+	else if(dist >= 5 && !isgood)
 		driveTrain.get()->RotateTank(motorSpeed);
 	else
+	{
 		isgood = true;
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

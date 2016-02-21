@@ -41,7 +41,7 @@ public:
 	double GetAngleForArm(double);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = -1;
+	static const int UP = 1;
 	static const int DOWN = -UP;
 
 	const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);

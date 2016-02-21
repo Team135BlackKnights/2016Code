@@ -18,7 +18,7 @@ void DriveArm::Execute()
 {
 	float y = oi->GetStickY(OI::MANIP);
 	arm->RaiseLowerArm(y * Arm::UP);
-	//std::cout << arm->GetEncoderPosition() << std::endl;
+	std::cout << arm->GetEncoderPosition() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

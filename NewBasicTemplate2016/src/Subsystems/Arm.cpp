@@ -54,7 +54,7 @@ double Arm::GetAngleForArm(double cameraDist)
 }
 
 int Arm::GetEncoderPosition() {
-	return -armMotor->GetEncPosition();
+	return -armMotor->GetEncPosition();// + UP_ARM_POSITION;
 }
 
 void Arm::ZeroEncoder() {

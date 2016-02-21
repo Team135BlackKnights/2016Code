@@ -1,4 +1,5 @@
 #include "ArmReset.h"
+#include "RobotMap.h"
 
 ArmReset::ArmReset()
 {
