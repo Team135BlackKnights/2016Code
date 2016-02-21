@@ -1,6 +1,6 @@
 #include "AnalogSensors.h"
 #include "../RobotMap.h"
-#include "UltrasonicTesting.h"
+#include "Commands/UltrasonicTesting.h"
 
 AnalogSensors::AnalogSensors() :
 		Subsystem("ExampleSubsystem")
