@@ -25,6 +25,7 @@ private:
 	static const int RADIUS = 6;
 	static const int DIAMETER = 2 * RADIUS;
 	static const int CIRCUMFERENCE_OF_WHEEL = DIAMETER * M_PI;
+	static constexpr double GEAR_RATIO = 28.0D / 60.0D;
 
 public:
 

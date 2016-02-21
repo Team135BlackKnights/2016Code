@@ -15,6 +15,7 @@ void DriveShooter::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveShooter::Execute()
 {
+	//std::cout << shooter->GetEncoderPosition(Shooter::TWO_WHEEL_SHOOTER_MOTOR) << std::endl;
 	float power = 0;
 	motorPower = oi->GetStickSlider(oi->MANIP);//Preferences::GetInstance()->GetFloat("Shooter Power", motorPower);
 	if (oi->GetButton(oi->CONTROL_SHOOTER_OUT[0], oi->CONTROL_SHOOTER_OUT[1]))//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))

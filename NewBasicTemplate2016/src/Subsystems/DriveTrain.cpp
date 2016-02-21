@@ -103,13 +103,15 @@ void DriveTrain::ZeroEncoder(int motorIndex) {
 }
 
 int DriveTrain::GetEncoderPosition(int motorIndex) {
-	return motors[motorIndex]->GetEncPosition();
+	int value = motors[motorIndex]->GetEncPosition();
+	std::cout << "Encoder: " << value << std::endl;
+	return value;
 }
 
 double DriveTrain::GetDistanceInches(int motorIndex) {
 
 	int encoderPosition = GetEncoderPosition(motorIndex);
-	double REVS = (encoderPosition/QUADRATURE_COUNT);
-	double DISTANCE_TRAVELED = REVS * CIRCUMFERENCE_OF_WHEEL;
+	double REVS = ((double)encoderPosition/QUADRATURE_COUNT);
+	double DISTANCE_TRAVELED = REVS * GEAR_RATIO * CIRCUMFERENCE_OF_WHEEL;
 	return DISTANCE_TRAVELED;
 }

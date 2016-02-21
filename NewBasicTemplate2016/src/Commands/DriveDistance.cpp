@@ -17,25 +17,29 @@ DriveDistance::DriveDistance(double inchesDistance)
 // Called just before this Command runs the first time
 void DriveDistance::Initialize()
 {
-	driveTrain->ZeroEncoder(DriveTrain::REAR_LEFT);
+	driveTrain->ZeroEncoder(DriveTrain::FRONT_RIGHT);
 	driveTrain->ZeroEncoder(DriveTrain::FRONT_LEFT);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveDistance::Execute()
 {
-	distanceFromLeftEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_LEFT);
-	distanceFromRightEncoder = driveTrain->GetDistanceInches(DriveTrain::REAR_RIGHT);
+	distanceFromLeftEncoder = driveTrain->GetDistanceInches(DriveTrain::FRONT_LEFT);
+	distanceFromRightEncoder = driveTrain->GetDistanceInches(DriveTrain::FRONT_RIGHT);
+	std::cout << "Right distance: " << distanceFromRightEncoder << std::endl;
 	//std::cout << distanceFromLeftEncoder << "  " << distanceFromRightEncoder << std::endl;
+	/*
 	if (distanceFromLeftEncoder >= this->inchesDistance) {
 		leftDone = true;
 		leftMotorPower = 0;
 		//std::cout << "DOne";
 	}
-
+	*/
 	if (distanceFromRightEncoder >= this->inchesDistance) {
 		rightDone = true;
+		leftDone = true;
 		rightMotorPower = 0;
+		leftMotorPower = 0;
 		//std::cout << "DOne2";
 	}
 
@@ -45,12 +49,7 @@ void DriveDistance::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool DriveDistance::IsFinished()
 {
-	if (leftDone == true && rightDone == true) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return leftDone && rightDone;
 }
 
 // Called once after isFinished returns true

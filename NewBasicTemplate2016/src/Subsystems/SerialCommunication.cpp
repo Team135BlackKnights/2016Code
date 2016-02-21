@@ -8,7 +8,7 @@ SerialCommunication::SerialCommunication() :
 
 	//  serialPort.reset(new SerialPort);
 	//serialPort->Reset();
-	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kUSB);
+	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kMXP);
 	//serialPort->SetReadBufferSize(10);
 
 	serialPort->EnableTermination('\n');
@@ -31,18 +31,20 @@ void SerialCommunication::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
-	SetDefaultCommand(new UltrasonicTesting());
+	//SetDefaultCommand(new UltrasonicTesting());
 }
 
 //  LEFT_SONAR_VALUE = 0;
 //  RIGHT_SONAR_VALUE = 1;
 //  LIGHT_SENSOR_VALUE = 2;
 void SerialCommunication::ReadSerialValues() {
+	std::cout << "Bad" << std::endl;
 	if (serialPort->GetBytesReceived()== 0) {
 		std::cout << -1;
 		return;
 	}
 	while (serialPort->GetBytesReceived() > 0) {
+		std::cout << serialPort->GetBytesReceived() << std::endl;
 		buffer = new char('\a');
 		int index = -1;
 		serialPort->Read(buffer, 8);
