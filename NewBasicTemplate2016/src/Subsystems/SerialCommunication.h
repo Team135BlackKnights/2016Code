@@ -3,6 +3,7 @@
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
+#include "../RobotMap.h"
 
 class SerialCommunication: public Subsystem
 {
@@ -32,6 +33,17 @@ private:
 		   rightSonarBarrierDistance = 20,
 		   lightValue = 10;
 
+	int typeOfMethod;
+
+	int driveTrainEncoderPosition;
+
+	int placer;
+
+	int initialEncoderPosition,
+		finalEncoderPosition;
+
+	//  30.5in. + 12in. = 42.5in.
+	static const int ENCODER_POSITION_PLACEMENT = (int)round((LENGTH_OF_ROBOT + (256/M_PI)));
 
 public:
 
@@ -41,7 +53,7 @@ public:
 	double GetSerialValues(int);
 	void ReadSerialValues();
 
-	bool OverDefense(int);
+	bool OverDefense(int, int);
 
 	static const int CASE_LIGHT = 0,
 					 CASE_LEFT_AND_LIGHT = 1,

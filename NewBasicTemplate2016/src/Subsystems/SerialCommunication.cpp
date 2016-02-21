@@ -1,5 +1,4 @@
 #include "SerialCommunication.h"
-#include "../RobotMap.h"
 #include "Commands/UltrasonicTesting.h"
 #include <sstream>
 
@@ -17,6 +16,15 @@ SerialCommunication::SerialCommunication() :
 	//serialPort->SetReadBufferSize(16);
 
 	buffer = new char('\a');
+
+	typeOfMethod = 0;
+
+	driveTrainEncoderPosition = 0;
+
+	placer = 0;
+
+	initialEncoderPosition = 0;
+	finalEncoderPosition = 0;
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -156,48 +164,88 @@ double SerialCommunication::GetSerialValues(int TypeOfValue) {
 
 }
 
-bool SerialCommunication::OverDefense(int typeOfMethod) {
-	switch (typeOfMethod) {
-	case CASE_LIGHT:
-		if (data[LIGHT_SENSOR_VALUE] > lightValue) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	break;
+bool SerialCommunication::OverDefense(int typeOfMethod, int driveTrainEncoderPosition) {
+	this->typeOfMethod = typeOfMethod;
+	this->driveTrainEncoderPosition = driveTrainEncoderPosition;
 
-	case CASE_LEFT_AND_LIGHT:
-		if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	break;
-
-	case CASE_RIGHT_AND_LIGHT:
-		if (data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	break;
-
-	case CASE_LEFT_RIGHT_AND_LIGHT:
-		if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	break;
-
-	default:
+	if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && placer == 0) {
+		initialEncoderPosition = this->driveTrainEncoderPosition;
+		finalEncoderPosition = initialEncoderPosition + ENCODER_POSITION_PLACEMENT;
+		placer = 1;
 		return false;
-	break;
 	}
+	else if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && placer == 1 && ENCODER_POSITION_PLACEMENT > this->driveTrainEncoderPosition) {
+		return true;
+	}
+	else {
+		return false;
+	}
+	/*this->encoderPosition = encoderPosition;
+		switch (typeOfMethod) {
+		case CASE_LIGHT:
+			if (data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == false) {
+				passedFirstRamp = true;
+				initialEncoderPostion = this->encoderPosition;
+				finalEncoderPosition = initialEncoderPostion + addOnEncoderCount;
+				return false;
+			}
+			else if (data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition){
+				passedFirstRamp = false;
+				return true;
+			}
+			else {
+				return false;
+			}
+		break;
+		case CASE_LEFT_AND_LIGHT:
+			if (data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true) {
+				passedFirstRamp = true;
+				initialEncoderPostion = this->encoderPosition;
+				finalEncoderPosition = initialEncoderPostion + addOnEncoderCount;
+				return false;
+			}
+			else if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition) {
+				passedFirstRamp = false;
+				return true;
+			}
+			else {
+				return false;
+			}
+		break;
+		case CASE_RIGHT_AND_LIGHT:
+			if (data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true) {
+				passedFirstRamp = true;
+				initialEncoderPostion = this->encoderPosition;
+				finalEncoderPosition = initialEncoderPostion + addOnEncoderCount;
+				return false;
+			}
+			else if (data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition) {
+				passedFirstRamp = false;
+				return true;
+			}
+			else {
+				return false;
+			}
+		break;
+		case CASE_LEFT_RIGHT_AND_LIGHT:
+			if (data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true) {
+				passedFirstRamp = true;
+				initialEncoderPostion = this->encoderPosition;
+				finalEncoderPosition = initialEncoderPostion + addOnEncoderCount;
+				return false;
+			}
+			else if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && data[LIGHT_SENSOR_VALUE] > lightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition) {
+				passedFirstRamp = false;
+				return true;
+			}
+			else {
+				return false;
+			}
+		break;
+		default:
+			return false;
+		break;
+		} */
 }
 
 

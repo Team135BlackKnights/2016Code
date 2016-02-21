@@ -47,5 +47,7 @@
 
     const bool DRIVE_TRAIN_INVERTED = false;
 
+    constexpr float LENGTH_OF_ROBOT = 30.5f;
+
 #endif
 

@@ -28,6 +28,8 @@ private:
 
 	int placer;
 
+	int encoderPosition;;
+
 public:
 	RunningOverDefense(int);
 	void Initialize();

@@ -4,7 +4,6 @@ RunningOverDefense::RunningOverDefense(int typeOfMethod)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(serialCommunication.get());
 	Requires(driveTrain.get());
 	leftSonarDistance = 0;
 	rightSonarDistance = 0;
@@ -21,6 +20,8 @@ RunningOverDefense::RunningOverDefense(int typeOfMethod)
 
 	placer = 0;
 
+	encoderPosition = 0;
+
 }
 
 // Called just before this Command runs the first time
@@ -32,9 +33,11 @@ void RunningOverDefense::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void RunningOverDefense::Execute()
 {
+	driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
+
 	driveTrain->DriveTank(motorPower, motorPower);
 	if (overDefense == false) {
-		overDefense = serialCommunication->OverDefense(this->typeOfMethod);
+		overDefense = serialCommunication->OverDefense(this->typeOfMethod, encoderPosition);
 		placer = 1;
 	}
 	if (overDefense == true && placer == 1) {
