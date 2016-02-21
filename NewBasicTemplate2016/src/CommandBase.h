@@ -8,9 +8,14 @@
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/LogData.h"
 #include "Subsystems/LiftHang.h"
+#include "Subsystems/AxisCam.h"
+#include "OI.h"
+#include "WPILib.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/SerialCommunication.h"
 #include "Subsystems/Arm.h"
+#include "Subsystems/Collection.h"
+#include "Subsystems/DefenseArm.h"
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -19,7 +24,7 @@
 class CommandBase: public Command
 {
 public:
-	//CommandBase(const std::string &name);
+	CommandBase(const std::string &name);
 	CommandBase();
 	static void init();
 	// Create a single static instance of all of your subsystems
@@ -30,6 +35,10 @@ public:
 	static std::unique_ptr<LiftHang> liftHang;
 	static std::unique_ptr<SerialCommunication> serialCommunication;
 	static std::unique_ptr<Arm> arm;
+	static std::unique_ptr<Collection> collection;
+	//static std::unique_ptr<Preferences> preferences;
+	static std::unique_ptr<AxisCam> cam;
+	static std::unique_ptr<DefenseArm> defenseArm;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "AutomationOfArm.h"
 
-AutomationOfArm::AutomationOfArm(double inchesHypotenuse)
+AutomationOfArm::AutomationOfArm()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -8,15 +8,14 @@ AutomationOfArm::AutomationOfArm(double inchesHypotenuse)
 	currentArmEncoderValue = 0;
 	desiredArmEncoderValue = 0;
 
-	this->inchesHypotenuse = inchesHypotenuse;
 }
 
 // Called just before this Command runs the first time
 void AutomationOfArm::Initialize()
 {
-	arm->ZeroEncoder();
 
-	desiredArmEncoderValue = arm->GetEncoderValueForAngle(this->inchesHypotenuse);
+	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
+	std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -25,20 +24,18 @@ void AutomationOfArm::Execute()
 	currentArmEncoderValue = arm->GetEncoderPosition();
 
 	if (currentArmEncoderValue < desiredArmEncoderValue) {
-		arm->RaiseLowerArm(motorPowerUp);
+		arm->RaiseLowerArm(motorPower * Arm::UP);
 	}
 	else if (currentArmEncoderValue > desiredArmEncoderValue) {
-		arm->RaiseLowerArm(motorPowerDown);
+		arm->RaiseLowerArm(motorPower * Arm::DOWN);
 	}
+	//std::cout << currentArmEncoderValue << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutomationOfArm::IsFinished()
 {
-	if (currentArmEncoderValue == desiredArmEncoderValue) {
-		return true;
-	}
-	return false;
+	return currentArmEncoderValue == desiredArmEncoderValue;
 }
 
 // Called once after isFinished returns true

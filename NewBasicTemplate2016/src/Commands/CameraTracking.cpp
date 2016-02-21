@@ -1,45 +1,49 @@
-#include <Commands/DriveArm.h>
 
-DriveArm::DriveArm()
+#include <Commands/CameraTracking.h>
+#include <OI.h>
+#include <cstdbool>
+#include <iostream>
+#include <memory>
+#include "../RobotMap.h"
+
+
+CameraTracking::CameraTracking()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Requires(arm.get());
+	Requires(cam.get());
 }
 
 // Called just before this Command runs the first time
-void DriveArm::Initialize()
+void CameraTracking::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveArm::Execute()
+void CameraTracking::Execute()
 {
-	/*if (arm->GetBottomLimitSwitchValue()) {
-		arm->ZeroEncoder();
-		arm->RaiseLowerArm(motorPower);
-	} */
+	cam->GetCameraValues();
 
-	float y = oi->GetStickY(OI::MANIP);
-	arm->RaiseLowerArm(y * Arm::UP);
+	//cam->UpdateServo();
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveArm::IsFinished()
+bool CameraTracking::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void DriveArm::End()
+void CameraTracking::End()
 {
-	arm->RaiseLowerArm(0);
+	cam->TogglePID(false);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveArm::Interrupted()
+void CameraTracking::Interrupted()
 {
-	End();
+	this->End();
 }

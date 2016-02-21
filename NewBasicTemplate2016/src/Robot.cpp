@@ -9,6 +9,7 @@ class Robot: public IterativeRobot
 private:
 	//SendableChooser* sonarAndLightChooser;
 	//CommandGroup* sonarAndLightCommand;
+
 	void RobotInit()
 	{
 		CommandBase::init();

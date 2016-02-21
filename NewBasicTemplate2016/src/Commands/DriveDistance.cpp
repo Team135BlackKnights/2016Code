@@ -17,7 +17,8 @@ DriveDistance::DriveDistance(double inchesDistance)
 // Called just before this Command runs the first time
 void DriveDistance::Initialize()
 {
-	driveTrain->ZeroAllEncoders();
+	driveTrain->ZeroEncoder(DriveTrain::REAR_LEFT);
+	driveTrain->ZeroEncoder(DriveTrain::FRONT_LEFT);
 }
 
 // Called repeatedly when this Command is scheduled to run

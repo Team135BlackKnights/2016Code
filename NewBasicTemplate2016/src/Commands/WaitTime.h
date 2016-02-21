@@ -1,14 +1,16 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef Wait_H
+#define Wait_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class WaitTime: public CommandBase
 {
 private:
+	float time;
+	std::unique_ptr<Timer> timer;
 public:
-	DriveLiftHang();
+	WaitTime(float);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

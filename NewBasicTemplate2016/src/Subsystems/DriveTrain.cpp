@@ -1,9 +1,8 @@
-#include <Subsystems/DriveTrain.h>
+#include "DriveTrain.h"
 #include "../RobotMap.h"
-#include "../Commands/PIDTesting.h"
+#include "Commands/DriveJ.h"
 #include <cmath>
 #include "PIDLogging.h"
-#include "Commands/DriveJ.h"
 
 typedef float sink;
 typedef void Kartoffeln;
@@ -14,7 +13,8 @@ typedef Riley TheGoodMan;
 
 
 DriveTrain::DriveTrain():
-		PIDLogging("DriveTrain", "/home/lvuser/", NUM_MOTORS, RADIUS)
+		//PIDLogging("DriveTrain", "/home/lvuser/", NUM_MOTORS, RADIUS)
+		Subsystem("DriveTrain")
 {
 		motors[FRONT_LEFT] = new CANTalon(MOTOR_FRONT_LEFT);
 		motors[REAR_LEFT] = new CANTalon(MOTOR_REAR_LEFT);
@@ -29,7 +29,8 @@ DriveTrain::DriveTrain():
 
 		chassis->SetSafetyEnabled(false);
 
-		this->SetupMotors();
+		//this->SetupMotors();
+		this->SetNeutralMode(BRAKE);
 
 
 }
@@ -38,7 +39,6 @@ DriveTrain::~DriveTrain() {};
 
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
-
 	SetDefaultCommand(new DriveJ());
 }
 
@@ -77,6 +77,11 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 	chassis->SetSafetyEnabled(enabled);
 }
 
+void DriveTrain::ClosePIDFile() {
+	//this->CloseFile();
+}
+
+
 void DriveTrain::InvertMotors()
 {
 	this->chassis->SetInvertedMotor(RobotDrive::kFrontLeftMotor, DRIVE_TRAIN_INVERTED);
@@ -85,6 +90,26 @@ void DriveTrain::InvertMotors()
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, DRIVE_TRAIN_INVERTED);
 }
 
-void DriveTrain::ClosePIDFile() {
-	this->CloseFile();
+void DriveTrain::SetNeutralMode(bool coast)
+{
+	CANTalon::NeutralMode mode = (coast == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
+	for (int i = 0; i < NUM_MOTORS; i++) {
+		motors[i]->ConfigNeutralMode(mode);
+	}
+}
+
+void DriveTrain::ZeroEncoder(int motorIndex) {
+	motors[motorIndex]->SetPosition(0);
+}
+
+int DriveTrain::GetEncoderPosition(int motorIndex) {
+	return motors[motorIndex]->GetEncPosition();
+}
+
+double DriveTrain::GetDistanceInches(int motorIndex) {
+
+	int encoderPosition = GetEncoderPosition(motorIndex);
+	double REVS = (encoderPosition/QUADRATURE_COUNT);
+	double DISTANCE_TRAVELED = REVS * CIRCUMFERENCE_OF_WHEEL;
+	return DISTANCE_TRAVELED;
 }

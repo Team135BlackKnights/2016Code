@@ -1,14 +1,13 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef MoveToShootingPosition_H
+#define MoveToShootingPosition_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class MoveToShootingPosition: public CommandBase
 {
-private:
 public:
-	DriveLiftHang();
+	MoveToShootingPosition();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

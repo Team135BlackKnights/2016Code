@@ -6,11 +6,9 @@
 
 class DriveArm: public CommandBase
 {
-private:
+//private:
 	//  int armEncoderValue;
-	int motorPower = .5;
-
-	std::unique_ptr<Timer> timer;
+	//  int motorPower = .5;
 public:
 	DriveArm();
 	void Initialize();

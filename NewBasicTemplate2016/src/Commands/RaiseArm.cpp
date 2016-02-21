@@ -1,45 +1,41 @@
-#include <Commands/DriveArm.h>
+#include "RaiseArm.h"
 
-DriveArm::DriveArm()
+RaiseArm::RaiseArm()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(arm.get());
+
+	timer = new Timer();
 }
 
 // Called just before this Command runs the first time
-void DriveArm::Initialize()
+void RaiseArm::Initialize()
 {
-
+	timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveArm::Execute()
+void RaiseArm::Execute()
 {
-	/*if (arm->GetBottomLimitSwitchValue()) {
-		arm->ZeroEncoder();
-		arm->RaiseLowerArm(motorPower);
-	} */
-
-	float y = oi->GetStickY(OI::MANIP);
-	arm->RaiseLowerArm(y * Arm::UP);
+	arm->RaiseLowerArm(.25 * arm->UP);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveArm::IsFinished()
+bool RaiseArm::IsFinished()
 {
-	return false;
+	return (timer->Get() > TimeRaise);
 }
 
 // Called once after isFinished returns true
-void DriveArm::End()
+void RaiseArm::End()
 {
 	arm->RaiseLowerArm(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveArm::Interrupted()
+void RaiseArm::Interrupted()
 {
-	End();
+	this->End();
 }

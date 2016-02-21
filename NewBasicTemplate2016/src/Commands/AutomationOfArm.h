@@ -10,13 +10,12 @@ private:
 	int currentArmEncoderValue;
 	int desiredArmEncoderValue;
 
-	double inchesHypotenuse;
+	//double inchesHypotenuse;
 
-	double motorPowerUp = .2;
-	double motorPowerDown = -.2;
+	double motorPower = .8;
 
 public:
-	AutomationOfArm(double);
+	AutomationOfArm();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

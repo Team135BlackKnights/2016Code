@@ -1,5 +1,9 @@
 #include <Commands/DriveJ.h>
-#include "RobotMap.h"
+#include <OI.h>
+#include <Subsystems/AxisCam.h>
+#include <Subsystems/DriveTrain.h>
+#include <cstdbool>
+#include <memory>
 
 DriveJ::DriveJ()
 {
@@ -10,6 +14,10 @@ DriveJ::DriveJ()
 
 // Called just before this Command runs the first time
 void DriveJ::Initialize() {
+	//this->inverted = Preferences::GetInstance()->GetBoolean("Inverted", false);
+	//driveTrain->SetupMotors();
+	//driveTrain->ZeroAllEncoders();
+	driveTrain->InvertMotors();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -17,8 +25,9 @@ void DriveJ::Execute()
 {
 
 	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
-	driveTrain->DriveTank(oi->GetStick(OI::LEFT), oi->GetStick(OI::RIGHT));
+	driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT));
 }
+
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveJ::IsFinished()

@@ -1,14 +1,13 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef CameraTracking_H
+#define CameraTracking_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class CameraTracking: public CommandBase
 {
-private:
 public:
-	DriveLiftHang();
+	CameraTracking();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

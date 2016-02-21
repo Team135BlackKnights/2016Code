@@ -1,26 +1,30 @@
 #ifndef MecanumDrive_H
 #define MecanumDrive_H
 
-#include "PIDLogging.h"
 #include "WPILib.h"
 #include "../OI.h"
 #include <fstream>
-//#include "Commands/PIDTesting.h"
+#include "Commands/Subsystem.h"
 
-class DriveTrain: public PIDLogging
+class DriveTrain: public Subsystem//public PIDLogging
 {
 public:
 	static const int NUM_MOTORS = 4;
 private:
 	//std::unique_ptr<CANTalon> motors[NUM_MOTORS];
 
+	CANTalon* motors[4];
+
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Need a value for the count of the encoder
 	static const int COUNT = 64;
+	static const int QUADRATURE_COUNT = 256;
 
 	//  Measured in Inches
 	static const int RADIUS = 6;
+	static const int DIAMETER = 2 * RADIUS;
+	static const int CIRCUMFERENCE_OF_WHEEL = DIAMETER * M_PI;
 
 public:
 
@@ -28,6 +32,9 @@ public:
 						REAR_LEFT = RobotDrive::kRearLeftMotor,
 						FRONT_RIGHT = RobotDrive::kFrontRightMotor,
 						REAR_RIGHT = RobotDrive::kRearRightMotor;
+
+	static const bool COAST = true;
+	static const bool BRAKE = false;
 
 	DriveTrain();
 	~DriveTrain();
@@ -44,6 +51,11 @@ public:
 	void InvertMotors();
 	void ClosePIDFile();
 
+	void ZeroEncoder(int);
+	int GetEncoderPosition(int);
+	double GetDistanceInches(int);
+
+	void SetNeutralMode(bool coast);
 };
 
 #endif

@@ -5,12 +5,15 @@ ShootBoulder::ShootBoulder()
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(shooter.get());
-	speedSet = false;
 	encoderVelocity = 0;
 
 	timer.reset(new Timer());
 	initalTimerValue = 0;
 	finalTimerValue = 0;
+
+	timerStarted = false;;
+
+	speedSet = false;
 
 	placer = 0;
 }
@@ -18,15 +21,16 @@ ShootBoulder::ShootBoulder()
 // Called just before this Command runs the first time
 void ShootBoulder::Initialize()
 {
-	shooter->ZeroAllEncoders();
+	shooter->ZeroEncoder(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
+	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",5.0f);
 	timer->Reset();
-	timer->Start();
+	//timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ShootBoulder::Execute()
 {
-	encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
+	/*encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
 
 	std::cout << "Encoder Velocity: " << encoderVelocity << std::endl;
 
@@ -49,20 +53,37 @@ void ShootBoulder::Execute()
 		placer = 0;
 		speedSet = false;
 		SmartDashboard::PutBoolean("Shooter Up to Speed: ", speedSet);
-	}
+	} */
 
+	shooter->DriveShooterMotors(Shooter::OUT);
+
+	//if (encoderVelocity >= setEncoderVelocity) {
+		//SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
+
+		if (!timerStarted) {
+			timer->Reset();
+			timer->Start();
+			timerStarted = true;
+		}
+		else if (timer->Get() >= timeWait) {
+			shooter->DriveKicker(Shooter::KICKER_KICKED);
+		}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return false;
+	return timer->Get() >= timeWait + 2;
+	//return false;
 }
 
 // Called once after isFinished returns true
 void ShootBoulder::End()
 {
 	speedSet = false;
+	encoderVelocity = 0;
+
+	timerStarted = false;
 	shooter->StopShooterMotors();
 }
 

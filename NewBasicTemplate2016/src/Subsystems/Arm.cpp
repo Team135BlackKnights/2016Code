@@ -5,11 +5,13 @@
 Arm::Arm():
 	Subsystem("Arm")
 {
-	armMotor = new CANTalon(MOTOR_RAISE_LOWER_ARM);
+	armMotor.reset(new CANTalon(MOTOR_RAISE_LOWER_ARM));
 
 	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 	armMotor->ConfigEncoderCodesPerRev(COUNT);
 	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+	this->ZeroEncoder();
+	armMotor->SetSensorDirection(false);
 }
 
 void Arm::InitDefaultCommand()
@@ -32,14 +34,27 @@ bool Arm::GetBottomLimitSwitchValue() {
 
 //  HEIGHT and hypotenuse in inches
 int Arm::GetEncoderValueForAngle(double inchesHypotenuse) {
-	double radians = asin(HEIGHT_OF_TOWER/inchesHypotenuse);
-	double angle = radians * (180/M_PI);
-	int encoderPosition = round((int)(angle * ENCODER_MULTIPLYING_CONSTANT));
+	std::cout << "camera to goal distance: " << inchesHypotenuse << std::endl;
+	//double radians = asin((HEIGHT_OF_TOWER)/((float)feetHypotenuse * 12.0f));
+	double radians = GetAngleForArm(inchesHypotenuse);
+	std::cout << "rad: " << radians << std::endl;
+	double angle = radians * (180.0D/M_PI);
+	std::cout << "angle: " << angle << std::endl;
+	int encoderPosition = (angle * ENCODER_MULTIPLYING_CONSTANT);
 	return encoderPosition;
+	//return Preferences::GetInstance()->GetInt("encoderPos", 0);
+}
+
+//cameraDist is in inches
+double Arm::GetAngleForArm(double cameraDist)
+{
+	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist)));
+	std::cout << "Ground distance: " << groundDist << std::endl;
+	return atan((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {
-	return armMotor->GetEncPosition();
+	return -armMotor->GetEncPosition();
 }
 
 void Arm::ZeroEncoder() {
