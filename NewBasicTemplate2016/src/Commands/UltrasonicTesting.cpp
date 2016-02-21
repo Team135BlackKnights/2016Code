@@ -20,8 +20,8 @@ void UltrasonicTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void UltrasonicTesting::Execute()
 {
-	leftSonarDistance = analogSensors->GetSonarDistance(LEFT_SONAR_ANALOG_PORT);
-	rightSonarDistance = analogSensors->GetSonarDistance(RIGHT_SONAR_ANALOG_PORT);
+	leftSonarDistance = analogSensors->GetSonarDistanceLV(LEFT_SONAR_ANALOG_PORT);
+	rightSonarDistance = analogSensors->GetSonarDistanceLV(RIGHT_SONAR_ANALOG_PORT);
 	lightSensorDistance = analogSensors->GetLightValue();
 
 	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;

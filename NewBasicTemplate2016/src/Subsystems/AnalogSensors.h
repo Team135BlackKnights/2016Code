@@ -17,11 +17,13 @@ private:
 	float leftDistanceInches,
 		  rightDistanceInches;
 
-	static constexpr float VOLTS_PER_INCH = 5.0f/512.0f;
+	static constexpr float VOLTS_PER_INCH_LV = 5.0f/512.0f;
+	static constexpr float VOLTS_PER_5MM_HRLV = 5.0f/1024.0f;
 public:
 	AnalogSensors();
 	void InitDefaultCommand();
-	float GetSonarDistance(int);
+	float GetSonarDistanceLV(int);
+	float GetSonarDistanceHRLV(int);
 	int GetLightValue();
 };
 
