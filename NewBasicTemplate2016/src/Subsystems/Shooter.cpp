@@ -9,9 +9,12 @@ Shooter::Shooter() :
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 
-	kicker.reset(new Relay(RELAY_SHOOTER_KICKER, Relay::Direction::kForwardOnly));
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::CtreMagEncoder_Relative);
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+	//  Magnetic Encoder Count is either 256, 1024 quadrature;  OR 1024, 4096 quadrature
 
-	this->SetupMotors();
+
+	kicker.reset(new Servo(Servo_SHOOTER_KICKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -29,7 +32,7 @@ void Shooter::StopShooterMotors() {
 }
 
 void Shooter::DriveKicker(float power) {
-	//kicker->Set(power);
+	kicker->Set(power);
 }
 
 // Put methods for controlling this subsystem

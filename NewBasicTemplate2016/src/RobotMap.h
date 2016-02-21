@@ -30,9 +30,9 @@
     const int MOTOR_SHOOT_BOULDER = 14;
     const int MOTOR_RAISE_LOWER_ARM = 15;
 
+    const int Servo_SHOOTER_KICKER = 3;
 
     //  Inacuurate PWM Ports
-    const int RELAY_SHOOTER_KICKER = 5;
     const int MOTOR_COLLECTION = 3;
     const int MOTOR_LIFT_HANG_LIFT = 1;
     const int MOTOR_LIFT_HANG_FLIPPER = 2;

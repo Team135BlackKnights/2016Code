@@ -28,6 +28,8 @@ void ShootBoulder::Execute()
 {
 	encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
 
+	std::cout << "Encoder Velocity: " << encoderVelocity << std::endl;
+
 	shooter->DriveShooterMotors();
 
 	if (encoderVelocity >= setEncoderVelocity) {
