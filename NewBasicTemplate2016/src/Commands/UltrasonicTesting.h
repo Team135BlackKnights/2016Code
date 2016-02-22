@@ -12,7 +12,6 @@ private:
 
 	int lightSensorDistance;
 
-	//  int i;
 public:
 	UltrasonicTesting();
 	void Initialize();

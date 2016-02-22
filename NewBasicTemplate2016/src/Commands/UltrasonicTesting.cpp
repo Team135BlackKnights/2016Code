@@ -20,8 +20,8 @@ void UltrasonicTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void UltrasonicTesting::Execute()
 {
-	leftSonarDistance = analogSensors->GetSonarDistanceLV(LEFT_SONAR_ANALOG_PORT);
-	rightSonarDistance = analogSensors->GetSonarDistanceLV(RIGHT_SONAR_ANALOG_PORT);
+	leftSonarDistance = analogSensors->GetSonarDistanceLV(LEFT_SONAR_PWM_PORT);
+	rightSonarDistance = analogSensors->GetSonarDistanceLV(RIGHT_SONAR_PWM_PORT);
 	lightSensorDistance = analogSensors->GetLightValue();
 
 	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
@@ -34,9 +34,6 @@ void UltrasonicTesting::Execute()
 
 	//  SmartDashboard::PutString("LEFT SONAR", data); */
 
-	//  i = 0;
-	//  }
-	//  i++;
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -32,7 +32,9 @@
     const bool DRIVE_TRAIN_INVERTED = true;
 
     const int LIGHT_ANALOG_PORT = 0;
-    const int LEFT_SONAR_ANALOG_PORT = 1;
-    const int RIGHT_SONAR_ANALOG_PORT = 2;
+    //const int LEFT_SONAR_ANALOG_PORT = 1;
+    //const int RIGHT_SONAR_ANALOG_PORT = 2;
+    const int LEFT_SONAR_PWM_PORT = 0;
+    const int RIGHT_SONAR_PWM_PORT = 1;
 
 #endif

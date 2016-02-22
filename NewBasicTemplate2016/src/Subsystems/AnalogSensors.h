@@ -10,8 +10,10 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	std::unique_ptr<AnalogInput> leftSonar;
-	std::unique_ptr<AnalogInput> rightSonar;
+	//std::unique_ptr<AnalogInput> leftSonar;
+	//std::unique_ptr<AnalogInput> rightSonar;
+	std::unique_ptr<PWM> leftSonar;
+	std::unique_ptr<PWM> rightSonar;
 	std::unique_ptr<AnalogInput> light;
 
 	float leftDistanceInches,
@@ -19,6 +21,8 @@ private:
 
 	static constexpr float VOLTS_PER_INCH_LV = 5.0f/512.0f;
 	static constexpr float VOLTS_PER_5MM_HRLV = 5.0f/1024.0f;
+
+	static const int PWM_CONVERT_TO_INCHES_CONVERT = 147;
 public:
 	AnalogSensors();
 	void InitDefaultCommand();

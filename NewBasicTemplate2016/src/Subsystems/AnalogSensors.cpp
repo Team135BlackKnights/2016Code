@@ -5,8 +5,11 @@
 AnalogSensors::AnalogSensors() :
 		Subsystem("ExampleSubsystem")
 {
-	leftSonar.reset(new AnalogInput(LEFT_SONAR_ANALOG_PORT));
-	rightSonar.reset(new AnalogInput(RIGHT_SONAR_ANALOG_PORT));
+	//leftSonar.reset(new AnalogInput(LEFT_SONAR_ANALOG_PORT));
+	//rightSonar.reset(new AnalogInput(RIGHT_SONAR_ANALOG_PORT));
+
+	leftSonar.reset(new PWM(LEFT_SONAR_PWM_PORT));
+	rightSonar.reset(new PWM(RIGHT_SONAR_PWM_PORT));
 	light.reset(new AnalogInput(LIGHT_ANALOG_PORT));
 
 	leftDistanceInches = 0;
@@ -21,22 +24,25 @@ void AnalogSensors::InitDefaultCommand()
 }
 
 //  Based off of Port Number
+//  Left is 0
+//  Right is 1
 float AnalogSensors::GetSonarDistanceLV(int rightOrLeft) {
-	if (rightOrLeft == LEFT_SONAR_ANALOG_PORT) {
+	if (rightOrLeft == LEFT_SONAR_PWM_PORT) {
 		//  Value for Left Sonar Sensor
-		leftDistanceInches = leftSonar->GetVoltage()/(VOLTS_PER_INCH_LV);
+		leftDistanceInches = leftSonar->GetRaw()/(PWM_CONVERT_TO_INCHES_CONVERT);
 			return leftDistanceInches;
 	}
 	else {
 		//  Value for Right Sonar Sensor
-		rightDistanceInches = rightSonar->GetVoltage()/(VOLTS_PER_INCH_LV);
+		rightDistanceInches = rightSonar->GetRaw()/(PWM_CONVERT_TO_INCHES_CONVERT);
 		return rightDistanceInches;
 	}
 }
 
 //  Not too accurate of values
 float AnalogSensors::GetSonarDistanceHRLV(int rightOrLeft) {
-	if (rightOrLeft == LEFT_SONAR_ANALOG_PORT) {
+	return 5;
+	/*if (rightOrLeft == LEFT_SONAR_PWM_PORT) {
 		//  Value for Left Sonar Sensor
 		float leftDistanceInMillimeters = ((leftSonar->GetAverageVoltage()/(VOLTS_PER_5MM_HRLV))*5);
 		float leftDistanceInCentimeters = leftDistanceInMillimeters * 10;
@@ -49,7 +55,7 @@ float AnalogSensors::GetSonarDistanceHRLV(int rightOrLeft) {
 		float rightDistanceInCentimeters = rightDistanceInMillimeters * 10;
 		rightDistanceInches = (rightDistanceInCentimeters/2.54);
 		return rightDistanceInches;
-	}
+	} */
 }
 
 int AnalogSensors::GetLightValue() {
