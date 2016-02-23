@@ -48,5 +48,7 @@
     const int DIGITAL_ARM_RESET = 0;
     const int UP_ARM_POSITION = 155;
 
+    const int POT_ANALOG = 1;
+
 #endif
 

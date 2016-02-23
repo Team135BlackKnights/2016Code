@@ -29,6 +29,9 @@ private:
 	static constexpr double GOAL_HEIGHT_COMPENSATION = 12.0D;
 
 	static const int COUNT = 64;
+
+	Potentiometer* pot;
+	AnalogInput* ai;
 public:
 	Arm();
 	void InitDefaultCommand();
