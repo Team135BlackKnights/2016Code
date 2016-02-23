@@ -31,8 +31,8 @@
 
     const bool DRIVE_TRAIN_INVERTED = true;
 
-    const int LIGHT_ANALOG_PORT = 0;
-    const int LEFT_SONAR_ANALOG_PORT = 1;
+    const int LIGHT_ANALOG_PORT = 1;
+    const int LEFT_SONAR_ANALOG_PORT = 3;
     const int RIGHT_SONAR_ANALOG_PORT = 2;
 
     constexpr float LENGTH_OF_ROBOT = 30.5;
