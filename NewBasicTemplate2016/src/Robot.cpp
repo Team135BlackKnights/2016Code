@@ -10,13 +10,12 @@ class Robot: public IterativeRobot
 private:
 	//SendableChooser* sonarAndLightChooser;
 	//CommandGroup* sonarAndLightCommand;
-	Command* crosssDefenseStrictlyBasedOnARawDistance;
-
+	//Command* crosssDefenseStrictlyBasedOnARawDistance;
 	void RobotInit()
 	{
 		CommandBase::init();
-		double dist = Preferences::GetInstance()->GetFloat((std::string)"dist", 140.0f);
-		crosssDefenseStrictlyBasedOnARawDistance = new DriveDistance(dist);
+		//double dist = Preferences::GetInstance()->GetFloat((std::string)"dist", 140.0f);
+		//crosssDefenseStrictlyBasedOnARawDistance = new DriveDistance(dist);
 		//sonarAndLightChooser = new SendableChooser();
 		//sonarAndLightChooser->AddDefault("Both Sonars and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
 		//sonarAndLightChooser->AddObject("Right Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_RIGHT_AND_LIGHT));
@@ -35,7 +34,7 @@ private:
 	{
 		//sonarAndLightCommand = (CommandGroup*) sonarAndLightChooser->GetSelected();
 		//sonarAndLightCommand->Start();
-		crosssDefenseStrictlyBasedOnARawDistance->Start();
+		//crosssDefenseStrictlyBasedOnARawDistance->Start();
 	}
 
 	void AutonomousPeriodic()

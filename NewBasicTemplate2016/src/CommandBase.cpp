@@ -55,5 +55,4 @@ void CommandBase::init()
 	analogSensors.reset(new AnalogSensors());
 
 	//preferences.reset(Preferences::GetInstance());
-
 }

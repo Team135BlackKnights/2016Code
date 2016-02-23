@@ -9,7 +9,7 @@ RunningOverDefense::RunningOverDefense(int typeOfMethod)
 	rightSonarDistance = 0;
 	lightValueReceived = 0;
 
-	overDefense = false;
+	this->overDefense = false;
 
 	this->typeOfMethod = typeOfMethod;
 
@@ -37,10 +37,12 @@ void RunningOverDefense::Execute()
 
 	driveTrain->DriveTank(motorPower, motorPower);
 	if (overDefense == false) {
-		overDefense = serialCommunication->OverDefense(this->typeOfMethod, encoderPosition);
+		std::cout << "Executing" << std::endl;
+		this->overDefense = analogSensors->OverDefense(AnalogSensors::CASE_LEFT_RIGHT_AND_LIGHT);
 		placer = 1;
 	}
-	if (overDefense == true && placer == 1) {
+	if (this->overDefense == true && placer == 1) {
+		std::cout << "Over Defense" << std::endl;
 		initialTimerValue = timer->Get();
 		setTimerValue = initialTimerValue + waitTimerValue;
 		placer = 2;
@@ -50,17 +52,13 @@ void RunningOverDefense::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool RunningOverDefense::IsFinished()
 {
-	if (overDefense == true && setTimerValue >= timer->Get()) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return (this->overDefense == true && setTimerValue >= timer->Get());
 }
 
 // Called once after isFinished returns true
 void RunningOverDefense::End()
 {
+	std::cout << "Ended" << std::endl;
 	driveTrain->DriveTank(0.0, 0.0);
 	timer->Stop();
 }

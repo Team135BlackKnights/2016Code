@@ -31,9 +31,9 @@ private:
 	//  Values Still To Be Determined
 	double leftSonarBarrierDistance = 20,
 		   rightSonarBarrierDistance = 20,
-		   lightValue = 10;
+		   lightValue = 10; */
 
-	int typeOfMethod;
+	/*int typeOfMethod;
 
 	int driveTrainEncoderPosition;
 

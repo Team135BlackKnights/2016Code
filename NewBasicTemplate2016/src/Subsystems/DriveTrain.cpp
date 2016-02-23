@@ -2,7 +2,6 @@
 #include "../RobotMap.h"
 #include "Commands/DriveJ.h"
 #include <cmath>
-#include "PIDLogging.h"
 
 typedef float sink;
 typedef void Kartoffeln;
@@ -76,11 +75,6 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 {
 	chassis->SetSafetyEnabled(enabled);
 }
-
-void DriveTrain::ClosePIDFile() {
-	//this->CloseFile();
-}
-
 
 void DriveTrain::InvertMotors()
 {

@@ -24,6 +24,7 @@ void UltrasonicTesting::Execute()
 	rightSonarDistance = analogSensors->GetSonarDistance(RIGHT_SONAR_ANALOG_PORT);
 	lightSensorDistance = analogSensors->GetLightValue();
 
+	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
 	//  if (i % 10 == 0) {
 	/*serialCommunication->ReadSerialValues();
 
@@ -32,8 +33,6 @@ void UltrasonicTesting::Execute()
 	lightSensorDistance = serialCommunication->GetSerialValues(SerialCommunication::LIGHT_SENSOR_VALUE);
 
 	//  SmartDashboard::PutString("LEFT SONAR", data); */
-
-	std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

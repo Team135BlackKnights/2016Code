@@ -8,13 +8,14 @@ SerialCommunication::SerialCommunication() :
 
 	/*  //serialPort.reset(new SerialPort);
 	//serialPort->Reset();
-	serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kMXP);
+	/*serialPort = new SerialPort(BAUD_RATE, SerialPort::Port::kUSB);
 	//serialPort->SetReadBufferSize(10);
 
 	serialPort->EnableTermination('\n');
 	serialPort->SetTimeout(10);
 	//serialPort->SetReadBufferSize(16);
 
+<<<<<<< HEAD
 	buffer = new char('\a');
 
 	typeOfMethod = 0;
@@ -24,7 +25,9 @@ SerialCommunication::SerialCommunication() :
 	placer = 0;
 
 	initialEncoderPosition = 0;
-	finalEncoderPosition = 0; */
+	finalEncoderPosition = 0;
+
+	buffer = new char('\a'); */
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -40,11 +43,18 @@ void SerialCommunication::InitDefaultCommand()
 void SerialCommunication::ReadSerialValues() {
 	/*std::cout << "Bad" << std::endl;
 	if (serialPort->GetBytesReceived()== 0) {
+=======
+	/*if (serialPort->GetBytesReceived() == 0) {
+>>>>>>> refs/remotes/origin/UltrasonicTesting
 		std::cout << -1;
 		return;
 	}
 	while (serialPort->GetBytesReceived() > 0) {
+<<<<<<< HEAD
 		std::cout << serialPort->GetBytesReceived() << std::endl;
+=======
+		std::cout << "bad";
+>>>>>>> refs/remotes/origin/UltrasonicTesting
 		buffer = new char('\a');
 		int index = -1;
 		serialPort->Read(buffer, 8);
@@ -171,12 +181,26 @@ bool SerialCommunication::OverDefense(int typeOfMethod, int driveTrainEncoderPos
 	return false;
 	/*this->typeOfMethod = typeOfMethod;
 	this->driveTrainEncoderPosition = driveTrainEncoderPosition;
+=======
+bool SerialCommunication::OverDefense(int typeOfMethod) {
+	return false;
+	/*switch (typeOfMethod) {
+	case CASE_LIGHT:
+		if (data[LIGHT_SENSOR_VALUE] > lightValue) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	break;
+>>>>>>> refs/remotes/origin/UltrasonicTesting
 
 	if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && placer == 0) {
 		initialEncoderPosition = this->driveTrainEncoderPosition;
 		finalEncoderPosition = initialEncoderPosition + ENCODER_POSITION_PLACEMENT;
 		placer = 1;
 		return false;
+<<<<<<< HEAD
 	}
 	else if (data[LEFT_SONAR_VALUE] > leftSonarBarrierDistance && data[RIGHT_SONAR_VALUE] > rightSonarBarrierDistance && placer == 1 && ENCODER_POSITION_PLACEMENT > this->driveTrainEncoderPosition) {
 		return true;
