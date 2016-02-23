@@ -50,15 +50,17 @@ public:
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
-    static const int SILVER_TOGGLE = 1;
-    static const int RED_TOGGLE = 2;
+    //Button orientation - switches on top
+    static const int SILVER_SWITCH = 1;
+    static const int RED_SWITCH = 2;
+    static const int SILVER_TOGGLE = 10;
     static const int BUTTON = 3;
-    static const int LEFTARROW_BUMPUP = 10;
-    static const int LEFTARROW_BUMPDOWN = 11;
-    static const int MIDDLE_BUMPUP = 6;
-    static const int MIDDLE_BUMPDOWN = 7;
-    static const int LINE_BUMPUP = 9;
-    static const int LINE_BUMPDOWN = 8;
+    static const int LEFTARROW_BUMPUP = 9;
+    static const int LEFTARROW_BUMPDOWN = 8;
+    static const int MIDDLE_BUMPUP = 7;
+    static const int MIDDLE_BUMPDOWN = 6;
+    static const int LINE_BUMPUP = 5;
+    static const int LINE_BUMPDOWN = 4;
 
 	//BUTTON CONTROL CONSTANTS
 
