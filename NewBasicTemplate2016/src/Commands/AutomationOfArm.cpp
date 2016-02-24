@@ -14,7 +14,7 @@ AutomationOfArm::AutomationOfArm()
 void AutomationOfArm::Initialize()
 {
 
-	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
+	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob());
 	std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 }
 
