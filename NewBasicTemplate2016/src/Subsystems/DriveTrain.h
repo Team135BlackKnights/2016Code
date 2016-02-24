@@ -27,6 +27,10 @@ private:
 	static const int CIRCUMFERENCE_OF_WHEEL = DIAMETER * M_PI;
 	static constexpr double GEAR_RATIO = 26.0D / 60.0D;
 
+	int angleToTurn;
+
+	static const float CIRCUMFERENCE_OF_ROBOT = WIDTH_OF_ROBOT * M_PI;
+
 public:
 
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
@@ -55,6 +59,7 @@ public:
 	void ZeroEncoder(int);
 	int GetEncoderPosition(int);
 	double GetDistanceInches(int);
+	int GetEncoderPositionToTurnAngle(int);
 
 	void SetNeutralMode(bool coast);
 };

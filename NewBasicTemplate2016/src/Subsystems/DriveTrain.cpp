@@ -22,14 +22,14 @@ DriveTrain::DriveTrain():
 
 		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
 
-		// chassis->SetExpiration(0.5);
-
 		this->InvertMotors();
 
 		chassis->SetSafetyEnabled(false);
 
 		//this->SetupMotors();
 		this->SetNeutralMode(BRAKE);
+
+		this->angleToTurn = 0;
 
 
 }
@@ -108,4 +108,12 @@ double DriveTrain::GetDistanceInches(int motorIndex) {
 	double REVS = ((double)encoderPosition/QUADRATURE_COUNT);
 	double DISTANCE_TRAVELED = REVS * GEAR_RATIO * CIRCUMFERENCE_OF_WHEEL;
 	return DISTANCE_TRAVELED;
+}
+
+int DriveTrain::GetEncoderPositionToTurnAngle(int angle) {
+	this->angleToTurn = angle;
+	float distanceToTravel = (CIRCUMFERENCE_OF_ROBOT * this->angleToTurn)/(360.0f);
+	float rotationsToSpin = (distanceToTravel/CIRCUMFERENCE_OF_WHEEL);
+	int encoderPosition = (int) round(rotationsToSpin * COUNT);
+	return encoderPosition;
 }
