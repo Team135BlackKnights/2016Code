@@ -31,10 +31,10 @@
     const int MOTOR_RAISE_LOWER_ARM = 15;
 
     //  Inacuurate PWM Ports
-    const int MOTOR_LIFT_HANG_LIFT = 0;
-    const int Servo_SHOOTER_KICKER = 3;
+    const int MOTOR_LIFT_HANG_LIFT = 1;
+    const int Servo_SHOOTER_KICKER = 2;
     const int MOTOR_COLLECTION = 2;
-    const int MOTOR_LIFT_HANG_FLIPPER = 1; //2;
+    const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
     const int MOTOR_DEFENSE_ARM = 4;
     const int SERVO_PORT_Y = 8;
     const int SERVO_PORT_X = 9;
