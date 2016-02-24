@@ -10,7 +10,10 @@ private:
 	int currentArmEncoderValue;
 	int desiredArmEncoderValue;
 
-	double inchesHypotenuse;
+	double desiredPotValue,
+		   currentPotValue;
+
+	//double inchesHypotenuse;
 
 	double motorPower = .8;
 

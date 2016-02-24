@@ -8,20 +8,38 @@ AutomationOfArm::AutomationOfArm()
 	currentArmEncoderValue = 0;
 	desiredArmEncoderValue = 0;
 
+	desiredPotValue = 0;
+	currentPotValue = 0;
+
 }
 
 // Called just before this Command runs the first time
 void AutomationOfArm::Initialize()
 {
 
+<<<<<<< HEAD
 	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob());
 	std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
+=======
+	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
+	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
+	desiredPotValue = arm->GetPotValueForArm(cam.get()->distanceToBlob(cam.get()->getWidth()));
+>>>>>>> branch 'SBScrimage' of https://github.com/Team135BlackKnights/2016Code.git
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutomationOfArm::Execute()
 {
-	currentArmEncoderValue = arm->GetEncoderPosition();
+	currentPotValue = arm->GetPotValue();
+
+	if (currentPotValue < desiredPotValue) {
+		arm->RaiseLowerArm(motorPower * Arm::UP);
+	}
+	else if (currentPotValue > desiredPotValue) {
+		arm->RaiseLowerArm(motorPower * Arm::DOWN);
+	}
+
+	/*currentArmEncoderValue = arm->GetEncoderPosition();
 
 	if (currentArmEncoderValue < desiredArmEncoderValue) {
 		arm->RaiseLowerArm(motorPower * Arm::UP);
@@ -29,13 +47,14 @@ void AutomationOfArm::Execute()
 	else if (currentArmEncoderValue > desiredArmEncoderValue) {
 		arm->RaiseLowerArm(motorPower * Arm::DOWN);
 	}
-	//std::cout << currentArmEncoderValue << std::endl;
+	//std::cout << currentArmEncoderValue << std::endl; */
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutomationOfArm::IsFinished()
 {
-	return currentArmEncoderValue == desiredArmEncoderValue;
+	//return currentArmEncoderValue == desiredArmEncoderValue;
+	return currentPotValue = desiredPotValue;
 }
 
 // Called once after isFinished returns true

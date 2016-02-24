@@ -20,7 +20,7 @@ Arm::Arm():
 	//armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	//this->ZeroEncoder();
 	//armMotor->SetSensorDirection(false);
-	ai = new AnalogInput(POT_ANALOG);
+	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, 360, 0); // 0 can change if you want more offset
 }
 
@@ -70,6 +70,17 @@ int Arm::GetEncoderPosition() {
 
 void Arm::ZeroEncoder() {
 	//armMotor->SetPosition(0);
+}
+
+double Arm::GetPotValue() {
+	return pot->Get();
+}
+
+double Arm::GetPotValueForArm(double inchesHypotenuse) {
+	double radians = GetAngleForArm(inchesHypotenuse);
+	double angle = radians * (180.0D/M_PI);
+	double potValue = angle;
+	return potValue;
 }
 
 // Put methods for controlling this subsystem
