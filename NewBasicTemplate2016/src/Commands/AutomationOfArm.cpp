@@ -16,15 +16,9 @@ AutomationOfArm::AutomationOfArm()
 // Called just before this Command runs the first time
 void AutomationOfArm::Initialize()
 {
-
-<<<<<<< HEAD
-	desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob());
-	std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
-=======
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
-	desiredPotValue = arm->GetPotValueForArm(cam.get()->distanceToBlob(cam.get()->getWidth()));
->>>>>>> branch 'SBScrimage' of https://github.com/Team135BlackKnights/2016Code.git
+	//desiredPotValue = arm->GetPotValueForArm(cam.get()->distanceToBlob(cam.get()->getWidth()));
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -54,7 +48,8 @@ void AutomationOfArm::Execute()
 bool AutomationOfArm::IsFinished()
 {
 	//return currentArmEncoderValue == desiredArmEncoderValue;
-	return currentPotValue = desiredPotValue;
+	//return currentPotValue = desiredPotValue;
+	return false;
 }
 
 // Called once after isFinished returns true

@@ -6,7 +6,6 @@
 
 class DriveLiftHang: public CommandBase
 {
-private:
 public:
 	DriveLiftHang();
 	void Initialize();
