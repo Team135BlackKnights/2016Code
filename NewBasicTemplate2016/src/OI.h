@@ -2,6 +2,7 @@
 #define OI_H
 
 #include "WPILib.h"
+#include "RobotMap.h"
 //#include "Triggers/POV.h"
 
 class OI
@@ -90,5 +91,8 @@ public:
 	//Flipper power is controlled off the RIGHT slider
 	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
 	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
+
+	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
+	static constexpr float DISTANCE_NEED_TO_TRAVEL_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
 };
 #endif

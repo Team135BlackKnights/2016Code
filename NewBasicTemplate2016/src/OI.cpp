@@ -31,7 +31,7 @@ OI::OI()
 
 	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->WhenPressed(new AimBot());
 
-	buttonsArray[LEFT][12]->WhenPressed(new DriveDistance(12));
+	buttonsArray[RIGHT][6]->WhenPressed(new DriveDistance(DISTANCE_NEED_TO_TRAVEL_TO_RAMP));
 	/*
 	for (int i = 0; i < 8; i++) {
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));

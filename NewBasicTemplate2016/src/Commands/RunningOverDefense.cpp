@@ -52,7 +52,8 @@ void RunningOverDefense::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool RunningOverDefense::IsFinished()
 {
-	return (this->overDefense == true && setTimerValue >= timer->Get());
+	//return (this->overDefense == true && setTimerValue >= timer->Get());
+	return (this->overDefense == true);
 }
 
 // Called once after isFinished returns true

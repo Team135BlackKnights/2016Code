@@ -4,6 +4,8 @@
 #include "Subsystems/SerialCommunication.h"
 #include "Commands/GetRobotOverDefenseIntoPosition.h"
 #include "Commands/DriveDistance.h"
+#include "OI.h"
+#include "Commands/GetRobotOverDefenseIntoPosition.h"
 
 class Robot: public IterativeRobot
 {
@@ -11,9 +13,11 @@ private:
 	//SendableChooser* sonarAndLightChooser;
 	//CommandGroup* sonarAndLightCommand;
 	//Command* crosssDefenseStrictlyBasedOnARawDistance;
+	Command* autoCommand;
 	void RobotInit()
 	{
 		CommandBase::init();
+		autoCommand = new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_LEFT_RIGHT_AND_LIGHT);
 		//double dist = Preferences::GetInstance()->GetFloat((std::string)"dist", 140.0f);
 		//crosssDefenseStrictlyBasedOnARawDistance = new DriveDistance(dist);
 		//sonarAndLightChooser = new SendableChooser();
@@ -35,6 +39,7 @@ private:
 		//sonarAndLightCommand = (CommandGroup*) sonarAndLightChooser->GetSelected();
 		//sonarAndLightCommand->Start();
 		//crosssDefenseStrictlyBasedOnARawDistance->Start();
+		autoCommand->Start();
 	}
 
 	void AutonomousPeriodic()

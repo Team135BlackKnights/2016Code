@@ -35,7 +35,7 @@ private:
 		finalEncoderPosition,
 		addOnEncoderPosition = (LENGTH_OF_ROBOT * INCHES_TO_ENCODER_POSITION) + (24 * INCHES_TO_ENCODER_POSITION);
 
-	double leftSonarBarrierDistance = 22,
+	static constexpr double leftSonarBarrierDistance = 22,
 		   rightSonarBarrierDistance = 22,
 		   overDefenseLightValue = 30;
 

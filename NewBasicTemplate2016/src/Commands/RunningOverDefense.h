@@ -24,7 +24,7 @@ private:
 		   setTimerValue,
 		   waitTimerValue = .5;
 
-	const double motorPower = .8;
+	const double motorPower = .5D;
 
 	int placer;
 

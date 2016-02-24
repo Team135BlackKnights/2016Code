@@ -55,9 +55,21 @@ bool AnalogSensors::OverDefense(int typeOfMethod) {
 	leftDistanceInches = GetSonarDistance(LEFT_SONAR_ANALOG_PORT);
 	rightDistanceInches = GetSonarDistance(RIGHT_SONAR_ANALOG_PORT);
 	lightValue = GetLightValue();
+
+	std::cout << "Left: " << leftDistanceInches << "\tRight: " << rightDistanceInches << std::endl;
 	this->typeOfMethod = typeOfMethod;
 	this->encoderPosition = encoderPosition;
-			switch (typeOfMethod) {
+
+	if (leftDistanceInches > leftSonarBarrierDistance && rightDistanceInches > rightSonarBarrierDistance) {
+		if (passedFirstRamp)
+			return true;
+	}
+	else {
+		passedFirstRamp = true;
+	}
+
+	return false;
+			/*switch (typeOfMethod) {
 			case CASE_LIGHT:
 				if (lightValue > overDefenseLightValue && passedFirstRamp == false) {
 					passedFirstRamp = true;
@@ -121,7 +133,7 @@ bool AnalogSensors::OverDefense(int typeOfMethod) {
 			default:
 				return false;
 			break;
-			}
+			} */
 }
 
 // Put methods for controlling this subsystem
