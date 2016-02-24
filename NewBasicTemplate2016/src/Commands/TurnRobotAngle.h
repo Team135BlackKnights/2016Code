@@ -15,7 +15,7 @@ private:
 	int angleToTurn;
 	int directionToSpin;
 
-	static const float motorPower = .5;
+	static constexpr float motorPower = .5;
 
 	bool rightOrLeft;
 public:

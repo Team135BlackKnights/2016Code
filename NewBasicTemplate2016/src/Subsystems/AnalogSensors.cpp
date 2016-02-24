@@ -27,7 +27,7 @@ void AnalogSensors::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
-	SetDefaultCommand(new UltrasonicTesting());
+	//SetDefaultCommand(new UltrasonicTesting());
 }
 
 //  Based off of Port Number

@@ -23,7 +23,7 @@ void UltrasonicTesting::Execute()
 	leftSonarDistance = analogSensors->GetSonarDistance(LEFT_SONAR_ANALOG_PORT);
 	rightSonarDistance = analogSensors->GetSonarDistance(RIGHT_SONAR_ANALOG_PORT);
 	//lightSensorDistance = analogSensors->GetLightValue();
-	std::cout << "Right: " << rightSonarDistance <<  "Left: " <<  std::endl;
+	std::cout << "Right: " << rightSonarDistance <<  " Left: " <<  leftSonarDistance << std::endl;
 
 	//std::cout << "Left: " << leftSonarDistance <<  "  " << "Right: " << rightSonarDistance << "  " << "Light: " << lightSensorDistance << std::endl;
 	//  if (i % 10 == 0) {
