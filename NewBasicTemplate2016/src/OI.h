@@ -1,8 +1,8 @@
 #ifndef OI_H
 #define OI_H
 
+#include <Triggers/ArmResetOnDetonatorButton.h>
 #include "WPILib.h"
-#include "Triggers/ArmResetOnButton.h"
 
 class OI
 {
@@ -11,9 +11,11 @@ protected:
 
 	static const int JOYSTICKS = 4; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
+
 	//unique_ptr creates a(n) unique pointer  ask Eddie if confused
 	//Joystick array starts at index 0
 	std::unique_ptr<Joystick> joysticksArray[JOYSTICKS]; //creates an array of the joysticks
+
 	//JoystickButton array starts at index 1 (index 0 is not used)
 	std::unique_ptr<JoystickButton> buttonsArray[JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1]; //creates an array of the joysticks vs the buttons starting with buttons at 1
 		 /*	 	 	 	 	 	 Buttons * 0 is invalid *
@@ -22,7 +24,7 @@ protected:
 		  	 Controller [2]
 		 */
 
-	ArmResetOnButton* resetArm;
+	ArmResetOnDetonatorButton* resetArm;
 
 public:
 	OI();
@@ -53,6 +55,7 @@ public:
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
+    //Button Box Mappings
     static const int SILVER_TOGGLE = 1;
     static const int RED_TOGGLE = 2;
     static const int BUTTON = 3;
@@ -73,19 +76,20 @@ public:
 
 	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
 
-	const int CONTROL_COLLECTION_IN[2] = {MANIP, 6};
-	const int CONTROL_COLLECTION_OUT[2] = {MANIP, 5};
-
 	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
 	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
 
-	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 8};
-	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 8};
+	//Defense Arm?
+	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 13};
+	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 13};
 
 	const int CONTROL_SHOOTER_IN[2] = {MANIP, 2};
 	const int CONTROL_SHOOTER_OUT[2] = {MANIP, 1};
 
+	//Aim Bot FTW
 	const int CONTROL_SHOOT[2] = {MANIP, 7};
+
+	const int CONTROL_ARM_RESET[2] = {MANIP, 8};
 
 	//Lift power is controlled of the MANIP slider
 	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 12};

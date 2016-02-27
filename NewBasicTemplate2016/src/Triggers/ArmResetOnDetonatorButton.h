@@ -3,12 +3,12 @@
 
 #include "WPILib.h"
 
-class ArmResetOnButton: public Trigger
+class ArmResetOnDetonatorButton: public Trigger
 {
 private:
 	DigitalInput* input;
 public:
-	ArmResetOnButton();
+	ArmResetOnDetonatorButton();
 	bool Get();
 };
 

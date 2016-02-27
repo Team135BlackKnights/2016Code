@@ -9,7 +9,6 @@
 #include "CommandBase.h"
 
 #include "Commands/ShootBoulder.h"
-#include "Commands/DriveCollection.h"
 #include "Commands/DriveLiftHang.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
@@ -39,13 +38,7 @@ OI::OI()
 	*/
 	//resetArm = new ArmResetOnButton();
 	//resetArm->WhenActive(new ArmReset());
-	buttonsArray[RIGHT][8]->WhenPressed(new ArmReset());
-
-	//buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
-	//buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));
-
-	//buttonsArray[CONTROL_COLLECTION_IN[0]][CONTROL_COLLECTION_IN[1]]->WhileHeld(new DriveCollection(Collection::IN));
-	//buttonsArray[CONTROL_COLLECTION_OUT[0]][CONTROL_COLLECTION_OUT[1]]->WhileHeld(new DriveCollection(Collection::OUT));
+	buttonsArray[CONTROL_ARM_RESET[0]][CONTROL_ARM_RESET[1]]->WhenPressed(new ArmReset());
 
 	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
 	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));

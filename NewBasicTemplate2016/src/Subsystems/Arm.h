@@ -33,6 +33,9 @@ private:
 	Potentiometer* pot;
 	AnalogInput* ai;
 public:
+    static const int ARM_DOWN_POSITION = 0;
+    static const int ARM_UP_POSITION = 155;
+
 	Arm();
 	void InitDefaultCommand();
 	void RaiseLowerArm(float);
@@ -49,7 +52,7 @@ public:
 	static const int UP = 1;
 	static const int DOWN = -UP;
 
-	const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
+	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
 	void ZeroEncoder();
 	double GetPotValue();

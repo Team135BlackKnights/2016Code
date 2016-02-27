@@ -9,7 +9,7 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
-	kicker.reset(new Servo(Servo_SHOOTER_KICKER));
+	kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 }
 
 void Shooter::InitDefaultCommand()

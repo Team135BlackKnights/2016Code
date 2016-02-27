@@ -16,9 +16,10 @@
 // For example to map the left and right motors, you could define the
 // following variables to use with your drivetrain subsystem.
 
+	//Maps a value from a range into a new range
 	#define map(x, in_min, in_max, out_min, out_max) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
 
-	//constexpr bool ROBOT_MAIN = false;
+	//Truncates a values to a certain number of variables
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
     const int MOTOR_FRONT_LEFT	= 13;
@@ -29,26 +30,23 @@
     //  Inaccurate ID Values for the Talon
     const int MOTOR_SHOOT_BOULDER = 14;
     const int MOTOR_RAISE_LOWER_ARM = 15;
+    const int MOTOR_DEFENSE_ARM = 20; //Not used?
 
     //  Inacuurate PWM Ports
     const int MOTOR_LIFT_HANG_LIFT = 1;
-    const int Servo_SHOOTER_KICKER = 2;
-    const int MOTOR_COLLECTION = 2;
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
-    const int MOTOR_DEFENSE_ARM = 4;
-    const int SERVO_PORT_Y = 8;
-    const int SERVO_PORT_X = 9;
+    const int MOTOR_COLLECTION = 2;
 
-    //  Buttons Declarations
-    const int JOYSTICK_BUTTON_TESTER_START = 1;
-    const int JOYSTICK_BUTTON_TESTER_STOP = 6;
-
-    const bool DRIVE_TRAIN_INVERTED = false;
-
-    const int DIGITAL_ARM_RESET = 0;
-    const int UP_ARM_POSITION = 155;
+    const int SERVO_SHOOTER_KICKER = 2;
 
     const int POT_ANALOG_PORT = 0;
+
+    //Is drive train inverted? The world may never know...
+    const bool DRIVE_TRAIN_INVERTED = false;
+
+    //  Hard Buttons Declarations
+    const int DIGITAL_BUTTON_ARM_RESET = 1;
+
 
 #endif
 

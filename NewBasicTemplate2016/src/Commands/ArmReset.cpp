@@ -22,7 +22,7 @@ void ArmReset::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ArmReset::IsFinished()
 {
-	return arm->GetEncoderPosition() >= UP_ARM_POSITION;
+	return arm->GetEncoderPosition() >= Arm::ARM_DOWN_POSITION;
 }
 
 // Called once after isFinished returns true

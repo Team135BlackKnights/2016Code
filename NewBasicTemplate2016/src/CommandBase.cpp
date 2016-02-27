@@ -5,7 +5,6 @@
 std::unique_ptr<OI> CommandBase::oi;
 std::unique_ptr<Shooter> CommandBase::shooter;
 std::unique_ptr<Arm> CommandBase::arm;
-std::unique_ptr<Collection> CommandBase::collection;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
@@ -32,8 +31,6 @@ void CommandBase::init()
 
 	arm.reset(new Arm());
 
-	collection.reset(new Collection());
-
 	driveTrain.reset(new DriveTrain());
 
 	oi.reset(new OI());
@@ -42,7 +39,5 @@ void CommandBase::init()
 
 	cam.reset(new AxisCam());
 
-	defenseArm.reset(new DefenseArm());
-
-	//preferences.reset(Preferences::GetInstance());
+	//defenseArm.reset(new DefenseArm());
 }
