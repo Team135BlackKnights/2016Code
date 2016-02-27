@@ -3,8 +3,8 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
-#include "Subsystems/SerialCommunication.h"
 #include "RobotMap.h"
+#include "AnalogSensors.h"
 
 class RunningOverDefense: public CommandBase
 {
@@ -15,8 +15,6 @@ private:
 		   lightValueReceived;
 
 	bool overDefense;
-
-	int typeOfMethod;
 
 	std::unique_ptr<Timer> timer;
 
@@ -31,7 +29,7 @@ private:
 	int encoderPosition;;
 
 public:
-	RunningOverDefense(int);
+	RunningOverDefense(AnalogSensors::DEFENSE_METHOD);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -1,6 +1,6 @@
 #include "RunningOverDefense.h"
 
-RunningOverDefense::RunningOverDefense(int typeOfMethod)
+RunningOverDefense::RunningOverDefense(AnalogSensors::DEFENSE_METHOD typeOfMethod)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -9,9 +9,7 @@ RunningOverDefense::RunningOverDefense(int typeOfMethod)
 	rightSonarDistance = 0;
 	lightValueReceived = 0;
 
-	this->overDefense = false;
-
-	this->typeOfMethod = typeOfMethod;
+	overDefense = false;
 
 	timer.reset(new Timer());
 
@@ -33,12 +31,14 @@ void RunningOverDefense::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void RunningOverDefense::Execute()
 {
-	driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
+	encoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
 
 	driveTrain->DriveTank(motorPower, motorPower);
-	if (overDefense == false) {
+
+	overDefense = analogSensors->OverDefense(AnalogSensors::CASE_LOW_BAR, encoderPosition);
+	/*if (overDefense == false) {
 		std::cout << "Executing" << std::endl;
-		this->overDefense = analogSensors->OverDefense(AnalogSensors::CASE_LEFT_RIGHT_AND_LIGHT);
+		this->overDefense = analogSensors->OverDefense(AnalogSensors::CASE_LOW_BAR, encoderPosition);
 		placer = 1;
 	}
 	if (this->overDefense == true && placer == 1) {
@@ -46,14 +46,14 @@ void RunningOverDefense::Execute()
 		initialTimerValue = timer->Get();
 		setTimerValue = initialTimerValue + waitTimerValue;
 		placer = 2;
-	}
+	} */
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool RunningOverDefense::IsFinished()
 {
 	//return (this->overDefense == true && setTimerValue >= timer->Get());
-	return (this->overDefense == true);
+	return (overDefense);
 }
 
 // Called once after isFinished returns true
