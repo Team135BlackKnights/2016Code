@@ -4,31 +4,27 @@
 #include "TurnRobotAngle.h"
 
 
-GetRobotOverDefenseIntoPosition::GetRobotOverDefenseIntoPosition(int defensePosition)
+GetRobotOverDefenseIntoPosition::GetRobotOverDefenseIntoPosition(AnalogSensors::DEFENSE_METHOD typeOfDefense, int defensePosition)
 {
-	//this->typeOfMethod = typeOfMethod;
-
-	this->defensePosition = defensePosition;
-
 	AddSequential(new DriveDistance(DISTANCE_NEED_TO_TRAVEL));
-	AddSequential(new RunningOverDefense(AnalogSensors::CASE_LEFT_RIGHT_AND_LIGHT));
+	AddSequential(new RunningOverDefense(typeOfDefense));
 
-	if (this->defensePosition == 1) {
+	if (defensePosition == 1) {
 		AddSequential(new DriveDistance(120));
 	}
-	else if (this->defensePosition == 2) {
+	else if (defensePosition == 2) {
 		AddSequential(new DriveDistance(145));
 	}
-	else if (this->defensePosition == 3) {
+	else if (defensePosition == 3) {
 		AddSequential(new DriveDistance(80));
 		AddSequential(new TurnRobotAngle(90, RIGHT));
 		AddSequential(new DriveDistance(44));
 		AddSequential(new TurnRobotAngle(90, LEFT));
 	}
-	else if (this->defensePosition == 4) {
+	else if (defensePosition == 4) {
 		AddSequential(new DriveDistance(85));
 	}
-	else if (this->defensePosition == 5) {
+	else if (defensePosition == 5) {
 		AddSequential(new DriveDistance(140));
 	}
 

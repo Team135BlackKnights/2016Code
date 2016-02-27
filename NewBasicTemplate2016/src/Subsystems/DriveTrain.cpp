@@ -106,8 +106,8 @@ double DriveTrain::GetDistanceInches(int motorIndex) {
 
 	int encoderPosition = GetEncoderPosition(motorIndex);
 	double REVS = ((double)encoderPosition/QUADRATURE_COUNT);
-	double DISTANCE_TRAVELED = REVS * GEAR_RATIO * CIRCUMFERENCE_OF_WHEEL;
-	return DISTANCE_TRAVELED;
+	double distanceTraveled = REVS * GEAR_RATIO * CIRCUMFERENCE_OF_WHEEL;
+	return distanceTraveled;
 }
 
 int DriveTrain::GetEncoderPositionToTurnAngle(int angle) {

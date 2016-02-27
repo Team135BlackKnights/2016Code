@@ -15,6 +15,7 @@ AnalogSensors::AnalogSensors() :
 	lightValue = 0;
 
 	passedFirstRamp = false;
+	startUsingUltrasonicSensors = false;
 
 	initialEncoderPosition = 0;
 	finalEncoderPosition = 0;
@@ -48,12 +49,12 @@ int AnalogSensors::GetLightValue() {
 	return lightValue;
 }
 
-bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfMethod, int encoderPosition) {
+bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfDefense, int encoderPosition) {
 	leftDistanceInches = GetSonarDistance(LEFT_SONAR_ANALOG_PORT);
 	rightDistanceInches = GetSonarDistance(RIGHT_SONAR_ANALOG_PORT);
 	lightValue = GetLightValue();
 
-	/*switch (typeOfMethod) {
+	switch (typeOfDefense) {
 	case CASE_ROUGH_TERRAIN:
 	case CASE_MOAT:
 	case CASE_RAMPARTS:
@@ -84,9 +85,11 @@ bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfMethod, int encoderPosition
 	default:
 		return false;
 	break;
-	} */
+	}
 
-	switch (typeOfMethod) {
+
+	//  With Light Sensors
+	/*switch (typeOfMethod) {
 	case CASE_ROUGH_TERRAIN:
 	case CASE_MOAT:
 	case CASE_RAMPARTS:
@@ -97,9 +100,12 @@ bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfMethod, int encoderPosition
 			passedFirstRamp = true;
 			return false;
 		}
-		else if (lightValue > OVER_DEFENSE_LIGHT_VALUE && leftDistanceInches > LEFT_SONAR_BARRIER_DISTANCE && rightDistanceInches > RIGHT_SONAR_BARRIER_DISTANCE && passedFirstRamp == true && encoderPosition > finalEncoderPosition) {
+		else if (lightValue > OVER_DEFENSE_LIGHT_VALUE && passedFirstRamp == true && encoderPosition > finalEncoderPosition) {
+			startUsingUltrasonicSensors = true;
+			return false;
+		}
+		else if (startUsingUltrasonicSensors == true && leftDistanceInches > LEFT_SONAR_BARRIER_DISTANCE && rightDistanceInches > RIGHT_SONAR_BARRIER_DISTANCE) {
 			return true;
-			passedFirstRamp = false;
 		}
 		else {
 			return false;
@@ -112,86 +118,19 @@ bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfMethod, int encoderPosition
 			passedFirstRamp = true;
 			return false;
 		}
-		else if (lightValue > OVER_DEFENSE_LIGHT_VALUE && rightDistanceInches > RIGHT_SONAR_BARRIER_DISTANCE && passedFirstRamp == true && encoderPosition > finalEncoderPosition) {
+		else if (lightValue > OVER_DEFENSE_LIGHT_VALUE && passedFirstRamp == true && encoderPosition > finalEncoderPosition) {
+			startUsingUltrasonicSensors = true;
+			return false;
+		}
+		else if (startUsingUltrasonicSensors == true && rightDistanceInches > RIGHT_SONAR_BARRIER_DISTANCE) {
 			return true;
-			passedFirstRamp = false;
 		}
 		else {
 			return false;
 		}
 		break;
-	default:
-		return false;
-	break;
-	}
+	} */
 }
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-
-
-/*switch (typeOfMethod) {
-case CASE_LIGHT:
-	if (lightValue > overDefenseLightValue && passedFirstRamp == false) {
-		passedFirstRamp = true;
-		initialEncoderPosition = this->encoderPosition;
-		finalEncoderPosition = initialEncoderPosition + addOnEncoderPosition;
-		return false;
-	}
-	else if (lightValue > overDefenseLightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition){
-		passedFirstRamp = false;
-		return true;
-	}
-	else {
-		return false;
-	}
-break;
-case CASE_LEFT_AND_LIGHT:
-	if (lightValue > overDefenseLightValue && passedFirstRamp == true) {
-		passedFirstRamp = true;
-		initialEncoderPosition = this->encoderPosition;
-		finalEncoderPosition = initialEncoderPosition + addOnEncoderPosition;
-		return false;
-	}
-	else if (leftDistanceInches > leftSonarBarrierDistance && lightValue > overDefenseLightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition) {
-		passedFirstRamp = false;
-		return true;
-	}
-	else {
-		return false;
-	}
-break;
-case CASE_RIGHT_AND_LIGHT:
-	if (lightValue > overDefenseLightValue && passedFirstRamp == true) {
-		passedFirstRamp = true;
-		initialEncoderPosition = this->encoderPosition;
-		finalEncoderPosition = initialEncoderPosition + addOnEncoderPosition;
-		return false;
-	}
-	else if (rightDistanceInches > rightSonarBarrierDistance && lightValue > overDefenseLightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition) {
-		passedFirstRamp = false;
-		return true;
-	}
-	else {
-		return false;
-	}
-break;
-case CASE_LEFT_RIGHT_AND_LIGHT:
-	if (lightValue > overDefenseLightValue && passedFirstRamp == true) {
-		passedFirstRamp = true;
-		initialEncoderPosition = this->encoderPosition;
-		finalEncoderPosition = initialEncoderPosition + addOnEncoderPosition;
-		return false;
-	}
-	else if (leftDistanceInches > leftSonarBarrierDistance && rightDistanceInches > rightSonarBarrierDistance && lightValue > overDefenseLightValue && passedFirstRamp == true && finalEncoderPosition >= this->encoderPosition) {
-		passedFirstRamp = false;
-		return true;
-	}
-	else {
-		return false;
-	}
-break;
-default:
-	return false;
-break;
-} */

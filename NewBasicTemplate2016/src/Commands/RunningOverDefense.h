@@ -9,24 +9,13 @@
 class RunningOverDefense: public CommandBase
 {
 private:
-
-	double leftSonarDistance,
-		   rightSonarDistance,
-		   lightValueReceived;
-
 	bool overDefense;
-
-	std::unique_ptr<Timer> timer;
-
-	double initialTimerValue,
-		   setTimerValue,
-		   waitTimerValue = .5;
 
 	const double motorPower = .5D;
 
-	int placer;
+	int encoderPosition;
 
-	int encoderPosition;;
+	AnalogSensors::DEFENSE_METHOD typeOfDefense;
 
 public:
 	RunningOverDefense(AnalogSensors::DEFENSE_METHOD);

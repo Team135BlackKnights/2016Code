@@ -31,7 +31,7 @@ private:
 	int initialEncoderPosition,
 		finalEncoderPosition,
 		//  24 inches to travel after light sensor detects first light
-		addOnEncoderPosition = 24 * INCHES_TO_ENCODER_POSITION;
+		addOnEncoderPosition = 36 * INCHES_TO_ENCODER_POSITION;
 
 
 	static constexpr double WIDTH_BETWEEN_BARRIERS = 50.5;
@@ -44,6 +44,7 @@ private:
 	static constexpr double OVER_DEFENSE_LIGHT_VALUE = 30;
 
 	bool passedFirstRamp;
+	bool startUsingUltrasonicSensors;
 
 
 

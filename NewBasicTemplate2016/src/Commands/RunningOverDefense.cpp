@@ -1,31 +1,23 @@
 #include "RunningOverDefense.h"
 
-RunningOverDefense::RunningOverDefense(AnalogSensors::DEFENSE_METHOD typeOfMethod)
+RunningOverDefense::RunningOverDefense(AnalogSensors::DEFENSE_METHOD typeOfDefense)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
-	leftSonarDistance = 0;
-	rightSonarDistance = 0;
-	lightValueReceived = 0;
 
 	overDefense = false;
 
-	timer.reset(new Timer());
-
-	initialTimerValue = 0;
-	setTimerValue = 0;
-
-	placer = 0;
-
 	encoderPosition = 0;
+
+	this->typeOfDefense = typeOfDefense;
 
 }
 
 // Called just before this Command runs the first time
 void RunningOverDefense::Initialize()
 {
-	timer->Reset();
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -35,7 +27,7 @@ void RunningOverDefense::Execute()
 
 	driveTrain->DriveTank(motorPower, motorPower);
 
-	overDefense = analogSensors->OverDefense(AnalogSensors::CASE_LOW_BAR, encoderPosition);
+	overDefense = analogSensors->OverDefense(this->typeOfDefense, encoderPosition);
 	/*if (overDefense == false) {
 		std::cout << "Executing" << std::endl;
 		this->overDefense = analogSensors->OverDefense(AnalogSensors::CASE_LOW_BAR, encoderPosition);
@@ -61,7 +53,6 @@ void RunningOverDefense::End()
 {
 	std::cout << "Ended" << std::endl;
 	driveTrain->DriveTank(0.0, 0.0);
-	timer->Stop();
 }
 
 // Called when another command which requires one or more of the same

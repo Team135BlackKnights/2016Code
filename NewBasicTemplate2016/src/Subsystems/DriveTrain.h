@@ -29,7 +29,9 @@ private:
 
 	int angleToTurn;
 
-	static constexpr float CIRCUMFERENCE_OF_ROBOT = WIDTH_OF_ROBOT * M_PI;
+	static const int WIDTH_OF_WHEELS = 2;
+
+	static constexpr float CIRCUMFERENCE_OF_ROBOT = (WIDTH_OF_ROBOT + WIDTH_OF_WHEELS) * M_PI;
 
 public:
 
