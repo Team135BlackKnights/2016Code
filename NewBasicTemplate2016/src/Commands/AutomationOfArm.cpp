@@ -1,15 +1,15 @@
 #include "AutomationOfArm.h"
 
-AutomationOfArm::AutomationOfArm()
+AutomationOfArm::AutomationOfArm(Arm::CONTROL_TYPE controlType)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(arm.get());
-	currentArmEncoderValue = 0;
-	desiredArmEncoderValue = 0;
 
-	desiredPotValue = 0;
-	currentPotValue = 0;
+	currentValue = 0;
+	desiredValue = 0;
+
+	this->controlType = controlType;
 
 }
 
@@ -18,30 +18,20 @@ void AutomationOfArm::Initialize()
 {
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
-	//desiredPotValue = arm->GetPotValueForArm(cam.get()->distanceToBlob(cam.get()->getWidth()));
+	desiredValue = (double) arm->GetPotOrEncoderValueForAutomationOfArm(this->controlType, cam.get()->distanceToBlob());
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutomationOfArm::Execute()
 {
-	currentPotValue = arm->GetPotValue();
+	currentValue = (double) arm->GetPotValueOrEncoderPosition(this->controlType);
 
-	if (currentPotValue < desiredPotValue) {
+	if (currentValue < desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::UP);
 	}
-	else if (currentPotValue > desiredPotValue) {
+	else if (currentValue > desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::DOWN);
 	}
-
-	/*currentArmEncoderValue = arm->GetEncoderPosition();
-
-	if (currentArmEncoderValue < desiredArmEncoderValue) {
-		arm->RaiseLowerArm(motorPower * Arm::UP);
-	}
-	else if (currentArmEncoderValue > desiredArmEncoderValue) {
-		arm->RaiseLowerArm(motorPower * Arm::DOWN);
-	}
-	//std::cout << currentArmEncoderValue << std::endl; */
 }
 
 // Make this return true when this Command no longer needs to run execute()

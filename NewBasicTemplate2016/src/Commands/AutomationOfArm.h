@@ -7,18 +7,17 @@
 class AutomationOfArm: public CommandBase
 {
 private:
-	int currentArmEncoderValue;
-	int desiredArmEncoderValue;
-
-	double desiredPotValue,
-		   currentPotValue;
+	double currentValue,
+		   desiredValue;
 
 	//double inchesHypotenuse;
 
 	double motorPower = .8;
 
+	Arm::CONTROL_TYPE controlType;
+
 public:
-	AutomationOfArm();
+	AutomationOfArm(Arm::CONTROL_TYPE);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -10,6 +10,8 @@
 #include <iostream>
 #include <memory>
 
+
+
 Arm::Arm():
 	Subsystem("Arm")
 {
@@ -42,19 +44,6 @@ bool Arm::GetBottomLimitSwitchValue() {
 	return bottomLimitSwitch->Get();
 }
 
-//  HEIGHT and hypotenuse in inches
-int Arm::GetEncoderValueForAngle(double inchesHypotenuse) {
-	std::cout << "camera to goal distance: " << inchesHypotenuse << std::endl;
-	//double radians = asin((HEIGHT_OF_TOWER)/((float)feetHypotenuse * 12.0f));
-	double radians = GetAngleForArm(inchesHypotenuse);
-	std::cout << "rad: " << radians << std::endl;
-	double angle = radians * (180.0D/M_PI);
-	std::cout << "angle: " << angle << std::endl;
-	int encoderPosition = angle;// = (angle * ENCODER_MULTIPLYING_CONSTANT);
-	return encoderPosition;
-	//return Preferences::GetInstance()->GetInt("encoderPos", 0);
-}
-
 //cameraDist is in inches
 double Arm::GetAngleForArm(double cameraDist)
 {
@@ -64,23 +53,54 @@ double Arm::GetAngleForArm(double cameraDist)
 }
 
 int Arm::GetEncoderPosition() {
-	//return -armMotor->GetEncPosition();// + UP_ARM_POSITION;
-	return  pot->Get();
+	return -armMotor->GetEncPosition();// + UP_ARM_POSITION;
 }
 
 void Arm::ZeroEncoder() {
-	//armMotor->SetPosition(0);
+	armMotor->SetPosition(0);
 }
 
 double Arm::GetPotValue() {
 	return pot->Get();
 }
 
-double Arm::GetPotValueForArm(double inchesHypotenuse) {
-	double radians = GetAngleForArm(inchesHypotenuse);
-	double angle = radians * (180.0D/M_PI);
-	double potValue = angle;
-	return potValue;
+//  Hypotenuse in inches
+double Arm::GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE controlType, double inchesHypotenuse) {
+	switch(controlType) {
+	case POT: {
+		double potRadians = GetAngleForArm(inchesHypotenuse);
+		double potAngle = potRadians * (180.0D/M_PI);
+		double potValue = potAngle;
+		return potValue;
+	}
+
+	case ENCODER: {
+		double encoderRadians = GetAngleForArm(inchesHypotenuse);
+		double encoderAngle = encoderRadians * (180.0D/M_PI);
+		int encoderPosition = encoderAngle * ENCODER_MULTIPLYING_CONSTANT;
+		return (double)encoderPosition;
+	}
+
+	default: {
+		return 0.0;
+	}
+}
+}
+
+double Arm::GetPotValueOrEncoderPosition(CONTROL_TYPE controlType) {
+	switch (controlType) {
+	case POT:
+		return pot->Get();
+	break;
+
+	case ENCODER:
+		return (double) armMotor->GetEncPosition();
+	break;
+
+	default:
+		return 0.0;
+	break;
+	}
 }
 
 // Put methods for controlling this subsystem

@@ -5,6 +5,7 @@
 #include "WPILib.h"
 #include "PIDLogging.h"
 
+
 class Arm: public Subsystem //public PIDLogging
 {
 private:
@@ -32,7 +33,13 @@ private:
 
 	Potentiometer* pot;
 	AnalogInput* ai;
+
 public:
+	enum CONTROL_TYPE {
+		POT = 0,
+		ENCODER = 1
+	};
+
     static const int ARM_DOWN_POSITION = 0;
     static const int ARM_UP_POSITION = 155;
 
@@ -56,6 +63,9 @@ public:
 	int GetEncoderPosition();
 	void ZeroEncoder();
 	double GetPotValue();
+
+	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);
+	double GetPotValueOrEncoderPosition(CONTROL_TYPE);
 
 };
 
