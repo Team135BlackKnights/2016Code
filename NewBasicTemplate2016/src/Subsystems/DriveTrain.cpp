@@ -112,7 +112,7 @@ double DriveTrain::GetDistanceInches(int motorIndex) {
 
 int DriveTrain::GetEncoderPositionToTurnAngle(int angle) {
 	this->angleToTurn = angle;
-	float distanceToTravel = (CIRCUMFERENCE_OF_ROBOT * this->angleToTurn)/(360.0f);
+	float distanceToTravel = (CIRCUMFERENCE_OF_TURNING_RADIUS_OF_ROBOT * this->angleToTurn)/(360.0f);
 	float rotationsToSpin = (distanceToTravel/CIRCUMFERENCE_OF_WHEEL);
 	int encoderPosition = (int) round(rotationsToSpin * COUNT);
 	return encoderPosition;

@@ -5,28 +5,26 @@
 #include "Commands/GetRobotOverDefenseIntoPosition.h"
 #include "Commands/DriveDistance.h"
 #include "OI.h"
-#include "Commands/GetRobotOverDefenseIntoPosition.h"
 
 class Robot: public IterativeRobot
 {
 private:
-	//SendableChooser* sonarAndLightChooser;
-	//CommandGroup* sonarAndLightCommand;
-	//Command* crosssDefenseStrictlyBasedOnARawDistance;
-	Command* autoCommand;
+	SendableChooser *defenseChooser;
+	CommandGroup* autoCommand;
+	int defensePosition;
 	void RobotInit()
 	{
 		CommandBase::init();
-		autoCommand = new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_LEFT_RIGHT_AND_LIGHT);
-		//double dist = Preferences::GetInstance()->GetFloat((std::string)"dist", 140.0f);
-		//crosssDefenseStrictlyBasedOnARawDistance = new DriveDistance(dist);
-		//sonarAndLightChooser = new SendableChooser();
-		//sonarAndLightChooser->AddDefault("Both Sonars and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_RIGHT_AND_LIGHT));
-		//sonarAndLightChooser->AddObject("Right Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_RIGHT_AND_LIGHT));
-		//sonarAndLightChooser->AddObject("Left Sonar and Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LEFT_AND_LIGHT));
-		//sonarAndLightChooser->AddObject("Only Light", new GetRobotOverDefenseIntoPosition(SerialCommunication::CASE_LIGHT));
+		defensePosition = Preferences::GetInstance()->GetInt("Defense Position", 1);
 
-		//SmartDashboard::PutData("Sonars and Light Chooser", sonarAndLightChooser);
+		defenseChooser = new SendableChooser();
+
+		defenseChooser->AddDefault("Low Bar", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_LOW_BAR, defensePosition));
+		defenseChooser->AddObject("Rough Terrain", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_ROUGH_TERRAIN, defensePosition));
+		defenseChooser->AddObject("Ramparts", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_RAMPARTS, defensePosition));
+		defenseChooser->AddObject("Moat", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_MOAT, defensePosition));
+		defenseChooser->AddObject("Rock Wall", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_ROCKWALL, defensePosition));
+
 	}
 	
 	void DisabledPeriodic()
@@ -36,9 +34,7 @@ private:
 
 	void AutonomousInit()
 	{
-		//sonarAndLightCommand = (CommandGroup*) sonarAndLightChooser->GetSelected();
-		//sonarAndLightCommand->Start();
-		//crosssDefenseStrictlyBasedOnARawDistance->Start();
+		autoCommand = (CommandGroup*) defenseChooser->GetSelected();
 		autoCommand->Start();
 	}
 
