@@ -1,15 +1,15 @@
-#ifndef DriveCollection_H
-#define DriveCollection_H
+#ifndef ArmReset_H
+#define ArmReset_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveCollection: public CommandBase
+class ArmReset: public CommandBase
 {
 private:
-	float motorPower = 1.0f;
+	static constexpr float power = .6f;
 public:
-	DriveCollection();
+	ArmReset();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

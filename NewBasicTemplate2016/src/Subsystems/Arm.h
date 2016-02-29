@@ -5,6 +5,7 @@
 #include "WPILib.h"
 #include "PIDLogging.h"
 
+
 class Arm: public Subsystem //public PIDLogging
 {
 private:
@@ -29,7 +30,19 @@ private:
 	static constexpr double GOAL_HEIGHT_COMPENSATION = 12.0D;
 
 	static const int COUNT = 64;
+
+	Potentiometer* pot;
+	AnalogInput* ai;
+
 public:
+	enum CONTROL_TYPE {
+		POT = 0,
+		ENCODER = 1
+	};
+
+    static const int ARM_DOWN_POSITION = 0;
+    static const int ARM_UP_POSITION = 155;
+
 	Arm();
 	void InitDefaultCommand();
 	void RaiseLowerArm(float);
@@ -40,13 +53,19 @@ public:
 	int GetEncoderValueForAngle(double inchesHypotenuse);
 	double GetAngleForArm(double);
 
+	double GetPotValueForArm(double);
+
 	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = -1;
+	static const int UP = 1;
 	static const int DOWN = -UP;
 
-	const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
+	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
 	void ZeroEncoder();
+	double GetPotValue();
+
+	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);
+	double GetPotValueOrEncoderPosition(CONTROL_TYPE);
 
 };
 

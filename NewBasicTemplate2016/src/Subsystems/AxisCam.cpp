@@ -1,9 +1,13 @@
 #include <Commands/CameraTracking.h>
 #include <llvm/ArrayRef.h>
 #include <math.h>
+#include <networktables/NetworkTable.h>
+#include <PIDController.h>
 #include <Preferences.h>
 #include <Servo.h>
 #include <Subsystems/AxisCam.h>
+#include <Timer.h>
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -12,18 +16,19 @@ AxisCam::AxisCam():
 {
 	//grip.reset(NetworkTable::GetTable("grip").get());
 	visionTable = NetworkTable::GetTable("SmartDashboard");
-	height = 0;
-	width = 0;
-	x = 0;
-	y = 0;
+	height =666;
+	width = 666;
+	x = 666;
+	y = 666;
+	ASSpectRatio = width/height;
 	lastSetPointDelta = 0;
 	timer = new Timer();
 	//yServo.reset(new Servo(SERVO_PORT_Y));
 	xServo.reset(new Servo(0));
 	pidServoX = new ServoPID(xServo.get());
 	pidX = new PIDController(KU * .4, 0, TU / 2.0f, pidServoX, pidServoX);
-	//pidX = new PIDController(KU * Preferences::GetInstance()->GetFloat("KUMult",.4f),0, TU / Preferences::GetInstance()->GetFloat("TUMULT", 2.0f),
-	//					 pidServoX, pidServoX);
+	pidX = new PIDController(KU * Preferences::GetInstance()->GetFloat("KUMult",.4f),0, TU / Preferences::GetInstance()->GetFloat("TUMULT", 2.0f),
+						 pidServoX, pidServoX);
 
 	pidX->SetSetpoint(.5);
 
@@ -56,14 +61,23 @@ void AxisCam::GetCameraValues()
 		y = 666;
 		width = 666;
 		height = 666;
-		pidX->Disable();
+		//pidX->Disable();
 		return;
 	}
-	width = shapes[4] - shapes[3];
+	std::cout << "raw angle: " << shapes[1] << std::endl;
+	std::cout << "angle: " << shapes[1] * (M_PI / 180) << std::endl;
+	width = (shapes[4] - shapes[3]) / cos(shapes[1] * (M_PI / 180));
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
 	y = height / 2 + shapes[5];
-	pidX->Enable();
+	try{
+		ASSpectRatio = width/height;
+	}
+	catch(int e)
+	{
+		ASSpectRatio = 1;
+	}
+	//pidX->Enable();
 	/*std::cout << "x: " << x << std::endl;
 	std::cout << "y: " << y << std::endl;
 	std::cout << "Width: " << width << std::endl;
@@ -116,7 +130,7 @@ float AxisCam::getY()
 }
 
 //NOW IN INCHES
-float AxisCam::distanceToBlob(double pixel_width)
+float AxisCam::distanceToBlob()
 {
 	this->GetCameraValues();
 	double width = this->getWidth();
@@ -125,6 +139,10 @@ float AxisCam::distanceToBlob(double pixel_width)
 		value = 12.0f * (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
 		std::cout << "Width " << i << ": " << width << std::endl;
 		std::cout << "CamDist take " << i << ": " << value << std::endl;
+		 std::cout << "Aspect Ratio: " << ASSpectRatio << std::endl;
+		 std::cout << "width: " << width << " height: " << height << std::endl;
+		 //std::cout << "NEW CAMDIST: " << ASSpectRatio
+		 std::cout <<"done" << std::endl;
 	}
 	return value;
 }

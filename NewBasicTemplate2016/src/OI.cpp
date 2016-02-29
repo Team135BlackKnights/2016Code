@@ -9,13 +9,13 @@
 #include "CommandBase.h"
 
 #include "Commands/ShootBoulder.h"
-#include "Commands/DriveCollection.h"
 #include "Commands/DriveLiftHang.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
 #include "Subsystems/LiftHang.h"
 #include "Commands/AimBot.h"
-#include "Triggers/POV.h"
+#include "Commands/ArmReset.h"
+//#include "Triggers/ArmResetOnButton.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -36,13 +36,9 @@ OI::OI()
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
 	}
 	*/
-
-
-	//buttonsArray[CONTROL_ARM_UP[0]][CONTROL_ARM_UP[1]]->WhileHeld(new DriveArm(DriveArm::UP));
-	//buttonsArray[CONTROL_ARM_DOWN[0]][CONTROL_ARM_DOWN[1]]->WhileHeld(new DriveArm(DriveArm::DOWN));
-
-	//buttonsArray[CONTROL_COLLECTION_IN[0]][CONTROL_COLLECTION_IN[1]]->WhileHeld(new DriveCollection(Collection::IN));
-	//buttonsArray[CONTROL_COLLECTION_OUT[0]][CONTROL_COLLECTION_OUT[1]]->WhileHeld(new DriveCollection(Collection::OUT));
+	//resetArm = new ArmResetOnButton();
+	//resetArm->WhenActive(new ArmReset());
+	buttonsArray[CONTROL_ARM_RESET[0]][CONTROL_ARM_RESET[1]]->WhenPressed(new ArmReset());
 
 	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
 	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));

@@ -17,7 +17,7 @@ void ShootBoulder::Initialize()
 {
 	//shooter->ZeroAllEncoders();
 	timer->Reset();
-	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",5.0f);
+	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",3.5f);
 }
 
 // Called repeatedly when this Command is scheduled to run

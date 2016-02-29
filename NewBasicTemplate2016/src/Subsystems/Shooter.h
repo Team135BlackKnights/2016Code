@@ -29,8 +29,8 @@ public:
 	static const int IN = 1;
 	static const int OUT = -IN;
 
-	static constexpr float KICKER_KICKED = .99135135135135135f;
-	static constexpr float KICKER_RESET = .7f;
+	static constexpr float KICKER_KICKED = 0.6f;
+	static constexpr float KICKER_RESET = 0.0f;
 };
 
 #endif

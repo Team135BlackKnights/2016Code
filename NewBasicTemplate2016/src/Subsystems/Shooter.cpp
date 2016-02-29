@@ -9,7 +9,7 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
-	kicker.reset(new Servo(Servo_SHOOTER_KICKER));
+	kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -27,7 +27,9 @@ void Shooter::StopShooterMotors() {
 }
 
 void Shooter::DriveKicker(float value) {
-	kicker->Set(value);
+	//Kicker shouldn't fight itself now!
+	if (this->kicker->Get() != value)
+		kicker->Set(value);
 }
 
 // Put methods for controlling this subsystem
