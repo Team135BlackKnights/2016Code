@@ -50,6 +50,7 @@ int AnalogSensors::GetLightValue() {
 }
 
 bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfDefense, int encoderPosition) {
+	//  Without Light Sensors
 	leftDistanceInches = GetSonarDistance(LEFT_SONAR_ANALOG_PORT);
 	rightDistanceInches = GetSonarDistance(RIGHT_SONAR_ANALOG_PORT);
 	lightValue = GetLightValue();
