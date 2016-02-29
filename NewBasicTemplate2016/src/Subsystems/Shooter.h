@@ -14,7 +14,6 @@ private:
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
 	std::unique_ptr<Servo> kicker;
-
 	//  Not defined yet
 public:
 	Shooter();
@@ -26,6 +25,7 @@ public:
 	void DriveKicker(float);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
+
 	static const int IN = 1;
 	static const int OUT = -IN;
 

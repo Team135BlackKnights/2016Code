@@ -3,10 +3,8 @@
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
-#include "PIDLogging.h"
 
-
-class Arm: public Subsystem //public PIDLogging
+class Arm: public Subsystem
 {
 private:
 	// It's desirable that everything possible under private except
@@ -29,11 +27,10 @@ private:
 	//Distance above the bottom of the goal we want to aim
 	static constexpr double GOAL_HEIGHT_COMPENSATION = 12.0D;
 
-	static const int COUNT = 64;
-
 	Potentiometer* pot;
 	AnalogInput* ai;
 
+	static const int COUNT = 256;
 public:
 	enum CONTROL_TYPE {
 		POT = 0,
@@ -50,22 +47,18 @@ public:
 	bool GetTopLimitSwitchValue();
 	bool GetBottomLimitSwitchValue();
 
-	int GetEncoderValueForAngle(double inchesHypotenuse);
 	double GetAngleForArm(double);
 
-	double GetPotValueForArm(double);
+	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);
+	double GetPotValueOrEncoderPosition(CONTROL_TYPE);
 
-	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = 1;
-	static const int DOWN = -UP;
-
-	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
 	void ZeroEncoder();
 	double GetPotValue();
 
-	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);
-	double GetPotValueOrEncoderPosition(CONTROL_TYPE);
+	static const int RAISE_LOWER_ARM = 0;
+	static const int UP = 1;
+	static const int DOWN = -UP;
 
 };
 

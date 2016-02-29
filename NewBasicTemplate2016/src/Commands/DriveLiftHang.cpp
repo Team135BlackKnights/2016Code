@@ -32,8 +32,6 @@ void DriveLiftHang::Execute()
 	if (oi->GetButton(oi->CONTROL_LIFT_HANG_FLIPPER_DOWN[0], oi->CONTROL_LIFT_HANG_FLIPPER_DOWN[1]))
 		flipperPower = flipperPowerSlider * LiftHang::FLIPPER_DOWN;
 	liftHang->DriveFlipperMotor(flipperPower);
-
-
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -17,11 +17,12 @@ Arm::Arm():
 {
 	armMotor.reset(new CANTalon(MOTOR_RAISE_LOWER_ARM));
 
-	//armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-	//armMotor->ConfigEncoderCodesPerRev(256);
-	//armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
-	//this->ZeroEncoder();
-	//armMotor->SetSensorDirection(false);
+	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+	armMotor->ConfigEncoderCodesPerRev(COUNT);
+	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+	this->ZeroEncoder();
+	armMotor->SetSensorDirection(false);
+
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, 360, 0); // 0 can change if you want more offset
 }

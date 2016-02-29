@@ -1,12 +1,11 @@
-/*
-	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
-	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
- */
 #include <Commands/DriveArm.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
+
+#include "Commands/RunningOverDefense.h"
+#include "Commands/DriveDistance.h"
 
 #include "Commands/ShootBoulder.h"
 #include "Commands/DriveLiftHang.h"
@@ -31,13 +30,6 @@ OI::OI()
 
 	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->WhenPressed(new AimBot());
 
-	/*
-	for (int i = 0; i < 8; i++) {
-		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
-	}
-	*/
-	//resetArm = new ArmResetOnButton();
-	//resetArm->WhenActive(new ArmReset());
 	buttonsArray[CONTROL_ARM_RESET[0]][CONTROL_ARM_RESET[1]]->WhenPressed(new ArmReset());
 
 	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
@@ -45,8 +37,8 @@ OI::OI()
 	buttonsArray[CONTROL_TURN_LEFT[0]][CONTROL_TURN_LEFT[1]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
 	buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
 
-	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
-	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
+	//buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
+	//buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
 }
 
 //OI Functions

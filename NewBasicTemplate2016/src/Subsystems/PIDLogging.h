@@ -22,9 +22,12 @@ protected:
 
 	int numMotors;
 	static const int COUNT = 64;
+	static const int QUADRATURE_COUNT = (COUNT * 4);
 	//int quadratureCOUNT;
 
 	double radius; //  In inches, assuming ALL wheels have the same radius
+
+	double diameter;
 
 	double circumfrence;
 
@@ -50,7 +53,7 @@ public:
 	int GetEncoderVelocity(int);
 	void ZeroEncoder(int);
 	void ZeroAllEncoders();
-	double GetDistance(int);
+	double GetDistanceInches(int);
 	double GetVelocity(int);
 
 	void LogTwoEncoderValues(int, double, double, double);

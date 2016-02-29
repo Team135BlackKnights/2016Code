@@ -6,6 +6,9 @@
 
 class DriveArm: public CommandBase
 {
+//private:
+	//  int armEncoderValue;
+	//  int motorPower = .5;
 public:
 	DriveArm();
 	void Initialize();

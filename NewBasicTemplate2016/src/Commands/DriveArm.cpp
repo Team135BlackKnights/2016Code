@@ -16,6 +16,11 @@ void DriveArm::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveArm::Execute()
 {
+	/*if (arm->GetBottomLimitSwitchValue()) {
+		arm->ZeroEncoder();
+		arm->RaiseLowerArm(motorPower);
+	} */
+
 	float y = oi->GetStickY(OI::MANIP);
 	arm->RaiseLowerArm(y * Arm::UP);
 	//std::cout << arm->GetEncoderPosition() << std::endl;

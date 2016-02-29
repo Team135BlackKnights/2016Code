@@ -3,11 +3,11 @@
 
 #include <Triggers/ArmResetOnDetonatorButton.h>
 #include "WPILib.h"
+#include "RobotMap.h"
 
 class OI
 {
 protected:
-
 
 	static const int JOYSTICKS = 4; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
@@ -98,5 +98,8 @@ public:
 	//Flipper power is controlled off the RIGHT slider
 	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
 	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
+
+	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
+	static constexpr float DISTANCE_NEED_TO_TRAVEL_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
 };
 #endif

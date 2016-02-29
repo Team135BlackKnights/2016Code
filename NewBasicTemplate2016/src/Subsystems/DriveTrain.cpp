@@ -22,12 +22,14 @@ DriveTrain::DriveTrain():
 
 		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
 
-		// chassis->SetExpiration(0.5);
+		this->InvertMotors();
 
 		chassis->SetSafetyEnabled(false);
 
 		//this->SetupMotors();
 		this->SetNeutralMode(BRAKE);
+
+		this->angleToTurn = 0;
 
 
 }
@@ -36,16 +38,11 @@ DriveTrain::~DriveTrain() {};
 
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
-
 	SetDefaultCommand(new DriveJ());
 }
 
-double DriveTrain::GetMotorExpiration(int motorIndex) {
-	return motors[motorIndex]->GetExpiration();
-}
-
-void DriveTrain::EnableMotorControl(int motorIndex) {
-	motors[motorIndex]->EnableControl();
+void DriveTrain::DriveTank(Joystick* left, Joystick* right) {
+	chassis->TankDrive(left, right);
 }
 
 void DriveTrain::DriveTank(float left, float right)
@@ -61,6 +58,14 @@ void DriveTrain::SetMotorValue(int MotorPort, double MotorPower) {
 	motors[MotorPort]->Set(MotorPower);
 }
 
+void DriveTrain::SetAllMotorValues(double motorPower) {
+	motors[FRONT_LEFT]->Set(motorPower);
+	motors[REAR_LEFT]->Set(motorPower);
+	motors[FRONT_RIGHT]->Set(motorPower);
+	motors[REAR_RIGHT]->Set(motorPower);
+
+}
+
 void DriveTrain::RotateTank(float power)
 {
 	chassis->TankDrive(power, -power);
@@ -70,11 +75,6 @@ void DriveTrain::SetSafetyEnabled(bool enabled)
 {
 	chassis->SetSafetyEnabled(enabled);
 }
-
-void DriveTrain::ClosePIDFile() {
-	//this->CloseFile();
-}
-
 
 void DriveTrain::InvertMotors()
 {
@@ -90,4 +90,30 @@ void DriveTrain::SetNeutralMode(bool coast)
 	for (int i = 0; i < NUM_MOTORS; i++) {
 		motors[i]->ConfigNeutralMode(mode);
 	}
+}
+
+void DriveTrain::ZeroEncoder(int motorIndex) {
+	motors[motorIndex]->SetPosition(0);
+}
+
+int DriveTrain::GetEncoderPosition(int motorIndex) {
+	int value = motors[motorIndex]->GetEncPosition();
+	std::cout << "Encoder: " << value << std::endl;
+	return value;
+}
+
+double DriveTrain::GetDistanceInches(int motorIndex) {
+
+	int encoderPosition = GetEncoderPosition(motorIndex);
+	double REVS = ((double)encoderPosition/QUADRATURE_COUNT);
+	double distanceTraveled = REVS * GEAR_RATIO * CIRCUMFERENCE_OF_WHEEL;
+	return distanceTraveled;
+}
+
+int DriveTrain::GetEncoderPositionToTurnAngle(int angle) {
+	this->angleToTurn = angle;
+	float distanceToTravel = (CIRCUMFERENCE_OF_TURNING_RADIUS_OF_ROBOT * this->angleToTurn)/(360.0f);
+	float rotationsToSpin = (distanceToTravel/CIRCUMFERENCE_OF_WHEEL);
+	int encoderPosition = (int) round(rotationsToSpin * COUNT);
+	return encoderPosition;
 }

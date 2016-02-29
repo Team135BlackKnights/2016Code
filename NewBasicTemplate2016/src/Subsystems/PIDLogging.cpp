@@ -8,6 +8,8 @@
 #include "PIDLogging.h"
 #include <sstream>
 #include "RobotMap.h"
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int numMotors, double radius):
 	PIDSubsystem("PIDLogging", p, i, d),
@@ -17,12 +19,53 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 
 	this->numMotors = numMotors;
 	this->radius = radius;
-	this->circumfrence = this->radius * 3.14159;
+	//  this->circumfrence = this->radius * 3.14159;
 	//  preference->GetInstance();
 
 	//CANTalon motorTemps[numMotors];
 	//this->motors = motorTemps;
 	//memcpy(this->motors, motorTemps, numMotors);
+
+	diameter = this->radius * 2;;;;;;;;;;;;	;	;	;	;	;	;		;	;	;			;	;	;	;	;						;	;	;	;;
+		;		;	;
+			;	;
+			;	;
+
+				;	;
+					;
+						;
+							;
+							;
+
+							;	;
+								;
+									;
+										;
+										;	;	;
+											;
+
+											;
+											;	;
+												;
+													;
+														;
+															;
+																;
+																	;
+																		;
+																			;
+																			;
+
+																			;	;
+
+																			;
+																				;
+																				;
+																				;	;
+																					;
+																					;
+
+	this->circumfrence = diameter * M_PI;
 }
 
 PIDLogging::~PIDLogging() {
@@ -80,18 +123,18 @@ void PIDLogging::ZeroAllEncoders() {
 	}
 }
 
-double PIDLogging::GetDistance(int motorIndex) {
+double PIDLogging::GetDistanceInches(int motorIndex) {
 
 	int encoderPosition = GetEncoderPosition(motorIndex);
-	double REVS = (encoderPosition/COUNT);
-	double DISTANCE_TRAVELED = REVS * circumfrence;
+	double REVS = (encoderPosition/QUADRATURE_COUNT);
+	double DISTANCE_TRAVELED = REVS * this->circumfrence;
 	return DISTANCE_TRAVELED;
 }
 
 double PIDLogging::GetVelocity(int motorIndex) {
 
 	int encoderVelocity = GetEncoderVelocity(motorIndex);
-	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(COUNT);
+	double NUM_REVS_PER_SEC = (encoderVelocity * 10)/(QUADRATURE_COUNT);
 	double DISTANCE_PER_SEC = NUM_REVS_PER_SEC * circumfrence;
 	return DISTANCE_PER_SEC;  //  Units: Inches per second
 
@@ -194,7 +237,7 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 		std::cout << "LOGGING VELOCITY";
 	}
 	if((whatToLog >> DISTANCE_OFFSET) & 1)
-		data << ",\t" << this->GetDistance(motorIndex);
+		data << ",\t" << this->GetDistanceInches(motorIndex);
 	//  data << "\n";
 	this->WriteString(data.str());
 }
