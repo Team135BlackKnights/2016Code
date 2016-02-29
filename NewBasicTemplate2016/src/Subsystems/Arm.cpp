@@ -71,7 +71,7 @@ double Arm::GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE controlType, dou
 		double potRadians = GetAngleForArm(inchesHypotenuse);
 		double potAngle = potRadians * (180.0D/M_PI);
 		double potValue = potAngle;
-		return potValue;
+		return (double) potValue;
 	}
 
 	case ENCODER: {
