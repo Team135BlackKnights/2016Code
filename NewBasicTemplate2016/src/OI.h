@@ -3,6 +3,7 @@
 
 #include <Triggers/ArmResetOnDetonatorButton.h>
 #include "WPILib.h"
+#include "Driver.h"
 
 class OI
 {
@@ -23,12 +24,9 @@ protected:
 		  	 Controller [1]
 		  	 Controller [2]
 		 */
-<<<<<<< HEAD
-=======
 
 	ArmResetOnDetonatorButton* resetArm;
 
->>>>>>> refs/remotes/origin/V2Test
 public:
 	OI();
 	Joystick* GetStick(int);
@@ -36,9 +34,20 @@ public:
 	float GetStickY(int);
 	float GetStickTwist(int);
 	float GetStickSlider(int);
+	float GetStickAxis(int, Joystick::AxisType);
 	bool GetButton(int stick, int);
 	int GetPOV(int);
 	float GetAxis(int, Joystick::AxisType);
+
+	Manipulator* sam;
+	Manipulator* chris;
+	//SendableChooser* manipulatorChooser;
+	Manipulator* manipulator;
+	
+	Driver* lefty;
+	Driver* righty;
+	//SendableChooser* driverChooser;
+	Driver* driver;
 
 	//USB JOYSTICK VALUES
     const int JOYSTICK_LEFT = 1;
@@ -58,17 +67,11 @@ public:
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
-<<<<<<< HEAD
     //Button orientation - switches on top
     static const int SILVER_SWITCH = 1;
     static const int RED_SWITCH = 2;
     static const int SILVER_TOGGLE = 10;
-=======
-    //Button Box Mappings
-    static const int SILVER_TOGGLE = 1;
-    static const int RED_TOGGLE = 2;
->>>>>>> refs/remotes/origin/V2Test
-    static const int BUTTON = 3;
+    static const int BIG_BUTTON = 3;
     static const int LEFTARROW_BUMPUP = 9;
     static const int LEFTARROW_BUMPDOWN = 8;
     static const int MIDDLE_BUMPUP = 7;
@@ -76,37 +79,9 @@ public:
     static const int LINE_BUMPUP = 5;
     static const int LINE_BUMPDOWN = 4;
 
-	//BUTTON CONTROL CONSTANTS
-
-	const int CONTROL_TURN_LEFT[2] = {LEFT, 3};
-	const int CONTROL_TURN_RIGHT[2] = {LEFT, 4};
-
-	const int CONTROL_FORWARD[2] = {LEFT, TRIGGER};
-	const int CONTROL_REVERSE[2] = {LEFT, THUMB_BUTTON};
-
-	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
-
-	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
-	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
-
-	//Defense Arm?
-	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 13};
-	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 13};
-
-	const int CONTROL_SHOOTER_IN[2] = {MANIP, 2};
-	const int CONTROL_SHOOTER_OUT[2] = {MANIP, 1};
-
-	//Aim Bot FTW
-	const int CONTROL_SHOOT[2] = {MANIP, 7};
-
-	const int CONTROL_ARM_RESET[2] = {MANIP, 8};
-
-	//Lift power is controlled of the MANIP slider
-	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 12};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 11};
-
-	//Flipper power is controlled off the RIGHT slider
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
+	void SetUpManipulators();
+	void SetUpDrivers();
+	void UpdateDriver(Driver*);
+	void UpdateManipulator(Manipulator*);
 };
 #endif

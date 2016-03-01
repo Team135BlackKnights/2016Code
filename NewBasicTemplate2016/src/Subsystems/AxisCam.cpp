@@ -64,8 +64,8 @@ void AxisCam::GetCameraValues()
 		//pidX->Disable();
 		return;
 	}
-	std::cout << "raw angle: " << shapes[1] << std::endl;
-	std::cout << "angle: " << shapes[1] * (M_PI / 180) << std::endl;
+	//std::cout << "raw angle: " << shapes[1] << std::endl;
+	//std::cout << "angle: " << shapes[1] * (M_PI / 180) << std::endl;
 	width = (shapes[4] - shapes[3]) / cos(shapes[1] * (M_PI / 180));
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
@@ -135,15 +135,13 @@ float AxisCam::distanceToBlob()
 	this->GetCameraValues();
 	double width = this->getWidth();
 	float value = 0;
-	for (int i = 0; i < 5; i++) {
 		value = 12.0f * (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
-		std::cout << "Width " << i << ": " << width << std::endl;
-		std::cout << "CamDist take " << i << ": " << value << std::endl;
-		 std::cout << "Aspect Ratio: " << ASSpectRatio << std::endl;
-		 std::cout << "width: " << width << " height: " << height << std::endl;
+		//std::cout << "Width " << i << ": " << width << std::endl;
+		//std::cout << "CamDist take " << i << ": " << value << std::endl;
+		 //std::cout << "Aspect Ratio: " << ASSpectRatio << std::endl;
+		 //std::cout << "width: " << width << " height: " << height << std::endl;
 		 //std::cout << "NEW CAMDIST: " << ASSpectRatio
-		 std::cout <<"done" << std::endl;
-	}
+		 //std::cout <<"done" << std::endl;
 	return value;
 }
 /*void AxisCam::setServoY()

@@ -1,14 +1,29 @@
 #include "WPILib.h"
 #include "Commands/Command.h"
 #include "CommandBase.h"
+#include "Commands/ChangeManipulator.h"
+#include "Commands/ChangeDriver.h"
 
 class Robot: public IterativeRobot
 {
 private:
 
+	SendableChooser* manipulatorChooser;
+	SendableChooser* driverChooser;
+
 	void RobotInit()
 	{
 		CommandBase::init();
+
+		manipulatorChooser = new SendableChooser();
+		manipulatorChooser->AddDefault("Chris", new ChangeManipulator(CommandBase::oi->chris));
+		manipulatorChooser->AddObject("Sam", new ChangeManipulator(CommandBase::oi->sam));
+		SmartDashboard::PutData("Manipulators", manipulatorChooser);
+
+		driverChooser = new SendableChooser();
+		driverChooser->AddDefault("Lefty", new ChangeDriver(CommandBase::oi->lefty));
+		driverChooser->AddObject("Righty", new ChangeDriver(CommandBase::oi->righty));
+		SmartDashboard::PutData("Drivers", driverChooser);
 	}
 	
 	void DisabledPeriodic()
@@ -27,6 +42,8 @@ private:
 
 	void TeleopInit()
 	{
+		((Command*)manipulatorChooser->GetSelected())->Start();
+		((Command*)driverChooser->GetSelected())->Start();
 	}
 
 	void TeleopPeriodic()

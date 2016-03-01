@@ -17,19 +17,19 @@ void DriveLiftHang::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHang::Execute()
 {
-	float liftPowerSlider = oi->GetStickSlider(OI::MANIP);
-	float flipperPowerSlider = oi->GetStickSlider(oi->RIGHT);
+	float liftPowerSlider = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_POWER_SLIDER);
+	float flipperPowerSlider = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
 	float liftPower = 0, flipperPower = 0;
 
-	if (oi->GetButton(oi->CONTROL_LIFT_HANG_UP[0], oi->CONTROL_LIFT_HANG_UP[1]))
+	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_UP[STICK], oi->manipulator->CONTROL_LIFT_HANG_UP[BUTTON]))
 		liftPower = liftPowerSlider * LiftHang::LIFT_UP;
-	if (oi->GetButton(oi->CONTROL_LIFT_HANG_DOWN[0], oi->CONTROL_LIFT_HANG_DOWN[1]))
+	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_DOWN[STICK], oi->manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON]))
 		liftPower = liftPowerSlider * LiftHang::LIFT_DOWN;
 	liftHang->DriveLiftMotor(liftPower);
 
-	if (oi->GetButton(oi->CONTROL_LIFT_HANG_FLIPPER_UP[0], oi->CONTROL_LIFT_HANG_FLIPPER_UP[1]))
+	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK], oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON]))
 		flipperPower = flipperPowerSlider * LiftHang::FLIPPER_UP;
-	if (oi->GetButton(oi->CONTROL_LIFT_HANG_FLIPPER_DOWN[0], oi->CONTROL_LIFT_HANG_FLIPPER_DOWN[1]))
+	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK], oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON]))
 		flipperPower = flipperPowerSlider * LiftHang::FLIPPER_DOWN;
 	liftHang->DriveFlipperMotor(flipperPower);
 

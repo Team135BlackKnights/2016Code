@@ -37,9 +37,9 @@
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
     const int MOTOR_COLLECTION = 2;
 
-    const int SERVO_SHOOTER_KICKER = 2;
+    const int SERVO_SHOOTER_KICKER = 3;
 
-    const int POT_ANALOG_PORT = 0;
+    const int POT_ANALOG_PORT = 4;
 
     //Is drive train inverted? The world may never know...
     const bool DRIVE_TRAIN_INVERTED = false;

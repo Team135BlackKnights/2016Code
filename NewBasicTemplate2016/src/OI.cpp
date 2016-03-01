@@ -15,6 +15,8 @@
 #include "Subsystems/LiftHang.h"
 #include "Commands/AimBot.h"
 #include "Commands/ArmReset.h"
+#include "Commands/ChangeDriver.h"
+//#include "Commands/ChangeManipulator.h"
 //#include "Triggers/ArmResetOnButton.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
@@ -29,7 +31,16 @@ OI::OI()
 			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
 				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 
-	buttonsArray[CONTROL_SHOOT[0]][CONTROL_SHOOT[1]]->WhenPressed(new AimBot());
+	lefty = new Driver();
+	righty = new Driver();
+	chris = new Manipulator();
+	sam = new Manipulator();
+
+	SetUpManipulators();
+	SetUpDrivers();
+
+	driver = new Driver(*lefty);
+	manipulator = new Manipulator(*sam);
 
 	/*
 	for (int i = 0; i < 8; i++) {
@@ -38,15 +49,19 @@ OI::OI()
 	*/
 	//resetArm = new ArmResetOnButton();
 	//resetArm->WhenActive(new ArmReset());
-	buttonsArray[CONTROL_ARM_RESET[0]][CONTROL_ARM_RESET[1]]->WhenPressed(new ArmReset());
 
-	buttonsArray[CONTROL_FORWARD[0]][CONTROL_FORWARD[1]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
-	buttonsArray[CONTROL_REVERSE[0]][CONTROL_REVERSE[1]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
-	buttonsArray[CONTROL_TURN_LEFT[0]][CONTROL_TURN_LEFT[1]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
-	buttonsArray[CONTROL_TURN_RIGHT[0]][CONTROL_TURN_RIGHT[1]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+	/*
+	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
+	buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
-	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
-	buttonsArray[CONTROL_NEUTRAL_MODE[0]][CONTROL_NEUTRAL_MODE[1]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
+	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
+	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+
+	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
+	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
+	*/
 }
 
 //OI Functions
@@ -80,6 +95,10 @@ float OI::GetStickTwist(int controllerNum)
 	return value;
 }
 
+float OI::GetStickAxis(int controllerNum, Joystick::AxisType axis) {
+	return joysticksArray[controllerNum]->GetAxis(axis);
+}
+
 float OI::GetStickSlider(int controllerNum)
 {
 	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
@@ -98,4 +117,15 @@ int OI::GetPOV(int stick)
 float OI::GetAxis(int stick, Joystick::AxisType axis)
 {
 	return joysticksArray[stick]->GetAxis(axis);
+}
+
+void OI::UpdateDriver(Driver* driver)
+{
+	this->driver = driver;
+}
+
+void OI::UpdateManipulator(Manipulator* manipulator)
+{
+	this->manipulator = manipulator;
+	std::cout << this->manipulator->NAME;
 }

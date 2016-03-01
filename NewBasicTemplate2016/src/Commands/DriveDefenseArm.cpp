@@ -16,10 +16,10 @@ void DriveDefenseArm::Initialize()
 void DriveDefenseArm::Execute()
 {
 	float power = 0;
-	if (oi->GetButton(oi->CONTROL_DEFENSE_ARM_UP[0], oi->CONTROL_DEFENSE_ARM_UP[1]))
-		power = DefenseArm::UP;
-	else if (oi->CONTROL_DEFENSE_ARM_DOWN[0], oi->CONTROL_DEFENSE_ARM_DOWN[1])
-		power = DefenseArm::DOWN;
+	//if (oi->GetButton(oi->CONTROL_DEFENSE_ARM_UP[0], oi->CONTROL_DEFENSE_ARM_UP[1]))
+		//power = DefenseArm::UP;
+	//else if (oi->CONTROL_DEFENSE_ARM_DOWN[0], oi->CONTROL_DEFENSE_ARM_DOWN[1])
+		//power = DefenseArm::DOWN;
 
 	defenseArm->DriveMotor(power);
 }
