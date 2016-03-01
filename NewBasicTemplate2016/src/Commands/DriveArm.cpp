@@ -20,12 +20,11 @@ void DriveArm::Execute()
 		arm->ZeroEncoder();
 		arm->RaiseLowerArm(motorPower);
 	} */
-
 	float y = oi->GetStickY(OI::MANIP);
 	arm->RaiseLowerArm(y * Arm::UP);
-	//std::cout << arm->GetEncoderPosition() << std::endl;
+	//std::cout << arm->GetPotValueOrEncoderPosition(Arm::ENCODER) << std::endl;
 
-	std::cout << arm->GetPotValue() << std::endl;
+	//std::cout << arm->GetPotValueOrEncoderPosition(Arm::POT) << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

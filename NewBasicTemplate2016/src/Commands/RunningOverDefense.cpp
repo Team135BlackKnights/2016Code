@@ -4,6 +4,7 @@ RunningOverDefense::RunningOverDefense(AnalogSensors::DEFENSE_METHOD typeOfDefen
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
+	Requires(analogSensors.get());
 	Requires(driveTrain.get());
 
 	overDefense = false;

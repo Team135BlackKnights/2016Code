@@ -1,14 +1,14 @@
-#ifndef RaiseAndLowerArm_H
-#define RaiseAndLowerArm_H
+#ifndef SetArmPosition_H
+#define SetArmPosition_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 #include "Triggers/ResetEncoderFromLimitSwitch.h"
 
-class DriveArm: public CommandBase
+class SetArmPosition: public CommandBase
 {
 public:
-	DriveArm();
+	SetArmPosition(int position);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

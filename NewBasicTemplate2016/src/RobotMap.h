@@ -48,10 +48,18 @@
     constexpr float LENGTH_OF_ROBOT = 30.5f;
     constexpr float WIDTH_OF_ROBOT = 28.5f;
 
+    //  Diameter in inches
+    const int DIAMETER_OF_DRIVE_TRAIN_WHEELS = 12;
+
 	//  Analog Inputs
     const int POT_ANALOG_PORT = 0;
     const int LIGHT_ANALOG_PORT = 1;
     const int LEFT_SONAR_ANALOG_PORT = 3;
     const int RIGHT_SONAR_ANALOG_PORT = 2;
+
+    //  Limit Switch Digital Inputs
+    //  Inaccurate Values for the Limit Switches
+    const int TOP_LIMIT_SWITCH_PORT = 3;
+    const int BOTTOM_LIMIT_SWITCH_PORT = 4;
 
 #endif

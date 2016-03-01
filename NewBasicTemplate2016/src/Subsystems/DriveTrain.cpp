@@ -15,22 +15,38 @@ DriveTrain::DriveTrain():
 		//PIDLogging("DriveTrain", "/home/lvuser/", NUM_MOTORS, RADIUS)
 		Subsystem("DriveTrain")
 {
+		//  Declares the motors based on their designated Talon IDs
 		motors[FRONT_LEFT] = new CANTalon(MOTOR_FRONT_LEFT);
 		motors[REAR_LEFT] = new CANTalon(MOTOR_REAR_LEFT);
 		motors[FRONT_RIGHT] = new CANTalon(MOTOR_FRONT_RIGHT);
 		motors[REAR_RIGHT] = new CANTalon(MOTOR_REAR_RIGHT);
 
+		//  Sets the drive train motors up with the chassis
+		//  in order to execute specific functions like DriveTank
 		chassis.reset(new RobotDrive(motors[FRONT_LEFT], motors[REAR_LEFT], motors[FRONT_RIGHT], motors[REAR_RIGHT]));
 
 		this->InvertMotors();
 
 		chassis->SetSafetyEnabled(false);
 
-		//this->SetupMotors();
 		this->SetNeutralMode(BRAKE);
 
 		this->angleToTurn = 0;
 
+		//  Sets the Feedback Device as a Quadrature Encoder
+		//  Allows the user to use PID with the quadrature encoder
+		//  You can use certain functions as a result of setting the feedback device to a Quadrature Encoder
+		//  For example: GetPosition() returns the value of the sensor providing feedback, which in this case
+		//  would be the Quadrature Encoder
+		motors[FRONT_RIGHT]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+		motors[FRONT_LEFT]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+
+		motors[FRONT_RIGHT]->ConfigEncoderCodesPerRev(COUNT);
+		motors[FRONT_LEFT]->ConfigEncoderCodesPerRev(COUNT);
+
+		//  Updates the Encoder values quicker
+		motors[FRONT_RIGHT]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+		motors[FRONT_LEFT]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 
 }
 
@@ -63,7 +79,6 @@ void DriveTrain::SetAllMotorValues(double motorPower) {
 	motors[REAR_LEFT]->Set(motorPower);
 	motors[FRONT_RIGHT]->Set(motorPower);
 	motors[REAR_RIGHT]->Set(motorPower);
-
 }
 
 void DriveTrain::RotateTank(float power)
@@ -102,6 +117,7 @@ int DriveTrain::GetEncoderPosition(int motorIndex) {
 	return value;
 }
 
+//  Returns how many inches the drive train has traveled from the encoder count value
 double DriveTrain::GetDistanceInches(int motorIndex) {
 
 	int encoderPosition = GetEncoderPosition(motorIndex);
@@ -110,10 +126,11 @@ double DriveTrain::GetDistanceInches(int motorIndex) {
 	return distanceTraveled;
 }
 
+//  Returns the desired encoder position in order to turn the specified angle
 int DriveTrain::GetEncoderPositionToTurnAngle(int angle) {
 	this->angleToTurn = angle;
-	float distanceToTravel = (CIRCUMFERENCE_OF_TURNING_RADIUS_OF_ROBOT * this->angleToTurn)/(360.0f);
+	float distanceToTravel = (CIRCUMFERENCE_OF_TURNING_ROBOT * this->angleToTurn)/(360.0f);
 	float rotationsToSpin = (distanceToTravel/CIRCUMFERENCE_OF_WHEEL);
 	int encoderPosition = (int) round(rotationsToSpin * COUNT);
-	return encoderPosition;
+	return encoderPosition * (1 / GEAR_RATIO);
 }

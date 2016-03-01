@@ -1,39 +1,39 @@
-#include "ArmReset.h"
-#include "RobotMap.h"
+#include "SetArmPosition.h"
 
-ArmReset::ArmReset()
+SetArmPosition::SetArmPosition(int position)
 {
 	// Use Requires() here to declare subsystem dependencies
-	Requires(arm.get());
+	// eg. Requires(chassis);
+	arm->SetArmEncoderPosition(position);
 }
 
 // Called just before this Command runs the first time
-void ArmReset::Initialize()
+void SetArmPosition::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ArmReset::Execute()
+void SetArmPosition::Execute()
 {
-	arm->RaiseLowerArm(power * Arm::UP);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmReset::IsFinished()
+bool SetArmPosition::IsFinished()
 {
-	return arm->GetPotValueOrEncoderPosition(Arm::ENCODER) >= Arm::ARM_DOWN_POSITION;
+	return true;
 }
 
 // Called once after isFinished returns true
-void ArmReset::End()
+void SetArmPosition::End()
 {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ArmReset::Interrupted()
+void SetArmPosition::Interrupted()
 {
 
 }

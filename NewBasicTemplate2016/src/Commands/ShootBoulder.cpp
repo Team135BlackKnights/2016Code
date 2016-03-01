@@ -19,7 +19,7 @@ ShootBoulder::ShootBoulder()
 // Called just before this Command runs the first time
 void ShootBoulder::Initialize()
 {
-	shooter->ZeroEncoder(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
+	//shooter->ZeroEncoder(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
 	timer->Reset();
 }
 

@@ -4,7 +4,7 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 #include "RobotMap.h"
-#include "AnalogSensors.h"
+#include "Subsystems/AnalogSensors.h"
 
 class RunningOverDefense: public CommandBase
 {

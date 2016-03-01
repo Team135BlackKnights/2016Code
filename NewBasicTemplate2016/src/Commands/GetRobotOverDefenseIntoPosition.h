@@ -4,7 +4,7 @@
 #include "Commands/CommandGroup.h"
 #include "WPILib.h"
 #include "RobotMap.h"
-#include "AnalogSensors.h"
+#include "Subsystems/AnalogSensors.h"
 
 class GetRobotOverDefenseIntoPosition: public CommandGroup
 {
