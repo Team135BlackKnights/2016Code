@@ -37,6 +37,8 @@ public:
 	float GetStickAxis(int, Joystick::AxisType);
 	bool GetButton(int stick, int);
 	int GetPOV(int);
+	bool IsPOV(int, int);
+	bool IsPressed(int[3]);
 	float GetAxis(int, Joystick::AxisType);
 
 	Manipulator* sam;
@@ -79,6 +81,20 @@ public:
     static const int MIDDLE_BUMPDOWN = 6;
     static const int LINE_BUMPUP = 5;
     static const int LINE_BUMPDOWN = 4;
+
+    static const int POV_TOP = 			0b00000001,
+    				 POV_TOP_RIGHT = 	0b00000010,
+				     POV_RIGHT = 		0b00000100,
+					 POV_BOTTOM_RIGHT = 0b00001000,
+					 POV_BOTTOM = 		0b00010000,
+					 POV_BOTTOM_LEFT = 	0b00100000,
+					 POV_LEFT = 		0b01000000,
+					 POV_TOP_LEFT = 	0b10000000;
+
+    static const int POV_COUNT = 8;
+
+	static const int CONTROL_MODE_POV = 0,
+					 CONTROL_MODE_BTN = 1;
 
 	void SetUpManipulators();
 	void SetUpDrivers();

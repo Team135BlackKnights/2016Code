@@ -23,7 +23,8 @@ void DriveShooter::Execute()
 		power = motorPower * Shooter::IN;
 	shooter->DriveShooterMotors(power);
 
-	if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
+	//if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
+	if (oi->IsPressed(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK))
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);

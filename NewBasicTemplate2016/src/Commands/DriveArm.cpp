@@ -20,7 +20,7 @@ void DriveArm::Execute()
 	arm->RaiseLowerArm(y * Arm::UP);
 	//std::cout << arm->GetEncoderPosition() << std::endl;
 
-	std::cout << arm->GetPotValue() << std::endl;
+	//std::cout << arm->GetPotValue() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

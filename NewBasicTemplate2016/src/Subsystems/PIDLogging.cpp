@@ -17,7 +17,7 @@ PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int
 
 	this->numMotors = numMotors;
 	this->radius = radius;
-	this->circumfrence = this->radius * 3.14159;
+	this->circumfrence = this->radius * M_PI;
 	//  preference->GetInstance();
 
 	//CANTalon motorTemps[numMotors];

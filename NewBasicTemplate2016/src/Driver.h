@@ -10,6 +10,7 @@
 
 #define STICK 0
 #define BUTTON 1
+#define MODE 2
 
 struct Manipulator {
 	std::string TYPE = "MANIPULATOR";
@@ -24,7 +25,8 @@ struct Manipulator {
 	int CONTROL_NEUTRAL_MODE[2];
 
 	//SHOOTER
-	int CONTROL_SHOOTER_KICKER_KICK[2];
+	//int CONTROL_SHOOTER_KICKER_MODE;
+	int CONTROL_SHOOTER_KICKER_KICK[3];
 	//int CONTROL_SHOOTER_KICKER_RESET[2];
 
 	int CONTROL_SHOOTER_POWER_SLIDER;

@@ -27,9 +27,10 @@ OI::OI()
 	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
 	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
-	for (int i = 0; i < JOYSTICKS; i++) //assigns values to each button in the array for each controller
-			for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
-				buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
+		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
+			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+	}
 
 	lefty = new Driver();
 	righty = new Driver();
@@ -40,8 +41,8 @@ OI::OI()
 	SetUpManipulators();
 	SetUpDrivers();
 
-	driver = new Driver(*lefty);
-	manipulator = new Manipulator(*sam);
+	driver = lefty;
+	manipulator = sam;
 
 	/*
 	for (int i = 0; i < 8; i++) {
@@ -113,6 +114,26 @@ bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a but
 int OI::GetPOV(int stick)
 {
 	return joysticksArray[stick]->GetPOV();
+}
+
+bool OI::IsPOV(int stick, int data)
+{
+	int value = joysticksArray[stick]->GetPOV();
+	if (value < 0) return false;
+
+	int offset = (value / 360.0f) * POV_COUNT;
+	bool pressed = ((data >> offset) & 1);
+	return pressed;
+}
+
+bool OI::IsPressed(int data[3])
+{
+	if (data[MODE] == CONTROL_MODE_POV)
+		return IsPOV(data[STICK], data[BUTTON]);
+	else if (data[MODE] == CONTROL_MODE_BTN)
+		return GetButton(data[STICK], data[BUTTON]);
+	else
+		return false;
 }
 
 float OI::GetAxis(int stick, Joystick::AxisType axis)
