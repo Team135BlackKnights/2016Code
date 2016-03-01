@@ -35,6 +35,7 @@ OI::OI()
 	righty = new Driver();
 	chris = new Manipulator();
 	sam = new Manipulator();
+	brandon = new Manipulator();
 
 	SetUpManipulators();
 	SetUpDrivers();

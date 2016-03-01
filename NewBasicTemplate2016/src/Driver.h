@@ -12,6 +12,7 @@
 #define BUTTON 1
 
 struct Manipulator {
+	std::string TYPE = "MANIPULATOR";
 	std::string NAME;
 
 	int CONTROL_TURN_LEFT[2];
@@ -50,6 +51,9 @@ struct Manipulator {
 };
 
 struct Driver {
+	std::string TYPE = "DRIVER";
+	std::string NAME;
+
 	int CONTROL_MOVEMENT_SLIDER;
 
 	int CONTROL_TURN_LEFT[2];

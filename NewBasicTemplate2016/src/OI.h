@@ -41,6 +41,7 @@ public:
 
 	Manipulator* sam;
 	Manipulator* chris;
+	Manipulator* brandon;
 	//SendableChooser* manipulatorChooser;
 	Manipulator* manipulator;
 	

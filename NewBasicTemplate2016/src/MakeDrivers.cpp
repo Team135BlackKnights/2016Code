@@ -90,10 +90,53 @@ void OI::SetUpManipulators() {
 
 	chris->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK] = MANIP;
 	chris->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON] = 11;
+
+	//------------------------BRANDON-----------------------------------
+	brandon->NAME = "BRANDON";
+	//Shooter
+	brandon->CONTROL_SHOOT[STICK] = MANIP;
+	brandon->CONTROL_SHOOT[BUTTON] = 7;
+
+	brandon->CONTROL_SHOOTER_POWER_SLIDER = MANIP;
+	brandon->CONTROL_SHOOTER_IN[STICK] = MANIP;
+	brandon->CONTROL_SHOOTER_IN[BUTTON] = 1;
+
+	brandon->CONTROL_SHOOTER_OUT[STICK] = MANIP;
+	brandon->CONTROL_SHOOTER_OUT[BUTTON] = 2;
+
+	brandon->CONTROL_SHOOTER_KICKER_KICK[STICK] = MANIP;
+	brandon->CONTROL_SHOOTER_KICKER_KICK[BUTTON] = 3;
+
+	//sam->CONTROL_SHOOTER_KICKER_RESET[STICK] = MANIP;
+	//sam->CONTROL_SHOOTER_KICKER_RESET[BUTTON] = 4;
+
+	//Arm
+	brandon->CONTROL_ARM_RESET[STICK] = MANIP;
+	brandon->CONTROL_ARM_RESET[BUTTON] = 8;
+
+	brandon->CONTROL_ARM_STICK = MANIP;
+	brandon->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
+
+	//Lift Hang
+	brandon->CONTROL_LIFT_HANG_POWER_SLIDER = MANIP;
+	brandon->CONTROL_LIFT_HANG_UP[STICK] = MANIP;
+	brandon->CONTROL_LIFT_HANG_UP[BUTTON] = 11;
+
+	brandon->CONTROL_LIFT_HANG_DOWN[STICK] = MANIP;
+	brandon->CONTROL_LIFT_HANG_DOWN[BUTTON] = 12;
+
+	brandon->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = RIGHT;
+	brandon->CONTROL_LIFT_HANG_FLIPPER_UP[STICK] = MANIP;
+	brandon->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON] = 9;
+
+	brandon->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK] = MANIP;
+	brandon->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON] = 10;
 }
 
 void OI::SetUpDrivers() {
-	//-----------------------D1------------------------------
+	//-----------------------LEFTY------------------------------
+	lefty->NAME = "LEFTY";
+
 	lefty->CONTROL_MOVEMENT_SLIDER = RIGHT;
 
 	lefty->CONTROL_FORWARD[STICK] = LEFT;
@@ -111,7 +154,9 @@ void OI::SetUpDrivers() {
 	lefty->CONTROL_NEUTRAL_MODE[STICK] = LEFT;
 	lefty->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
 
-	//-----------------------D1------------------------------
+	//-----------------------RIGHTY------------------------------
+	righty->NAME = "RIGHTY";
+
 	righty->CONTROL_MOVEMENT_SLIDER = LEFT;
 
 	righty->CONTROL_FORWARD[STICK] = RIGHT;

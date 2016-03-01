@@ -18,6 +18,7 @@ private:
 		manipulatorChooser = new SendableChooser();
 		manipulatorChooser->AddDefault("Chris", new ChangeManipulator(CommandBase::oi->chris));
 		manipulatorChooser->AddObject("Sam", new ChangeManipulator(CommandBase::oi->sam));
+		manipulatorChooser->AddObject("Brandon", new ChangeManipulator(CommandBase::oi->brandon));
 		SmartDashboard::PutData("Manipulators", manipulatorChooser);
 
 		driverChooser = new SendableChooser();
