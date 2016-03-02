@@ -25,6 +25,8 @@ private:
 	static constexpr double HEIGHT_OF_TOWER = 85.0D;
 	//Height of the lens of the camera off the ground
 	static constexpr double CAMERA_HEIGHT_OFF_GROUND = 11.0D;
+	//Height of the arm axle off the ground
+	static constexpr double ARM_HEIGHT_OFF_GROUND = 11.0D;
 	//Distance of the camera to the pivot point of the arm
 	static constexpr double CAMERA_DISTANCE_FROM_SHOOTING_AXIS = 13.0D;
 	//Distance above the bottom of the goal we want to aim
@@ -54,7 +56,7 @@ public:
 	bool GetBottomLimitSwitchValue();
 
 	int GetEncoderValueForAngle(double inchesHypotenuse);
-	double GetAngleForArm(double);
+	double GetAngleForArm(double,  double fadeAwayDist = 0);
 
 	double GetPotValueForArm(double);
 

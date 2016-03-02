@@ -62,11 +62,11 @@ bool Arm::GetBottomLimitSwitchValue() {
 }
 
 //cameraDist is in inches
-double Arm::GetAngleForArm(double cameraDist)
+double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
-	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist)));
+	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	return atan((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {
