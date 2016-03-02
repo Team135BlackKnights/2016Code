@@ -19,6 +19,7 @@ private:
 
 	//  32 COUNT over 45 degrees
 	static constexpr float ENCODER_MULTIPLYING_CONSTANT = (256.0f/90.0f);
+	static constexpr float POT_MULTIPLYING_CONSTANT = 314.0f;
 
 	//Height of tower to the tape
 	static constexpr double HEIGHT_OF_TOWER = 85.0D;
@@ -40,6 +41,8 @@ public:
 		ENCODER = 1
 	};
 
+	static const CONTROL_TYPE FEEDBACK = CONTROL_TYPE::POT;
+
     static const int ARM_DOWN_POSITION = 0;
     static const int ARM_UP_POSITION = 155;
 
@@ -59,14 +62,16 @@ public:
 	static const int UP = 1;
 	static const int DOWN = -UP;
 
+	static const bool ENCODER_INVERTED = true;
+
 	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
 	void ZeroEncoder();
 	void SetEncoderPosition(int);
 	double GetPotValue();
 
-	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);
-	double GetPotValueOrEncoderPosition(CONTROL_TYPE);
+	double GetPotOrEncoderValueForAutomationOfArm(double);
+	double GetPotValueOrEncoderPosition();
 
 };
 

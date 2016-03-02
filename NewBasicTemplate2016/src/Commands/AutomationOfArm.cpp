@@ -1,6 +1,6 @@
 #include "AutomationOfArm.h"
 
-AutomationOfArm::AutomationOfArm(Arm::CONTROL_TYPE controlType)
+AutomationOfArm::AutomationOfArm()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -9,8 +9,6 @@ AutomationOfArm::AutomationOfArm(Arm::CONTROL_TYPE controlType)
 	currentValue = 0;
 	desiredValue = 0;
 
-	this->controlType = controlType;
-
 }
 
 // Called just before this Command runs the first time
@@ -18,13 +16,13 @@ void AutomationOfArm::Initialize()
 {
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
-	desiredValue = (double) arm->GetPotOrEncoderValueForAutomationOfArm(this->controlType, cam.get()->distanceToBlob());
+	desiredValue = (double) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutomationOfArm::Execute()
 {
-	currentValue = (double) arm->GetPotValueOrEncoderPosition(this->controlType);
+	currentValue = (double) arm->GetPotValueOrEncoderPosition();
 
 	if (currentValue < desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::UP);

@@ -10,7 +10,7 @@ ArmReset::ArmReset()
 // Called just before this Command runs the first time
 void ArmReset::Initialize()
 {
-	this->SetTimeout(10.0f);
+	this->SetTimeout(15.0f);
 	this->SetRunWhenDisabled(true);
 }
 
@@ -29,7 +29,7 @@ bool ArmReset::IsFinished()
 // Called once after isFinished returns true
 void ArmReset::End()
 {
-
+	arm->RaiseLowerArm(0.00000f);
 }
 
 // Called when another command which requires one or more of the same
