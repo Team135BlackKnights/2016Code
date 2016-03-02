@@ -23,12 +23,7 @@ protected:
 		  	 Controller [1]
 		  	 Controller [2]
 		 */
-<<<<<<< HEAD
-=======
 
-	ArmResetOnDetonatorButton* resetArm;
-
->>>>>>> refs/remotes/origin/V2Test
 public:
 	OI();
 	Joystick* GetStick(int);
@@ -58,16 +53,10 @@ public:
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
-<<<<<<< HEAD
     //Button orientation - switches on top
     static const int SILVER_SWITCH = 1;
     static const int RED_SWITCH = 2;
     static const int SILVER_TOGGLE = 10;
-=======
-    //Button Box Mappings
-    static const int SILVER_TOGGLE = 1;
-    static const int RED_TOGGLE = 2;
->>>>>>> refs/remotes/origin/V2Test
     static const int BUTTON = 3;
     static const int LEFTARROW_BUMPUP = 9;
     static const int LEFTARROW_BUMPDOWN = 8;
