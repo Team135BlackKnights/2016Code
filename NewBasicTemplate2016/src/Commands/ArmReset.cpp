@@ -10,7 +10,8 @@ ArmReset::ArmReset()
 // Called just before this Command runs the first time
 void ArmReset::Initialize()
 {
-
+	this->SetTimeout(10.0f);
+	this->SetRunWhenDisabled(true);
 }
 
 // Called repeatedly when this Command is scheduled to run

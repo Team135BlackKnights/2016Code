@@ -34,12 +34,11 @@ public:
 	float GetStickY(int);
 	float GetStickTwist(int);
 	float GetStickSlider(int);
-	float GetStickAxis(int, Joystick::AxisType);
 	bool GetButton(int stick, int);
 	int GetPOV(int);
 	bool IsPOV(int, int);
 	bool IsPressed(int[3]);
-	float GetAxis(int, Joystick::AxisType);
+	float GetStickAxis(int, Joystick::AxisType);
 
 	Manipulator* sam;
 	Manipulator* chris;

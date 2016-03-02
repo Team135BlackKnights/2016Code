@@ -1,4 +1,3 @@
-
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 
@@ -45,7 +44,7 @@
     const bool DRIVE_TRAIN_INVERTED = false;
 
     //  Hard Buttons Declarations
-    const int DIGITAL_BUTTON_ARM_RESET = 1;
+    const int DIGITAL_BUTTON_ARM_RESET = 8;
 
 
 #endif

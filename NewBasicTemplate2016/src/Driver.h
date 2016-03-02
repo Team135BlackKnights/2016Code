@@ -13,7 +13,7 @@
 #define MODE 2
 
 struct Manipulator {
-	std::string TYPE = "MANIPULATOR";
+	const std::string TYPE = "MANIPULATOR";
 	std::string NAME;
 
 	int CONTROL_TURN_LEFT[2];
