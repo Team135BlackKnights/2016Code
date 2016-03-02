@@ -62,6 +62,7 @@ public:
 	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
 	void ZeroEncoder();
+	void SetEncoderPosition(int);
 	double GetPotValue();
 
 	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);

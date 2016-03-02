@@ -23,7 +23,7 @@ void ArmReset::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ArmReset::IsFinished()
 {
-	return arm->GetEncoderPosition() >= Arm::ARM_DOWN_POSITION;
+	return arm->GetTopLimitSwitchValue();
 }
 
 // Called once after isFinished returns true

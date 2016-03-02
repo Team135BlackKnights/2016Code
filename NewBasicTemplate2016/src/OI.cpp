@@ -49,8 +49,8 @@ OI::OI()
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
 	}
 	*/
-	//resetArm = new ArmResetOnButton();
-	//resetArm->WhenActive(new ArmReset());
+	resetArm = new ArmResetOnDetonatorButton();
+	resetArm->WhenActive(new ArmReset());
 
 	/*
 	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());

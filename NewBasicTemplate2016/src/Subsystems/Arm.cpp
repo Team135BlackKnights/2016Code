@@ -24,6 +24,9 @@ Arm::Arm():
 	//armMotor->SetSensorDirection(false);
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, 360, 0); // 0 can change if you want more offset
+
+	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
+	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 }
 
 void Arm::InitDefaultCommand()
@@ -33,7 +36,21 @@ void Arm::InitDefaultCommand()
 }
 
 void Arm::RaiseLowerArm(float motorPower) {
-	armMotor->Set(motorPower);
+	float power = motorPower;
+	if (GetTopLimitSwitchValue()) {
+		this->SetEncoderPosition(this->ARM_UP_POSITION);
+		if (UP > 0)
+			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
+	}
+	else if (GetBottomLimitSwitchValue()) {
+		if (UP > 0)
+			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
+	}
+	armMotor->Set(power);
 }
 
 bool Arm::GetTopLimitSwitchValue() {
@@ -54,6 +71,11 @@ double Arm::GetAngleForArm(double cameraDist)
 
 int Arm::GetEncoderPosition() {
 	return -armMotor->GetEncPosition();// + UP_ARM_POSITION;
+}
+
+void Arm::SetEncoderPosition(int value)
+{
+	this->armMotor->SetPosition(value);
 }
 
 void Arm::ZeroEncoder() {
