@@ -17,9 +17,9 @@ private:
 
 	std::unique_ptr<CANTalon> armMotor;
 
-	//  32 COUNT over 45 degrees
+	//  256 COUNT over 90 degrees
 	static constexpr float ENCODER_MULTIPLYING_CONSTANT = (256.0f/90.0f);
-	static constexpr float POT_MULTIPLYING_CONSTANT = 300.0f;
+	static constexpr float POT_CONSTANT = 300.0f;
 
 	//Height of tower to the tape
 	static constexpr double HEIGHT_OF_TOWER = 85.0D;

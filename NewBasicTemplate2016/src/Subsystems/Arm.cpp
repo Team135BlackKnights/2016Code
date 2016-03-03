@@ -23,7 +23,7 @@ Arm::Arm():
 	//this->ZeroEncoder();
 	//armMotor->SetSensorDirection(false);
 	ai = new AnalogInput(POT_ANALOG_PORT);
-	pot = new AnalogPotentiometer(ai, POT_MULTIPLYING_CONSTANT, 0); // 0 can change if you want more offset
+	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
 	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
 	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
