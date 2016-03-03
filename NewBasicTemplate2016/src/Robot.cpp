@@ -4,6 +4,8 @@
 #include "Commands/GetRobotOverDefenseIntoPosition.h"
 #include "Commands/DriveDistance.h"
 #include "OI.h"
+#include "Commands/ChangeManipulator.h"
+#include "Commands/ChangeDriver.h"
 
 class Robot: public IterativeRobot
 {
@@ -11,6 +13,10 @@ private:
 	//SendableChooser *defenseChooser;
 	//CommandGroup* autoCommand;
 	//int defensePosition;
+
+	SendableChooser* manipulatorChooser;
+	SendableChooser* driverChooser;
+
 	void RobotInit()
 	{
 		CommandBase::init();
@@ -24,6 +30,17 @@ private:
 		defenseChooser->AddObject("Ramparts", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_RAMPARTS, defensePosition));
 		defenseChooser->AddObject("Moat", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_MOAT, defensePosition));
 		defenseChooser->AddObject("Rock Wall", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_ROCKWALL, defensePosition)); */
+
+		manipulatorChooser = new SendableChooser();
+		manipulatorChooser->AddDefault(CommandBase::oi->chris->NAME, new ChangeManipulator(CommandBase::oi->chris));
+		manipulatorChooser->AddObject(CommandBase::oi->sam->NAME, new ChangeManipulator(CommandBase::oi->sam));
+		manipulatorChooser->AddObject(CommandBase::oi->brandon->NAME, new ChangeManipulator(CommandBase::oi->brandon));
+		SmartDashboard::PutData("Manipulators", manipulatorChooser);
+
+		driverChooser = new SendableChooser();
+		driverChooser->AddDefault(CommandBase::oi->lefty->NAME, new ChangeDriver(CommandBase::oi->lefty));
+		driverChooser->AddObject(CommandBase::oi->righty->NAME, new ChangeDriver(CommandBase::oi->righty));
+		SmartDashboard::PutData("Drivers", driverChooser);
 	}
 	
 	void DisabledPeriodic()
@@ -44,6 +61,8 @@ private:
 
 	void TeleopInit()
 	{
+		((Command*)manipulatorChooser->GetSelected())->Start();
+		((Command*)driverChooser->GetSelected())->Start();
 	}
 
 	void TeleopPeriodic()

@@ -3,7 +3,7 @@
 #include "../Commands/DriveShooter.h"
 
 Shooter::Shooter() :
-	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
+	EncoderLogging("Shooter", "/home/lvuser/", numMotors, radius)
 {
 	//  The declaration of the CANTalon is in the PIDLogging class, so you do not need
 	//  to re-include it in Shooter.h

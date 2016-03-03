@@ -4,7 +4,6 @@
 #include "WPILib.h"
 #include <fstream>
 #include <string>
-#include "PIDLogging.h"
 
 class LogData
 {

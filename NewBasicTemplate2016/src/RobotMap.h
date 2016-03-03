@@ -38,11 +38,15 @@
 
     const int SERVO_SHOOTER_KICKER = 3;
 
+
     //Is drive train inverted? The world may never know...
     const bool DRIVE_TRAIN_INVERTED = false;
 
     //  Hard Buttons Declarations
     const int DIGITAL_BUTTON_ARM_RESET = 8;
+
+    const int DIGITAL_ARM_LIMIT_TOP = 4;
+    const int DIGITAL_ARM_LIMIT_BOTTOM = 5;
 
     //  Length and Width of Robot
     constexpr float LENGTH_OF_ROBOT = 30.5f;
@@ -56,10 +60,5 @@
     const int LIGHT_ANALOG_PORT = 1;
     const int LEFT_SONAR_ANALOG_PORT = 3;
     const int RIGHT_SONAR_ANALOG_PORT = 2;
-
-    //  Limit Switch Digital Inputs
-    //  Inaccurate Values for the Limit Switches
-    const int TOP_LIMIT_SWITCH_PORT = 4;
-    const int BOTTOM_LIMIT_SWITCH_PORT = 5;
 
 #endif

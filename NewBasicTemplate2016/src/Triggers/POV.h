@@ -3,16 +3,10 @@
 
 #include "WPILib.h"
 
-
-//typedef int (*Func)(int);
-
 class POV: public Trigger
 {
-private:
-	int joystick;
-	int pov;
 public:
-	POV(int, int);
+	POV();
 	bool Get();
 };
 

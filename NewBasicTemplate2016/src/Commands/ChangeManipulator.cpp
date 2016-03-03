@@ -1,47 +1,38 @@
-#include <Commands/Move.h>
+#include "ChangeManipulator.h"
 
-Move::Move(float speed)
+ChangeManipulator::ChangeManipulator(Manipulator* manipulator)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Move(speed, speed);
-}
-
-Move::Move(float left, float right)
-{
-	Requires(driveTrain.get());
-	this->speedLeft = left;
-	this->speedRight = right;
+	this->manipulator = manipulator;
 }
 
 // Called just before this Command runs the first time
-void Move::Initialize()
+void ChangeManipulator::Initialize()
 {
-
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Move::Execute()
+void ChangeManipulator::Execute()
 {
-	float speed = oi->GetStickSlider(oi->driver->CONTROL_MOVEMENT_SLIDER);
-	driveTrain->DriveTank(speed * speedLeft, speed * speedRight);
+	oi->UpdateManipulator(manipulator);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Move::IsFinished()
+bool ChangeManipulator::IsFinished()
 {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
-void Move::End()
+void ChangeManipulator::End()
 {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Move::Interrupted()
+void ChangeManipulator::Interrupted()
 {
 
 }

@@ -1,15 +1,14 @@
-#ifndef ArmReset_H
-#define ArmReset_H
+#ifndef ChangeDriver_H
+#define ChangeDriver_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class ArmReset: public CommandBase
+class ChangeDriver: public CommandBase
 {
-private:
-	static constexpr float power = .4f;
+	Driver* driver;
 public:
-	ArmReset();
+	ChangeDriver(Driver* driver);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

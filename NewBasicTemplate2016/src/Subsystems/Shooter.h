@@ -1,11 +1,11 @@
 #ifndef Shooter_H
 #define Shooter_H
 
+#include <Subsystems/EncoderLogging.h>
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
-#include "PIDLogging.h"
 
-class Shooter: public PIDLogging
+class Shooter: public EncoderLogging
 {
 private:
 	// It's desirable that everything possible under private except

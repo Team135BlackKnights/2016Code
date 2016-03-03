@@ -10,7 +10,7 @@ AimBot::AimBot()
 {
 	AddSequential(new MoveFromCameraValue());
 	AddSequential(new WaitTime(1.0f));
-	AddSequential(new AutomationOfArm(Arm::POT));
+	AddSequential(new AutomationOfArm());
 	AddSequential(new ShootBoulder());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

@@ -1,47 +1,40 @@
-#include <Commands/Move.h>
+#include "ChangeDriver.h"
 
-Move::Move(float speed)
+ChangeDriver::ChangeDriver(Driver* driver)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	Move(speed, speed);
-}
+	this->driver = driver;
 
-Move::Move(float left, float right)
-{
-	Requires(driveTrain.get());
-	this->speedLeft = left;
-	this->speedRight = right;
 }
 
 // Called just before this Command runs the first time
-void Move::Initialize()
+void ChangeDriver::Initialize()
 {
-
+	oi->UpdateDriver(driver);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Move::Execute()
+void ChangeDriver::Execute()
 {
-	float speed = oi->GetStickSlider(oi->driver->CONTROL_MOVEMENT_SLIDER);
-	driveTrain->DriveTank(speed * speedLeft, speed * speedRight);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Move::IsFinished()
+bool ChangeDriver::IsFinished()
 {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
-void Move::End()
+void ChangeDriver::End()
 {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Move::Interrupted()
+void ChangeDriver::Interrupted()
 {
 
 }

@@ -5,27 +5,31 @@
  *      Author: conne_000
  */
 
-#include "PIDLogging.h"
+#include <Subsystems/EncoderLogging.h>
 #include <sstream>
 #include "RobotMap.h"
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int numMotors, double radius):
-	PIDSubsystem("PIDLogging", p, i, d),
-	LogData(filePath)
+EncoderLogging::EncoderLogging(const std::string &name, const std::string& filePath, int numMotors, double radius):
+	Subsystem("PIDLogging"), LogData(filePath)
 {
 	// TODO Auto-generated constructor stub
 
 	this->numMotors = numMotors;
+	this->radius = radius;
+	this->circumfrence = this->radius * M_PI;
+	//  preference->GetInstance();
 
 	this->radius = radius;
 	diameter = this->radius * 2;
 
 	this->circumfrence = diameter * M_PI;
+
+	SetPIDPreferences();
 }
 
-PIDLogging::~PIDLogging() {
+EncoderLogging::~EncoderLogging() {
 	// TODO Auto-generated destructor stub
 	for (int i = 0; i < numMotors; i++) {
 		delete motors[i];
@@ -33,7 +37,7 @@ PIDLogging::~PIDLogging() {
 }
 
 //  Sets up the motors in order to use the encoders properly
-void PIDLogging::SetupMotors() {
+void EncoderLogging::SetupMotors() {
 	for (int i = 0; i < this->numMotors; i++) {
 		//  Sets the quadrature encoders on the driveTrain as the feedback device
 		//  Setting the encoder as the feedback device opens up more functions the encoder can be used in
@@ -51,7 +55,7 @@ void PIDLogging::SetupMotors() {
 }
 
 //  Returns the Encoder Position of the encoder hooked up to the specified Talon
-int PIDLogging::GetEncoderPosition(int motorIndex) {
+int EncoderLogging::GetEncoderPosition(int motorIndex) {
 
 	//  This value is equal to the QUADRATURE_COUNT * (# of Revolutions)
 	//  For example, if the encoder were to spin one full rotation, the encoder position = QUADRATURE_COUNT
@@ -59,7 +63,7 @@ int PIDLogging::GetEncoderPosition(int motorIndex) {
 }
 
 //  Returns the Encoder Velocity of the encoder hooked up to the specified Talon
-int PIDLogging::GetEncoderVelocity(int motorIndex) {
+int EncoderLogging::GetEncoderVelocity(int motorIndex) {
 
 	//  Gets the Speed Value (Encoder Ticks/.1sec.) of the Encoder
 	//  The value should be Count*4 because it is a quadrature encoder
@@ -68,21 +72,21 @@ int PIDLogging::GetEncoderVelocity(int motorIndex) {
 }
 
 //  Zeroes the encoder of the encoder hooked up to the specified Talon
-void PIDLogging::ZeroEncoder(int motorIndex) {
+void EncoderLogging::ZeroEncoder(int motorIndex) {
 
 	//  Resets the Encoder Value to Zero
 	motors[motorIndex]->SetPosition(0);
 }
 
 //  Zeroes all the encoders
-void PIDLogging::ZeroAllEncoders() {
+void EncoderLogging::ZeroAllEncoders() {
 	for (int i = 0; i < numMotors; i++) {
 		motors[i]->SetPosition(0);
 	}
 }
 
 //  Return the Distance Traveled depending upon the encoder position
-double PIDLogging::GetDistanceInches(int motorIndex) {
+double EncoderLogging::GetDistanceInches(int motorIndex) {
 
 	int encoderPosition = GetEncoderPosition(motorIndex);
 	double REVS = (encoderPosition/QUADRATURE_COUNT);
@@ -91,7 +95,7 @@ double PIDLogging::GetDistanceInches(int motorIndex) {
 }
 
 //  Gets the encoder velocity in units to work with easily
-double PIDLogging::GetVelocity(int motorIndex) {
+double EncoderLogging::GetVelocity(int motorIndex) {
 
 	//  GetEncVel() returns the rate at which the EncPosition() is changing over .1 seconds
 	int encoderVelocity = GetEncoderVelocity(motorIndex);
@@ -101,7 +105,7 @@ double PIDLogging::GetVelocity(int motorIndex) {
 
 }
 
-void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
+void EncoderLogging::FeedbackPIDOutput(int motorIndex, double output) {
 	//  PIDWrite()
 	motors[motorIndex]->PIDWrite(output);
 
@@ -109,14 +113,14 @@ void PIDLogging::FeedbackPIDOutput(int motorIndex, double output) {
 
 //  Don't use this in a command as SetPIDPreferences used this function
 //  Sets the PID Values of a specific motor
-void PIDLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
+void EncoderLogging::UpdateMotorToReflectCurrentPIDValues(int motorIndex) {
 	motors[motorIndex]->SetP(this->p);
 	motors[motorIndex]->SetI(this->i);
 	motors[motorIndex]->SetD(this->d);
 }
 
 //  Sets the PID Values based off of the values inputed in the preferences
-void PIDLogging::SetPIDPreferences() {
+void EncoderLogging::SetPIDPreferences() {
 
 	this->p = Preferences::GetInstance()->GetDouble("PValue", 1.0);
 	this->i = Preferences::GetInstance()->GetDouble("IValue", 0.0);
@@ -130,7 +134,7 @@ void PIDLogging::SetPIDPreferences() {
 
 //  Will write in an open log file the headers for what is being recorded in one line
 //  Headers for a table made in Excels
-void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
+void EncoderLogging::LogEncoderDataHeader(short int whatToLog) {
 	std::stringstream data;
 	//  data << this->m_name << ": " << this->p << "," << this->i << "," << this->d << '\n';
 
@@ -150,7 +154,7 @@ void PIDLogging::LogEncoderDataHeader(short int whatToLog) {
 
 //  Logs the encoder data based on either position, velocity, or distance
 //  Along with time in seconds
-void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
+void EncoderLogging::LogEncoderData(int motorIndex, double timerValue, short int whatToLog) {
 
 	std::stringstream data;
 
@@ -172,14 +176,14 @@ void PIDLogging::LogEncoderData(int motorIndex, double timerValue, short int wha
 }
 
 //  Changes the title of the file with the PID values you are assigning the motor
- void PIDLogging::ChangeFileNameWithPIDValues() {
+ void EncoderLogging::ChangeFileNameWithPIDValues() {
 	std::stringstream NameofFile;
 	NameofFile << "PID:" << this->p << "," << this->i << "," << this->d << ".csv";
 	ChangeFileName(NameofFile.str());
 }
 
  //  Display the pid values in the open file in one line
-void PIDLogging::DisplayPIDValuesInLogData() {
+void EncoderLogging::DisplayPIDValuesInLogData() {
 	//  In the Data Logging File that will be created, the first two lines will write the P, I, and D Values Set
 	//this->OpenFile();
 	std::stringstream ss1;
@@ -190,13 +194,13 @@ void PIDLogging::DisplayPIDValuesInLogData() {
 
 
 //  Functions that are never used
-void PIDLogging::SetAbsoluteTolerance(float absValue) {}
-void PIDLogging::SetPercentTolerance(float percent) {}
-bool PIDLogging::OnTarget() const {return true;}
-double PIDLogging::PIDGet() {return 0;}
-double PIDLogging::ReturnPIDInput() {return 0;}
-void PIDLogging::UsePIDOutput(double output) {}
-void PIDLogging::InitTable(std::shared_ptr<ITable> table) {};
-std::string PIDLogging::GetSmartDashboardType() const {return "";};
+void EncoderLogging::SetAbsoluteTolerance(float absValue) {}
+void EncoderLogging::SetPercentTolerance(float percent) {}
+bool EncoderLogging::OnTarget() const {return true;}
+double EncoderLogging::PIDGet() {return 0;}
+double EncoderLogging::ReturnPIDInput() {return 0;}
+void EncoderLogging::UsePIDOutput(double output) {}
+void EncoderLogging::InitTable(std::shared_ptr<ITable> table) {};
+std::string EncoderLogging::GetSmartDashboardType() const {return "";};
 
 

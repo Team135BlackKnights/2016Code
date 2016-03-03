@@ -5,17 +5,17 @@
  *      Author: conne_000
  */
 
-#ifndef SRC_SUBSYSTEMS_PIDLOGGING_H_
-#define SRC_SUBSYSTEMS_PIDLOGGING_H_
+#ifndef SRC_SUBSYSTEMS_ENCODERLOGGING_H_
+#define SRC_SUBSYSTEMS_ENCODERLOGGING_H_
 
-#include <Commands/PIDSubsystem.h>
+#include <Commands/Subsystem.h>
 #include "LogData.h"
 
-class PIDLogging: public PIDSubsystem, public LogData
+class EncoderLogging: public Subsystem, public LogData
 {
 public:
-	PIDLogging(const std::string&, const std::string&, int, double);
-	virtual ~PIDLogging();
+	EncoderLogging(const std::string&, const std::string&, int, double);
+	virtual ~EncoderLogging();
 
 protected:
 	// Declares 10 Talon Motors 0-9
@@ -93,4 +93,4 @@ public:
 	std::string GetSmartDashboardType() const;
 };
 
-#endif /* SRC_SUBSYSTEMS_PIDLOGGING_H_ */
+#endif /* SRC_SUBSYSTEMS_ENCODERLOGGING_H_ */

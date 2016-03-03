@@ -12,12 +12,10 @@ private:
 
 	//double inchesHypotenuse;
 
-	double motorPower = .8;
-
-	Arm::CONTROL_TYPE controlType;
+	double motorPower = .8f;
 
 public:
-	AutomationOfArm(Arm::CONTROL_TYPE);
+	AutomationOfArm();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

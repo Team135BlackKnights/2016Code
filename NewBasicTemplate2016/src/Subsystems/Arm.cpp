@@ -32,15 +32,16 @@ Arm::Arm():
 	//  0 to 360
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
-	//  Declaring limit switches in their designated Digital Input slots
-	topLimitSwitch = new DigitalInput(TOP_LIMIT_SWITCH_PORT);
-	bottomLimitSwitch = new DigitalInput(BOTTOM_LIMIT_SWITCH_PORT);
 	//  Declaring a Trigger using the limit switches declared above
 	upperLimit = new ResetEncoderFromLimitSwitch(topLimitSwitch);
 	lowerLimit = new ResetEncoderFromLimitSwitch(bottomLimitSwitch);
 	//  When ResetEncoderFromLimitSwitch->Get() == true, then SetArmPosition() will execute
 	//upperLimit->WhenActive(new SetArmPosition(ARM_UP_POSITION));
 	//lowerLimit->WhenActive(new SetArmPosition(ARM_DOWN_POSITION));
+	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
+
+	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
+	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 }
 
 void Arm::InitDefaultCommand()
@@ -53,7 +54,7 @@ void Arm::InitDefaultCommand()
 void Arm::RaiseLowerArm(float motorPower) {
 	//  If the Upper Limit Switch is pressed
 	if (GetTopLimitSwitchValue()) {
-		this->SetArmEncoderPosition(ARM_UP_POSITION);
+		this->SetEncoderPosition(ARM_UP_POSITION);
 		if (UP > 0)  //  If up is positive
 			//  Takes the minimum of the two values in parenthesis
 			//  Only allow the arm to move in the negative direction, downward
@@ -65,7 +66,7 @@ void Arm::RaiseLowerArm(float motorPower) {
 	}
 	//  If the Lower Limit Switch is pressed
 	else if (GetBottomLimitSwitchValue()) {
-		SetArmEncoderPosition(ARM_DOWN_POSITION);
+		SetEncoderPosition(ARM_DOWN_POSITION);
 		if (UP > 0) //  If up is positive
 			//  Only allow the arm to move in the positive direction, upwards
 			motorPower = fmaxf(motorPower, 0);
@@ -86,15 +87,20 @@ bool Arm::GetBottomLimitSwitchValue() {
 }
 
 //cameraDist is in inches
-double Arm::GetAngleForArm(double cameraDist)
+double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
-	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist)));
+	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	return atan((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {
-	return (ENCODER_INVERTED ? -1: 1) * armMotor->GetEncPosition();
+	return (FEEDBACK_DEVICE_INVERTED ? -1 : 1) * armMotor->GetEncPosition();// + UP_ARM_POSITION;
+}
+
+void Arm::SetEncoderPosition(int value)
+{
+	this->armMotor->SetPosition(value);
 }
 
 void Arm::ZeroEncoder() {
@@ -106,54 +112,15 @@ double Arm::GetPotValue() {
 }
 
 //  Hypotenuse in inches
-double Arm::GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE controlType, double inchesHypotenuse) {
-	//  Switches between the encoder and the potentiometer
-	switch(controlType) {
-	case POT: {
-		//  Converts the angle into a potentiometer value and returns this value for arm need to be at
-		double potRadians = GetAngleForArm(inchesHypotenuse);
-		double potAngle = potRadians * (180.0D/M_PI);
-		double potValue = potAngle;
-		return (double) potValue;
-	}
-
-	case ENCODER: {
-		//  Converts the angle into an encoder count value and returns this value for arm need to be at
-		double encoderRadians = GetAngleForArm(inchesHypotenuse);
-		double encoderAngle = encoderRadians * (180.0D/M_PI);
-		int encoderPosition = encoderAngle * ENCODER_MULTIPLYING_CONSTANT;
-		return (double)encoderPosition;
-	}
-
-	//  If the control type enum is none of the two above, return 0
-	default: {
-		return 0.0;
-	}
-}
+double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
+	double radians = GetAngleForArm(inchesHypotenuse);
+	double degrees = radians * (180/M_PI);
+	return FEEDBACK == CONTROL_TYPE::POT ? degrees : (double)(degrees * ENCODER_MULTIPLYING_CONSTANT);
 }
 
 //  Depending upon whether we are using an encoder or potentiometer, get the current value of the specified sensor
-double Arm::GetPotValueOrEncoderPosition(CONTROL_TYPE controlType) {
-	switch (controlType) {
-	case POT:
-		return pot->Get();
-	break;
-
-	//  Gets the encoder Position
-	//  Value is the current Count of the encoder
-	//  1 Rotation is equal to the QUADRATURE_COUNT of the encoder
-	case ENCODER:
-		return (double) armMotor->GetEncPosition();
-	break;
-
-	default:
-		return 0.0;
-	break;
-	}
-}
-
-void Arm::SetArmEncoderPosition(int encoderPostion) {
-	armMotor->SetEncPosition(encoderPostion);
+double Arm::GetPotValueOrEncoderPosition() {
+	return FEEDBACK == CONTROL_TYPE::POT ? pot->Get() : (double)armMotor->GetEncPosition();
 }
 
 // Put methods for controlling this subsystem
