@@ -136,7 +136,7 @@ void OI::ResetButtonMapping()
 	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
 		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++) {
 			buttonsArray[i][k].release();
-			//delete buttonsArray[i][k].get();
+			delete buttonsArray[i][k].get();
 			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 		}
 	}

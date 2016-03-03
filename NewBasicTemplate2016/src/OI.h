@@ -2,6 +2,7 @@
 #define OI_H
 
 #include <Triggers/ArmResetOnDetonatorButton.h>
+#include "Triggers/POV.h"
 #include "WPILib.h"
 #include "Driver.h"
 
