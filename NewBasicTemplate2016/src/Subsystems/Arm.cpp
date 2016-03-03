@@ -54,11 +54,11 @@ void Arm::RaiseLowerArm(float motorPower) {
 }
 
 bool Arm::GetTopLimitSwitchValue() {
-	return topLimitSwitch->Get();
+	return !topLimitSwitch->Get();
 }
 
 bool Arm::GetBottomLimitSwitchValue() {
-	return bottomLimitSwitch->Get();
+	return !bottomLimitSwitch->Get();
 }
 
 //cameraDist is in inches

@@ -46,8 +46,8 @@
     //  Hard Buttons Declarations
     const int DIGITAL_BUTTON_ARM_RESET = 8;
 
-    const int DIGITAL_ARM_LIMIT_TOP = 0;
-    const int DIGITAL_ARM_LIMIT_BOTTOM = 1;
+    const int DIGITAL_ARM_LIMIT_TOP = 4;
+    const int DIGITAL_ARM_LIMIT_BOTTOM = 5;
 
 
 #endif
