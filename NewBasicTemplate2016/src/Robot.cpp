@@ -22,7 +22,7 @@ private:
 		SmartDashboard::PutData("Manipulators", manipulatorChooser);
 
 		driverChooser = new SendableChooser();
-		driverChooser->AddDefault(CommandBase::oi->tyler->NAME, new ChangeDriver(CommandBase::oi->tyler));
+		driverChooser->AddDefault(CommandBase::oi->lefty->NAME, new ChangeDriver(CommandBase::oi->lefty));
 		driverChooser->AddObject(CommandBase::oi->righty->NAME, new ChangeDriver(CommandBase::oi->righty));
 		SmartDashboard::PutData("Drivers", driverChooser);
 	}

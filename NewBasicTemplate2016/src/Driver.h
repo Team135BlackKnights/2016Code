@@ -63,7 +63,7 @@ struct Driver {
 	int CONTROL_TURN_RIGHT[2];
 
 	int CONTROL_FORWARD[2];
-	int CONTROL_REVERSE[2];
+	int CONTROL_REVERSE[3];
 
 	int CONTROL_NEUTRAL_MODE[2];
 };

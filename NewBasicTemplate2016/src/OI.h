@@ -46,7 +46,7 @@ public:
 	//SendableChooser* manipulatorChooser;
 	Manipulator* manipulator;
 	
-	Driver* tyler;
+	Driver* lefty;
 	Driver* righty;
 	//SendableChooser* driverChooser;
 	Driver* driver;

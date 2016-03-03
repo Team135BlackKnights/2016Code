@@ -30,7 +30,7 @@ OI::OI()
 			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 	}
 
-	tyler = new Driver();
+	lefty = new Driver();
 	righty = new Driver();
 	chris = new Manipulator();
 	sam = new Manipulator();
@@ -39,7 +39,7 @@ OI::OI()
 	SetUpManipulators();
 	SetUpDrivers();
 
-	driver = tyler;
+	driver = lefty;
 	manipulator = sam;
 
 	/*
@@ -145,7 +145,11 @@ void OI::ResetButtonMapping()
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
 	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
-	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
+	if (driver->CONTROL_REVERSE[MODE] == CONTROL_MODE_BTN)
+		buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
+	else {
+		//NEEDS IMPLEMENTED
+	}
 
 	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
 	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));

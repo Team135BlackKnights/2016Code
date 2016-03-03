@@ -142,25 +142,26 @@ void OI::SetUpManipulators() {
 }
 
 void OI::SetUpDrivers() {
-	//-----------------------Nope------------------------------
-	tyler->NAME = "Nope";
+	//-----------------------Lefty------------------------------
+	lefty->NAME = "lefty";
 
-	tyler->CONTROL_MOVEMENT_SLIDER = RIGHT;
+	lefty->CONTROL_MOVEMENT_SLIDER = RIGHT;
 
-	tyler->CONTROL_FORWARD[STICK] = LEFT;
-	tyler->CONTROL_FORWARD[BUTTON] = 1;
+	lefty->CONTROL_FORWARD[STICK] = LEFT;
+	lefty->CONTROL_FORWARD[BUTTON] = 1;
 
-	tyler->CONTROL_REVERSE[STICK] = LEFT;
-	tyler->CONTROL_REVERSE[BUTTON] = 2;//POV_BOTTOM | POV_BOTTOM_LEFT | POV_BOTTOM_RIGHT;
+	lefty->CONTROL_REVERSE[STICK] = LEFT;
+	lefty->CONTROL_REVERSE[BUTTON] = 2;
+	lefty->CONTROL_REVERSE[MODE] = CONTROL_MODE_BTN;
 
-	tyler->CONTROL_TURN_LEFT[STICK] = LEFT;
-	tyler->CONTROL_TURN_LEFT[BUTTON] = 3;
+	lefty->CONTROL_TURN_LEFT[STICK] = LEFT;
+	lefty->CONTROL_TURN_LEFT[BUTTON] = 3;
 
-	tyler->CONTROL_TURN_RIGHT[STICK] = LEFT;
-	tyler->CONTROL_TURN_RIGHT[BUTTON] = 4;
+	lefty->CONTROL_TURN_RIGHT[STICK] = LEFT;
+	lefty->CONTROL_TURN_RIGHT[BUTTON] = 4;
 
-	tyler->CONTROL_NEUTRAL_MODE[STICK] = RIGHT;
-	tyler->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
+	lefty->CONTROL_NEUTRAL_MODE[STICK] = RIGHT;
+	lefty->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
 
 	//-----------------------RIGHTY------------------------------
 	righty->NAME = "RIGHTY";
@@ -172,6 +173,7 @@ void OI::SetUpDrivers() {
 
 	righty->CONTROL_REVERSE[STICK] = RIGHT;
 	righty->CONTROL_REVERSE[BUTTON] = 2;
+	righty->CONTROL_REVERSE[MODE] = CONTROL_MODE_BTN;
 
 	righty->CONTROL_TURN_LEFT[STICK] = RIGHT;
 	righty->CONTROL_TURN_LEFT[BUTTON] = 3;
