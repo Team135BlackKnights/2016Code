@@ -11,8 +11,10 @@ class DriveTrain: public Subsystem
 public:
 	static const int NUM_MOTORS = 4;
 private:
+	//  Declaring that there will be 4 Talon's on the driveTrain
 	CANTalon* motors[4];
 
+	//  Declares chassis which will include the four drive train motors
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Count of the encoder
@@ -29,8 +31,8 @@ private:
 	//  Need to convert the encoder value into how fast the wheels are actually turning
 	static constexpr double GEAR_RATIO = 26.0D / 60.0D;
 
-	int angleToTurn;
-
+	//  The distance between the wheel to the end of the robot in terms of width
+	//  The wheels are inside the frame of the robot
 	static const int WIDTH_BETWEEN_WHEELS_AND_OUTER_RIM = 2;
 
 	//  Calculates the Turning Circumference of the robot
@@ -38,13 +40,18 @@ private:
 
 public:
 
+	//  Allow the motors
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
 						REAR_LEFT = RobotDrive::kRearLeftMotor,
 						FRONT_RIGHT = RobotDrive::kFrontRightMotor,
 						REAR_RIGHT = RobotDrive::kRearRightMotor;
 
+	//  Used to switch between brake and coast mode using SetNeutralMode()
 	static const bool COAST = true;
 	static const bool BRAKE = false;
+
+	static const bool RIGHT = true;
+	static const bool LEFT = false;
 
 	DriveTrain();
 	~DriveTrain();
@@ -59,14 +66,18 @@ public:
 	void SetSafetyEnabled(bool);
 
 	void InvertMotors();
-	void ClosePIDFile();
 
 	void ZeroEncoder(int);
 	int GetEncoderPosition(int);
+
+	//  Returns how far the robot has travel using the encoder values
 	double GetDistanceInches(int);
+	//  Returns the encoder position needed in order to turn the robot a given angle
 	int GetEncoderPositionToTurnAngle(int);
 
 	void SetNeutralMode(bool coast);
+
+	void ClosePIDFile();
 };
 
 #endif

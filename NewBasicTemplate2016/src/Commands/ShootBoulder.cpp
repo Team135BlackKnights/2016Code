@@ -28,7 +28,7 @@ void ShootBoulder::Execute()
 {
 	//encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
 
-	shooter->DriveShooterMotors(Shooter::OUT);
+	shooter->DriveShooterMotor(Shooter::OUT);
 
 	//if (encoderVelocity >= setEncoderVelocity) {
 		//SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
@@ -56,7 +56,7 @@ void ShootBoulder::End()
 	//encoderVelocity = 0;
 
 	timerStarted = false;
-	shooter->StopShooterMotors();
+	shooter->StopShooterMotor();
 }
 
 // Called when another command which requires one or more of the same

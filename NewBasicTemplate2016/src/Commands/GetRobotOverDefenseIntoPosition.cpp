@@ -17,9 +17,9 @@ GetRobotOverDefenseIntoPosition::GetRobotOverDefenseIntoPosition(AnalogSensors::
 	}
 	else if (defensePosition == 3) {
 		AddSequential(new DriveDistance(80));
-		AddSequential(new TurnRobotAngle(90, RIGHT));
+		AddSequential(new TurnRobotAngle(90,DriveTrain::RIGHT));
 		AddSequential(new DriveDistance(44));
-		AddSequential(new TurnRobotAngle(90, LEFT));
+		AddSequential(new TurnRobotAngle(90, DriveTrain::LEFT));
 	}
 	else if (defensePosition == 4) {
 		AddSequential(new DriveDistance(85));

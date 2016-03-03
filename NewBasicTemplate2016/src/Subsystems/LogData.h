@@ -4,14 +4,21 @@
 #include "WPILib.h"
 #include <fstream>
 #include <string>
+#include "PIDLogging.h"
 
 class LogData
 {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
+
+	//  Declares a variable based off of the functions of ofstream
+	//  of in ofstream stands for Output File
+	//  You need to make a variable of this type to send data to a file in the RoboRIO
 	std::ofstream logFile;
+	//  The location in which the file is stored
 	std::string filePath;
+	//  The name of the file
 	std::string fileName;
 
 public:
@@ -26,6 +33,9 @@ public:
 	void OpenFile();
 
 	std::string ZeroifyNumber(int, int);
+
+	void LogOneEncoderValue(int, double, double);
+	void LogTwoEncoderValues(int, double, double, double);
 };
 
 #endif

@@ -1,6 +1,8 @@
 #include "TurnRobotAngle.h"
 
-//  Right is true, Left is false
+//  From Drive Train Subsystem
+	//RIGHT = true;
+	//LEFT = false;
 TurnRobotAngle::TurnRobotAngle(int angleToTurn, bool rightOrLeft)
 {
 	// Use Requires() here to declare subsystem dependencies
@@ -8,6 +10,7 @@ TurnRobotAngle::TurnRobotAngle(int angleToTurn, bool rightOrLeft)
 	Requires(driveTrain.get());
 
 	this->angleToTurn = angleToTurn;
+
 	directionToSpin = rightOrLeft ? -1: 1;
 	this->rightOrLeft = rightOrLeft;
 

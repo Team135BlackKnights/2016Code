@@ -9,8 +9,8 @@
 class GetRobotOverDefenseIntoPosition: public CommandGroup
 {
 private:
-	static const bool RIGHT = true;
-	static const bool LEFT = false;
+	static const bool FORWARD = true;
+	static const bool BACKWARD = false;
 
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
 	static constexpr float DISTANCE_NEED_TO_TRAVEL = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;

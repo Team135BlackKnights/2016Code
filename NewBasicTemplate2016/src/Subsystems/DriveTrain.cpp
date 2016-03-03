@@ -29,9 +29,8 @@ DriveTrain::DriveTrain():
 
 		chassis->SetSafetyEnabled(false);
 
+		//  Changes the mode so the robot will brake and not coast
 		this->SetNeutralMode(BRAKE);
-
-		this->angleToTurn = 0;
 
 		//  Sets the Feedback Device as a Quadrature Encoder
 		//  Allows the user to use PID with the quadrature encoder
@@ -61,6 +60,7 @@ void DriveTrain::DriveTank(Joystick* left, Joystick* right) {
 	chassis->TankDrive(left, right);
 }
 
+//  Drives the robot given the motor powers for the left and right side of the robot
 void DriveTrain::DriveTank(float left, float right)
 {
 	left = fmax(-1, fmin(1, left));
@@ -69,11 +69,14 @@ void DriveTrain::DriveTank(float left, float right)
 	chassis->TankDrive(left, right);
 }
 
+//  Runs only one motor given the motor power
 void DriveTrain::SetMotorValue(int MotorPort, double MotorPower) {
 
 	motors[MotorPort]->Set(MotorPower);
 }
 
+
+//  Runs all the motors of the drive train given the motor power
 void DriveTrain::SetAllMotorValues(double motorPower) {
 	motors[FRONT_LEFT]->Set(motorPower);
 	motors[REAR_LEFT]->Set(motorPower);
@@ -99,18 +102,23 @@ void DriveTrain::InvertMotors()
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, DRIVE_TRAIN_INVERTED);
 }
 
+//  Can change between brake and coast mode for all the motors of the drive train
 void DriveTrain::SetNeutralMode(bool coast)
 {
+	//  If you input into this function false, mode will equal brake mode
+	//  If you input true into this function, mode will equal coast mode
 	CANTalon::NeutralMode mode = (coast == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
 	for (int i = 0; i < NUM_MOTORS; i++) {
 		motors[i]->ConfigNeutralMode(mode);
 	}
 }
 
+//  Zeroes the encoder given the motorIndex of the motor that attaches to the Talon
 void DriveTrain::ZeroEncoder(int motorIndex) {
 	motors[motorIndex]->SetPosition(0);
 }
 
+//  Gets the encoder position of the encoder hooked up to the motor Index inputed into this function
 int DriveTrain::GetEncoderPosition(int motorIndex) {
 	int value = motors[motorIndex]->GetEncPosition();
 	std::cout << "Encoder: " << value << std::endl;
@@ -128,8 +136,7 @@ double DriveTrain::GetDistanceInches(int motorIndex) {
 
 //  Returns the desired encoder position in order to turn the specified angle
 int DriveTrain::GetEncoderPositionToTurnAngle(int angle) {
-	this->angleToTurn = angle;
-	float distanceToTravel = (CIRCUMFERENCE_OF_TURNING_ROBOT * this->angleToTurn)/(360.0f);
+	float distanceToTravel = (CIRCUMFERENCE_OF_TURNING_ROBOT * angle)/(360.0f);
 	float rotationsToSpin = (distanceToTravel/CIRCUMFERENCE_OF_WHEEL);
 	int encoderPosition = (int) round(rotationsToSpin * COUNT);
 	return encoderPosition * (1 / GEAR_RATIO);

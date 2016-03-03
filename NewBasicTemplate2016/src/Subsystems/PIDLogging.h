@@ -11,34 +11,29 @@
 #include <Commands/PIDSubsystem.h>
 #include "LogData.h"
 
-class PIDLogging: public PIDSubsystem, public LogData {
+class PIDLogging: public PIDSubsystem, public LogData
+{
 public:
 	PIDLogging(const std::string&, const std::string&, int, double);
 	virtual ~PIDLogging();
 
 protected:
-	//  std::shared_ptr<CANTalon> motors[10]; //Array of motors that you want to read encoder data from
+	// Declares 10 Talon Motors 0-9
 	CANTalon* motors[10];
 
 	int numMotors;
+
+	//  Encoder Count for all the encoders except for the one on the shooter (Magnetic) and the arm (256 Count)
 	static const int COUNT = 64;
 	static const int QUADRATURE_COUNT = (COUNT * 4);
-	//int quadratureCOUNT;
 
-	double radius; //  In inches, assuming ALL wheels have the same radius
+	double radius; //  In inches
 
 	double diameter;
 
 	double circumfrence;
 
 public:
-	static const short int POSITION = 			0b001;
-	static const int POSITION_OFFSET = 			0;
-	static const short int VELOCITY = 			0b010;
-	static const int VELOCITY_OFFSET = 			1;
-	static const short int DISTANCE = 			0b100;
-	static const int DISTANCE_OFFSET = 			2;
-
 	double p,
 		   i,
 		   d;
@@ -47,28 +42,34 @@ private:
 	void UpdateMotorToReflectCurrentPIDValues(int);
 
 public:
+	//  Binary Variables from Eddie
+	static const short int POSITION = 			0b001;
+	static const int POSITION_OFFSET = 			0;
+	static const short int VELOCITY = 			0b010;
+	static const int VELOCITY_OFFSET = 			1;
+	static const short int DISTANCE = 			0b100;
+	static const int DISTANCE_OFFSET = 			2;
+
+	//  Sets up the motors for the purpose of the encoders
 	void SetupMotors();
+	//  Encoder Functions
 	int GetEncoderPosition(int);
-	int GetPosition(int);
 	int GetEncoderVelocity(int);
 	void ZeroEncoder(int);
 	void ZeroAllEncoders();
 	double GetDistanceInches(int);
 	double GetVelocity(int);
 
-	void LogTwoEncoderValues(int, double, double, double);
-	void LogOneEncoderValue(int, double, double);
+	void FeedbackPIDOutput(int, double);
+
+	//  Setting the P,I, and D Values based on the values the user inputs in the Preferences
+	void SetPIDPreferences();
+
+	void ChangeFileNameWithPIDValues();
+	void DisplayPIDValuesInLogData();
 
 	void LogEncoderData(int, double, short int);
 	void LogEncoderDataHeader(short int);
-
-	void FeedbackPIDOutput(int, double);
-	//  void SetPIDValues(int);
-	void SetPIDPreferences();
-	//  bool shooterBool = false;
-	//  bool driveTrainBool = false;
-	void ChangeFileNameWithSubsystemName();
-	void DisplayPIDValuesInLogData();
 
 
 	//  The functions below are not defined in the .cpp file and are not used

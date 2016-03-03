@@ -16,6 +16,9 @@ private:
 
 	bool leftDone,
 		 rightDone;
+
+	int intialDistance,
+		finalDistance;
 public:
 	DriveDistance(double);
 	void Initialize();
