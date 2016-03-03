@@ -23,7 +23,7 @@ void Move::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void Move::Execute()
 {
-	float speed = oi->GetStickSlider(OI::LEFT);
+	float speed = oi->GetStickSlider(oi->driver->CONTROL_MOVEMENT_SLIDER);
 	driveTrain->DriveTank(speed * speedLeft, speed * speedRight);
 }
 

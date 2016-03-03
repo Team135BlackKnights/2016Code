@@ -16,14 +16,14 @@ private:
 		CommandBase::init();
 
 		manipulatorChooser = new SendableChooser();
-		manipulatorChooser->AddDefault("Chris", new ChangeManipulator(CommandBase::oi->chris));
-		manipulatorChooser->AddObject("Sam", new ChangeManipulator(CommandBase::oi->sam));
-		manipulatorChooser->AddObject("Brandon", new ChangeManipulator(CommandBase::oi->brandon));
+		manipulatorChooser->AddDefault(CommandBase::oi->chris->NAME, new ChangeManipulator(CommandBase::oi->chris));
+		manipulatorChooser->AddObject(CommandBase::oi->sam->NAME, new ChangeManipulator(CommandBase::oi->sam));
+		manipulatorChooser->AddObject(CommandBase::oi->brandon->NAME, new ChangeManipulator(CommandBase::oi->brandon));
 		SmartDashboard::PutData("Manipulators", manipulatorChooser);
 
 		driverChooser = new SendableChooser();
-		driverChooser->AddDefault("Lefty", new ChangeDriver(CommandBase::oi->lefty));
-		driverChooser->AddObject("Righty", new ChangeDriver(CommandBase::oi->righty));
+		driverChooser->AddDefault(CommandBase::oi->tyler->NAME, new ChangeDriver(CommandBase::oi->tyler));
+		driverChooser->AddObject(CommandBase::oi->righty->NAME, new ChangeDriver(CommandBase::oi->righty));
 		SmartDashboard::PutData("Drivers", driverChooser);
 	}
 	

@@ -39,6 +39,7 @@ struct Manipulator {
 	int CONTROL_ARM_RESET[2];
 
 	int CONTROL_ARM_STICK;
+	bool CONTROL_ARM_INVERTED;
 	Joystick::AxisType CONTROL_ARM_AXIS;
 
 	//LIFT HANG

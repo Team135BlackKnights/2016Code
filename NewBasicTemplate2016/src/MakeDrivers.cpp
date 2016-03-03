@@ -35,6 +35,7 @@ void OI::SetUpManipulators() {
 	sam->CONTROL_ARM_RESET[BUTTON] = 8;
 
 	sam->CONTROL_ARM_STICK = MANIP;
+	sam->CONTROL_ARM_INVERTED = false;
 	sam->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
 
 	//Lift Hang
@@ -78,6 +79,7 @@ void OI::SetUpManipulators() {
 	chris->CONTROL_ARM_RESET[BUTTON] = 8;
 
 	chris->CONTROL_ARM_STICK = MANIP;
+	chris->CONTROL_ARM_INVERTED = true;
 	chris->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
 
 	//Lift Hang
@@ -120,6 +122,7 @@ void OI::SetUpManipulators() {
 	brandon->CONTROL_ARM_RESET[BUTTON] = 8;
 
 	brandon->CONTROL_ARM_STICK = MANIP;
+	brandon->CONTROL_ARM_INVERTED = false;
 	brandon->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
 
 	//Lift Hang
@@ -139,25 +142,25 @@ void OI::SetUpManipulators() {
 }
 
 void OI::SetUpDrivers() {
-	//-----------------------LEFTY------------------------------
-	lefty->NAME = "LEFTY";
+	//-----------------------Nope------------------------------
+	tyler->NAME = "Nope";
 
-	lefty->CONTROL_MOVEMENT_SLIDER = RIGHT;
+	tyler->CONTROL_MOVEMENT_SLIDER = RIGHT;
 
-	lefty->CONTROL_FORWARD[STICK] = LEFT;
-	lefty->CONTROL_FORWARD[BUTTON] = 1;
+	tyler->CONTROL_FORWARD[STICK] = LEFT;
+	tyler->CONTROL_FORWARD[BUTTON] = 1;
 
-	lefty->CONTROL_REVERSE[STICK] = LEFT;
-	lefty->CONTROL_REVERSE[BUTTON] = 2;
+	tyler->CONTROL_REVERSE[STICK] = LEFT;
+	tyler->CONTROL_REVERSE[BUTTON] = 2;//POV_BOTTOM | POV_BOTTOM_LEFT | POV_BOTTOM_RIGHT;
 
-	lefty->CONTROL_TURN_LEFT[STICK] = LEFT;
-	lefty->CONTROL_TURN_LEFT[BUTTON] = 3;
+	tyler->CONTROL_TURN_LEFT[STICK] = LEFT;
+	tyler->CONTROL_TURN_LEFT[BUTTON] = 3;
 
-	lefty->CONTROL_TURN_RIGHT[STICK] = LEFT;
-	lefty->CONTROL_TURN_RIGHT[BUTTON] = 4;
+	tyler->CONTROL_TURN_RIGHT[STICK] = LEFT;
+	tyler->CONTROL_TURN_RIGHT[BUTTON] = 4;
 
-	lefty->CONTROL_NEUTRAL_MODE[STICK] = LEFT;
-	lefty->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
+	tyler->CONTROL_NEUTRAL_MODE[STICK] = RIGHT;
+	tyler->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
 
 	//-----------------------RIGHTY------------------------------
 	righty->NAME = "RIGHTY";

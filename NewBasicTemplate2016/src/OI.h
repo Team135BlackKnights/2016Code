@@ -46,7 +46,7 @@ public:
 	//SendableChooser* manipulatorChooser;
 	Manipulator* manipulator;
 	
-	Driver* lefty;
+	Driver* tyler;
 	Driver* righty;
 	//SendableChooser* driverChooser;
 	Driver* driver;
@@ -64,7 +64,7 @@ public:
 	static const int BBOX = 3;
 
 	//VARIOUS JOYSTICK AND OI CONSTANTS
-	static constexpr float DEAD_BAND = .05f; //declares dead zone
+	static constexpr float DEAD_BAND = .02f; //declares dead zone
 
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
@@ -99,5 +99,7 @@ public:
 	void SetUpDrivers();
 	void UpdateDriver(Driver*);
 	void UpdateManipulator(Manipulator*);
+
+	void ResetButtonMapping();
 };
 #endif

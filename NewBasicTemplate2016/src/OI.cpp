@@ -16,8 +16,6 @@
 #include "Commands/AimBot.h"
 #include "Commands/ArmReset.h"
 #include "Commands/ChangeDriver.h"
-//#include "Commands/ChangeManipulator.h"
-//#include "Triggers/ArmResetOnButton.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -32,7 +30,7 @@ OI::OI()
 			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 	}
 
-	lefty = new Driver();
+	tyler = new Driver();
 	righty = new Driver();
 	chris = new Manipulator();
 	sam = new Manipulator();
@@ -41,7 +39,7 @@ OI::OI()
 	SetUpManipulators();
 	SetUpDrivers();
 
-	driver = lefty;
+	driver = tyler;
 	manipulator = sam;
 
 	/*
@@ -51,17 +49,6 @@ OI::OI()
 	*/
 	resetArm = new ArmResetOnDetonatorButton();
 	//resetArm->WhenActive(new ArmReset());
-
-	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
-	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
-
-	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
-	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
-	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
-	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
-
-	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
-	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
 }
 
 //OI Functions
@@ -77,7 +64,8 @@ float OI::GetStickX(int controllerNum) //Returns controller's x value
 
 float OI::GetStickY(int controllerNum)
 {
-	return GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
+	//return -joysticksArray[controllerNum]->GetY();
+	return -GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
 }
 
 float OI::GetStickTwist(int controllerNum)
@@ -123,19 +111,45 @@ bool OI::IsPressed(int data[3])
 float OI::GetStickAxis(int controllerNum, Joystick::AxisType axis)
 {
 	float value = joysticksArray[controllerNum]->GetAxis(axis);
-	if (abs(value) > DEAD_BAND)
+	//if (abs(value) > DEAD_BAND)
 		return value;
 
-	return 0;
+	//return 0;
 }
 
 void OI::UpdateDriver(Driver* driver)
 {
 	this->driver = driver;
+	std::cout << this->driver->NAME;
+	ResetButtonMapping();
 }
 
 void OI::UpdateManipulator(Manipulator* manipulator)
 {
 	this->manipulator = manipulator;
 	std::cout << this->manipulator->NAME;
+	ResetButtonMapping();
+}
+
+void OI::ResetButtonMapping()
+{
+	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
+		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++) {
+			buttonsArray[i][k].release();
+			//delete buttonsArray[i][k].get();
+			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+		}
+	}
+
+	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
+	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
+
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::FORWARD));
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::REVERSE));
+
+	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
+	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+
+	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
+	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
 }
