@@ -21,14 +21,14 @@
 	//Truncates a values to a certain number of variables
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
-	const int MOTOR_FRONT_LEFT	= 13;
-    const int MOTOR_REAR_LEFT	= 11;
-    const int MOTOR_FRONT_RIGHT	= 10;
-    const int MOTOR_REAR_RIGHT	= 12;
+    const int MOTOR_FRONT_LEFT	= 10;
+    const int MOTOR_REAR_LEFT	= 12;
+    const int MOTOR_FRONT_RIGHT	= 15;
+    const int MOTOR_REAR_RIGHT	= 13;
 
     //  Inaccurate ID Values for the Talon
-    const int MOTOR_SHOOT_BOULDER = 14;
-    const int MOTOR_RAISE_LOWER_ARM = 15;
+    const int MOTOR_SHOOT_BOULDER = 16;
+    const int MOTOR_RAISE_LOWER_ARM = 11;
     const int MOTOR_DEFENSE_ARM = 20; //Not used?
 
     //  Inacuurate PWM Ports
@@ -36,13 +36,13 @@
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
     const int MOTOR_COLLECTION = 2;
 
-    const int SERVO_SHOOTER_KICKER = 2;
+    const int SERVO_SHOOTER_KICKER = 3;
 
     //Is drive train inverted? The world may never know...
     const bool DRIVE_TRAIN_INVERTED = false;
 
     //  Hard Buttons Declarations
-    const int DIGITAL_BUTTON_ARM_RESET = 1;
+    const int DIGITAL_BUTTON_ARM_RESET = 8;
 
     //  Length and Width of Robot
     constexpr float LENGTH_OF_ROBOT = 30.5f;
@@ -59,7 +59,7 @@
 
     //  Limit Switch Digital Inputs
     //  Inaccurate Values for the Limit Switches
-    const int TOP_LIMIT_SWITCH_PORT = 3;
-    const int BOTTOM_LIMIT_SWITCH_PORT = 4;
+    const int TOP_LIMIT_SWITCH_PORT = 4;
+    const int BOTTOM_LIMIT_SWITCH_PORT = 5;
 
 #endif

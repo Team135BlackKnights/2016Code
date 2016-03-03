@@ -36,12 +36,17 @@ private:
 	AnalogInput* ai;
 
 	//  Declaring limit switches as Digital Inputs
-	DigitalInput* upperLimitSwitch;
-	DigitalInput* lowerLimitSwitch;
+	DigitalInput* topLimitSwitch;
+	DigitalInput* bottomLimitSwitch;
 	//  Declaring the Trigger ResetEncoderFromLimitSwitch which is going to be used along with the
 	//  Digital Input Limit Switches
 	ResetEncoderFromLimitSwitch* upperLimit;
 	ResetEncoderFromLimitSwitch* lowerLimit;
+
+	static const int POT_CONSTANT = 300;
+
+	static const bool ENCODER_INVERTED = false;
+
 public:
 	//  Enum to be used to switch between using an encoder or potentiometer on the articulation of the arm
 	enum CONTROL_TYPE {
@@ -61,8 +66,14 @@ public:
 	double GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE, double);
 	double GetPotValueOrEncoderPosition(CONTROL_TYPE);
 
+	int GetEncoderPosition();
 	void ZeroEncoder();
 	void SetArmEncoderPosition(int);
+
+	double GetPotValue();
+
+	bool GetTopLimitSwitchValue();
+	bool GetBottomLimitSwitchValue();
 
 	//   Slot
 	static const int RAISE_LOWER_ARM = 0;

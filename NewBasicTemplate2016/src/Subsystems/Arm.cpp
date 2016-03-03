@@ -30,14 +30,14 @@ Arm::Arm():
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	//  360 represents the range in which the potentiometer will output
 	//  0 to 360
-	pot = new AnalogPotentiometer(ai, 360, 0); // 0 can change if you want more offset
+	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
 	//  Declaring limit switches in their designated Digital Input slots
-	upperLimitSwitch = new DigitalInput(TOP_LIMIT_SWITCH_PORT);
-	lowerLimitSwitch = new DigitalInput(BOTTOM_LIMIT_SWITCH_PORT);
+	topLimitSwitch = new DigitalInput(TOP_LIMIT_SWITCH_PORT);
+	bottomLimitSwitch = new DigitalInput(BOTTOM_LIMIT_SWITCH_PORT);
 	//  Declaring a Trigger using the limit switches declared above
-	upperLimit = new ResetEncoderFromLimitSwitch(upperLimitSwitch);
-	lowerLimit = new ResetEncoderFromLimitSwitch(lowerLimitSwitch);
+	upperLimit = new ResetEncoderFromLimitSwitch(topLimitSwitch);
+	lowerLimit = new ResetEncoderFromLimitSwitch(bottomLimitSwitch);
 	//  When ResetEncoderFromLimitSwitch->Get() == true, then SetArmPosition() will execute
 	//upperLimit->WhenActive(new SetArmPosition(ARM_UP_POSITION));
 	//lowerLimit->WhenActive(new SetArmPosition(ARM_DOWN_POSITION));
@@ -52,7 +52,7 @@ void Arm::InitDefaultCommand()
 //  Set the value for which the arm will move up or down
 void Arm::RaiseLowerArm(float motorPower) {
 	//  If the Upper Limit Switch is pressed
-	if (upperLimitSwitch->Get()) {
+	if (GetTopLimitSwitchValue()) {
 		this->SetArmEncoderPosition(ARM_UP_POSITION);
 		if (UP > 0)  //  If up is positive
 			//  Takes the minimum of the two values in parenthesis
@@ -64,7 +64,7 @@ void Arm::RaiseLowerArm(float motorPower) {
 			motorPower = fmaxf(motorPower, 0);
 	}
 	//  If the Lower Limit Switch is pressed
-	else if (lowerLimitSwitch->Get()) {
+	else if (GetBottomLimitSwitchValue()) {
 		SetArmEncoderPosition(ARM_DOWN_POSITION);
 		if (UP > 0) //  If up is positive
 			//  Only allow the arm to move in the positive direction, upwards
@@ -77,6 +77,14 @@ void Arm::RaiseLowerArm(float motorPower) {
 	armMotor->Set(motorPower);
 }
 
+bool Arm::GetTopLimitSwitchValue() {
+	return !topLimitSwitch->Get();
+}
+
+bool Arm::GetBottomLimitSwitchValue() {
+	return !bottomLimitSwitch->Get();
+}
+
 //cameraDist is in inches
 double Arm::GetAngleForArm(double cameraDist)
 {
@@ -85,8 +93,16 @@ double Arm::GetAngleForArm(double cameraDist)
 	return atan((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
+int Arm::GetEncoderPosition() {
+	return (ENCODER_INVERTED ? -1: 1) * armMotor->GetEncPosition();
+}
+
 void Arm::ZeroEncoder() {
 	armMotor->SetPosition(0);
+}
+
+double Arm::GetPotValue() {
+	return pot->Get();
 }
 
 //  Hypotenuse in inches
