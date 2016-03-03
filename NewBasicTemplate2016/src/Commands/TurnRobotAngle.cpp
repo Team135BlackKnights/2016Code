@@ -1,8 +1,6 @@
 #include "TurnRobotAngle.h"
 
-//  From Drive Train Subsystem
-	//RIGHT = true;
-	//LEFT = false;
+//  Right is true, Left is false
 TurnRobotAngle::TurnRobotAngle(int angleToTurn, bool rightOrLeft)
 {
 	// Use Requires() here to declare subsystem dependencies
@@ -10,7 +8,6 @@ TurnRobotAngle::TurnRobotAngle(int angleToTurn, bool rightOrLeft)
 	Requires(driveTrain.get());
 
 	this->angleToTurn = angleToTurn;
-
 	directionToSpin = rightOrLeft ? -1: 1;
 	this->rightOrLeft = rightOrLeft;
 
@@ -23,6 +20,7 @@ TurnRobotAngle::TurnRobotAngle(int angleToTurn, bool rightOrLeft)
 // Called just before this Command runs the first time
 void TurnRobotAngle::Initialize()
 {
+	//  Only using one encoder, which is hooked up to the FRONT_LEFT Talon on the drive train
 	initialEncoderValue = driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
 
 	//  For Turning Right
