@@ -40,8 +40,8 @@ OI::OI()
 	SetUpManipulators();
 	SetUpDrivers();
 
-	driver = lefty;
-	manipulator = sam;
+	driver = new Driver(*lefty);
+	manipulator = new Manipulator(*sam);
 
 	/*
 	for (int i = 0; i < 8; i++) {
@@ -134,6 +134,12 @@ void OI::UpdateManipulator(Manipulator* manipulator)
 
 void OI::ResetButtonMapping()
 {
+	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
+	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
+	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
+
+
 	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
 		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++) {
 			buttonsArray[i][k].release();
@@ -145,8 +151,8 @@ void OI::ResetButtonMapping()
 	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
-	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER));
-	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE* SLIDER_MOVEMENT_MULTIPLIER));
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER, Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER));
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE* SLIDER_MOVEMENT_MULTIPLIER, Move::REVERSE * SLIDER_MOVEMENT_MULTIPLIER));
 
 	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
 	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));

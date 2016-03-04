@@ -28,7 +28,7 @@ protected:
 
 	ArmResetOnDetonatorButton* resetArm;
 
-	const float SLIDER_MOVEMENT_MULTIPLIER = .025f;
+	const float SLIDER_MOVEMENT_MULTIPLIER = .4f;
 
 public:
 	OI();

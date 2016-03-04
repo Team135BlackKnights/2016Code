@@ -18,8 +18,8 @@ public:
 	void End();
 	void Interrupted();
 
-	static const int FORWARD = 1;
-	static const int REVERSE = -FORWARD;
+	static constexpr float FORWARD = 1.0f;
+	static constexpr float REVERSE = -FORWARD * 1.0f;
 };
 
 #endif
