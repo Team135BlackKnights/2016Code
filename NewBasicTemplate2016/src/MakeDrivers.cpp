@@ -146,6 +146,9 @@ void OI::SetUpDrivers() {
 	lefty->NAME = "lefty";
 
 	lefty->CONTROL_MOVEMENT_SLIDER = RIGHT;
+	lefty->DRIVE_TRAIN_INVERTED = false;
+	lefty->CONTROL_DRIVE_TRAIN_INVERTED[STICK] = RIGHT;
+	lefty->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON] = 1;
 
 	lefty->CONTROL_FORWARD[STICK] = LEFT;
 	lefty->CONTROL_FORWARD[BUTTON] = 1;
@@ -161,12 +164,15 @@ void OI::SetUpDrivers() {
 	lefty->CONTROL_TURN_RIGHT[BUTTON] = 4;
 
 	lefty->CONTROL_NEUTRAL_MODE[STICK] = RIGHT;
-	lefty->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
+	lefty->CONTROL_NEUTRAL_MODE[BUTTON] = 2;
 
 	//-----------------------RIGHTY------------------------------
 	righty->NAME = "RIGHTY";
 
 	righty->CONTROL_MOVEMENT_SLIDER = LEFT;
+	righty->DRIVE_TRAIN_INVERTED = false;
+	righty->CONTROL_DRIVE_TRAIN_INVERTED[STICK] = RIGHT;
+	righty->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON] = 1;
 
 	righty->CONTROL_FORWARD[STICK] = RIGHT;
 	righty->CONTROL_FORWARD[BUTTON] = 1;
@@ -182,6 +188,6 @@ void OI::SetUpDrivers() {
 	righty->CONTROL_TURN_RIGHT[BUTTON] = 4;
 
 	righty->CONTROL_NEUTRAL_MODE[STICK] = LEFT;
-	righty->CONTROL_NEUTRAL_MODE[BUTTON] = 1;
+	righty->CONTROL_NEUTRAL_MODE[BUTTON] = 2;
 }
 

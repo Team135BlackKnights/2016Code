@@ -28,6 +28,8 @@ protected:
 
 	ArmResetOnDetonatorButton* resetArm;
 
+	const float SLIDER_MOVEMENT_MULTIPLIER = .025f;
+
 public:
 	OI();
 	Joystick* GetStick(int);

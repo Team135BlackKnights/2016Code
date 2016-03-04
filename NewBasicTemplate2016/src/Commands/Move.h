@@ -19,7 +19,7 @@ public:
 	void Interrupted();
 
 	static const int FORWARD = 1;
-	static const int REVERSE = -1;
+	static const int REVERSE = -FORWARD;
 };
 
 #endif
