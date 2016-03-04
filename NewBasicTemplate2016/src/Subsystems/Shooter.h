@@ -1,9 +1,9 @@
 #ifndef Shooter_H
 #define Shooter_H
 
-#include <Subsystems/EncoderLogging.h>
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
+#include "EncoderLogging.h"
 
 class Shooter: public EncoderLogging
 {

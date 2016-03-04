@@ -20,7 +20,7 @@ private:
 	//  1024 COUNT over 360 degrees
 	//  Used to convert angles degrees into the desired encoder count
 	static constexpr float ENCODER_MULTIPLYING_CONSTANT = (QUADRATURE_COUNT/360.0f);
-	static constexpr float POT_CONSTANT = 300.0f;
+	static constexpr double POT_CONSTANT = 300.0D;
 
 	//Height of tower to the tape
 	static constexpr double HEIGHT_OF_TOWER = 85.0D;

@@ -33,7 +33,7 @@ bool DriveDefenseArm::IsFinished()
 // Called once after isFinished returns true
 void DriveDefenseArm::End()
 {
-	defenseArm->DriveMotor(0);
+	defenseArm->DriveMotor(0.0f);
 }
 
 // Called when another command which requires one or more of the same

@@ -40,7 +40,7 @@ bool DriveShooter::IsFinished()
 // Called once after isFinished returns true
 void DriveShooter::End()
 {
-	shooter->DriveShooterMotor(0);
+	shooter->DriveShooterMotor(0.0f);
 	shooter->DriveKicker(Shooter::KICKER_RESET);
 }
 

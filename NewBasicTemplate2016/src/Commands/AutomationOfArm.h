@@ -10,8 +10,6 @@ private:
 	double currentValue,
 		   desiredValue;
 
-	//double inchesHypotenuse;
-
 	double motorPower = .8f;
 
 public:

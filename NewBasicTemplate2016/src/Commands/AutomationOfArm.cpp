@@ -24,7 +24,6 @@ void AutomationOfArm::Initialize()
 void AutomationOfArm::Execute()
 {
 	currentValue = (double) arm->GetPotValueOrEncoderPosition();
-	std::cout << "Current Value: " << currentValue << std::endl;
 
 	if (currentValue < desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::UP);
@@ -45,7 +44,7 @@ bool AutomationOfArm::IsFinished()
 // Called once after isFinished returns true
 void AutomationOfArm::End()
 {
-	arm->RaiseLowerArm(0);
+	arm->RaiseLowerArm(0.0f);
 }
 
 // Called when another command which requires one or more of the same

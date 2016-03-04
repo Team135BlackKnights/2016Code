@@ -5,10 +5,9 @@
  *      Author: conne_000
  */
 
-#include <Subsystems/EncoderLogging.h>
+#include "EncoderLogging.h"
 #include <sstream>
 #include "RobotMap.h"
-#define _USE_MATH_DEFINES
 #include <cmath>
 
 EncoderLogging::EncoderLogging(const std::string &name, const std::string& filePath, int numMotors, double radius):
@@ -18,10 +17,7 @@ EncoderLogging::EncoderLogging(const std::string &name, const std::string& fileP
 
 	this->numMotors = numMotors;
 	this->radius = radius;
-	this->circumfrence = this->radius * M_PI;
-	//  preference->GetInstance();
 
-	this->radius = radius;
 	diameter = this->radius * 2;
 
 	this->circumfrence = diameter * M_PI;

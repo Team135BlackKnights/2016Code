@@ -6,6 +6,7 @@
 
 class ChangeNeutralMode: public CommandBase
 {
+private:
 	bool mode;
 public:
 	ChangeNeutralMode(bool mode);

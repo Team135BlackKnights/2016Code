@@ -1,5 +1,4 @@
 #include "ArmReset.h"
-#include "RobotMap.h"
 
 ArmReset::ArmReset()
 {
@@ -11,7 +10,7 @@ ArmReset::ArmReset()
 void ArmReset::Initialize()
 {
 	this->SetTimeout(15.0f);
-	this->SetRunWhenDisabled(true);
+	//this->SetRunWhenDisabled(true);
 }
 
 // Called repeatedly when this Command is scheduled to run

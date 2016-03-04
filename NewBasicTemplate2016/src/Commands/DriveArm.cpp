@@ -31,7 +31,7 @@ bool DriveArm::IsFinished()
 // Called once after isFinished returns true
 void DriveArm::End()
 {
-	arm->RaiseLowerArm(0);
+	arm->RaiseLowerArm(0.0f);
 }
 
 // Called when another command which requires one or more of the same

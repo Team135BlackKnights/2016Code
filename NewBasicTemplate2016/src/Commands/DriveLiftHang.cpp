@@ -43,8 +43,8 @@ bool DriveLiftHang::IsFinished()
 // Called once after isFinished returns true
 void DriveLiftHang::End()
 {
-	liftHang->DriveLiftMotor(0);
-	liftHang->DriveFlipperMotor(0);
+	liftHang->DriveLiftMotor(0.0f);
+	liftHang->DriveFlipperMotor(0.0f);
 }
 
 // Called when another command which requires one or more of the same

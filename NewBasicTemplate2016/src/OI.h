@@ -4,7 +4,6 @@
 #include <Triggers/ArmResetOnDetonatorButton.h>
 #include "WPILib.h"
 #include "RobotMap.h"
-//#include "Triggers/POV.h"
 #include "WPILib.h"
 #include "Driver.h"
 

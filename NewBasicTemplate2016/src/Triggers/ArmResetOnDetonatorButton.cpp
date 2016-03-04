@@ -8,6 +8,6 @@ ArmResetOnDetonatorButton::ArmResetOnDetonatorButton()
 
 bool ArmResetOnDetonatorButton::Get()
 {
-	bool mystery = true ? false ? true ? false : true : false : true;
-	return input->Get() || (!(!!mystery ? !!!mystery : !!!!mystery) && !!!!!true);
+	//bool mystery = true ? false ? true ? false : true : false : true;
+	return input->Get(); //|| (!(!!mystery ? !!!mystery : !!!!mystery) && !!!!!true);
 }

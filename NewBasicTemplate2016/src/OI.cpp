@@ -1,11 +1,7 @@
 #include <Commands/DriveArm.h>
 #include "OI.h"
-#include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
-
-#include "Commands/RunningOverDefense.h"
-#include "Commands/DriveDistance.h"
 
 #include "Commands/ShootBoulder.h"
 #include "Commands/DriveLiftHang.h"
@@ -23,6 +19,11 @@ OI::OI()
 	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
 	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
 	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
+
+	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
+		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
+			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+	}
 
 
 	lefty = new Driver();
