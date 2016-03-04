@@ -9,7 +9,7 @@
 #include <cstdbool>
 #include <iostream>
 #include <memory>
-#include "ResetEncoderFromLimitSwitch.h"
+#include "Triggers/ResetEncoderFromLimitSwitch.h"
 
 
 
@@ -39,8 +39,8 @@ Arm::Arm():
 	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
 	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 	//  Declaring a Trigger using the limit switches declared above
-	upperLimit = new ResetEncoderFromLimitSwitch(topLimitSwitch);
-	lowerLimit = new ResetEncoderFromLimitSwitch(bottomLimitSwitch);
+	//upperLimit = new ResetEncoderFromLimitSwitch(topLimitSwitch);
+	//lowerLimit = new ResetEncoderFromLimitSwitch(bottomLimitSwitch);
 	//  When ResetEncoderFromLimitSwitch->Get() == true, then SetArmPosition() will execute
 	//upperLimit->WhenActive(new SetArmPosition(ARM_UP_POSITION));
 	//lowerLimit->WhenActive(new SetArmPosition(ARM_DOWN_POSITION));

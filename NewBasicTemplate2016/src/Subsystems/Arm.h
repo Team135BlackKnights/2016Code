@@ -43,8 +43,8 @@ private:
 	std::unique_ptr<DigitalInput> bottomLimitSwitch;
 	//  Declaring the Trigger ResetEncoderFromLimitSwitch which is going to be used along with the
 	//  Digital Input Limit Switches
-	ResetEncoderFromLimitSwitch* upperLimit;
-	ResetEncoderFromLimitSwitch* lowerLimit;
+	//ResetEncoderFromLimitSwitch* upperLimit;
+	//ResetEncoderFromLimitSwitch* lowerLimit;
 
 	static const bool FEEDBACK_DEVICE_INVERTED = false;
 

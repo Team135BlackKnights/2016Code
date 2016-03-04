@@ -46,7 +46,7 @@ void AxisCam::InitDefaultCommand()
 	this->TogglePID(true);
 	driveTurn->SetSetpoint(-32.0f);
 	//yServo->Set(.2f);
-	SetDefaultCommand(new CameraTracking());
+	//SetDefaultCommand(new CameraTracking());
 }
 
 

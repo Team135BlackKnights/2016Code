@@ -58,7 +58,7 @@
 	//  Analog Inputs
     const int POT_ANALOG_PORT = 0;
     const int LIGHT_ANALOG_PORT = 1;
-    const int LEFT_SONAR_ANALOG_PORT = 3;
-    const int RIGHT_SONAR_ANALOG_PORT = 2;
+    const int LEFT_SONAR_ANALOG_PORT = 2;
+    const int RIGHT_SONAR_ANALOG_PORT = 3;
 
 #endif
