@@ -3,7 +3,6 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
-#include "Triggers/ResetEncoderFromLimitSwitch.h"
 
 class DriveArm: public CommandBase
 {

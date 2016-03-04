@@ -3,7 +3,6 @@
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
-#include "Triggers/ResetEncoderFromLimitSwitch.h"
 
 class Arm: public Subsystem
 {
