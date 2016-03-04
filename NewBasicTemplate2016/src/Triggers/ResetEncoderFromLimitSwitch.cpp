@@ -6,7 +6,7 @@ ResetEncoderFromLimitSwitch::ResetEncoderFromLimitSwitch(DigitalInput* limit)
 }
 
 bool ResetEncoderFromLimitSwitch::Get() {
-	return this->limit->Get();
+	return !this->limit->Get();
 }
 
 

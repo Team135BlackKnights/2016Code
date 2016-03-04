@@ -9,6 +9,7 @@
 #include <cstdbool>
 #include <iostream>
 #include <memory>
+#include "ResetEncoderFromLimitSwitch.h"
 
 
 
@@ -18,13 +19,15 @@ Arm::Arm():
 	//  Declares the arm motor with its designated Talon ID
 	armMotor.reset(new CANTalon(MOTOR_RAISE_LOWER_ARM));
 
-	//  Set up the Encoder on the arm
-	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
-	armMotor->ConfigEncoderCodesPerRev(COUNT);
-	this->ZeroEncoder();
-	//  Have the encodet update its values at a faster rate
-	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
-	armMotor->SetSensorDirection(false);
+	if (FEEDBACK == CONTROL_TYPE::ENCODER) {
+		//  Set up the Encoder on the arm
+		armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+		armMotor->ConfigEncoderCodesPerRev(COUNT);
+		this->ZeroEncoder();
+		//  Have the encodet update its values at a faster rate
+		armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+		armMotor->SetSensorDirection(false);
+	}
 
 	//  Declaring the potentiometer in its designated analog input slot
 	ai = new AnalogInput(POT_ANALOG_PORT);
@@ -32,16 +35,15 @@ Arm::Arm():
 	//  0 to 360
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
+	//  Declares Limit Switches in their designated Digital Input Slot on the RoboRIO
+	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
+	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 	//  Declaring a Trigger using the limit switches declared above
 	upperLimit = new ResetEncoderFromLimitSwitch(topLimitSwitch);
 	lowerLimit = new ResetEncoderFromLimitSwitch(bottomLimitSwitch);
 	//  When ResetEncoderFromLimitSwitch->Get() == true, then SetArmPosition() will execute
 	//upperLimit->WhenActive(new SetArmPosition(ARM_UP_POSITION));
 	//lowerLimit->WhenActive(new SetArmPosition(ARM_DOWN_POSITION));
-	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
-
-	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
-	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 }
 
 void Arm::InitDefaultCommand()

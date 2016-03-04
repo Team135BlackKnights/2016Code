@@ -4,7 +4,7 @@ SetArmPosition::SetArmPosition(int position)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	arm->SetArmEncoderPosition(position);
+	arm->SetEncoderPosition(position);
 }
 
 // Called just before this Command runs the first time

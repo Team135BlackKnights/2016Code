@@ -102,19 +102,12 @@ void DriveTrain::InvertMotors()
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, DRIVE_TRAIN_INVERTED);
 }
 
-<<<<<<< HEAD
 //  Can change between brake and coast mode for all the motors of the drive train
 void DriveTrain::SetNeutralMode(bool coast)
 {
 	//  If you input into this function false, mode will equal brake mode
 	//  If you input true into this function, mode will equal coast mode
-	CANTalon::NeutralMode mode = (coast == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
-=======
-void DriveTrain::SetNeutralMode(bool mode)
-{
-	std::cout << "CHANGING NETURAL MODE\t" << mode << std::endl;
-	CANTalon::NeutralMode neutralMode = (mode == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
->>>>>>> refs/remotes/origin/DriverStructuring
+	CANTalon::NeutralMode neutralMode = (coast == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
 	for (int i = 0; i < NUM_MOTORS; i++) {
 		motors[i]->ConfigNeutralMode(neutralMode);
 	}

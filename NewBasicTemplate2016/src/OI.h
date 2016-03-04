@@ -102,8 +102,6 @@ public:
 	void UpdateManipulator(Manipulator*);
 
 
-	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
-	static constexpr float DISTANCE_NEED_TO_TRAVEL_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
 	void ResetButtonMapping();
 };
 #endif
