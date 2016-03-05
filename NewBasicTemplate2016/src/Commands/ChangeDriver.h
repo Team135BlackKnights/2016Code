@@ -6,7 +6,6 @@
 
 class ChangeDriver: public CommandBase
 {
-	Driver* driver;
 public:
 	ChangeDriver(Driver* driver);
 	void Initialize();
@@ -14,6 +13,8 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+	Driver* driver;
 };
 
 #endif

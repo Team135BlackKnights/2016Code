@@ -11,6 +11,7 @@
 #include "Commands/AimBot.h"
 #include "Commands/ArmReset.h"
 #include "Commands/ChangeDriver.h"
+#include "Commands/ChangeManipulator.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -35,9 +36,9 @@ OI::OI()
 	SetUpManipulators();
 	SetUpDrivers();
 
-	driver = lefty;
-	manipulator = sam;
-
+	driver = ((ChangeDriver*)((SendableChooser*)SmartDashboard::GetData("Drivers"))->GetSelected())->driver;
+	manipulator = ((ChangeManipulator*)((SendableChooser*)SmartDashboard::GetData("Manipulators"))->GetSelected())->manipulator;
+	ResetButtonMapping();
 	resetArm = new ArmResetOnDetonatorButton();
 	//resetArm->WhenActive(new ArmReset());
 }

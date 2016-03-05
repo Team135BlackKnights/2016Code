@@ -6,7 +6,6 @@
 
 class ChangeManipulator: public CommandBase
 {
-	Manipulator* manipulator;
 public:
 	ChangeManipulator(Manipulator* manipulator);
 	void Initialize();
@@ -14,6 +13,8 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+	Manipulator* manipulator;
 };
 
 #endif
