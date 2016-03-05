@@ -72,6 +72,7 @@ bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfDefense, int encoderPositio
 	case CASE_MOAT:
 	case CASE_RAMPARTS:
 	case CASE_ROCKWALL:
+	case CASE_CHEVAL_DE_FRISE:
 		//  If the left and right sonars are getting values that assume the robot is out of the defenses
 		if (leftDistanceInches > LEFT_SONAR_BARRIER_DISTANCE && rightDistanceInches > RIGHT_SONAR_BARRIER_DISTANCE) {
 			//  If you have passed the first ramp, return true;  if not, return false
@@ -114,6 +115,7 @@ bool AnalogSensors::OverDefense(DEFENSE_METHOD typeOfDefense, int encoderPositio
 	case CASE_MOAT:
 	case CASE_RAMPARTS:
 	case CASE_ROCKWALL:
+	case CASE_CHEVAL_DE_FRISE:
 		//  If the light Value displays that the robot is on top of a ramp and on the defense
 		if (lightValue > OVER_DEFENSE_LIGHT_VALUE && passedFirstRamp == false) {
 			//  Then the robot has passed the first ramp

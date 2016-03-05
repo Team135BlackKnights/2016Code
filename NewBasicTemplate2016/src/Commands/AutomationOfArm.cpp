@@ -15,19 +15,22 @@ AutomationOfArm::AutomationOfArm()
 void AutomationOfArm::Initialize()
 {
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
-	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
+
+	//  The desired value of the arm should be at the position the function below returns
 	desiredValue = (double) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
-	//std::cout << "Desired Value: " << desiredValue << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutomationOfArm::Execute()
 {
+	//  The currentValue updates every time Execute() runs
 	currentValue = (double) arm->GetPotValueOrEncoderPosition();
 
+	//  If the currentValue is lower than the desiredValue, then raise the arm upwards
 	if (currentValue < desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::UP);
 	}
+	//  If the currentValue is higher than the desiredValue, then lower the arm
 	else if (currentValue > desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::DOWN);
 	}

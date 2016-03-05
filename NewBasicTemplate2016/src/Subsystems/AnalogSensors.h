@@ -62,7 +62,8 @@ public:
 		CASE_ROUGH_TERRAIN = 1,
 		CASE_MOAT = 2,
 		CASE_RAMPARTS = 3,
-		CASE_ROCKWALL = 4
+		CASE_ROCKWALL = 4,
+		CASE_CHEVAL_DE_FRISE = 5
 	};
 
 	AnalogSensors();

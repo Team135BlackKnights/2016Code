@@ -7,6 +7,9 @@
 class AutomationOfArm: public CommandBase
 {
 private:
+	//  The currentValue will be equal to what the potentiometer or encoder value reads at the particular
+	//  moment in time we are executing this command.  The desiredValue equals what the potentiometer or encoder
+	//  value should be after some calculations
 	double currentValue,
 		   desiredValue;
 

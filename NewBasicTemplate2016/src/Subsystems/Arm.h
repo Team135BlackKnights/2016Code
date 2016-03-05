@@ -59,6 +59,8 @@ public:
     static const int ARM_DOWN_POSITION = 0;
     static const int ARM_UP_POSITION = 155;
 
+    static const int CHEVAL_DE_FRISE_DEGREES = 0;
+
 	Arm();
 	void InitDefaultCommand();
 	void RaiseLowerArm(float);
@@ -81,6 +83,8 @@ public:
 
 	double GetPotOrEncoderValueForAutomationOfArm(double);
 	double GetPotValueOrEncoderPosition();
+
+	double GetPotValueOrEncoderPositionGivenDesiredAngle(double);
 };
 
 #endif

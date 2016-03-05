@@ -1,5 +1,6 @@
 #include "ChangeNeutralMode.h"
 
+//  Input the mode depending upon if the robot should be in brake or coast mode
 ChangeNeutralMode::ChangeNeutralMode(bool mode) {
 	this->mode = mode;
 }
@@ -12,6 +13,8 @@ void ChangeNeutralMode::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ChangeNeutralMode::Execute()
 {
+	//  If you input into this function false, the motors will be set at brake mode
+	//  If you input true into this function, the motors will be set at coast mode
 	driveTrain->SetNeutralMode(mode);
 }
 

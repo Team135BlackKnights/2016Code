@@ -9,7 +9,6 @@
 class GetRobotOverDefenseIntoPosition: public CommandGroup
 {
 private:
-
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
 	static constexpr float DISTANCE_NEED_TO_TRAVEL = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
 public:

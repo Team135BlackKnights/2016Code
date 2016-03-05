@@ -8,6 +8,7 @@ class DriveDistance: public CommandBase
 {
 private:
 	double inchesDistance;
+	//  The currentDistance the encoder values return
 	double distanceFromLeftEncoder,
 		   distanceFromRightEncoder;
 

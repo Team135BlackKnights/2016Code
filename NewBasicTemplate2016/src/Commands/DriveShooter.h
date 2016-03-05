@@ -16,6 +16,8 @@ public:
 
 private:
 	float motorPower = 1.0f;
+
+	float power;
 };
 
 #endif

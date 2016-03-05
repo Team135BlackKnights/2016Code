@@ -28,7 +28,9 @@ private:
 		defenseChooser->AddObject("Rough Terrain", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_ROUGH_TERRAIN, defensePosition));
 		defenseChooser->AddObject("Ramparts", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_RAMPARTS, defensePosition));
 		defenseChooser->AddObject("Moat", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_MOAT, defensePosition));
-		defenseChooser->AddObject("Rock Wall", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_ROCKWALL, defensePosition)); */
+		defenseChooser->AddObject("Rock Wall", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_ROCKWALL, defensePosition));
+		defenseChooser->AddObject("Cheval De Frise", new GetRobotOverDefenseIntoPosition(AnalogSensors::CASE_CHEVAL_DE_FRISE, defensePosition));
+		*/
 
 		manipulatorChooser = new SendableChooser();
 		manipulatorChooser->AddDefault(CommandBase::oi->chris->NAME, new ChangeManipulator(CommandBase::oi->chris));

@@ -16,7 +16,12 @@ void DriveArm::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveArm::Execute()
 {
+	//  Get the value of the y-axis on the Maniupulator Joystick, since that value will be between -1 and 1
+	//  and Input it into the RaiseLowerArm Function
 	float y = oi->GetStickAxis(oi->manipulator->CONTROL_ARM_STICK, oi->manipulator->CONTROL_ARM_AXIS);
+	//  Multiply "y" by Arm::Up because when "y" is positive, you want the arm to be moving up
+	//  If y is negative, you want the arm to be moving downwards
+	//  If the arm is inverted, multiply it by -1, false, multiply by 1
 	arm->RaiseLowerArm(y * Arm::UP * (oi->manipulator->CONTROL_ARM_INVERTED ? -1 : 1));
 
 	//std::cout << arm->GetPotValueOrEncoderPosition() << std::endl;
@@ -31,6 +36,7 @@ bool DriveArm::IsFinished()
 // Called once after isFinished returns true
 void DriveArm::End()
 {
+	//  Stop the motor from running when the command isn't executing
 	arm->RaiseLowerArm(0.0f);
 }
 

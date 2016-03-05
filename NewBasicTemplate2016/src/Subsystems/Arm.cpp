@@ -118,5 +118,9 @@ double Arm::GetPotValueOrEncoderPosition() {
 	return FEEDBACK == CONTROL_TYPE::POT ? pot->Get() : (double)armMotor->GetEncPosition();
 }
 
+double Arm::GetPotValueOrEncoderPositionGivenDesiredAngle(double degrees) {
+	return (FEEDBACK == CONTROL_TYPE::POT ? degrees : degrees * ENCODER_MULTIPLYING_CONSTANT);
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
