@@ -1,10 +1,11 @@
 #include "ChangeManipulator.h"
 
-ChangeManipulator::ChangeManipulator(Manipulator* manipulator)
+ChangeManipulator::ChangeManipulator(Manipulator* manipulator, bool updateButtons)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	this->manipulator = manipulator;
+	this->updateButtons = updateButtons;
 }
 
 // Called just before this Command runs the first time
@@ -15,7 +16,7 @@ void ChangeManipulator::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ChangeManipulator::Execute()
 {
-	oi->UpdateManipulator(manipulator);
+	oi->UpdateManipulator(manipulator, updateButtons);
 }
 
 // Make this return true when this Command no longer needs to run execute()

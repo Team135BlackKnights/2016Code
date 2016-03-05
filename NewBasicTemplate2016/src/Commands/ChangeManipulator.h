@@ -6,14 +6,16 @@
 
 class ChangeManipulator: public CommandBase
 {
-	Manipulator* manipulator;
+	bool updateButtons;
 public:
-	ChangeManipulator(Manipulator* manipulator);
+	ChangeManipulator(Manipulator* manipulator, bool=false);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+	Manipulator* manipulator;
 };
 
 #endif

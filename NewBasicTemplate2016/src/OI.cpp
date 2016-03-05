@@ -40,9 +40,10 @@ OI::OI()
 	SetUpManipulators();
 	SetUpDrivers();
 
-	driver = new Driver(*lefty);
-	manipulator = new Manipulator(*sam);
 
+	driver = new Driver(*righty);//((ChangeDriver*)((SendableChooser*)SmartDashboard::GetData("Drivers"))->GetSelected())->driver;
+	manipulator = new Manipulator(*sam);//((ChangeManipulator*)((SendableChooser*)SmartDashboard::GetData("Manipulators"))->GetSelected())->manipulator;
+	ResetButtonMapping();
 	/*
 	for (int i = 0; i < 8; i++) {
 		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
@@ -118,18 +119,20 @@ float OI::GetStickAxis(int controllerNum, Joystick::AxisType axis)
 	//return 0;
 }
 
-void OI::UpdateDriver(Driver* driver)
+void OI::UpdateDriver(Driver* driver, bool updateButtons)
 {
 	this->driver = driver;
 	std::cout << this->driver->NAME;
-	ResetButtonMapping();
+	if (updateButtons)
+		ResetButtonMapping();
 }
 
-void OI::UpdateManipulator(Manipulator* manipulator)
+void OI::UpdateManipulator(Manipulator* manipulator, bool updateButtons)
 {
 	this->manipulator = manipulator;
 	std::cout << this->manipulator->NAME;
-	ResetButtonMapping();
+	if (updateButtons)
+		ResetButtonMapping();
 }
 
 void OI::ResetButtonMapping()
@@ -151,8 +154,10 @@ void OI::ResetButtonMapping()
 	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
-	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER, Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER));
-	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE* SLIDER_MOVEMENT_MULTIPLIER, Move::REVERSE * SLIDER_MOVEMENT_MULTIPLIER));
+	float forwardPower = Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER;
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(forwardPower, forwardPower));
+	float reversePower = Move::REVERSE * SLIDER_MOVEMENT_MULTIPLIER;
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(reversePower, reversePower));
 
 	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
 	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));

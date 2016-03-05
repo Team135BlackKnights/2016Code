@@ -6,14 +6,16 @@
 
 class ChangeDriver: public CommandBase
 {
-	Driver* driver;
+	bool updateButtons;
 public:
-	ChangeDriver(Driver* driver);
+	ChangeDriver(Driver* driver, bool updateButtons=true);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+	Driver* driver;
 };
 
 #endif

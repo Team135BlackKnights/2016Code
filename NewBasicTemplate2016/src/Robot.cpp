@@ -43,8 +43,8 @@ private:
 
 	void TeleopInit()
 	{
-		((Command*)manipulatorChooser->GetSelected())->Start();
-		((Command*)driverChooser->GetSelected())->Start();
+		//((Command*)manipulatorChooser->GetSelected())->Start();
+		//((Command*)driverChooser->GetSelected())->Start();
 	}
 
 	void TeleopPeriodic()

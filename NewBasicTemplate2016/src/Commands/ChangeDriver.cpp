@@ -1,17 +1,18 @@
 #include "ChangeDriver.h"
 
-ChangeDriver::ChangeDriver(Driver* driver)
+ChangeDriver::ChangeDriver(Driver* driver, bool updateButtons)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	this->driver = driver;
+	this->updateButtons = updateButtons;
 
 }
 
 // Called just before this Command runs the first time
 void ChangeDriver::Initialize()
 {
-	oi->UpdateDriver(driver);
+	oi->UpdateDriver(driver, updateButtons);
 }
 
 // Called repeatedly when this Command is scheduled to run

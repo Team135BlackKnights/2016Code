@@ -55,8 +55,8 @@ public:
 	Driver* driver;
 
 	//USB JOYSTICK VALUES
-    const int JOYSTICK_LEFT = 1;
-    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_LEFT = 0;
+    const int JOYSTICK_RIGHT = 1;
     const int JOYSTICK_MANIP = 2;
     const int JOYSTICK_BBOX = 3;
 
@@ -100,8 +100,8 @@ public:
 
 	void SetUpManipulators();
 	void SetUpDrivers();
-	void UpdateDriver(Driver*);
-	void UpdateManipulator(Manipulator*);
+	void UpdateDriver(Driver*, bool = true);
+	void UpdateManipulator(Manipulator*, bool=true);
 
 	void ResetButtonMapping();
 };
