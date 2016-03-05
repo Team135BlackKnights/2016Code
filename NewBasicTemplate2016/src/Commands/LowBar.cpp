@@ -3,7 +3,6 @@
 
 LowBar::LowBar()
 {
-	AddSequential(new AutonomousDrive(0,0,AutonomousDrive::MODE::TIME,0,0)); //Add Parameters here
-	//AddSequential(new CameraTracking());
-	//AddSequential(new Shoot());
+	AddSequential(new AutonomousDrive(.7f,.7f,AutonomousDrive::MODE::TIME,10,0)); //Add Parameters here
+	//AddSequential(new AimBot());
 }
