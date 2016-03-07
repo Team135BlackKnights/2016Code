@@ -8,7 +8,7 @@ class Move: public CommandBase
 {
 private:
 	float speedLeft;
-	int speedRight;
+	float speedRight;
 public:
 	Move(float);
 	Move(float, float);
