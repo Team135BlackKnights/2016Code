@@ -42,14 +42,6 @@ public:
 	static const bool COAST = true;
 	static const bool BRAKE = false;
 
-	enum TYPE_OF_DEFENSE {
-		LOW_BAR,
-		ROCK_WALL,
-		ROUGH_TERRAIN,
-		MOAT,
-		RAMPARTS
-	};
-
 	DriveTrain();
 	~DriveTrain();
 	void InitDefaultCommand();

@@ -34,11 +34,11 @@ private:
 
 		autoChooser = new SendableChooser();
 		defensePosition = Preferences::GetInstance()->GetInt("Defense Position", 1);
-		autoChooser->AddDefault("Low Bar", new AutoCommand(DriveTrain::TYPE_OF_DEFENSE::LOW_BAR, defensePosition));
-		autoChooser->AddObject("Rock Wall", new AutoCommand(DriveTrain::TYPE_OF_DEFENSE::ROCK_WALL, defensePosition));
-		autoChooser->AddObject("Rough Terrain", new AutoCommand(DriveTrain::TYPE_OF_DEFENSE::ROUGH_TERRAIN, defensePosition));
-		autoChooser->AddObject("Ramparts", new AutoCommand(DriveTrain::TYPE_OF_DEFENSE::RAMPARTS, defensePosition));
-		autoChooser->AddObject("Moat", new AutoCommand(DriveTrain::TYPE_OF_DEFENSE::MOAT, defensePosition));
+		autoChooser->AddDefault("Low Bar", new AutoCommand(TYPE_OF_DEFENSE::LOW_BAR, defensePosition));
+		autoChooser->AddObject("Rock Wall", new AutoCommand(TYPE_OF_DEFENSE::ROCK_WALL, defensePosition));
+		autoChooser->AddObject("Rough Terrain", new AutoCommand(TYPE_OF_DEFENSE::ROUGH_TERRAIN, defensePosition));
+		autoChooser->AddObject("Ramparts", new AutoCommand(TYPE_OF_DEFENSE::RAMPARTS, defensePosition));
+		autoChooser->AddObject("Moat", new AutoCommand(TYPE_OF_DEFENSE::MOAT, defensePosition));
 	}
 	
 	void DisabledPeriodic()

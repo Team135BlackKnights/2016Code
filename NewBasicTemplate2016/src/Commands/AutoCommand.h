@@ -5,6 +5,7 @@
 #include "WPILib.h"
 #include "DriveDistance.h"
 #include "TurnRobotAngle.h"
+#include "RobotMap.h"
 
 class AutoCommand: public CommandGroup
 {
@@ -25,7 +26,7 @@ private:
 
 	static constexpr float MOTOR_POWER_TO_RAMP = 0.6f;
 public:
-	AutoCommand(DriveTrain::TYPE_OF_DEFENSE, int);
+	AutoCommand(TYPE_OF_DEFENSE, int);
 };
 
 #endif

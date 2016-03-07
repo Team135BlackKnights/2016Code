@@ -1,6 +1,6 @@
 #include "AutoCommand.h"
 
-AutoCommand::AutoCommand(DriveTrain::TYPE_OF_DEFENSE typeOfDefense, int defensePosition)
+AutoCommand::AutoCommand(TYPE_OF_DEFENSE typeOfDefense, int defensePosition)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -21,19 +21,19 @@ AutoCommand::AutoCommand(DriveTrain::TYPE_OF_DEFENSE typeOfDefense, int defenseP
 
 	AddSequential(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, MOTOR_POWER_TO_RAMP, ZERO));
 
-	/*if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::LOW_BAR) {
+	if (typeOfDefense == TYPE_OF_DEFENSE::LOW_BAR) {
 		AddSequential(new DriveDistance(lowBarDistance));
 	}
-	else if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::MOAT) {
+	else if (typeOfDefense == TYPE_OF_DEFENSE::MOAT) {
 		AddSequential(new DriveDistance(moatDistance));
 	}
-	else if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::RAMPARTS) {
+	else if (typeOfDefense == TYPE_OF_DEFENSE::RAMPARTS) {
 		AddSequential(new DriveDistance(rampartsDistance));
 	}
-	else if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::ROCK_WALL) {
+	else if (typeOfDefense == TYPE_OF_DEFENSE::ROCK_WALL) {
 		AddSequential(new DriveDistance(rockWallDistance));
 	}
-	else if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::ROUGH_TERRAIN) {
+	else if (typeOfDefense == TYPE_OF_DEFENSE::ROUGH_TERRAIN) {
 		AddSequential(new DriveDistance(roughTerrainDistance));
 	}
 
@@ -54,6 +54,6 @@ AutoCommand::AutoCommand(DriveTrain::TYPE_OF_DEFENSE typeOfDefense, int defenseP
 	}
 	else if (defensePosition == 5) {
 		AddSequential(new DriveDistance(140));
-	} */
+	}
 
 }
