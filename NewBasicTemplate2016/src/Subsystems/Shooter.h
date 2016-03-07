@@ -13,8 +13,7 @@ private:
 
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
-
-	std::unique_ptr<Relay> kicker;
+	std::unique_ptr<Servo> kicker;
 
 	//  Not defined yet
 public:
@@ -24,14 +23,14 @@ public:
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
 
-	void DriveKicker(Relay::Value);
+	void DriveKicker(float);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
-	static const int IN = -1;
+	static const int IN = 1;
 	static const int OUT = -IN;
 
-	static const Relay::Value KICKER_KICKED = Relay::Value::kForward;
-	static const Relay::Value KICKER_RESET = Relay::Value::kOff;
+	static constexpr float KICKER_KICKED = 0.6f;
+	static constexpr float KICKER_RESET = 0.0f;
 };
 
 #endif

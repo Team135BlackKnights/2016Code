@@ -1,13 +1,13 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef DriveDefenseArm_H
+#define DriveDefenseArm_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class DriveDefenseArm: public CommandBase
 {
 public:
-	DriveLiftHang();
+	DriveDefenseArm();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

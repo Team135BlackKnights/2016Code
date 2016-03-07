@@ -1,15 +1,13 @@
-#ifndef DriveCollection_H
-#define DriveCollection_H
+#ifndef MoveToShootingPosition_H
+#define MoveToShootingPosition_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveCollection: public CommandBase
+class MoveToShootingPosition: public CommandBase
 {
-private:
-	float motorPower = 1.0f;
 public:
-	DriveCollection();
+	MoveToShootingPosition();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

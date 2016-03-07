@@ -1,22 +1,22 @@
-#ifndef Collection_H
-#define Collection_H
+#ifndef DefenseArm_H
+#define DefenseArm_H
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 
-class Collection: public Subsystem
+class DefenseArm: public Subsystem
 {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	std::unique_ptr<VictorSP> collectionMotor;
+	std::unique_ptr<CANTalon> motor;
 public:
-	Collection();
+	DefenseArm();
 	void InitDefaultCommand();
-	void PowerCollection(double);
+	void DriveMotor(float power);
 
-	static const int IN = 1;
-	static const int OUT = -IN;
+	static constexpr float UP = -.4f;
+	static constexpr float DOWN = -UP;
 };
 
 #endif

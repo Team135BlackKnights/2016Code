@@ -1,8 +1,8 @@
 #ifndef OI_H
 #define OI_H
 
+#include <Triggers/ArmResetOnDetonatorButton.h>
 #include "WPILib.h"
-//#include "Triggers/POV.h"
 
 class OI
 {
@@ -11,9 +11,11 @@ protected:
 
 	static const int JOYSTICKS = 4; //max number of joysticks connected
 	static const int MAX_JOYSTICK_BUTTONS = 12; //max number of buttons
+
 	//unique_ptr creates a(n) unique pointer  ask Eddie if confused
 	//Joystick array starts at index 0
 	std::unique_ptr<Joystick> joysticksArray[JOYSTICKS]; //creates an array of the joysticks
+
 	//JoystickButton array starts at index 1 (index 0 is not used)
 	std::unique_ptr<JoystickButton> buttonsArray[JOYSTICKS][MAX_JOYSTICK_BUTTONS + 1]; //creates an array of the joysticks vs the buttons starting with buttons at 1
 		 /*	 	 	 	 	 	 Buttons * 0 is invalid *
@@ -21,6 +23,7 @@ protected:
 		  	 Controller [1]
 		  	 Controller [2]
 		 */
+
 public:
 	OI();
 	Joystick* GetStick(int);
@@ -50,15 +53,17 @@ public:
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
 
-    static const int SILVER_TOGGLE = 1;
-    static const int RED_TOGGLE = 2;
+    //Button orientation - switches on top
+    static const int SILVER_SWITCH = 1;
+    static const int RED_SWITCH = 2;
+    static const int SILVER_TOGGLE = 10;
     static const int BUTTON = 3;
-    static const int LEFTARROW_BUMPUP = 10;
-    static const int LEFTARROW_BUMPDOWN = 11;
-    static const int MIDDLE_BUMPUP = 6;
-    static const int MIDDLE_BUMPDOWN = 7;
-    static const int LINE_BUMPUP = 9;
-    static const int LINE_BUMPDOWN = 8;
+    static const int LEFTARROW_BUMPUP = 9;
+    static const int LEFTARROW_BUMPDOWN = 8;
+    static const int MIDDLE_BUMPUP = 7;
+    static const int MIDDLE_BUMPDOWN = 6;
+    static const int LINE_BUMPUP = 5;
+    static const int LINE_BUMPDOWN = 4;
 
 	//BUTTON CONTROL CONSTANTS
 
@@ -70,29 +75,27 @@ public:
 
 	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
 
-	const int CONTROL_COLLECTION_IN[2] = {BBOX, LINE_BUMPDOWN};
-	const int CONTROL_COLLECTION_OUT[2] = {BBOX, LINE_BUMPUP};
+	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
+	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
 
-	//const int CONTROL_ARM_UP[2] = {MANIP, 7};
-	//const int CONTROL_ARM_DOWN[2] = {MANIP, 8};
+	//Defense Arm?
+	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 13};
+	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 13};
 
-	const int CONTROL_SHOOT[2] = {BBOX, BUTTON};
+	const int CONTROL_SHOOTER_IN[2] = {MANIP, 2};
+	const int CONTROL_SHOOTER_OUT[2] = {MANIP, 1};
 
-	const int CONTROL_LIFT_HANG_UP[2] = {BBOX, LEFTARROW_BUMPUP};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {BBOX, LEFTARROW_BUMPDOWN};
+	//Aim Bot FTW
+	const int CONTROL_SHOOT[2] = {MANIP, 7};
 
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {BBOX, MIDDLE_BUMPUP};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {BBOX, MIDDLE_BUMPDOWN};
+	const int CONTROL_ARM_RESET[2] = {MANIP, 8};
 
-	const float CONTROL_POV[8][2] = {
-		{1, 1},
-		{1, 0},
-		{1, -1},
-		{-1, 0},
-		{-1, -1},
-		{0, -1},
-		{-1, 1},
-		{0, 1}
-	};
+	//Lift power is controlled of the MANIP slider
+	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 12};
+	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 11};
+
+	//Flipper power is controlled off the RIGHT slider
+	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
+	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
 };
 #endif

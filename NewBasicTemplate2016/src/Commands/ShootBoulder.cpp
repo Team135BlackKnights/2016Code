@@ -17,7 +17,7 @@ void ShootBoulder::Initialize()
 {
 	//shooter->ZeroAllEncoders();
 	timer->Reset();
-	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime", 1.0f);
+	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",3.5f);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -47,7 +47,7 @@ void ShootBoulder::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return timer->Get() >= timeWait;
+	return timer->Get() >= timeWait + 2;
 }
 
 // Called once after isFinished returns true

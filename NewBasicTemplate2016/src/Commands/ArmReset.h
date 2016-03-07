@@ -1,13 +1,15 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef ArmReset_H
+#define ArmReset_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class ArmReset: public CommandBase
 {
+private:
+	static constexpr float power = .6f;
 public:
-	DriveLiftHang();
+	ArmReset();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -1,43 +1,39 @@
-#include <Commands/DriveArm.h>
+#include "ArmReset.h"
+#include "RobotMap.h"
 
-DriveArm::DriveArm()
+ArmReset::ArmReset()
 {
 	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(chassis);
 	Requires(arm.get());
 }
 
 // Called just before this Command runs the first time
-void DriveArm::Initialize()
+void ArmReset::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveArm::Execute()
+void ArmReset::Execute()
 {
-	float y = oi->GetStickY(OI::MANIP);
-	arm->RaiseLowerArm(y * Arm::UP);
-	//std::cout << arm->GetEncoderPosition() << std::endl;
-
-	std::cout << arm->GetPotValue() << std::endl;
+	arm->RaiseLowerArm(power * Arm::UP);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveArm::IsFinished()
+bool ArmReset::IsFinished()
 {
-	return false;
+	return arm->GetEncoderPosition() >= Arm::ARM_DOWN_POSITION;
 }
 
 // Called once after isFinished returns true
-void DriveArm::End()
+void ArmReset::End()
 {
-	arm->RaiseLowerArm(0);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveArm::Interrupted()
+void ArmReset::Interrupted()
 {
-	End();
+
 }
