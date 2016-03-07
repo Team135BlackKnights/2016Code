@@ -21,6 +21,8 @@ private:
 	static const int COUNT = 64;
 	static const int QUADRATURE_COUNT = COUNT * 4;
 
+	static constexpr float GEAR_RATIO = 26.0f/60.0f;
+
 	//  Measured in Inches
 	static const int RADIUS_OF_WHEELS = 6;
 	static const int DIAMETER_OF_WHEELS = 2 * RADIUS_OF_WHEELS;
@@ -35,6 +37,14 @@ public:
 
 	static const bool COAST = true;
 	static const bool BRAKE = false;
+
+	enum TYPE_OF_DEFENSE {
+		LOW_BAR,
+		ROCK_WALL,
+		ROUGH_TERRAIN,
+		MOAT,
+		RAMPARTS
+	};
 
 	DriveTrain();
 	~DriveTrain();

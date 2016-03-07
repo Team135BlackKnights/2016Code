@@ -114,6 +114,6 @@ void DriveTrain::ZeroEncoder(int motorIndex) {
 float DriveTrain::GetDistanceInches(int motorIndex) {
 	int encoderPosition = GetEncoderPosition(motorIndex);
 	float numberOfRotations = encoderPosition / QUADRATURE_COUNT;
-	float distanceTravelInches = numberOfRotations * CIRCUMFERENCE_OF_WHEELS;
+	float distanceTravelInches = numberOfRotations * GEAR_RATIO * CIRCUMFERENCE_OF_WHEELS;
 	return distanceTravelInches;
 }

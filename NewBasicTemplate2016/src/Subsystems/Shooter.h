@@ -30,7 +30,7 @@ public:
 	static const int OUT = -IN;
 
 	static constexpr float KICKER_KICKED = 0.6f;
-	static constexpr float KICKER_RESET = 0.0f;
+	static constexpr float KICKER_RESET = 0.05f;
 };
 
 #endif
