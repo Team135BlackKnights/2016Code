@@ -29,6 +29,16 @@ DriveTrain::DriveTrain():
 		//this->SetupMotors();
 		this->SetNeutralMode(BRAKE);
 
+		motors[FRONT_LEFT]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+		motors[FRONT_LEFT]->ConfigEncoderCodesPerRev(COUNT);
+		motors[FRONT_LEFT]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+
+
+		motors[FRONT_RIGHT]->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
+		motors[FRONT_RIGHT]->ConfigEncoderCodesPerRev(COUNT);
+		motors[FRONT_RIGHT]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+
+
 
 }
 
@@ -91,4 +101,19 @@ void DriveTrain::SetNeutralMode(bool mode)
 	for (int i = 0; i < NUM_MOTORS; i++) {
 		motors[i]->ConfigNeutralMode(neutralMode);
 	}
+}
+
+int DriveTrain::GetEncoderPosition(int motorIndex) {
+	return motors[motorIndex]->GetEncPosition();
+}
+
+void DriveTrain::ZeroEncoder(int motorIndex) {
+	motors[motorIndex]->SetPosition(0);
+}
+
+float DriveTrain::GetDistanceInches(int motorIndex) {
+	int encoderPosition = GetEncoderPosition(motorIndex);
+	float numberOfRotations = encoderPosition / QUADRATURE_COUNT;
+	float distanceTravelInches = numberOfRotations * CIRCUMFERENCE_OF_WHEELS;
+	return distanceTravelInches;
 }

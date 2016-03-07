@@ -19,9 +19,12 @@ private:
 
 	//  Need a value for the count of the encoder
 	static const int COUNT = 64;
+	static const int QUADRATURE_COUNT = COUNT * 4;
 
 	//  Measured in Inches
-	static const int RADIUS = 6.25;
+	static const int RADIUS_OF_WHEELS = 6;
+	static const int DIAMETER_OF_WHEELS = 2 * RADIUS_OF_WHEELS;
+	static const int CIRCUMFERENCE_OF_WHEELS = DIAMETER_OF_WHEELS * M_PI;
 
 public:
 
@@ -50,6 +53,10 @@ public:
 	void EnableMotorControl(int);
 
 	void SetNeutralMode(bool coast);
+
+	int GetEncoderPosition(int);
+	void ZeroEncoder(int);
+	float GetDistanceInches(int);
 
 };
 
