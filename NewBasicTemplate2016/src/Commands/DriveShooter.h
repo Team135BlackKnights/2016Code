@@ -15,7 +15,7 @@ public:
 	void Interrupted();
 
 private:
-	float motorPower = 1.0f;
+	float shootPower = 1.0f;
 };
 
 #endif

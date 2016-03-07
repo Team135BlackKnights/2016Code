@@ -1,4 +1,3 @@
-
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 
@@ -22,14 +21,14 @@
 	//Truncates a values to a certain number of variables
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
-    const int MOTOR_FRONT_LEFT	= 13;
-    const int MOTOR_REAR_LEFT	= 11;
-    const int MOTOR_FRONT_RIGHT	= 10;
-    const int MOTOR_REAR_RIGHT	= 12;
+    const int MOTOR_FRONT_LEFT	= 10;
+    const int MOTOR_REAR_LEFT	= 12;
+    const int MOTOR_FRONT_RIGHT	= 15;
+    const int MOTOR_REAR_RIGHT	= 13;
 
     //  Inaccurate ID Values for the Talon
-    const int MOTOR_SHOOT_BOULDER = 14;
-    const int MOTOR_RAISE_LOWER_ARM = 15;
+    const int MOTOR_SHOOT_BOULDER = 16;
+    const int MOTOR_RAISE_LOWER_ARM = 11;
     const int MOTOR_DEFENSE_ARM = 20; //Not used?
 
     //  Inacuurate PWM Ports
@@ -37,15 +36,18 @@
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
     const int MOTOR_COLLECTION = 2;
 
-    const int SERVO_SHOOTER_KICKER = 2;
+    const int SERVO_SHOOTER_KICKER = 3;
 
-    const int POT_ANALOG_PORT = 0;
+    const int POT_ANALOG_PORT = 4;
 
     //Is drive train inverted? The world may never know...
     const bool DRIVE_TRAIN_INVERTED = false;
 
     //  Hard Buttons Declarations
-    const int DIGITAL_BUTTON_ARM_RESET = 1;
+    const int DIGITAL_BUTTON_ARM_RESET = 8;
+
+    const int DIGITAL_ARM_LIMIT_TOP = 4;
+    const int DIGITAL_ARM_LIMIT_BOTTOM = 5;
 
 
 #endif

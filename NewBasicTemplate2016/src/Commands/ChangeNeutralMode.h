@@ -6,8 +6,9 @@
 
 class ChangeNeutralMode: public CommandBase
 {
+	bool mode;
 public:
-	ChangeNeutralMode(bool coast);
+	ChangeNeutralMode(bool mode);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

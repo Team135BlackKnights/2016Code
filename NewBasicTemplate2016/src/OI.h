@@ -2,7 +2,9 @@
 #define OI_H
 
 #include <Triggers/ArmResetOnDetonatorButton.h>
+#include "Triggers/POV.h"
 #include "WPILib.h"
+#include "Driver.h"
 
 class OI
 {
@@ -24,6 +26,10 @@ protected:
 		  	 Controller [2]
 		 */
 
+	ArmResetOnDetonatorButton* resetArm;
+
+	const float SLIDER_MOVEMENT_MULTIPLIER = .4f;
+
 public:
 	OI();
 	Joystick* GetStick(int);
@@ -33,11 +39,24 @@ public:
 	float GetStickSlider(int);
 	bool GetButton(int stick, int);
 	int GetPOV(int);
-	float GetAxis(int, Joystick::AxisType);
+	bool IsPOV(int, int);
+	bool IsPressed(int[3]);
+	float GetStickAxis(int, Joystick::AxisType);
+
+	Manipulator* sam;
+	Manipulator* chris;
+	Manipulator* brandon;
+	//SendableChooser* manipulatorChooser;
+	Manipulator* manipulator;
+	
+	Driver* lefty;
+	Driver* righty;
+	//SendableChooser* driverChooser;
+	Driver* driver;
 
 	//USB JOYSTICK VALUES
-    const int JOYSTICK_LEFT = 1;
-    const int JOYSTICK_RIGHT = 0;
+    const int JOYSTICK_LEFT = 0;
+    const int JOYSTICK_RIGHT = 1;
     const int JOYSTICK_MANIP = 2;
     const int JOYSTICK_BBOX = 3;
 
@@ -48,7 +67,7 @@ public:
 	static const int BBOX = 3;
 
 	//VARIOUS JOYSTICK AND OI CONSTANTS
-	static constexpr float DEAD_BAND = .05f; //declares dead zone
+	static constexpr float DEAD_BAND = .02f; //declares dead zone
 
     const int TRIGGER = 1;
     const int THUMB_BUTTON = 2;
@@ -57,7 +76,7 @@ public:
     static const int SILVER_SWITCH = 1;
     static const int RED_SWITCH = 2;
     static const int SILVER_TOGGLE = 10;
-    static const int BUTTON = 3;
+    static const int BIG_BUTTON = 3;
     static const int LEFTARROW_BUMPUP = 9;
     static const int LEFTARROW_BUMPDOWN = 8;
     static const int MIDDLE_BUMPUP = 7;
@@ -65,37 +84,25 @@ public:
     static const int LINE_BUMPUP = 5;
     static const int LINE_BUMPDOWN = 4;
 
-	//BUTTON CONTROL CONSTANTS
+    static const int POV_TOP = 			0b00000001,
+    				 POV_TOP_RIGHT = 	0b00000010,
+				     POV_RIGHT = 		0b00000100,
+					 POV_BOTTOM_RIGHT = 0b00001000,
+					 POV_BOTTOM = 		0b00010000,
+					 POV_BOTTOM_LEFT = 	0b00100000,
+					 POV_LEFT = 		0b01000000,
+					 POV_TOP_LEFT = 	0b10000000;
 
-	const int CONTROL_TURN_LEFT[2] = {LEFT, 3};
-	const int CONTROL_TURN_RIGHT[2] = {LEFT, 4};
+    static const int POV_COUNT = 8;
 
-	const int CONTROL_FORWARD[2] = {LEFT, TRIGGER};
-	const int CONTROL_REVERSE[2] = {LEFT, THUMB_BUTTON};
+	static const int CONTROL_MODE_POV = 0,
+					 CONTROL_MODE_BTN = 1;
 
-	const int CONTROL_NEUTRAL_MODE[2] = {RIGHT, TRIGGER};
+	void SetUpManipulators();
+	void SetUpDrivers();
+	void UpdateDriver(Driver*, bool = true);
+	void UpdateManipulator(Manipulator*, bool=true);
 
-	const int CONTROL_SHOOTER_KICKER_KICK[2] = {MANIP, 3};
-	const int CONTROL_SHOOTER_KICKER_RESET[2] = {MANIP, 4};
-
-	//Defense Arm?
-	const int CONTROL_DEFENSE_ARM_UP[2] = {MANIP, 13};
-	const int CONTROL_DEFENSE_ARM_DOWN[2] = {MANIP, 13};
-
-	const int CONTROL_SHOOTER_IN[2] = {MANIP, 2};
-	const int CONTROL_SHOOTER_OUT[2] = {MANIP, 1};
-
-	//Aim Bot FTW
-	const int CONTROL_SHOOT[2] = {MANIP, 7};
-
-	const int CONTROL_ARM_RESET[2] = {MANIP, 8};
-
-	//Lift power is controlled of the MANIP slider
-	const int CONTROL_LIFT_HANG_UP[2] = {MANIP, 12};
-	const int CONTROL_LIFT_HANG_DOWN[2] = {MANIP, 11};
-
-	//Flipper power is controlled off the RIGHT slider
-	const int CONTROL_LIFT_HANG_FLIPPER_UP[2] = {MANIP, 10};
-	const int CONTROL_LIFT_HANG_FLIPPER_DOWN[2] = {MANIP, 9};
+	void ResetButtonMapping();
 };
 #endif

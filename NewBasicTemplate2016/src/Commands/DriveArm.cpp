@@ -16,11 +16,11 @@ void DriveArm::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveArm::Execute()
 {
-	float y = oi->GetStickY(OI::MANIP);
-	arm->RaiseLowerArm(y * Arm::UP);
+	float y = oi->GetStickAxis(oi->manipulator->CONTROL_ARM_STICK, oi->manipulator->CONTROL_ARM_AXIS);
+	arm->RaiseLowerArm(y * Arm::UP * (oi->manipulator->CONTROL_ARM_INVERTED ? -1 : 1));
 	//std::cout << arm->GetEncoderPosition() << std::endl;
 
-	std::cout << arm->GetPotValue() << std::endl;
+	//std::cout << arm->GetPotValue() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

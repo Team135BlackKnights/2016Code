@@ -26,11 +26,11 @@ public:
 	void DriveKicker(float);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
-	static const int IN = 1;
+	static const int IN = -1;
 	static const int OUT = -IN;
 
 	static constexpr float KICKER_KICKED = 0.6f;
-	static constexpr float KICKER_RESET = 0.0f;
+	static constexpr float KICKER_RESET = 0.05f;
 };
 
 #endif

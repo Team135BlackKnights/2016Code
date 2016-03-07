@@ -1,16 +1,18 @@
 #include "ChangeNeutralMode.h"
 
-ChangeNeutralMode::ChangeNeutralMode(bool coast) {
-	driveTrain->SetNeutralMode(coast);
+ChangeNeutralMode::ChangeNeutralMode(bool mode) {
+	this->mode = mode;
 }
 
 // Called just before this Command runs the first time
-void ChangeNeutralMode::Initialize() {}
+void ChangeNeutralMode::Initialize() {
+
+}
 
 // Called repeatedly when this Command is scheduled to run
 void ChangeNeutralMode::Execute()
 {
-
+	driveTrain->SetNeutralMode(mode);
 }
 
 // Make this return true when this Command no longer needs to run execute()

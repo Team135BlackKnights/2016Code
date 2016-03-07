@@ -23,7 +23,10 @@ Arm::Arm():
 	//this->ZeroEncoder();
 	//armMotor->SetSensorDirection(false);
 	ai = new AnalogInput(POT_ANALOG_PORT);
-	pot = new AnalogPotentiometer(ai, 360, 0); // 0 can change if you want more offset
+	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
+
+	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
+	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 }
 
 void Arm::InitDefaultCommand()
@@ -33,27 +36,46 @@ void Arm::InitDefaultCommand()
 }
 
 void Arm::RaiseLowerArm(float motorPower) {
-	armMotor->Set(motorPower);
+	float power = motorPower;
+	if (GetTopLimitSwitchValue()) {
+		this->SetEncoderPosition(this->ARM_UP_POSITION);
+		if (UP > 0)
+			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
+	}
+	else if (GetBottomLimitSwitchValue()) {
+		if (UP > 0)
+			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
+	}
+	armMotor->Set(power);
 }
 
 bool Arm::GetTopLimitSwitchValue() {
-	return topLimitSwitch->Get();
+	return !topLimitSwitch->Get();
 }
 
 bool Arm::GetBottomLimitSwitchValue() {
-	return bottomLimitSwitch->Get();
+	return !bottomLimitSwitch->Get();
 }
 
 //cameraDist is in inches
-double Arm::GetAngleForArm(double cameraDist)
+double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
-	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist)));
+	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	return atan((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {
-	return -armMotor->GetEncPosition();// + UP_ARM_POSITION;
+	return (ENCODER_INVERTED ? -1 : 1) * armMotor->GetEncPosition();// + UP_ARM_POSITION;
+}
+
+void Arm::SetEncoderPosition(int value)
+{
+	this->armMotor->SetPosition(value);
 }
 
 void Arm::ZeroEncoder() {
@@ -65,42 +87,15 @@ double Arm::GetPotValue() {
 }
 
 //  Hypotenuse in inches
-double Arm::GetPotOrEncoderValueForAutomationOfArm(CONTROL_TYPE controlType, double inchesHypotenuse) {
-	switch(controlType) {
-	case POT: {
-		double potRadians = GetAngleForArm(inchesHypotenuse);
-		double potAngle = potRadians * (180.0D/M_PI);
-		double potValue = potAngle;
-		return potValue;
-	}
+double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
+	double radians = GetAngleForArm(inchesHypotenuse);
+	double degrees = radians * (180/M_PI);
 
-	case ENCODER: {
-		double encoderRadians = GetAngleForArm(inchesHypotenuse);
-		double encoderAngle = encoderRadians * (180.0D/M_PI);
-		int encoderPosition = encoderAngle * ENCODER_MULTIPLYING_CONSTANT;
-		return (double)encoderPosition;
-	}
-
-	default: {
-		return 0.0;
-	}
-}
+	return FEEDBACK == CONTROL_TYPE::POT ? degrees : (double)(degrees * ENCODER_MULTIPLYING_CONSTANT);
 }
 
-double Arm::GetPotValueOrEncoderPosition(CONTROL_TYPE controlType) {
-	switch (controlType) {
-	case POT:
-		return pot->Get();
-	break;
-
-	case ENCODER:
-		return (double) armMotor->GetEncPosition();
-	break;
-
-	default:
-		return 0.0;
-	break;
-	}
+double Arm::GetPotValueOrEncoderPosition() {
+	return FEEDBACK == CONTROL_TYPE::POT ? pot->Get() : (double)armMotor->GetEncPosition();
 }
 
 // Put methods for controlling this subsystem

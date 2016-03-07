@@ -1,40 +1,41 @@
-#include "ArmReset.h"
-#include "RobotMap.h"
+#include "ChangeDriver.h"
 
-ArmReset::ArmReset()
+ChangeDriver::ChangeDriver(Driver* driver, bool updateButtons)
 {
 	// Use Requires() here to declare subsystem dependencies
-	Requires(arm.get());
+	// eg. Requires(chassis);
+	this->driver = driver;
+	this->updateButtons = updateButtons;
+
 }
 
 // Called just before this Command runs the first time
-void ArmReset::Initialize()
+void ChangeDriver::Initialize()
 {
-	this->SetTimeout(15.0f);
-	this->SetRunWhenDisabled(true);
+	oi->UpdateDriver(driver, updateButtons);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ArmReset::Execute()
+void ChangeDriver::Execute()
 {
-	arm->RaiseLowerArm(power * Arm::UP);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmReset::IsFinished()
+bool ChangeDriver::IsFinished()
 {
-	return arm->GetTopLimitSwitchValue();
+	return true;
 }
 
 // Called once after isFinished returns true
-void ArmReset::End()
+void ChangeDriver::End()
 {
-	arm->RaiseLowerArm(0.00000f);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ArmReset::Interrupted()
+void ChangeDriver::Interrupted()
 {
 
 }

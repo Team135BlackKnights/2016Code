@@ -7,7 +7,7 @@
 class ArmReset: public CommandBase
 {
 private:
-	static constexpr float power = .6f;
+	static constexpr float power = .4f;
 public:
 	ArmReset();
 	void Initialize();

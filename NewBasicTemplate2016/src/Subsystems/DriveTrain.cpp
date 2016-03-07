@@ -84,10 +84,11 @@ void DriveTrain::InvertMotors()
 	this->chassis->SetInvertedMotor(RobotDrive::kRearRightMotor, DRIVE_TRAIN_INVERTED);
 }
 
-void DriveTrain::SetNeutralMode(bool coast)
+void DriveTrain::SetNeutralMode(bool mode)
 {
-	CANTalon::NeutralMode mode = (coast == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
+	std::cout << "CHANGING NETURAL MODE\t" << mode << std::endl;
+	CANTalon::NeutralMode neutralMode = (mode == COAST) ? CANTalon::NeutralMode::kNeutralMode_Coast : CANTalon::NeutralMode::kNeutralMode_Brake;
 	for (int i = 0; i < NUM_MOTORS; i++) {
-		motors[i]->ConfigNeutralMode(mode);
+		motors[i]->ConfigNeutralMode(neutralMode);
 	}
 }
