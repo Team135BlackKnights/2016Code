@@ -5,6 +5,7 @@
 #include "../OI.h"
 #include <fstream>
 #include "Commands/Subsystem.h"
+#include "RobotMap.h"
 
 class DriveTrain: public Subsystem//public PIDLogging
 {
@@ -24,9 +25,12 @@ private:
 	static constexpr float GEAR_RATIO = 26.0f/60.0f;
 
 	//  Measured in Inches
-	static const int RADIUS_OF_WHEELS = 6;
-	static const int DIAMETER_OF_WHEELS = 2 * RADIUS_OF_WHEELS;
-	static const int CIRCUMFERENCE_OF_WHEELS = DIAMETER_OF_WHEELS * M_PI;
+	static constexpr float RADIUS_OF_WHEELS = 6.0f;
+	static constexpr float DIAMETER_OF_WHEELS = 2.0f * RADIUS_OF_WHEELS;
+	static constexpr float CIRCUMFERENCE_OF_WHEELS = DIAMETER_OF_WHEELS * M_PI;
+
+	static const int DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2;
+	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = ((WIDTH_OF_ROBOT - (2 * DISTANCE_BETWEEN_EDGE_AND_WHEEL)) * M_PI);
 
 public:
 
@@ -67,6 +71,8 @@ public:
 	int GetEncoderPosition(int);
 	void ZeroEncoder(int);
 	float GetDistanceInches(int);
+
+	int GetEncoderPositionToTurnAngle(int);
 
 };
 

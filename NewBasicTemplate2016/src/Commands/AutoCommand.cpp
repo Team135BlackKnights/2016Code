@@ -19,9 +19,9 @@ AutoCommand::AutoCommand(DriveTrain::TYPE_OF_DEFENSE typeOfDefense, int defenseP
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential(new DriveDistance(DRIVE_DISTANCE_TO_RAMP));
+	AddSequential(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, MOTOR_POWER_TO_RAMP, ZERO));
 
-	if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::LOW_BAR) {
+	/*if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::LOW_BAR) {
 		AddSequential(new DriveDistance(lowBarDistance));
 	}
 	else if (typeOfDefense == DriveTrain::TYPE_OF_DEFENSE::MOAT) {
@@ -45,6 +45,15 @@ AutoCommand::AutoCommand(DriveTrain::TYPE_OF_DEFENSE typeOfDefense, int defenseP
 	}
 	else if (defensePosition == 3) {
 		AddSequential(new DriveDistance(80));
+		AddSequential(new TurnRobotAngle(90, RIGHT, 0.4f));
+		AddSequential(new DriveDistance(44));
+		AddSequential(new TurnRobotAngle(90, LEFT, 0.4f));
 	}
+	else if (defensePosition == 4) {
+		AddSequential(new DriveDistance(85));
+	}
+	else if (defensePosition == 5) {
+		AddSequential(new DriveDistance(140));
+	} */
 
 }
