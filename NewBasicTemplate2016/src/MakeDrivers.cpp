@@ -35,7 +35,7 @@ void OI::SetUpManipulators() {
 	sam->CONTROL_ARM_RESET[BUTTON] = 8;
 
 	sam->CONTROL_ARM_STICK = MANIP;
-	sam->CONTROL_ARM_INVERTED = false;
+	sam->CONTROL_ARM_INVERTED = true;
 	sam->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
 
 	//Lift Hang

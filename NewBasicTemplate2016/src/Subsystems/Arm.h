@@ -62,7 +62,7 @@ public:
 	double GetPotValueForArm(double);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = -1;
+	static const int UP = 1;
 	static const int DOWN = -UP;
 
 	static const bool ENCODER_INVERTED = false;

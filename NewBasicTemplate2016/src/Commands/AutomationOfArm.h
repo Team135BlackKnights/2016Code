@@ -9,7 +9,8 @@ class AutomationOfArm: public CommandBase
 private:
 	double currentValue,
 		   desiredValue,
-		   startingValue;
+		   startingValue,
+		   angle;
 
 	//double inchesHypotenuse;
 

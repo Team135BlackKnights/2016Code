@@ -51,7 +51,7 @@ void Arm::RaiseLowerArm(float motorPower) {
 		else
 			power = fmaxf(power, 0);
 	}
-	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
+	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
 	armMotor->Set(power);
 }
 
@@ -77,7 +77,7 @@ int Arm::GetEncoderPosition() {
 
 double Arm::GetValueBasedOnAngle(double angle)
 {
-	return FEEDBACK == CONTROL_TYPE::POT ? angle : (double)(angle * ENCODER_MULTIPLYING_CONSTANT);
+	return (double)(angle * 64.0D / 90.0D);
 }
 
 void Arm::SetEncoderPosition(int value)
@@ -102,7 +102,7 @@ double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
 }
 
 double Arm::GetPotValueOrEncoderPosition() {
-	return FEEDBACK == CONTROL_TYPE::POT ? pot->Get() : (double)armMotor->GetEncPosition();
+	return (ENCODER_INVERTED ? -1 : 1) * (FEEDBACK == CONTROL_TYPE::POT ? pot->Get() : (double)armMotor->GetEncPosition());
 }
 
 // Put methods for controlling this subsystem

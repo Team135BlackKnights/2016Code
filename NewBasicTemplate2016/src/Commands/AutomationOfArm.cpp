@@ -9,7 +9,7 @@ AutomationOfArm::AutomationOfArm()
 	currentValue = 0;
 	desiredValue = -1;
 	startingValue = 0;
-
+	this->angle = 0;
 }
 
 AutomationOfArm::AutomationOfArm(double angle)
@@ -18,6 +18,7 @@ AutomationOfArm::AutomationOfArm(double angle)
 	currentValue = 0;
 	desiredValue = arm->GetValueBasedOnAngle(angle);
 	startingValue = 0;
+	this->angle = angle;
 }
 
 // Called just before this Command runs the first time
@@ -39,7 +40,8 @@ void AutomationOfArm::Execute()
 {
 	currentValue = (double) arm->GetPotValueOrEncoderPosition();
 	std::cout << "Current Value: " << currentValue << std::endl;
-
+	std::cout << "Desired Value: " << desiredValue << std::endl;
+	std::cout << "Angle: " << currentValue * 90.0D / 64.0D << '\n';
 	if (currentValue < desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::UP);
 	}
