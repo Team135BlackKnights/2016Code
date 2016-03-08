@@ -1,4 +1,8 @@
 #include "AutoCommand.h"
+#include "AutomationOfArm.h"
+#include "DriveDistance.h"
+#include "TurnRobotAngle.h"
+#include "../CommandBase.h"
 
 AutoCommand::AutoCommand(int typeOfDefense, int defensePosition)
 {
@@ -19,7 +23,8 @@ AutoCommand::AutoCommand(int typeOfDefense, int defensePosition)
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, MOTOR_POWER_TO_RAMP, ZERO));
+	//AddParallel(new AutomationOfArm(30.0D));
+	AddSequential(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, 0.45f, ZERO));
 
 	//AddSequential(new DriveDistance(rampartsDistance, 0.5f));
 
@@ -27,16 +32,16 @@ AutoCommand::AutoCommand(int typeOfDefense, int defensePosition)
 		AddSequential(new DriveDistance(lowBarDistance));
 	}
 	else if (typeOfDefense == DriveTrain::MOAT) {
-		AddSequential(new DriveDistance(moatDistance));
+		AddSequential(new DriveDistance(moatDistance, .6f));
 	}
 	else if (typeOfDefense == DriveTrain::RAMPARTS) {
-		AddSequential(new DriveDistance(rampartsDistance));
+		AddSequential(new DriveDistance(rampartsDistance, .55f));
 	}
 	else if (typeOfDefense == DriveTrain::ROCK_WALL) {
 		AddSequential(new DriveDistance(rockWallDistance));
 	}
 	else if (typeOfDefense == DriveTrain::ROUGH_TERRAIN) {
-		AddSequential(new DriveDistance(roughTerrainDistance));
+		AddSequential(new DriveDistance(roughTerrainDistance, .5f));
 	}
 
 	/*if (defensePosition == 1) {

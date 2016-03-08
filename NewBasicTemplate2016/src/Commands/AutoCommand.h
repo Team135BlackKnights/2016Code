@@ -3,8 +3,6 @@
 
 #include "Commands/CommandGroup.h"
 #include "WPILib.h"
-#include "DriveDistance.h"
-#include "TurnRobotAngle.h"
 #include "RobotMap.h"
 
 class AutoCommand: public CommandGroup
@@ -12,8 +10,8 @@ class AutoCommand: public CommandGroup
 private:
 	static const int lowBarDistance = 50 + LENGTH_OF_ROBOT,
 				     rockWallDistance = 50 + LENGTH_OF_ROBOT,
-					 roughTerrainDistance = 50 + LENGTH_OF_ROBOT,
-					 moatDistance = 50 + LENGTH_OF_ROBOT,
+					 roughTerrainDistance = 36 + LENGTH_OF_ROBOT,
+					 moatDistance = 36 + LENGTH_OF_ROBOT,
 					 rampartsDistance = 40 + LENGTH_OF_ROBOT;
 
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;

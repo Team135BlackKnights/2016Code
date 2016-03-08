@@ -39,6 +39,7 @@ private:
 		autoChooser->AddObject("Rough Terrain", new AutoCommand(DriveTrain::ROUGH_TERRAIN, defensePosition));
 		autoChooser->AddObject("Ramparts", new AutoCommand(DriveTrain::RAMPARTS, defensePosition));
 		autoChooser->AddObject("Moat", new AutoCommand(DriveTrain::MOAT, defensePosition));
+		SmartDashboard::PutData("AUTOs", autoChooser);
 	}
 	
 	void DisabledPeriodic()

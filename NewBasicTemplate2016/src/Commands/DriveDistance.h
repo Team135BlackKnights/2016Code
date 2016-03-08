@@ -29,7 +29,7 @@ private:
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
 	static const int DRIVE_DISTANCE_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
 public:
-	DriveDistance(int inchesDistance, float motorPower = 0.5f, bool zero = false);
+	DriveDistance(int inchesDistance, float motorPower = .2f, bool zero = false);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
