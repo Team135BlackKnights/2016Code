@@ -64,7 +64,7 @@ public:
 	static const int UP = -1;
 	static const int DOWN = -UP;
 
-	static const bool ENCODER_INVERTED = true;
+	static const bool ENCODER_INVERTED = false;
 
 	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
