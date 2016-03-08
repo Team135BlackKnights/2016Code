@@ -19,7 +19,7 @@ private:
 	static const int MAG_QUADRATURE_COUNT = 4 * MAG_ENCODER_COUNT;
 
 	//  Still To Be Determined
-	static const int MAG_ENCODER_SETPOINT = 2500;
+	static constexpr double MAG_ENCODER_SETPOINT = 18000.0D;
 public:
 	Shooter();
 	void InitDefaultCommand();
@@ -29,10 +29,9 @@ public:
 
 	void DriveKicker(float);
 
-	int GetEncoderVelocity();
+	double GetEncoderVelocity();
 	int GetEncoderPosition();
 	bool ShooterUpToSpeed();
-	float GetRPMOfShooter();
 
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;

@@ -23,6 +23,7 @@ void Shooter::InitDefaultCommand()
 
 void Shooter::DriveShooterMotors(float power) {
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
+	std::cout << "Shooter Velocity: " << GetEncoderVelocity() << std::endl;
 }
 
 void Shooter::StopShooterMotors() {
@@ -35,8 +36,8 @@ void Shooter::DriveKicker(float value) {
 		kicker->Set(value);
 }
 
-int Shooter::GetEncoderVelocity() {
-	return motors[TWO_WHEEL_SHOOTER_MOTOR]->GetSpeed();
+double Shooter::GetEncoderVelocity() {
+	return motors[TWO_WHEEL_SHOOTER_MOTOR]->GetEncVel();//->GetSpeed();
 }
 
 int Shooter::GetEncoderPosition() {
@@ -52,11 +53,5 @@ bool Shooter::ShooterUpToSpeed() {
 		return false;
 	}
 }
-
-float Shooter::GetRPMOfShooter() {
-	float shooterVelocity = GetEncoderVelocity();
-
-}
-
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
