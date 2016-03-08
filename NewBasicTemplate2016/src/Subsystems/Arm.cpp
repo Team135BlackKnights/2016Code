@@ -45,7 +45,7 @@ void Arm::RaiseLowerArm(float motorPower) {
 			power = fmaxf(power, 0);
 	}
 	else if (GetBottomLimitSwitchValue()) {
-		this->SetEncoderPosition(0);
+		this->ZeroEncoder();
 		if (UP > 0)
 			power = fminf(power, 0);
 		else
@@ -68,7 +68,9 @@ double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
 	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	double radians = atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	double degrees = radians * (180/M_PI);
+	return degrees;
 }
 
 int Arm::GetEncoderPosition() {
@@ -77,7 +79,7 @@ int Arm::GetEncoderPosition() {
 
 double Arm::GetValueBasedOnAngle(double angle)
 {
-	return (double)(angle * 64.0D / 90.0D);
+	return (double)(angle / ENCODER_MULTIPLYING_CONSTANT);
 }
 
 void Arm::SetEncoderPosition(int value)
@@ -89,16 +91,11 @@ void Arm::ZeroEncoder() {
 	armMotor->SetPosition(0);
 }
 
-double Arm::GetPotValue() {
-	return pot->Get();
-}
-
 //  Hypotenuse in inches
 double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
-	double radians = GetAngleForArm(inchesHypotenuse);
-	double degrees = radians * (180/M_PI);
+	double angle = GetAngleForArm(inchesHypotenuse);
 
-	return FEEDBACK == CONTROL_TYPE::POT ? degrees : (double)(degrees * ENCODER_MULTIPLYING_CONSTANT);
+	return angle * ENCODER_MULTIPLYING_CONSTANT;
 }
 
 double Arm::GetPotValueOrEncoderPosition() {
