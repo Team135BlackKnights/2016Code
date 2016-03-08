@@ -75,6 +75,11 @@ int Arm::GetEncoderPosition() {
 	return (ENCODER_INVERTED ? -1 : 1) * armMotor->GetEncPosition();// + UP_ARM_POSITION;
 }
 
+double Arm::GetValueBasedOnAngle(double angle)
+{
+	return FEEDBACK == CONTROL_TYPE::POT ? angle : (double)(angle * ENCODER_MULTIPLYING_CONSTANT);
+}
+
 void Arm::SetEncoderPosition(int value)
 {
 	this->armMotor->SetPosition(value);

@@ -43,7 +43,7 @@ public:
 		ENCODER = 1
 	};
 
-	static const CONTROL_TYPE FEEDBACK = CONTROL_TYPE::POT;
+	static const CONTROL_TYPE FEEDBACK = CONTROL_TYPE::ENCODER;
 
     static const int ARM_DOWN_POSITION = 0;
     static const int ARM_UP_POSITION = 155;
@@ -57,6 +57,7 @@ public:
 
 	int GetEncoderValueForAngle(double inchesHypotenuse);
 	double GetAngleForArm(double,  double fadeAwayDist = 0);
+	double GetValueBasedOnAngle(double angle);
 
 	double GetPotValueForArm(double);
 

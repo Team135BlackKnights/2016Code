@@ -17,6 +17,7 @@
 #include "Commands/ArmReset.h"
 #include "Commands/ChangeDriver.h"
 #include "Commands/ChangeInvertedDriveTrain.h"
+#include "Commands/AutomationOfArm.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -167,4 +168,8 @@ void OI::ResetButtonMapping()
 
 	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenPressed(new ChangeInvertedDriveTrain(true));
 	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenReleased(new ChangeInvertedDriveTrain(false));
+
+	buttonsArray[MANIP][4]->WhenPressed(new AutomationOfArm(35.0D));
+	buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(40.0D));
+	buttonsArray[MANIP][5]->WhenPressed(new AutomationOfArm(55.0D));
 }
