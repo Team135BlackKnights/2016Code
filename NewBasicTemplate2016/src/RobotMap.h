@@ -52,14 +52,6 @@
     constexpr float LENGTH_OF_ROBOT = 30.5f;
     constexpr float WIDTH_OF_ROBOT = 28.5f;
 
-	enum TYPE_OF_DEFENSE {
-		LOW_BAR,
-		ROCK_WALL,
-		ROUGH_TERRAIN,
-		MOAT,
-		RAMPARTS
-	};
-
 
 #endif
 

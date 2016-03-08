@@ -10,11 +10,11 @@
 class AutoCommand: public CommandGroup
 {
 private:
-	static const int lowBarDistance = 80,
-				     rockWallDistance = 80,
-					 roughTerrainDistance = 80,
-					 moatDistance = 80,
-					 rampartsDistance = 70;
+	static const int lowBarDistance = 50 + LENGTH_OF_ROBOT,
+				     rockWallDistance = 50 + LENGTH_OF_ROBOT,
+					 roughTerrainDistance = 50 + LENGTH_OF_ROBOT,
+					 moatDistance = 50 + LENGTH_OF_ROBOT,
+					 rampartsDistance = 40 + LENGTH_OF_ROBOT;
 
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
 	static const int DRIVE_DISTANCE_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
@@ -26,7 +26,7 @@ private:
 
 	static constexpr float MOTOR_POWER_TO_RAMP = 0.8f;
 public:
-	AutoCommand(TYPE_OF_DEFENSE, int);
+	AutoCommand(int, int);
 };
 
 #endif

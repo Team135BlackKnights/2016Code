@@ -42,6 +42,12 @@ public:
 	static const bool COAST = true;
 	static const bool BRAKE = false;
 
+	static const int LOW_BAR = 0,
+					 ROCK_WALL = 1,
+					 ROUGH_TERRAIN = 2,
+					 MOAT = 3,
+					 RAMPARTS = 4;
+
 	DriveTrain();
 	~DriveTrain();
 	void InitDefaultCommand();
