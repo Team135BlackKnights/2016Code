@@ -16,6 +16,10 @@ public:
 
 private:
 	float shootPower = 1.0f;
+
+	bool upToSpeed = false;
+
+	int shooterVelocity = 0;
 };
 
 #endif

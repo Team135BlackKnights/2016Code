@@ -28,9 +28,11 @@ public:
 	void RaiseLowerArm(double);
 
 	void DriveKicker(float);
+
 	int GetEncoderVelocity();
 	int GetEncoderPosition();
 	bool ShooterUpToSpeed();
+	float GetRPMOfShooter();
 
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
