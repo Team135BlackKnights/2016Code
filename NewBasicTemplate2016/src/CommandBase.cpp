@@ -11,6 +11,7 @@ std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<LiftHang> CommandBase::liftHang;
 std::unique_ptr<AxisCam> CommandBase::cam;
 std::unique_ptr<DefenseArm> CommandBase::defenseArm;
+std::unique_ptr<AnalogSensors> CommandBase::analogSensors;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -38,6 +39,8 @@ void CommandBase::init()
 	liftHang.reset(new LiftHang());
 
 	cam.reset(new AxisCam());
+
+	analogSensors.reset(new AnalogSensors());
 
 	//defenseArm.reset(new DefenseArm());
 }
