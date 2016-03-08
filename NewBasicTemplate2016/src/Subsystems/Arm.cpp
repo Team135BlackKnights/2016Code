@@ -3,7 +3,7 @@
 #include <Commands/DriveArm.h>
 #include <DigitalInput.h>
 #include <interfaces/Potentiometer.h>
-#include <RobotMap.h>
+
 #include <Subsystems/Arm.h>
 #include <cmath>
 #include <cstdbool>

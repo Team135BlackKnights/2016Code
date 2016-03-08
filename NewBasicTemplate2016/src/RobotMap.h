@@ -21,6 +21,12 @@
 	//Truncates a values to a certain number of variables
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
+	enum ROBOT_VERSION {
+		V1, V2
+	};
+
+	const ROBOT_VERSION robit = V1;
+
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;
     const int MOTOR_FRONT_RIGHT	= 15;

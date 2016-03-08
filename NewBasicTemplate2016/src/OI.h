@@ -41,17 +41,8 @@ public:
 	bool IsPOV(int, int);
 	bool IsPressed(int[3]);
 	float GetStickAxis(int, Joystick::AxisType);
-
-	Manipulator* sam;
-	Manipulator* chris;
-	Manipulator* brandon;
-	//SendableChooser* manipulatorChooser;
-	Manipulator* manipulator;
-	
-	Driver* lefty;
-	Driver* righty;
-	//SendableChooser* driverChooser;
 	Driver* driver;
+	Manipulator* manipulator;
 
 	//USB JOYSTICK VALUES
     const int JOYSTICK_LEFT = 0;

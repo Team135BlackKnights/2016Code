@@ -4,6 +4,7 @@
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 #include "PIDLogging.h"
+#include <RobotMap.h>
 
 
 class Arm: public Subsystem //public PIDLogging
@@ -18,7 +19,7 @@ private:
 	std::unique_ptr<CANTalon> armMotor;
 
 	//  256 COUNT over 90 degrees
-	static constexpr float ENCODER_MULTIPLYING_CONSTANT = (256.0f/90.0f);
+	static constexpr float ENCODER_MULTIPLYING_CONSTANT = ((robit == V1 ? 64.0f : 256.0f) / 90.0f);
 	static constexpr float POT_CONSTANT = 300.0f;
 
 	//Height of tower to the tape
