@@ -1,16 +1,13 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef CameraTracking_H
+#define CameraTracking_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class CameraTracking: public CommandBase
 {
-private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
 public:
-	DriveJ();
+	CameraTracking();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

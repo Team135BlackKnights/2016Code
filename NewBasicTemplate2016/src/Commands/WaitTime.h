@@ -1,16 +1,16 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef Wait_H
+#define Wait_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class WaitTime: public CommandBase
 {
 private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
+	float time;
+	std::unique_ptr<Timer> timer;
 public:
-	DriveJ();
+	WaitTime(float);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

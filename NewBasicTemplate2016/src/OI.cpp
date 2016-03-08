@@ -1,60 +1,175 @@
+/*
+	LET IT BE KNOWN THAT 'OI' STANDS FOR OPERATOR INTERFACE. THUS IT HAS BEEN DECREED BY THE GREAT EDDIE.
+	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
+ */
+#include <Commands/DriveArm.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
+#include "Commands/ShootBoulder.h"
+#include "Commands/DriveLiftHang.h"
+#include "Commands/ChangeNeutralMode.h"
+#include "Commands/Move.h"
+#include "Subsystems/LiftHang.h"
+#include "Commands/AimBot.h"
+#include "Commands/ArmReset.h"
+#include "Commands/ChangeDriver.h"
+#include "Commands/ChangeInvertedDriveTrain.h"
+#include "Commands/AutomationOfArm.h"
+
+// OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
 {
-//
-	// Process operator interface input here.
-	//sticks[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //Declares new Joystick
-	//sticks[RIGHT].reset(new Joystick(JOYSTICK_RIGHT));
-	//sticks[MANIPULATOR_CONTROL].reset(new Joystick(JOYSTICK_MANIPULATOR_CONTROL));
+	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
+	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
+	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
+	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
+		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++)
+			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+	}
+
+	lefty = new Driver();
+	righty = new Driver();
+	chris = new Manipulator();
+	sam = new Manipulator();
+	brandon = new Manipulator();
+
+	SetUpManipulators();
+	SetUpDrivers();
+
+
+	driver = new Driver(*righty);//((ChangeDriver*)((SendableChooser*)SmartDashboard::GetData("Drivers"))->GetSelected())->driver;
+	manipulator = new Manipulator(*sam);//((ChangeManipulator*)((SendableChooser*)SmartDashboard::GetData("Manipulators"))->GetSelected())->manipulator;
+	ResetButtonMapping();
 	/*
-	for (int i = 0; i < NUMBER_O_JOYSTICKS; i++) //Declares new buttons for Joysticks max # of buttons is 12
-	{
-
-		for (int j = 1; j <= MAX_JOYSTICK_BUTTONS; j++)
-		{
-			buttons[i][j].reset(new JoystickButton(sticks[i].get(), j));
-		}
+	for (int i = 0; i < 8; i++) {
+		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
 	}
 	*/
+	resetArm = new ArmResetOnDetonatorButton();
+	//resetArm->WhenActive(new ArmReset());
 }
 
-float OI::GetStickX(int hand)
+//OI Functions
+Joystick* OI::GetStick(int controllerNum)
 {
-	//float value = sticks[hand]->GetX(); // Returns X axis value of Joysticks
+	return joysticksArray[controllerNum].get();
+}
+
+float OI::GetStickX(int controllerNum) //Returns controller's x value
+{
+	return GetStickAxis(controllerNum, Joystick::AxisType::kXAxis);
+}
+
+float OI::GetStickY(int controllerNum)
+{
+	//return -joysticksArray[controllerNum]->GetY();
+	return -GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
+}
+
+float OI::GetStickTwist(int controllerNum)
+{
+	return GetStickAxis(controllerNum, Joystick::AxisType::kTwistAxis);
+}
+
+float OI::GetStickSlider(int controllerNum)
+{
+	return 1 - joysticksArray[controllerNum]->GetThrottle(); //Gets throttle value and reverses it because the throttle is backwards
+}
+
+bool OI::GetButton(int controllerNum, int buttonNum) //Gets whether or not a button is pressed or not
+{
+	return buttonsArray[controllerNum][buttonNum]->Get();
+}
+
+int OI::GetPOV(int stick)
+{
+	return joysticksArray[stick]->GetPOV();
+}
+
+bool OI::IsPOV(int stick, int data)
+{
+	int value = joysticksArray[stick]->GetPOV();
+	if (value < 0) return false;
+
+	int offset = (value / 360.0f) * POV_COUNT;
+	bool pressed = ((data >> offset) & 1);
+	return pressed;
+}
+
+bool OI::IsPressed(int data[3])
+{
+	if (data[MODE] == CONTROL_MODE_POV)
+		return IsPOV(data[STICK], data[BUTTON]);
+	else if (data[MODE] == CONTROL_MODE_BTN)
+		return GetButton(data[STICK], data[BUTTON]);
+	else
+		return false;
+}
+
+float OI::GetStickAxis(int controllerNum, Joystick::AxisType axis)
+{
+	float value = joysticksArray[controllerNum]->GetAxis(axis);
 	//if (abs(value) > DEAD_BAND)
-		return 0;
+		return value;
+
 	//return 0;
 }
 
-float OI::GetStickY(int hand)
+void OI::UpdateDriver(Driver* driver, bool updateButtons)
 {
-	//float value = sticks[hand]->GetY(); // Returns Y axis value of Joysticks
-	//if (abs(value) > DEAD_BAND)
-		return 0;
-	//return 0;
+	this->driver = driver;
+	std::cout << this->driver->NAME;
+	if (updateButtons)
+		ResetButtonMapping();
 }
 
-float OI::GetStickTwist(int hand)
+void OI::UpdateManipulator(Manipulator* manipulator, bool updateButtons)
 {
-	//float value = sticks[hand]->GetTwist(); // Returns Twist axis value of Joysticks
-	//if (abs(value) > DEAD_BAND)
-		return 0;
-	//return 0;
+	this->manipulator = manipulator;
+	std::cout << this->manipulator->NAME;
+	if (updateButtons)
+		ResetButtonMapping();
 }
 
-float OI::GetStickSlider(int hand)
+void OI::ResetButtonMapping()
 {
-	//return 1 - sticks[hand]->GetThrottle();
-	return 0;
-}
+	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
+	joysticksArray[RIGHT].reset(new Joystick(JOYSTICK_RIGHT)); //creates a right joystick object
+	joysticksArray[MANIP].reset(new Joystick(JOYSTICK_MANIP));
+	joysticksArray[BBOX].reset(new Joystick(JOYSTICK_BBOX)); // creates buttbox object
 
-bool OI::GetButton(int stick, int button)
-{
-	//return buttons[stick][button]->Get();
-	return 0;
+
+	for (int i = 0; i < JOYSTICKS; i++) { //assigns values to each button in the array for each controller
+		for (int k = 1; k <= MAX_JOYSTICK_BUTTONS; k++) {
+			buttonsArray[i][k].release();
+			delete buttonsArray[i][k].get();
+			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
+		}
+	}
+
+	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
+	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
+
+	float forwardPower = Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER;
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(forwardPower));
+	float reversePower = Move::REVERSE * SLIDER_MOVEMENT_MULTIPLIER;
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(reversePower));
+
+	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
+	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+
+	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
+	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
+
+	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenPressed(new ChangeInvertedDriveTrain(true));
+	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenReleased(new ChangeInvertedDriveTrain(false));
+
+	buttonsArray[MANIP][4]->WhenPressed(new AutomationOfArm(35.0D));
+	buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(40.0D));
+	buttonsArray[MANIP][5]->WhenPressed(new AutomationOfArm(58.0D));
 }

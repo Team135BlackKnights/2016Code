@@ -1,16 +1,13 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef MoveToShootingPosition_H
+#define MoveToShootingPosition_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class MoveToShootingPosition: public CommandBase
 {
-private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
 public:
-	DriveJ();
+	MoveToShootingPosition();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

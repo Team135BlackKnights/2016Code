@@ -1,21 +1,21 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef DriveShooter_H
+#define DriveShooter_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class DriveShooter: public CommandBase
 {
-private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
 public:
-	DriveJ();
+	DriveShooter();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+private:
+	float shootPower = 1.0f;
 };
 
 #endif

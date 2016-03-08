@@ -1,16 +1,15 @@
-#ifndef DriveTeleop_H
-#define DriveTeleop_H
+#ifndef ArmReset_H
+#define ArmReset_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveJ: public CommandBase
+class ArmReset: public CommandBase
 {
 private:
-	int index = 0;
-	const int VELOCITY_LOG = 0b010;
+	static constexpr float power = .4f;
 public:
-	DriveJ();
+	ArmReset();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
