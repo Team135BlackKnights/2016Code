@@ -104,7 +104,12 @@ void DriveTrain::SetNeutralMode(bool mode)
 }
 
 int DriveTrain::GetEncoderPosition(int motorIndex) {
-	return motors[motorIndex]->GetEncPosition();
+	if (motorIndex == FRONT_LEFT) {
+		return (-1 * motors[motorIndex]->GetEncPosition());
+	}
+	else {
+		return motors[motorIndex]->GetEncPosition();
+	}
 }
 
 void DriveTrain::ZeroEncoder(int motorIndex) {

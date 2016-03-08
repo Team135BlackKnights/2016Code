@@ -21,7 +21,9 @@ AutoCommand::AutoCommand(TYPE_OF_DEFENSE typeOfDefense, int defensePosition)
 
 	AddSequential(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, MOTOR_POWER_TO_RAMP, ZERO));
 
-	if (typeOfDefense == TYPE_OF_DEFENSE::LOW_BAR) {
+	AddSequential(new DriveDistance(rampartsDistance, 0.5f));
+
+	/*if (typeOfDefense == TYPE_OF_DEFENSE::LOW_BAR) {
 		AddSequential(new DriveDistance(lowBarDistance));
 	}
 	else if (typeOfDefense == TYPE_OF_DEFENSE::MOAT) {
@@ -35,9 +37,9 @@ AutoCommand::AutoCommand(TYPE_OF_DEFENSE typeOfDefense, int defensePosition)
 	}
 	else if (typeOfDefense == TYPE_OF_DEFENSE::ROUGH_TERRAIN) {
 		AddSequential(new DriveDistance(roughTerrainDistance));
-	}
+	} */
 
-	if (defensePosition == 1) {
+	/*if (defensePosition == 1) {
 		AddSequential(new DriveDistance(120));
 	}
 	else if (defensePosition == 2) {
@@ -54,6 +56,6 @@ AutoCommand::AutoCommand(TYPE_OF_DEFENSE typeOfDefense, int defensePosition)
 	}
 	else if (defensePosition == 5) {
 		AddSequential(new DriveDistance(140));
-	}
+	} */
 
 }

@@ -31,8 +31,8 @@ void DriveShooter::Execute()
 
 	//upToSpeed = shooter->ShooterUpToSpeed();
 	//SmartDashboard::PutBoolean("Shooter Speed", upToSpeed);
-	shooterVelocity = shooter->GetEncoderVelocity();
-	std::cout << "Shooter Velocity: " << shooterVelocity << std::endl;
+	//shooterVelocity = shooter->GetEncoderVelocity();
+	//std::cout << "Shooter Velocity: " << shooterVelocity << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

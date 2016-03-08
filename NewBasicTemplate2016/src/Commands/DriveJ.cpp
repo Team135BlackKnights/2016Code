@@ -26,6 +26,9 @@ void DriveJ::Execute()
 	int inverted = oi->driver->DRIVE_TRAIN_INVERTED ? -1 : 1;
 	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT) * inverted, oi->GetStickY(OI::RIGHT) * inverted);
+	//float rightEncoderValue = driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
+	//float leftEncoderValue = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
+	//std::cout << "Left: " << leftEncoderValue << " Right: " << rightEncoderValue << std::endl;
 }
 
 

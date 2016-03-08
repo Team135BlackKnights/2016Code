@@ -12,10 +12,10 @@ private:
 	SendableChooser* manipulatorChooser;
 	SendableChooser* driverChooser;
 
-	SendableChooser* autoChooser;
+	//SendableChooser* autoChooser;
 	CommandGroup* autoCommand;
 
-	int defensePosition;
+	//int defensePosition = 1;
 
 	void RobotInit()
 	{
@@ -32,13 +32,15 @@ private:
 		driverChooser->AddObject(CommandBase::oi->righty->NAME, new ChangeDriver(CommandBase::oi->righty));
 		SmartDashboard::PutData("Drivers", driverChooser);
 
-		autoChooser = new SendableChooser();
-		defensePosition = Preferences::GetInstance()->GetInt("Defense Position", 1);
+		/*autoChooser = new SendableChooser();
+		//defensePosition = Preferences::GetInstance()->GetInt("Defense Position", 1);
 		autoChooser->AddDefault("Low Bar", new AutoCommand(TYPE_OF_DEFENSE::LOW_BAR, defensePosition));
 		autoChooser->AddObject("Rock Wall", new AutoCommand(TYPE_OF_DEFENSE::ROCK_WALL, defensePosition));
 		autoChooser->AddObject("Rough Terrain", new AutoCommand(TYPE_OF_DEFENSE::ROUGH_TERRAIN, defensePosition));
 		autoChooser->AddObject("Ramparts", new AutoCommand(TYPE_OF_DEFENSE::RAMPARTS, defensePosition));
-		autoChooser->AddObject("Moat", new AutoCommand(TYPE_OF_DEFENSE::MOAT, defensePosition));
+		autoChooser->AddObject("Moat", new AutoCommand(TYPE_OF_DEFENSE::MOAT, defensePosition)); */
+
+		autoCommand = new AutoCommand(TYPE_OF_DEFENSE::RAMPARTS, 1);
 	}
 	
 	void DisabledPeriodic()
@@ -48,7 +50,7 @@ private:
 
 	void AutonomousInit()
 	{
-		autoCommand = (CommandGroup*) autoChooser->GetSelected();
+		//autoCommand = (CommandGroup*) autoChooser->GetSelected();
 		autoCommand->Start();
 	}
 
