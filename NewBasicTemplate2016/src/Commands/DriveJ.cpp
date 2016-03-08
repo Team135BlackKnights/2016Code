@@ -18,13 +18,11 @@ void DriveJ::Initialize() {
 	//driveTrain->SetupMotors();
 	//driveTrain->ZeroAllEncoders();
 	driveTrain->InvertMotors();
-	driveTrain->ZeroEncoder(DriveTrain::REAR_LEFT);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveJ::Execute()
 {
-	std::cout << driveTrain->GetEncoderPosition(DriveTrain::REAR_LEFT) << std::endl;
 	int inverted = oi->driver->DRIVE_TRAIN_INVERTED ? -1 : 1;
 	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT) * inverted, oi->GetStickY(OI::RIGHT) * inverted);

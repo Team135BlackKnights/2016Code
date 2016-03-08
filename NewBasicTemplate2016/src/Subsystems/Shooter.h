@@ -15,7 +15,11 @@ private:
 	std::unique_ptr<CANTalon> shooter;
 	std::unique_ptr<Servo> kicker;
 
-	//  Not defined yet
+	static const int MAG_ENCODER_COUNT = 1024;
+	static const int MAG_QUADRATURE_COUNT = 4 * MAG_ENCODER_COUNT;
+
+	//  Still To Be Determined
+	static const int MAG_ENCODER_SETPOINT = 2500;
 public:
 	Shooter();
 	void InitDefaultCommand();
@@ -24,6 +28,9 @@ public:
 	void RaiseLowerArm(double);
 
 	void DriveKicker(float);
+	int GetEncoderVelocity();
+	int GetEncoderPosition();
+	bool ShooterUpToSpeed();
 
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;

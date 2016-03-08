@@ -10,6 +10,9 @@ Shooter::Shooter() :
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
+
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::CtreMagEncoder_Relative);
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 }
 
 void Shooter::InitDefaultCommand()
@@ -30,6 +33,24 @@ void Shooter::DriveKicker(float value) {
 	//Kicker shouldn't fight itself now!
 	if (this->kicker->Get() != value)
 		kicker->Set(value);
+}
+
+int Shooter::GetEncoderVelocity() {
+	return motors[TWO_WHEEL_SHOOTER_MOTOR]->GetSpeed();
+}
+
+int Shooter::GetEncoderPosition() {
+	return motors[TWO_WHEEL_SHOOTER_MOTOR]->GetPosition();
+}
+
+bool Shooter::ShooterUpToSpeed() {
+	int encoderVelocity = GetEncoderVelocity();
+	if (encoderVelocity >= MAG_ENCODER_SETPOINT) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // Put methods for controlling this subsystem
