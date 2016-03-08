@@ -52,10 +52,6 @@
     constexpr float LENGTH_OF_ROBOT = 30.5f;
     constexpr float WIDTH_OF_ROBOT = 28.5f;
 
-    const int ANALOG_RIGHT_SONAR_PORT = 3;
-    const int ANALOG_LEFT_SONAR_PORT = 2;
-    const int ANALOG_LIGHT_SENSOR_PORT = 1;
-
 	enum TYPE_OF_DEFENSE {
 		LOW_BAR,
 		ROCK_WALL,

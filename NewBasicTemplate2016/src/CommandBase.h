@@ -11,7 +11,6 @@
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Arm.h"
 #include "Subsystems/DefenseArm.h"
-#include "Subsystems/AnalogSensors.h"
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -33,7 +32,6 @@ public:
 	static std::unique_ptr<AxisCam> cam;
 	static std::unique_ptr<LiftHang> liftHang;
 	static std::unique_ptr<DefenseArm> defenseArm;
-	static std::unique_ptr<AnalogSensors> analogSensors;
 };
 
 #endif
