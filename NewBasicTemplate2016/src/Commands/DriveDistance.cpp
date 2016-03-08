@@ -54,7 +54,7 @@ void DriveDistance::Execute()
 			rightDistanceReached = true;
 			rightMotorPower = 0;
 		}
-		else if (leftCurrentDistance <= leftFinalDistance) {
+		if (leftCurrentDistance <= leftFinalDistance) {
 			leftDistanceReached = true;
 			leftMotorPower = 0;
 		}

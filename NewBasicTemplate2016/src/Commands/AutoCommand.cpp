@@ -44,6 +44,8 @@ AutoCommand::AutoCommand(int typeOfDefense, int defensePosition)
 		AddSequential(new DriveDistance(roughTerrainDistance, .5f));
 	}
 
+	AddSequential(new DriveDistance(16.135f, .65125135135135f));
+
 	/*if (defensePosition == 1) {
 		AddSequential(new DriveDistance(120));
 	}
