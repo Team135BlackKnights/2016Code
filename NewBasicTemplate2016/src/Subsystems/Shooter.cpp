@@ -19,6 +19,10 @@ void Shooter::InitDefaultCommand()
 }
 
 void Shooter::DriveShooterMotors(float power) {
+	bool value = (GetEncoderSpeed() >= 21000.0D);
+	double speed = GetEncoderSpeed();
+	SmartDashboard::PutNumber((std::string)"Shooter Speed", speed);
+	SmartDashboard::PutBoolean((std::string)"Shooter Up to Speed", value);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 

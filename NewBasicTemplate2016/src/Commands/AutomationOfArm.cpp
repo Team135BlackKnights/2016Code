@@ -46,7 +46,7 @@ void AutomationOfArm::Execute()
 		arm->RaiseLowerArm(Arm::UP);
 	}
 	else if (currentValue > desiredValue) {
-		arm->RaiseLowerArm(motorPower * Arm::DOWN);
+		arm->RaiseLowerArm(Arm::DOWN);
 	}
 }
 

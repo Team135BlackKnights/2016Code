@@ -13,8 +13,8 @@ public:
 	void InitDefaultCommand();
 	void DriveMotor(float power=1.0f);
 
-	static const int WINCH_UP = -1;
-	static const int WINCH_DOWN = -WINCH_UP;
+	static constexpr float WINCH_UP = -1.0f;
+	static constexpr float WINCH_DOWN = -WINCH_UP;
 
 };
 
