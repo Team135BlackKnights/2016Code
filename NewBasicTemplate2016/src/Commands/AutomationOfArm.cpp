@@ -28,9 +28,9 @@ void AutomationOfArm::Initialize()
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 	startingValue = arm->GetPotValueOrEncoderPosition();
 
-	if (desiredValue < 0)
+	if (desiredValue == -1)
 		desiredValue = (double) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
-
+		std::cout << desiredValue;
 	SetTimeout(10.0);
 	//std::cout << "Desired Value: " << desiredValue << std::endl;
 }

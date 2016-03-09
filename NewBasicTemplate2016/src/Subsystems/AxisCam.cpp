@@ -70,7 +70,7 @@ void AxisCam::GetCameraValues()
 	}
 	//std::cout << "raw angle: " << shapes[1] << std::endl;
 	//std::cout << "angle: " << shapes[1] * (M_PI / 180) << std::endl;
-	width = (shapes[4] - shapes[3]) / cos(shapes[1] * (M_PI / 180));
+	/*width = (shapes[4] - shapes[3]) / cos(shapes[1] * (M_PI / 180));
 	height = shapes[6] - shapes[5];
 	x = width / 2 + shapes[3];
 	y = height / 2 + shapes[5];
@@ -140,6 +140,7 @@ float AxisCam::distanceToBlob()
 	double width = this->getWidth();
 	float value = 0;
 		value = 12.0f * (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
+		std::cout << "distance" << value;
 		//std::cout << "Width " << i << ": " << width << std::endl;
 		//std::cout << "CamDist take " << i << ": " << value << std::endl;
 		 //std::cout << "Aspect Ratio: " << ASSpectRatio << std::endl;
