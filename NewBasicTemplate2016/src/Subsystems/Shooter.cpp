@@ -45,7 +45,7 @@ int Shooter::GetEncoderPosition() {
 }
 
 bool Shooter::ShooterUpToSpeed() {
-	int encoderVelocity = GetEncoderVelocity();
+	double encoderVelocity = GetEncoderVelocity();
 	if (encoderVelocity >= MAG_ENCODER_SETPOINT) {
 		return true;
 	}

@@ -8,8 +8,6 @@ ShootBoulder::ShootBoulder()
 	encoderVelocity = 0;
 
 	timer.reset(new Timer());
-	timeWait = 0;
-	timerStarted = false;
 }
 
 // Called just before this Command runs the first time
@@ -17,14 +15,11 @@ void ShootBoulder::Initialize()
 {
 	//shooter->ZeroAllEncoders();
 	timer->Reset();
-	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",.05f);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ShootBoulder::Execute()
 {
-	//encoderVelocity = shooter->GetEncoderVelocity();
-
 	shooter->DriveShooterMotors(Shooter::OUT);
 
 	if (shooter->ShooterUpToSpeed()) {

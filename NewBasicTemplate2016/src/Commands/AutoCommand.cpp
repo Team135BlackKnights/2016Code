@@ -46,23 +46,22 @@ AutoCommand::AutoCommand(int typeOfDefense, int defensePosition)
 
 	AddSequential(new DriveDistance(16.135f, .65125135135135f));
 
-	/*if (defensePosition == 1) {
-		AddSequential(new DriveDistance(120));
+	if (defensePosition == 1) {
+		AddSequential(new DriveDistance(65));
 	}
 	else if (defensePosition == 2) {
-		AddSequential(new DriveDistance(145));
-	}
-	else if (defensePosition == 3) {
-		AddSequential(new DriveDistance(80));
-		AddSequential(new TurnRobotAngle(90, RIGHT, 0.4f));
-		AddSequential(new DriveDistance(44));
-		AddSequential(new TurnRobotAngle(90, LEFT, 0.4f));
-	}
-	else if (defensePosition == 4) {
 		AddSequential(new DriveDistance(85));
 	}
+	else if (defensePosition == 3) {
+		AddSequential(new TurnRobotAngle(45.0f, RIGHT, 0.4f));
+		AddSequential(new DriveDistance(71));
+		AddSequential(new TurnRobotAngle(45.0f, LEFT, 0.4f));
+	}
+	else if (defensePosition == 4) {
+		AddSequential(new DriveDistance(10));
+	}
 	else if (defensePosition == 5) {
-		AddSequential(new DriveDistance(140));
-	} */
+		AddSequential(new DriveDistance(65));
+	}
 
 }
