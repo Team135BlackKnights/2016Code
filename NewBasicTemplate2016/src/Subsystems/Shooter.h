@@ -23,6 +23,7 @@ public:
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
 	double GetEncoderSpeed();
+	bool ShooterUpToSpeed();
 
 	void DriveKicker(float);
 
@@ -32,6 +33,8 @@ public:
 
 	static constexpr float KICKER_KICKED = 0.6f;
 	static constexpr float KICKER_RESET = 0.05f;
+
+	static const double MAG_ENCODER_SETPOINT = 18000.0D;
 };
 
 #endif
