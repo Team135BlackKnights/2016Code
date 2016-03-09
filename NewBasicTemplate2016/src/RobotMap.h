@@ -25,7 +25,7 @@
 		V1, V2
 	};
 
-	const ROBOT_VERSION robit = V2;
+	const ROBOT_VERSION robit = V1;
 
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;
@@ -47,7 +47,7 @@
     const int POT_ANALOG_PORT = 4;
 
     //Is drive train inverted? The world may never know...
-    const bool DRIVE_TRAIN_INVERTED = false;
+    const bool DRIVE_TRAIN_INVERTED = true;
 
     //  Hard Buttons Declarations
     const int DIGITAL_BUTTON_ARM_RESET = 7;

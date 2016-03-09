@@ -51,7 +51,7 @@ void Arm::RaiseLowerArm(float motorPower) {
 		else
 			power = fminf(power, 0);
 	}
-	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
+	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
 	armMotor->Set(power);
 }
 
