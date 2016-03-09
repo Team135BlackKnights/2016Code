@@ -7,24 +7,9 @@
 class Robot: public IterativeRobot
 {
 private:
-
-	SendableChooser* manipulatorChooser;
-	SendableChooser* driverChooser;
-
 	void RobotInit()
 	{
 		CommandBase::init();
-
-		manipulatorChooser = new SendableChooser();
-		manipulatorChooser->AddDefault(CommandBase::oi->chris->NAME, new ChangeManipulator(CommandBase::oi->chris));
-		manipulatorChooser->AddObject(CommandBase::oi->sam->NAME, new ChangeManipulator(CommandBase::oi->sam));
-		manipulatorChooser->AddObject(CommandBase::oi->brandon->NAME, new ChangeManipulator(CommandBase::oi->brandon));
-		SmartDashboard::PutData("Manipulators", manipulatorChooser);
-
-		driverChooser = new SendableChooser();
-		driverChooser->AddDefault(CommandBase::oi->lefty->NAME, new ChangeDriver(CommandBase::oi->lefty));
-		driverChooser->AddObject(CommandBase::oi->righty->NAME, new ChangeDriver(CommandBase::oi->righty));
-		SmartDashboard::PutData("Drivers", driverChooser);
 	}
 	
 	void DisabledPeriodic()
@@ -43,8 +28,6 @@ private:
 
 	void TeleopInit()
 	{
-		//((Command*)manipulatorChooser->GetSelected())->Start();
-		//((Command*)driverChooser->GetSelected())->Start();
 	}
 
 	void TeleopPeriodic()

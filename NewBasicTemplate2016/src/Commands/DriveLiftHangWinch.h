@@ -4,10 +4,10 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class DriveLiftHangWinch: public CommandBase
 {
 public:
-	DriveLiftHang();
+	DriveLiftHangWinch();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
