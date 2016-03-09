@@ -54,6 +54,10 @@ void AxisCam::GetCameraValues()
 {
 	//visionTable->
 	auto shapes = visionTable->GetNumberArray("SHAPES", llvm::ArrayRef<double>());
+	x = visionTable->GetNumber("goalX", 0);
+	y = visionTable->GetNumber("goalY", 0);
+	width = visionTable->GetNumber("goalW", 0);
+	height = visionTable->GetNumber("goalH",0);
 
 	if(shapes.empty())
 	{
