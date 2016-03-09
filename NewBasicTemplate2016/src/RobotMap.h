@@ -21,6 +21,12 @@
 	//Truncates a values to a certain number of variables
 	#define Trunc(d, decimals) roundf(d * powf(10, decimals)) / powf(10, decimals);
 
+	enum ROBOT_VERSION {
+		V1, V2
+	};
+
+	const ROBOT_VERSION robit = V2;
+
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;
     const int MOTOR_FRONT_RIGHT	= 15;
@@ -44,10 +50,10 @@
     const bool DRIVE_TRAIN_INVERTED = false;
 
     //  Hard Buttons Declarations
-    const int DIGITAL_BUTTON_ARM_RESET = 8;
+    const int DIGITAL_BUTTON_ARM_RESET = 7;
 
-    const int DIGITAL_ARM_LIMIT_TOP = 4;
-    const int DIGITAL_ARM_LIMIT_BOTTOM = 5;
+    const int DIGITAL_ARM_LIMIT_TOP = 8;
+    const int DIGITAL_ARM_LIMIT_BOTTOM = 9;
 
 
 #endif

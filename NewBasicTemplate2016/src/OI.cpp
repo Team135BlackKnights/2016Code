@@ -3,16 +3,16 @@
 	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
 #include <Commands/DriveArm.h>
+#include <Commands/DriveLiftHangWinch.h>
+#include <Subsystems/LiftHangWinch.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
 #include "Commands/ShootBoulder.h"
-#include "Commands/DriveLiftHang.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
-#include "Subsystems/LiftHang.h"
 #include "Commands/AimBot.h"
 #include "Commands/ArmReset.h"
 #include "Commands/ChangeDriver.h"
@@ -32,26 +32,14 @@ OI::OI()
 			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 	}
 
-	lefty = new Driver();
-	righty = new Driver();
-	chris = new Manipulator();
-	sam = new Manipulator();
-	brandon = new Manipulator();
+	driver = new Driver();
+	manipulator = new Manipulator();
 
 	SetUpManipulators();
 	SetUpDrivers();
 
-
-	driver = new Driver(*righty);//((ChangeDriver*)((SendableChooser*)SmartDashboard::GetData("Drivers"))->GetSelected())->driver;
-	manipulator = new Manipulator(*sam);//((ChangeManipulator*)((SendableChooser*)SmartDashboard::GetData("Manipulators"))->GetSelected())->manipulator;
 	ResetButtonMapping();
-	/*
-	for (int i = 0; i < 8; i++) {
-		(new POV(0, 45 * i))->WhileActive(new Move(CONTROL_POV[i][0], CONTROL_POV[i][1]));
-	}
-	*/
 	resetArm = new ArmResetOnDetonatorButton();
-	//resetArm->WhenActive(new ArmReset());
 }
 
 //OI Functions

@@ -1,11 +1,12 @@
 #ifndef COMMAND_BASE_H
 #define COMMAND_BASE_H
 
+#include <Subsystems/LiftHangWinch.h>
+#include <Subsystems/LiftHangFlipper.h>
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
 #include "Subsystems/AxisCam.h"
-#include "Subsystems/LiftHang.h"
 #include "OI.h"
 #include "WPILib.h"
 #include "Subsystems/Shooter.h"
@@ -29,7 +30,8 @@ public:
 	static std::unique_ptr<Arm> arm;
 	//static std::unique_ptr<Preferences> preferences;
 	static std::unique_ptr<AxisCam> cam;
-	static std::unique_ptr<LiftHang> liftHang;
+	static std::unique_ptr<LiftHangWinch> liftHangWinch;
+	//static std::unique_ptr<LiftHangFlipper> liftHangFlipper;
 	static std::unique_ptr<DefenseArm> defenseArm;
 };
 

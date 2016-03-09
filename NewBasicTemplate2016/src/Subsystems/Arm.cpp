@@ -3,7 +3,7 @@
 #include <Commands/DriveArm.h>
 #include <DigitalInput.h>
 #include <interfaces/Potentiometer.h>
-#include <RobotMap.h>
+
 #include <Subsystems/Arm.h>
 #include <cmath>
 #include <cstdbool>
@@ -45,11 +45,11 @@ void Arm::RaiseLowerArm(float motorPower) {
 			power = fmaxf(power, 0);
 	}
 	else if (GetBottomLimitSwitchValue()) {
-		this->SetEncoderPosition(0);
+		this->ZeroEncoder();
 		if (UP > 0)
-			power = fminf(power, 0);
-		else
 			power = fmaxf(power, 0);
+		else
+			power = fminf(power, 0);
 	}
 	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
 	armMotor->Set(power);
@@ -77,7 +77,7 @@ int Arm::GetEncoderPosition() {
 
 double Arm::GetValueBasedOnAngle(double angle)
 {
-	return (double)(angle * 64.0D / 90.0D);
+	return (double)(angle * ENCODER_MULTIPLYING_CONSTANT);
 }
 
 void Arm::SetEncoderPosition(int value)
@@ -89,16 +89,12 @@ void Arm::ZeroEncoder() {
 	armMotor->SetPosition(0);
 }
 
-double Arm::GetPotValue() {
-	return pot->Get();
-}
-
 //  Hypotenuse in inches
 double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
 	double radians = GetAngleForArm(inchesHypotenuse);
 	double degrees = radians * (180/M_PI);
 
-	return FEEDBACK == CONTROL_TYPE::POT ? degrees : (double)(degrees * ENCODER_MULTIPLYING_CONSTANT);
+	return degrees * ENCODER_MULTIPLYING_CONSTANT;
 }
 
 double Arm::GetPotValueOrEncoderPosition() {
