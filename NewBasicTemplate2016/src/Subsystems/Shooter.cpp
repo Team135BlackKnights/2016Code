@@ -32,5 +32,10 @@ void Shooter::DriveKicker(float value) {
 		kicker->Set(value);
 }
 
+double Shooter::GetEncoderSpeed()
+{
+	return motors[TWO_WHEEL_SHOOTER_MOTOR]->GetSpeed();
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

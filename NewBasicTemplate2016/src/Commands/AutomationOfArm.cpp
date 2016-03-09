@@ -43,7 +43,7 @@ void AutomationOfArm::Execute()
 	std::cout << "Desired Value: " << desiredValue << std::endl;
 	std::cout << "Angle: " << currentValue * 90.0D / 64.0D << '\n';
 	if (currentValue < desiredValue) {
-		arm->RaiseLowerArm(motorPower * Arm::UP);
+		arm->RaiseLowerArm(Arm::UP);
 	}
 	else if (currentValue > desiredValue) {
 		arm->RaiseLowerArm(motorPower * Arm::DOWN);

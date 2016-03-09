@@ -3,6 +3,7 @@
 
 #include "../CommandBase.h"
 #include "WPILib.h"
+#include "../RobotMap.h"
 
 class Move: public CommandBase
 {
@@ -18,7 +19,7 @@ public:
 	void End();
 	void Interrupted();
 
-	static constexpr float FORWARD = 1.0f;
+	static constexpr float FORWARD = DRIVE_TRAIN_INVERTED ? -1.0f: 1.0f;
 	static constexpr float REVERSE = -FORWARD * 1.0f;
 };
 

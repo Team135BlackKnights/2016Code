@@ -17,43 +17,48 @@ void ShootBoulder::Initialize()
 {
 	//shooter->ZeroAllEncoders();
 	timer->Reset();
-	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",3.5f);
+	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",1.0f);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ShootBoulder::Execute()
 {
-	//encoderVelocity = shooter->GetEncoderVelocity(Shooter::TWO_WHEEL_SHOOTER_MOTOR);
+	//encoderVelocity = shooter->GetEncoderVelocity();
 
 	shooter->DriveShooterMotors(Shooter::OUT);
 
-	//if (encoderVelocity >= setEncoderVelocity) {
-		//SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
+	if (shooter->GetEncoderSpeed() >= 18000) {
+		SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
 
 		if (!timerStarted) {
 			timer->Reset();
 			timer->Start();
 			timerStarted = true;
 		}
-		else if (timer->Get() >= timeWait) {
-			shooter->DriveKicker(Shooter::KICKER_KICKED);
-		}
-	//}
-	//else
-		//SmartDashboard::PutBoolean("Shooter Up to Speed: ", false);
+	}
+	else
+		SmartDashboard::PutBoolean("Shooter Up to Speed: ", false);
+
+	if (timer->Get() > timeWait) {
+		shooter->DriveKicker(Shooter::KICKER_KICKED);
+	}
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return timer->Get() >= timeWait + 2;
+	return timer->Get() >= timeWait + 0.5f;
 }
 
 // Called once after isFinished returns true
 void ShootBoulder::End()
 {
 	shooter->StopShooterMotors();
+	shooter->DriveKicker(Shooter::KICKER_RESET);
+	timer->Stop();
+	timer->Reset();
+	timerStarted = false;
 }
 
 // Called when another command which requires one or more of the same

@@ -164,9 +164,14 @@ void OI::ResetButtonMapping()
 	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenPressed(new ChangeInvertedDriveTrain(true));
 	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenReleased(new ChangeInvertedDriveTrain(false));
 
+	/*
 	buttonsArray[MANIP][4]->WhenPressed(new AutomationOfArm(35.0D));
 	buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(40.0D));
 	buttonsArray[MANIP][5]->WhenPressed(new AutomationOfArm(58.0D));
+	*/
+	buttonsArray[MANIP][4]->ToggleWhenPressed(new AimBot(35.0D));
+	buttonsArray[MANIP][6]->ToggleWhenPressed(new AimBot(40.0D));
+	buttonsArray[MANIP][5]->ToggleWhenPressed(new AimBot(58.0D));
 
-	buttonsArray[MANIP][8]->WhenPressed(new AutomationOfArm());
+	buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 }

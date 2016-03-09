@@ -22,6 +22,7 @@ public:
 	void DriveShooterMotors(float=1.0f);
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
+	double GetEncoderSpeed();
 
 	void DriveKicker(float);
 
