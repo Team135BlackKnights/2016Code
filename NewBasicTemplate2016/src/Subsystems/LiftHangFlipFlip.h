@@ -4,12 +4,12 @@
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 
-class LiftHangFlipper: public Subsystem
+class LiftHangFlipFlip: public Subsystem
 {
 private:
 	std::unique_ptr<VictorSP> flipper;
 public:
-	LiftHangFlipper();
+	LiftHangFlipFlip();
 	void InitDefaultCommand();
 	void DriveMotor(float power=.3f);
 

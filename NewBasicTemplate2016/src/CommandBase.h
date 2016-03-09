@@ -1,8 +1,8 @@
 #ifndef COMMAND_BASE_H
 #define COMMAND_BASE_H
 
+#include <Subsystems/LiftHangFlipFlip.h>
 #include <Subsystems/LiftHangWinch.h>
-#include <Subsystems/LiftHangFlipper.h>
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
@@ -32,7 +32,7 @@ public:
 	static std::unique_ptr<LiftHangWinch> liftHangWinch;
 
 
-	//static std::unique_ptr<LiftHangFlipper> liftHangflip;
+	static std::unique_ptr<LiftHangFlipFlip> liftHangFlip;
 };
 
 #endif

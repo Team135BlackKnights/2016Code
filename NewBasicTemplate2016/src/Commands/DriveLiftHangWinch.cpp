@@ -2,11 +2,12 @@
 #include <Subsystems/LiftHangWinch.h>
 #include "OI.h"
 
-DriveLiftHangWinch::DriveLiftHangWinch()
+DriveLiftHangWinch::DriveLiftHangWinch(float power)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(liftHangWinch.get());
+	this->power = power;
 }
 
 // Called just before this Command runs the first time
@@ -17,9 +18,9 @@ void DriveLiftHangWinch::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHangWinch::Execute()
 {
-	float liftPowerSlider = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_POWER_SLIDER);
-	float flipperPowerSlider = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
-	float liftPower = 0, flipperPower = 0;
+	float sliderPower = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
+
+	liftHangWinch->DriveMotor(power * sliderPower);
 
 	/*
 	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_UP[STICK], oi->manipulator->CONTROL_LIFT_HANG_UP[BUTTON]))

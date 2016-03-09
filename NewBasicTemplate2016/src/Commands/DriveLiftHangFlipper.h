@@ -6,8 +6,10 @@
 
 class DriveLiftHangFlipper: public CommandBase
 {
+private:
+	float direction;
 public:
-	DriveLiftHangFlipper();
+	DriveLiftHangFlipper(float direction);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
