@@ -1,5 +1,5 @@
-#ifndef LiftHangFlipper_H
-#define LiftHangFlipper_H
+#ifndef DriveLiftHangFlipper_H
+#define DriveLiftHangFlipper_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"

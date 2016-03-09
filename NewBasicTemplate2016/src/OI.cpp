@@ -4,6 +4,7 @@
  */
 #include <Commands/DriveArm.h>
 #include <Commands/DriveLiftHangWinch.h>
+#include <Commands/DriveLiftHangFlipper.h>
 #include <Subsystems/LiftHangWinch.h>
 #include "OI.h"
 #include "RobotMap.h"
@@ -145,6 +146,9 @@ void OI::ResetButtonMapping()
 
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_UP[STICK]][manipulator->CONTROL_LIFT_HANG_UP[BUTTON]]->ToggleWhenPressed(new DriveLiftHangWinch(LiftHangWinch::WINCH_UP));
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON]]->ToggleWhenPressed(new DriveLiftHangWinch(LiftHangWinch::WINCH_DOWN));
+
+	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_UP));
+	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_DOWN));
 
 	float forwardPower = Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER;
 	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(forwardPower));

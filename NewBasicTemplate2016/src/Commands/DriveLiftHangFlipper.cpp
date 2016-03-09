@@ -4,7 +4,7 @@
 DriveLiftHangFlipper::DriveLiftHangFlipper(float direction)
 {
 	// Use Requires() here to declare subsystem dependencies
-	Requires(liftHangWinch.get());
+	Requires(liftHangFlip.get());
 	this->direction = direction;
 }
 

@@ -39,14 +39,14 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
 
 	//Lift Hang
-	manipulator->CONTROL_LIFT_HANG_POWER_SLIDER = MANIP;
+	manipulator->CONTROL_LIFT_HANG_POWER_SLIDER = RIGHT;
 	manipulator->CONTROL_LIFT_HANG_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_UP[BUTTON] = 10;
 
 	manipulator->CONTROL_LIFT_HANG_DOWN[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON] = 12;
 
-	manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = RIGHT;
+	manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON] = 9;
 
