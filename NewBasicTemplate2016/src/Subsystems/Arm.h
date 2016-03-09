@@ -63,10 +63,10 @@ public:
 	double GetPotValueForArm(double);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = 1;
+	static const int UP = robit == V1 ? 1 : -1;
 	static const int DOWN = -UP;
 
-	static const bool ENCODER_INVERTED = false;
+	static const bool ENCODER_INVERTED = robit == V1 ? false : false;
 
 	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();

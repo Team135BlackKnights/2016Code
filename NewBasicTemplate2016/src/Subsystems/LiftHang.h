@@ -22,7 +22,7 @@ public:
 	static const int LIFT_UP = -1;
 	static const int LIFT_DOWN = -LIFT_UP;
 
-	static const int FLIPPER_UP = -1;
+	static const int FLIPPER_UP = 1;
 	static const int FLIPPER_DOWN = -FLIPPER_UP;
 };
 

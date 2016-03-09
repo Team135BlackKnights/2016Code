@@ -47,9 +47,9 @@ void Arm::RaiseLowerArm(float motorPower) {
 	else if (GetBottomLimitSwitchValue()) {
 		this->ZeroEncoder();
 		if (UP > 0)
-			power = fminf(power, 0);
-		else
 			power = fmaxf(power, 0);
+		else
+			power = fminf(power, 0);
 	}
 	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
 	armMotor->Set(power);
@@ -68,9 +68,7 @@ double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
 	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	double radians = atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
-	double degrees = radians * (180/M_PI);
-	return degrees;
+	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {
@@ -79,7 +77,7 @@ int Arm::GetEncoderPosition() {
 
 double Arm::GetValueBasedOnAngle(double angle)
 {
-	return (double)(angle / ENCODER_MULTIPLYING_CONSTANT);
+	return (double)(angle * ENCODER_MULTIPLYING_CONSTANT);
 }
 
 void Arm::SetEncoderPosition(int value)
@@ -93,9 +91,10 @@ void Arm::ZeroEncoder() {
 
 //  Hypotenuse in inches
 double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
-	double angle = GetAngleForArm(inchesHypotenuse);
+	double radians = GetAngleForArm(inchesHypotenuse);
+	double degrees = radians * (180/M_PI);
 
-	return angle * ENCODER_MULTIPLYING_CONSTANT;
+	return degrees * ENCODER_MULTIPLYING_CONSTANT;
 }
 
 double Arm::GetPotValueOrEncoderPosition() {
