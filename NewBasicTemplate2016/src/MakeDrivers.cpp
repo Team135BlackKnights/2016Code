@@ -6,7 +6,7 @@
  */
 
 #include "OI.h"
-
+#include "RobotMap.h"
 
 
 void OI::SetUpManipulators() {
@@ -35,18 +35,18 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_ARM_RESET[BUTTON] = 8;
 
 	manipulator->CONTROL_ARM_STICK = MANIP;
-	manipulator->CONTROL_ARM_INVERTED = true;
+	manipulator->CONTROL_ARM_INVERTED = robit == V1 ? false : true;
 	manipulator->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
 
 	//Lift Hang
-	manipulator->CONTROL_LIFT_HANG_POWER_SLIDER = MANIP;
+	manipulator->CONTROL_LIFT_HANG_POWER_SLIDER = RIGHT;
 	manipulator->CONTROL_LIFT_HANG_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_UP[BUTTON] = 10;
 
 	manipulator->CONTROL_LIFT_HANG_DOWN[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON] = 12;
 
-	manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = RIGHT;
+	manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON] = 9;
 

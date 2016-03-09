@@ -1,18 +1,18 @@
-#include "LiftHangFlipper.h"
+#include <Subsystems/LiftHangFlipFlip.h>
 #include "../RobotMap.h"
 
-LiftHangFlipper::LiftHangFlipper() :
-		Subsystem("LiftHangSlipper")
+LiftHangFlipFlip::LiftHangFlipFlip() :
+		Subsystem("LiftHangFlipper")
 {
 	flipper.reset(new VictorSP(MOTOR_LIFT_HANG_FLIPPER));
 }
 
-void LiftHangFlipper::InitDefaultCommand()
+void LiftHangFlipFlip::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 }
 
-void LiftHangFlipper::DriveMotor(float power)
+void LiftHangFlipFlip::DriveMotor(float power)
 {
 	flipper->Set(power);
 }

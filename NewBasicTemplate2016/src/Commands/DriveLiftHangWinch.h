@@ -6,8 +6,9 @@
 
 class DriveLiftHangWinch: public CommandBase
 {
+	float power;
 public:
-	DriveLiftHangWinch();
+	DriveLiftHangWinch(float power);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
