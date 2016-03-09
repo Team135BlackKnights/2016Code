@@ -18,9 +18,9 @@ void DriveLiftHangWinch::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHangWinch::Execute()
 {
-	float sliderPower = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
+	//float sliderPower = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
 
-	liftHangWinch->DriveMotor(power * sliderPower);
+	liftHangWinch->DriveMotor(power);
 
 	/*
 	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_UP[STICK], oi->manipulator->CONTROL_LIFT_HANG_UP[BUTTON]))
