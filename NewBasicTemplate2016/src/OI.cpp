@@ -3,16 +3,16 @@
 	ALSO NOTE THAT THERE IS ALSO COMMENTING IN THE HEADER FILE
  */
 #include <Commands/DriveArm.h>
+#include <Commands/DriveLiftHangWinch.h>
+#include <Subsystems/LiftHangWinch.h>
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveJ.h"
 #include "CommandBase.h"
 
 #include "Commands/ShootBoulder.h"
-#include "Commands/DriveLiftHang.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
-#include "Subsystems/LiftHang.h"
 #include "Commands/AimBot.h"
 #include "Commands/ArmReset.h"
 #include "Commands/ChangeDriver.h"

@@ -1,14 +1,13 @@
-#ifndef WinchLiftHang_H
-#define WinchLiftHang_H
+#ifndef DriveLiftHang_H
+#define DriveLiftHang_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class WinchLiftHang: public CommandBase
+class DriveLiftHangWinch: public CommandBase
 {
-	float power;
 public:
-	WinchLiftHang(float power);
+	DriveLiftHangWinch();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

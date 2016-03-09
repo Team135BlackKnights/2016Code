@@ -8,7 +8,8 @@ std::unique_ptr<Arm> CommandBase::arm;
 //std::unique_ptr<Preferences> CommandBase::preferences;
 
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
-std::unique_ptr<LiftHang> CommandBase::liftHang;
+std::unique_ptr<LiftHangWinch> CommandBase::liftHangWinch;
+//std::unique_ptr<LiftHangFlipper> CommandBase::liftHangFlipper;
 std::unique_ptr<AxisCam> CommandBase::cam;
 std::unique_ptr<DefenseArm> CommandBase::defenseArm;
 
@@ -35,7 +36,9 @@ void CommandBase::init()
 
 	oi.reset(new OI());
 
-	liftHang.reset(new LiftHang());
+	liftHangWinch.reset(new LiftHangWinch());
+
+	//liftHangFlipper.reset(new LiftHangFlipper());
 
 	cam.reset(new AxisCam());
 

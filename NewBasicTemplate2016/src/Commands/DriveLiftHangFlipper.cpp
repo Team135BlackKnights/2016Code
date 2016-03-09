@@ -1,40 +1,38 @@
-#include "WinchLiftHang.h"
+#include <Commands/DriveLiftHangFlipper.h>
 
-WinchLiftHang::WinchLiftHang(float power)
+DriveLiftHangFlipper::DriveLiftHangFlipper()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
-	this->power = power;
-
 }
 
 // Called just before this Command runs the first time
-void WinchLiftHang::Initialize()
+void DriveLiftHangFlipper::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void WinchLiftHang::Execute()
+void DriveLiftHangFlipper::Execute()
 {
-	liftHang->DriveLiftMotor(power);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool WinchLiftHang::IsFinished()
+bool DriveLiftHangFlipper::IsFinished()
 {
 	return false;
 }
 
 // Called once after isFinished returns true
-void WinchLiftHang::End()
+void DriveLiftHangFlipper::End()
 {
-	liftHang->DriveLiftMotor(0);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void WinchLiftHang::Interrupted()
+void DriveLiftHangFlipper::Interrupted()
 {
-	End();
+
 }

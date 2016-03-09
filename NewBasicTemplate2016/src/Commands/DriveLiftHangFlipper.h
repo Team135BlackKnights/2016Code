@@ -1,13 +1,13 @@
-#ifndef DriveLiftHang_H
-#define DriveLiftHang_H
+#ifndef LiftHangFlipper_H
+#define LiftHangFlipper_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class DriveLiftHang: public CommandBase
+class DriveLiftHangFlipper: public CommandBase
 {
 public:
-	DriveLiftHang();
+	DriveLiftHangFlipper();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
