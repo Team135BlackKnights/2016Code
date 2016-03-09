@@ -7,14 +7,14 @@
 class LiftHangFlipper: public Subsystem
 {
 private:
-	std::shared_ptr<VictorSP> flipper;
+	std::unique_ptr<VictorSP> flipper;
 public:
 	LiftHangFlipper();
 	void InitDefaultCommand();
 	void DriveMotor(float power=.3f);
 
-	static const int FLIPPER_UP = 1;
-	static const int FLIPPER_DOWN = -FLIPPER_UP;
+	static constexpr float FLIPPER_UP = 1.0f;
+	static constexpr float FLIPPER_DOWN = -FLIPPER_UP;
 };
 
 #endif

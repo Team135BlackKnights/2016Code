@@ -9,9 +9,8 @@ std::unique_ptr<Arm> CommandBase::arm;
 
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<LiftHangWinch> CommandBase::liftHangWinch;
-//std::unique_ptr<LiftHangFlipper> CommandBase::liftHangFlipper;
+//std::unique_ptr<LiftHangFlipper> CommandBase::liftHangflip;
 std::unique_ptr<AxisCam> CommandBase::cam;
-std::unique_ptr<DefenseArm> CommandBase::defenseArm;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -38,9 +37,7 @@ void CommandBase::init()
 
 	liftHangWinch.reset(new LiftHangWinch());
 
-	//liftHangFlipper.reset(new LiftHangFlipper());
+	//liftHangflip.reset(new LiftHangFlipper());
 
 	cam.reset(new AxisCam());
-
-	//defenseArm.reset(new DefenseArm());
 }

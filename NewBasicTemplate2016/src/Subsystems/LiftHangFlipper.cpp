@@ -2,7 +2,7 @@
 #include "../RobotMap.h"
 
 LiftHangFlipper::LiftHangFlipper() :
-		Subsystem("LiftHangSlipper")
+		Subsystem("LiftHangFlipper")
 {
 	flipper.reset(new VictorSP(MOTOR_LIFT_HANG_FLIPPER));
 }
