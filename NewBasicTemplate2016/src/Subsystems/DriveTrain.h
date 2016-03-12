@@ -5,6 +5,7 @@
 #include "../OI.h"
 #include <fstream>
 #include "Commands/Subsystem.h"
+#include "../RobotMap.h"
 
 class DriveTrain: public Subsystem//public PIDLogging
 {
@@ -18,7 +19,7 @@ private:
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Need a value for the count of the encoder
-	static const int COUNT = 64;
+	static const int COUNT = robit == V1 ? 64 : 256;
 
 	//  Measured in Inches
 	static const int RADIUS = 6.25;
@@ -32,6 +33,17 @@ public:
 
 	static const bool COAST = true;
 	static const bool BRAKE = false;
+
+	static constexpr float GEAR_RATIO = 26.0f/60.0f;
+
+		//  Measured in Inches
+	static constexpr float RADIUS_OF_WHEELS = 6.0f;
+	static constexpr float DIAMETER_OF_WHEELS = 2.0f * RADIUS_OF_WHEELS;
+	static constexpr float CIRCUMFERENCE_OF_WHEELS = DIAMETER_OF_WHEELS * M_PI;
+
+	static const int DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2;
+	static constexpr float WIDTH_OF_ROBOT = 23.0f;
+	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = ((WIDTH_OF_ROBOT - (2 * DISTANCE_BETWEEN_EDGE_AND_WHEEL)) * M_PI);
 
 	DriveTrain();
 	~DriveTrain();
@@ -52,6 +64,7 @@ public:
 	void SetNeutralMode(bool coast);
 
 	float GetDistanceInches(int);
+	void ZeroEncoder(int);
 
 };
 

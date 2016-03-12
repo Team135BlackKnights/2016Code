@@ -1,5 +1,4 @@
 #include "DriveTrain.h"
-#include "../RobotMap.h"
 #include "Commands/DriveJ.h"
 #include <cmath>
 
@@ -94,8 +93,13 @@ void DriveTrain::SetNeutralMode(bool mode)
 }
 
 float DriveTrain::GetDistanceInches(int motorIndex) {
-	int encoderPosition = GetEncoderPosition(motorIndex);
-	float numberOfRotations = encoderPosition / QUADRATURE_COUNT;
+	int encoderPosition = motors[motorIndex]->GetEncPosition();
+	float numberOfRotations = encoderPosition / COUNT;
 	float distanceTravelInches = numberOfRotations * GEAR_RATIO * CIRCUMFERENCE_OF_WHEELS;
 	return distanceTravelInches;
+}
+
+void DriveTrain::ZeroEncoder(int motorIndex)
+{
+	motors[motorIndex]->SetEncPosition(0);
 }
