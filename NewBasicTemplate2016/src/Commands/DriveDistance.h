@@ -26,7 +26,6 @@ private:
 	bool leftDistanceReached = false,
 		 rightDistanceReached = false;
 
-	static const int LENGTH_OF_ROBOT = 28;
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
 	static const int DRIVE_DISTANCE_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
 public:
