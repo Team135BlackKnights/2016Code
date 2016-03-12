@@ -20,13 +20,13 @@ void AutoArmLower::Initialize()
 {
 	arm->SetEncoderPosition(Arm::ARM_UP_POSITION);
 
-	initialEncoderPosition = (double)arm->GetEncoderPosition();
+	//initialEncoderPosition = (double)arm->GetEncoderPosition();
 	if (this->armAuto == Arm::AUTO_NON_LOW_BAR) {
-		lowerEncoderArmPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);
-		desiredEncoderPosition = initialEncoderPosition - lowerEncoderArmPosition;
+		//lowerEncoderArmPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);
+		desiredEncoderPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);//initialEncoderPosition - lowerEncoderArmPosition;
 	}
 	else if (this->armAuto == Arm::AUTO_LOW_BAR) {
-		lowerEncoderArmPosition = 0;
+		//lowerEncoderArmPosition = 0;
 		desiredEncoderPosition = 0;
 	}
 }
@@ -36,9 +36,9 @@ void AutoArmLower::Execute()
 {
 	currentEncoderPosition = (double) arm->GetEncoderPosition();
 
-	if (currentEncoderPosition > desiredEncoderPosition) {
+	//if (currentEncoderPosition > desiredEncoderPosition) {
 		arm->RaiseLowerArm(motorPower * Arm::DOWN);
-	}
+	//}
 }
 
 // Make this return true when this Command no longer needs to run execute()

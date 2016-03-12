@@ -14,7 +14,7 @@ private:
 		   desiredEncoderPosition,
 		   currentEncoderPosition;
 
-	static constexpr double motorPower = 0.8D;
+	static constexpr double motorPower = 1.0D;
 
 	static constexpr double ANGLE_TO_LOWER_ARM = 35.0D;
 public:
