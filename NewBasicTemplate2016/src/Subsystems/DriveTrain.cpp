@@ -92,3 +92,10 @@ void DriveTrain::SetNeutralMode(bool mode)
 		motors[i]->ConfigNeutralMode(neutralMode);
 	}
 }
+
+float DriveTrain::GetDistanceInches(int motorIndex) {
+	int encoderPosition = GetEncoderPosition(motorIndex);
+	float numberOfRotations = encoderPosition / QUADRATURE_COUNT;
+	float distanceTravelInches = numberOfRotations * GEAR_RATIO * CIRCUMFERENCE_OF_WHEELS;
+	return distanceTravelInches;
+}

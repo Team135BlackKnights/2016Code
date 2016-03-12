@@ -51,6 +51,8 @@ public:
 
 	void SetNeutralMode(bool coast);
 
+	float GetDistanceInches(int);
+
 };
 
 #endif
