@@ -13,8 +13,8 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	std::unique_ptr<DigitalInput> bottomLimitSwitch;
-	std::unique_ptr<DigitalInput> topLimitSwitch;
+	std::shared_ptr<DigitalInput> bottomLimitSwitch;
+	std::shared_ptr<DigitalInput> topLimitSwitch;
 
 	std::unique_ptr<CANTalon> armMotor;
 
@@ -63,7 +63,7 @@ public:
 	double GetPotValueForArm(double);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static constexpr float UP = 1.0f;
+	static constexpr float UP = -1.0f;
 	static constexpr float DOWN = -UP;
 
 	static const bool ENCODER_INVERTED = false;

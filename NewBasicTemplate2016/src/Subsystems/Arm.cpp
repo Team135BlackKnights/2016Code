@@ -37,31 +37,40 @@ void Arm::InitDefaultCommand()
 
 void Arm::RaiseLowerArm(float motorPower) {
 	float power = motorPower;
+	/*
 	if (GetTopLimitSwitchValue()) {
 		//this->SetEncoderPosition(this->ARM_UP_POSITION);
-		if (UP > 0)
-			power = fminf(power, 0);
-		else
-			power = fmaxf(power, 0);
+		std::cout << "\n\nTOP LIMIT PRESSED\n";
+		power = fmax(power, 0.0f);
 	}
-	else if (GetBottomLimitSwitchValue()) {
-		std::cout << "BOTTOM ENCODER PRESSED\n";
+	*/
+	if (GetBottomLimitSwitchValue()) {
+		std::cout << "\n\nBOTTOM LIMIT PRESSED\n";
 		this->ZeroEncoder();
+		power = fminf(power, 0.0f);
+		/*
 		if (UP > 0)
-			power = fmaxf(power, 0);
-		else
 			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
+		*/
 	}
 	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
 	armMotor->Set(power);
 }
 
 bool Arm::GetTopLimitSwitchValue() {
-	return !topLimitSwitch->Get();
+	bool value =  !topLimitSwitch.get()->Get();
+	if (value)
+		std::cout << "T";
+	return value;
 }
 
 bool Arm::GetBottomLimitSwitchValue() {
-	return !bottomLimitSwitch->Get();
+	bool value =  !bottomLimitSwitch.get()->Get();
+	if (value)
+		std::cout << "B";
+	return value;
 }
 
 //cameraDist is in inches
