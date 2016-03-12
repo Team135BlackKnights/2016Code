@@ -9,7 +9,6 @@ ShootBoulder::ShootBoulder()
 
 	timer.reset(new Timer());
 	timeWait = 0;
-	timerStarted = false;
 }
 
 // Called just before this Command runs the first time
@@ -23,12 +22,10 @@ void ShootBoulder::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ShootBoulder::Execute()
 {
-	//encoderVelocity = shooter->GetEncoderVelocity();
-
 	shooter->DriveShooterMotors(Shooter::OUT);
 
-	if (shooter->GetEncoderSpeed() >= 18000) {
-		SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
+	if (shooter->ShooterUpToSpeed()) {
+		//SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
 
 		if (!timerStarted) {
 			timer->Reset();
@@ -36,10 +33,8 @@ void ShootBoulder::Execute()
 			timerStarted = true;
 		}
 	}
-	else
-		SmartDashboard::PutBoolean("Shooter Up to Speed: ", false);
 
-	if (timer->Get() > timeWait) {
+	if (timer->Get() > timeWait && timerStarted == true) {
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	}
 
@@ -48,7 +43,7 @@ void ShootBoulder::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return timer->Get() >= timeWait + 0.5f;
+	return timer->Get() >= timeWait + 0.5D;
 }
 
 // Called once after isFinished returns true

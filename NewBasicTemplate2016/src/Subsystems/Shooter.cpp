@@ -18,14 +18,14 @@ Shooter::Shooter() :
 void Shooter::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	SetDefaultCommand(new DriveShooter());
+	//SetDefaultCommand(new DriveShooter());
 }
 
 void Shooter::DriveShooterMotors(float power) {
-	bool value = (GetEncoderSpeed() >= 21000.0D);
+	bool upToSpeed = ShooterUpToSpeed();
 	double speed = GetEncoderSpeed();
 	SmartDashboard::PutNumber((std::string)"Shooter Speed", speed);
-	SmartDashboard::PutBoolean((std::string)"Shooter Up to Speed", value);
+	SmartDashboard::PutBoolean((std::string)"Shooter Up to Speed", upToSpeed);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
@@ -53,6 +53,5 @@ bool Shooter::ShooterUpToSpeed() {
 		return false;
 	}
 }
-
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

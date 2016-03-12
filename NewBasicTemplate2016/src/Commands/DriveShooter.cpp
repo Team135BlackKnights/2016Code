@@ -28,12 +28,6 @@ void DriveShooter::Execute()
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);
-
-	double encoderVelocity = shooter->GetEncoderSpeed();
-	SmartDashboard::PutNumber("Shooter Encoder Velocity:", encoderVelocity);
-
-	bool shooterUpToSpeed = shooter->ShooterUpToSpeed();
-	SmartDashboard::PutBoolean("Shooter Up To Speed:", shooterUpToSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -47,6 +41,7 @@ void DriveShooter::End()
 {
 	shooter->DriveShooterMotors(0);
 	shooter->DriveKicker(Shooter::KICKER_RESET);
+	//upToSpeed = false;
 }
 
 // Called when another command which requires one or more of the same

@@ -14,8 +14,9 @@ private:
 
 	std::unique_ptr<Timer> timer;
 
+	bool timerStarted = false;
+
 	double timeWait;
-	bool timerStarted;
 public:
 	ShootBoulder();
 	void Initialize();

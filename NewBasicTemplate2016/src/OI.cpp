@@ -141,6 +141,8 @@ void OI::ResetButtonMapping()
 		}
 	}
 
+	buttonsArray[RIGHT][12]->WhenPressed(new ShootBoulder());
+
 	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 

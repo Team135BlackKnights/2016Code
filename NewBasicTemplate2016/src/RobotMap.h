@@ -55,6 +55,9 @@
     const int DIGITAL_ARM_LIMIT_TOP = 9;
     const int DIGITAL_ARM_LIMIT_BOTTOM = 8;
 
+    constexpr float LENGTH_OF_ROBOT = 30.5f;
+    constexpr float WIDTH_OF_ROBOT = 28.5f;
+
 
 #endif
 
