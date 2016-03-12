@@ -20,7 +20,7 @@ Arm::Arm():
 	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 	armMotor->ConfigEncoderCodesPerRev(256);
 	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
-	this->ZeroEncoder();
+	//this->ZeroEncoder();
 	armMotor->SetSensorDirection(false);
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset

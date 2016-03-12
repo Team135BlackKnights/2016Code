@@ -1,9 +1,8 @@
-#include "AutoCommand.h"
-#include "DriveDistance.h"
-#include "../CommandBase.h"
 #include "DriveToDefenseAndLowerArm.h"
+#include "DriveDistance.h"
+#include "AutoArmLower.h"
 
-AutoCommand::AutoCommand(bool lowBar, bool overDefense)
+DriveToDefenseAndLowerArm::DriveToDefenseAndLowerArm(bool lowBar)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -22,11 +21,6 @@ AutoCommand::AutoCommand(bool lowBar, bool overDefense)
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential(new DriveToDefenseAndLowerArm(lowBar));
-
-	if (overDefense) {
-		AddSequential(new DriveDistance(distanceToTravelOverDefense));
-		AddSequential(new DriveDistance(16.135f, .65f));
-	}
-
+	AddParallel(new AutoArmLower(lowBar));
+	AddParallel(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, 0.45f, ZERO));
 }

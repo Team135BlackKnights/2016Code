@@ -49,6 +49,9 @@ public:
     static const int ARM_DOWN_POSITION = 0;
     static const int ARM_UP_POSITION = 155;
 
+    static const bool AUTO_LOW_BAR = true,
+    				  AUTO_NON_LOW_BAR = false;
+
 	Arm();
 	void InitDefaultCommand();
 	void RaiseLowerArm(float);

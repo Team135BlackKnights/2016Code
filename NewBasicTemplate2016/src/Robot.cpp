@@ -18,12 +18,10 @@ private:
 		CommandBase::init();
 
 		autoChooser = new SendableChooser();
-		autoChooser->AddDefault("Low Bar", new AutoCommand(DriveTrain::LOW_BAR, defensePosition));
-		autoChooser->AddObject("Rock Wall", new AutoCommand(DriveTrain::ROCK_WALL, defensePosition));
-		autoChooser->AddObject("Rough Terrain", new AutoCommand(DriveTrain::ROUGH_TERRAIN, defensePosition));
-		autoChooser->AddObject("Ramparts", new AutoCommand(DriveTrain::RAMPARTS, defensePosition));
-		autoChooser->AddObject("Moat", new AutoCommand(DriveTrain::MOAT, defensePosition));
-		SmartDashboard::PutData("AUTOs", autoChooser);
+		autoChooser->AddDefault("No Low Bar And Over Defense", new AutoCommand(false, true));
+		autoChooser->AddObject("Low Bar and Over Defense", new AutoCommand(true, true));
+		autoChooser->AddObject("Only Reach Defense", new AutoCommand(false, false));
+		SmartDashboard::PutData("Autonomous Select", autoChooser);
 	}
 	
 	void DisabledPeriodic()

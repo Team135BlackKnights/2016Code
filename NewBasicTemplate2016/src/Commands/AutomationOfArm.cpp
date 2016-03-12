@@ -16,9 +16,10 @@ AutomationOfArm::AutomationOfArm(double angle)
 {
 	Requires(arm.get());
 	currentValue = 0;
-	desiredValue = arm->GetValueBasedOnAngle(angle);
 	startingValue = 0;
 	this->angle = angle;
+
+	desiredValue = arm->GetValueBasedOnAngle(angle);
 }
 
 // Called just before this Command runs the first time
@@ -42,6 +43,7 @@ void AutomationOfArm::Initialize()
 void AutomationOfArm::Execute()
 {
 	currentValue = (double) arm->GetEncoderPosition();
+
 	SmartDashboard::PutNumber("Current Encoder Arm Position:", currentValue);
 
 	//std::cout << "Current Value: " << currentValue << std::endl;
