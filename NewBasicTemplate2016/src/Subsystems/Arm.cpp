@@ -38,11 +38,11 @@ void Arm::InitDefaultCommand()
 void Arm::RaiseLowerArm(float motorPower) {
 	float power = motorPower;
 	if (GetTopLimitSwitchValue()) {
-		this->SetEncoderPosition(this->ARM_UP_POSITION);
+		//this->SetEncoderPosition(this->ARM_UP_POSITION);
 		if (UP > 0)
-			power = fmaxf(power, 0);
-		else
 			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
 	}
 	else if (GetBottomLimitSwitchValue()) {
 		std::cout << "BOTTOM ENCODER PRESSED\n";

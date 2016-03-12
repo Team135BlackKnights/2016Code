@@ -46,12 +46,7 @@ double Shooter::GetEncoderSpeed()
 
 bool Shooter::ShooterUpToSpeed() {
 	double encoderVelocity = GetEncoderSpeed();
-	if (encoderVelocity > MAG_ENCODER_SETPOINT) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return encoderVelocity > MAG_ENCODER_SETPOINT;
 }
 
 // Put methods for controlling this subsystem
