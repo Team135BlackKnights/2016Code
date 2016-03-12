@@ -27,6 +27,7 @@ Arm::Arm():
 
 	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
 	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
+	SetEncoderPosition(Arm::ARM_UP_POSITION);
 }
 
 void Arm::InitDefaultCommand()
@@ -55,7 +56,8 @@ void Arm::RaiseLowerArm(float motorPower) {
 			power = fmaxf(power, 0);
 		*/
 	}
-	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
+	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 256 << std::endl;
+
 	armMotor->Set(power);
 }
 
@@ -92,11 +94,11 @@ double Arm::GetValueBasedOnAngle(double angle)
 
 void Arm::SetEncoderPosition(int value)
 {
-	this->armMotor->SetPosition(value);
+	this->armMotor->SetEncPosition(value);
 }
 
 void Arm::ZeroEncoder() {
-	armMotor->SetPosition(0);
+	armMotor->SetEncPosition(0);
 }
 
 //  Hypotenuse in inches

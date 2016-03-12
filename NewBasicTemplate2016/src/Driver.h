@@ -37,6 +37,7 @@ struct Manipulator {
 
 	//ARM
 	int CONTROL_ARM_RESET[2];
+	int CONTROL_ARM_STOP[3];
 
 	int CONTROL_ARM_STICK;
 	bool CONTROL_ARM_INVERTED;

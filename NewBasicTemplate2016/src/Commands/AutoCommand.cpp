@@ -25,8 +25,8 @@ AutoCommand::AutoCommand(bool lowBar, bool overDefense)
 	AddSequential(new DriveToDefenseAndLowerArm(lowBar));
 
 	if (overDefense) {
-		AddSequential(new DriveDistance(distanceToTravelOverDefense));
-		AddSequential(new DriveDistance(16.135f, .65f));
+		AddSequential(new DriveDistance(distanceToTravelOverDefense, .55f, true));
+		AddSequential(new DriveDistance(30.135f, .45f));
 	}
 
 }

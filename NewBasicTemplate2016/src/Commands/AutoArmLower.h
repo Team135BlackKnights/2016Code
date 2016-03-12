@@ -16,7 +16,7 @@ private:
 
 	static constexpr double motorPower = 1.0D;
 
-	static constexpr double ANGLE_TO_LOWER_ARM = 35.0D;
+	static constexpr double ANGLE_TO_LOWER_ARM = 25.0D;
 public:
 	AutoArmLower(bool);
 	void Initialize();

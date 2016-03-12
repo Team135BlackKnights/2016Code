@@ -17,6 +17,8 @@ void DriveArm::Initialize()
 void DriveArm::Execute()
 {
 	float y = oi->GetStickAxis(oi->manipulator->CONTROL_ARM_STICK, oi->manipulator->CONTROL_ARM_AXIS);
+	if (oi->IsPressed(oi->manipulator->CONTROL_ARM_STOP))
+		y = 0;
 	arm->RaiseLowerArm(y * Arm::UP * (oi->manipulator->CONTROL_ARM_INVERTED ? -1 : 1));
 
 	std::cout << arm->GetPotValueOrEncoderPosition() << std::endl;

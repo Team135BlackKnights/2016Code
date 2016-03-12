@@ -5,6 +5,7 @@ AutoArmLower::AutoArmLower(bool armAuto)
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(arm.get());
+	Requires(shooter.get());
 
 	this->armAuto = armAuto;
 
@@ -13,13 +14,14 @@ AutoArmLower::AutoArmLower(bool armAuto)
 
 	initialEncoderPosition = 0;
 	lowerEncoderArmPosition = 0;
+	this->SetTimeout(5.0f);
 }
 
 // Called just before this Command runs the first time
 void AutoArmLower::Initialize()
 {
-	arm->SetEncoderPosition(Arm::ARM_UP_POSITION);
 
+	shooter->DriveKicker(Shooter::KICKER_MID);
 	//initialEncoderPosition = (double)arm->GetEncoderPosition();
 	if (this->armAuto == Arm::AUTO_NON_LOW_BAR) {
 		//lowerEncoderArmPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);
@@ -51,6 +53,7 @@ bool AutoArmLower::IsFinished()
 void AutoArmLower::End()
 {
 	arm->RaiseLowerArm(0.0f);
+	shooter->DriveKicker(Shooter::KICKER_RESET);
 }
 
 // Called when another command which requires one or more of the same

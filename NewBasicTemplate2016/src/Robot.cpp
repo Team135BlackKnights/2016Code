@@ -19,7 +19,7 @@ private:
 		autoChooser = new SendableChooser();
 		autoChooser->AddDefault("No Low Bar And Over Defense", new AutoCommand(Arm::AUTO_NON_LOW_BAR, true));
 		autoChooser->AddObject("Low Bar and Over Defense", new AutoCommand(Arm::AUTO_LOW_BAR, true));
-		autoChooser->AddObject("Only Reach Defense", new AutoCommand(false, false));
+		autoChooser->AddObject("Only Reach Defense", new AutoCommand(Arm::AUTO_NON_LOW_BAR, false));
 		SmartDashboard::PutData("Autonomous Select", autoChooser);
 	}
 	

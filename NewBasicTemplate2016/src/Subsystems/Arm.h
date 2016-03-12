@@ -47,7 +47,7 @@ public:
 	static const CONTROL_TYPE FEEDBACK = CONTROL_TYPE::ENCODER;
 
     static const int ARM_DOWN_POSITION = 0;
-    static const int ARM_UP_POSITION = 155;
+    static const int ARM_UP_POSITION = 196;
 
 	Arm();
 	void InitDefaultCommand();

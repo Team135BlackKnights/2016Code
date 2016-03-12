@@ -34,6 +34,10 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_ARM_RESET[STICK] = MANIP;
 	manipulator->CONTROL_ARM_RESET[BUTTON] = 8;
 
+	manipulator->CONTROL_ARM_STOP[STICK] = MANIP;
+	manipulator->CONTROL_ARM_STOP[BUTTON] = 0b11111111;
+	manipulator->CONTROL_ARM_STOP[MODE] = CONTROL_MODE_POV;
+
 	manipulator->CONTROL_ARM_STICK = MANIP;
 	manipulator->CONTROL_ARM_INVERTED = true;
 	manipulator->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
@@ -43,8 +47,8 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_LIFT_HANG_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_UP[BUTTON] = 10;
 
-	manipulator->CONTROL_LIFT_HANG_DOWN[STICK] = MANIP;
-	manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON] = 12;
+	manipulator->CONTROL_LIFT_HANG_DOWN[STICK] = RIGHT;
+	manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON] = 7;
 
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK] = MANIP;
