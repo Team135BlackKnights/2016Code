@@ -44,7 +44,8 @@ void AutomationOfArm::Initialize()
 void AutomationOfArm::Execute()
 {
 	currentValue = arm->GetEncoderPosition();
-	SmartDashboard::PutNumber("Current Encoder Arm Position:", currentValue);
+	SmartDashboard::PutNumber("Current Encoder Value:", currentValue);
+	SmartDashboard::PutNumber("Desired Encoder Value:", desiredValue);
 
 	//std::cout << "Current Value: " << currentValue << std::endl;
 	//std::cout << "Desired Value: " << desiredValue << std::endl;
@@ -64,7 +65,7 @@ bool AutomationOfArm::IsFinished()
 {
 	//return currentArmEncoderValue == desiredArmEncoderValue;
 	//return currentPotValue = desiredPotValue;
-	if (abs(startingValue - desiredValue) <= 2)
+	if (startingValue == desiredValue)
 		return true;
 
 	return startingValue < desiredValue ? currentValue >= desiredValue : currentValue <= desiredValue;

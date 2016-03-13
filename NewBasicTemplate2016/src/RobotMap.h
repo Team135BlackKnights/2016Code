@@ -40,9 +40,9 @@
     //  Inacuurate PWM Ports
     const int MOTOR_LIFT_HANG_LIFT = 1;
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
-    const int MOTOR_COLLECTION = 3;
+   // const int MOTOR_COLLECTION = 3;
 
-    const int SERVO_SHOOTER_KICKER = 2;
+    const int SERVO_SHOOTER_KICKER = 3;
 
     const int POT_ANALOG_PORT = 4;
 

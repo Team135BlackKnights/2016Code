@@ -50,6 +50,7 @@ void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 		this->ZeroEncoder();
 		power = fminf(power, 0.0f);
 	}
+	/*
 	if (softStop && GetTopLimitSwitchValue()) {
 		std::cout << "YOU'VE REACHED THE TOP\n";
 		power = fmaxf(power, 0.0f);
@@ -59,8 +60,8 @@ void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 		else
 			power = fmaxf(power, 0);
 		*/
-	}
-	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 256 << std::endl;
+	//}
+	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
 
 	armMotor->Set(power);
 }
@@ -90,7 +91,7 @@ int Arm::GetEncoderPosition() {
 	return (ENCODER_INVERTED ? -1 : 1) * armMotor->GetEncPosition();// + UP_ARM_POSITION;
 }
 
-double Arm::GetValueBasedOnAngle(double angle)
+int Arm::GetValueBasedOnAngle(double angle)
 {
 	return (int)(angle * ENCODER_MULTIPLYING_CONSTANT);
 }

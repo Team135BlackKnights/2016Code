@@ -58,7 +58,7 @@ public:
 
 	int GetEncoderValueForAngle(double inchesHypotenuse);
 	double GetAngleForArm(double,  double fadeAwayDist = 0);
-	double GetValueBasedOnAngle(double angle);
+	int GetValueBasedOnAngle(double angle);
 
 	double GetPotValueForArm(double);
 
