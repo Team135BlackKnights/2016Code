@@ -169,9 +169,9 @@ void OI::ResetButtonMapping()
 	buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(40.0D));
 	buttonsArray[MANIP][5]->WhenPressed(new AutomationOfArm(58.0D));
 	*/
-	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(35.0D));
-	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(40.0D));
-	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(58.0D));
+	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
+	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
+	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
 
 	buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 }

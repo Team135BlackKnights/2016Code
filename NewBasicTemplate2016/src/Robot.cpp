@@ -16,11 +16,14 @@ private:
 	{
 		CommandBase::init();
 
+		/*
 		autoChooser = new SendableChooser();
-		autoChooser->AddDefault("No Low Bar And Over Defense", new AutoCommand(Arm::AUTO_NON_LOW_BAR, true));
-		autoChooser->AddObject("Low Bar and Over Defense", new AutoCommand(Arm::AUTO_LOW_BAR, true));
+		autoChooser->AddDefault("Other Slow", new AutoCommand(Arm::AUTO_NON_LOW_BAR, true));
+		autoChooser->AddDefault("Other Fast", new AutoCommand(Arm::AUTO_NON_LOW_BAR, true));
+		autoChooser->AddObject("Low Bar", new AutoCommand(Arm::AUTO_LOW_BAR, true));
 		autoChooser->AddObject("Only Reach Defense", new AutoCommand(Arm::AUTO_NON_LOW_BAR, false));
 		SmartDashboard::PutData("Autonomous Select", autoChooser);
+		*/
 	}
 	
 	void DisabledPeriodic()
@@ -30,7 +33,8 @@ private:
 
 	void AutonomousInit()
 	{
-		autoCommand = (CommandGroup*) autoChooser->GetSelected();
+		//autoCommand = (CommandGroup*) autoChooser->GetSelected();
+		autoCommand = new AutoCommand(Preferences::GetInstance()->GetBoolean("lowBar", true), true, Preferences::GetInstance()->GetBoolean("fastDefense", false));
 		autoCommand->Start();
 	}
 

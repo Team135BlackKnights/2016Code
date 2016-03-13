@@ -23,7 +23,7 @@ private:
 
 	static constexpr float MOTOR_POWER_TO_RAMP = 0.8f;
 public:
-	AutoCommand(bool, bool);
+	AutoCommand(bool lowBar, bool overDefense, bool fastDefense);
 };
 
 #endif

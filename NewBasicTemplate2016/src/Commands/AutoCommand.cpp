@@ -3,7 +3,7 @@
 #include "../CommandBase.h"
 #include "DriveToDefenseAndLowerArm.h"
 
-AutoCommand::AutoCommand(bool lowBar, bool overDefense)
+AutoCommand::AutoCommand(bool lowBar, bool overDefense, bool fastDefense)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -25,8 +25,13 @@ AutoCommand::AutoCommand(bool lowBar, bool overDefense)
 	AddSequential(new DriveToDefenseAndLowerArm(lowBar));
 
 	if (overDefense) {
-		AddSequential(new DriveDistance(distanceToTravelOverDefense, .55f, true));
-		AddSequential(new DriveDistance(30.135f, .45f));
+		float speed;
+		if (fastDefense)
+			speed = .7f;
+		else
+			speed = .55f;
+		AddSequential(new DriveDistance(distanceToTravelOverDefense, speed, true));
+		AddSequential(new DriveDistance(60.135f, .45f));
 	}
 
 }
