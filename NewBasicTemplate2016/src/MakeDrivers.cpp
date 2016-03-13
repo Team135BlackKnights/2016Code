@@ -23,6 +23,9 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_SHOOTER_OUT[STICK] = MANIP;
 	manipulator->CONTROL_SHOOTER_OUT[BUTTON] = 1;
 
+	manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK] = MANIP;
+	manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON] = 8;
+
 	manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK] = MANIP;
 	manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON] = 3;
 	manipulator->CONTROL_SHOOTER_KICKER_KICK[MODE] = CONTROL_MODE_BTN;
@@ -41,6 +44,9 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_ARM_STICK = MANIP;
 	manipulator->CONTROL_ARM_INVERTED = true;
 	manipulator->CONTROL_ARM_AXIS = Joystick::AxisType::kYAxis;
+
+	manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[STICK] = RIGHT;
+	manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[BUTTON] = 11;
 
 	//Lift Hang
 	manipulator->CONTROL_LIFT_HANG_POWER_SLIDER = RIGHT;

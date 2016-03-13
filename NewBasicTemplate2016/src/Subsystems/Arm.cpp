@@ -20,7 +20,7 @@ Arm::Arm():
 	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 	armMotor->ConfigEncoderCodesPerRev(256);
 	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
-	this->ZeroEncoder();
+	//this->ZeroEncoder();
 	armMotor->SetSensorDirection(false);
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
@@ -36,7 +36,7 @@ void Arm::InitDefaultCommand()
 	SetDefaultCommand(new DriveArm());
 }
 
-void Arm::RaiseLowerArm(float motorPower) {
+void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 	float power = motorPower;
 	/*
 	if (GetTopLimitSwitchValue()) {
@@ -49,6 +49,10 @@ void Arm::RaiseLowerArm(float motorPower) {
 		std::cout << "\n\nBOTTOM LIMIT PRESSED\n";
 		this->ZeroEncoder();
 		power = fminf(power, 0.0f);
+	}
+	if (softStop && GetTopLimitSwitchValue()) {
+		std::cout << "YOU'VE REACHED THE TOP\n";
+		power = fmaxf(power, 0.0f);
 		/*
 		if (UP > 0)
 			power = fminf(power, 0);
@@ -62,9 +66,8 @@ void Arm::RaiseLowerArm(float motorPower) {
 }
 
 bool Arm::GetTopLimitSwitchValue() {
-	bool value =  !topLimitSwitch.get()->Get();
-	if (value)
-		std::cout << "T";
+	bool value = GetEncoderPosition() >= ARM_UP_POSITION;
+	//std::cout << value << std::endl;
 	return value;
 }
 

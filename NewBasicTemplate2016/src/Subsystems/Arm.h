@@ -51,7 +51,7 @@ public:
 
 	Arm();
 	void InitDefaultCommand();
-	void RaiseLowerArm(float);
+	void RaiseLowerArm(float, bool=true);
 
 	bool GetTopLimitSwitchValue();
 	bool GetBottomLimitSwitchValue();

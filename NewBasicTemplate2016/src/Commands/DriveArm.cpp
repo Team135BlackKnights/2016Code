@@ -19,7 +19,12 @@ void DriveArm::Execute()
 	float y = oi->GetStickAxis(oi->manipulator->CONTROL_ARM_STICK, oi->manipulator->CONTROL_ARM_AXIS);
 	if (oi->IsPressed(oi->manipulator->CONTROL_ARM_STOP))
 		y = 0;
-	arm->RaiseLowerArm(y * Arm::UP * (oi->manipulator->CONTROL_ARM_INVERTED ? -1 : 1));
+	float power = y * Arm::UP * (oi->manipulator->CONTROL_ARM_INVERTED ? -1 : 1);
+
+	//if (abs(power) < 0.05f)
+		//power = 0.0f;
+
+	arm->RaiseLowerArm(power);// !oi->GetButton(oi->manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[STICK], oi->manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[BUTTON]));
 
 	std::cout << arm->GetPotValueOrEncoderPosition() << std::endl;
 

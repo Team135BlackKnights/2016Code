@@ -32,8 +32,8 @@ public:
 	static const int OUT = -IN;
 
 	static constexpr float KICKER_KICKED = 0.6f;
-	static constexpr float KICKER_RESET = 0.02f;
-	static constexpr float KICKER_MID = 0.1f;
+	static constexpr float KICKER_RESET = 0.03f;
+	static constexpr float KICKER_MID = 0.07f;
 
 	static constexpr double MAG_ENCODER_SETPOINT = 21000.0D;
 };
