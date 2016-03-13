@@ -26,14 +26,16 @@ void AutomationOfArm::Initialize()
 {
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
-	startingValue = arm->GetPotValueOrEncoderPosition();
+	startingValue = arm->GetEncoderPosition();
 
 	if (desiredValue == -1)
-		desiredValue = (double) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
+	{
+		desiredValue = (int) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
 		std::cout << desiredValue;
-	SetTimeout(10.0);
+	}
+	SetTimeout(6.0);
 
-	SmartDashboard::PutNumber("Desired Arm Encoder Position", desiredValue);
+	//SmartDashboard::PutNumber("Desired Arm Encoder Position", desiredValue);
 
 	//std::cout << "Desired Value: " << desiredValue << std::endl;
 }
@@ -41,7 +43,7 @@ void AutomationOfArm::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void AutomationOfArm::Execute()
 {
-	currentValue = (double) arm->GetEncoderPosition();
+	currentValue = arm->GetEncoderPosition();
 	SmartDashboard::PutNumber("Current Encoder Arm Position:", currentValue);
 
 	//std::cout << "Current Value: " << currentValue << std::endl;
@@ -53,6 +55,8 @@ void AutomationOfArm::Execute()
 	else if (currentValue > desiredValue) {
 		arm->RaiseLowerArm(Arm::DOWN);
 	}
+	else
+		arm->RaiseLowerArm(0);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -60,6 +64,9 @@ bool AutomationOfArm::IsFinished()
 {
 	//return currentArmEncoderValue == desiredArmEncoderValue;
 	//return currentPotValue = desiredPotValue;
+	if (abs(startingValue - desiredValue) <= 2)
+		return true;
+
 	return startingValue < desiredValue ? currentValue >= desiredValue : currentValue <= desiredValue;
 }
 

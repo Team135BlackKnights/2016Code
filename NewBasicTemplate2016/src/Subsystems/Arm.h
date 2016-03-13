@@ -77,7 +77,7 @@ public:
 	void SetEncoderPosition(int);
 	double GetPotValue();
 
-	double GetPotOrEncoderValueForAutomationOfArm(double);
+	int GetPotOrEncoderValueForAutomationOfArm(double);
 	double GetPotValueOrEncoderPosition();
 
 };

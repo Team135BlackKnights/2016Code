@@ -92,7 +92,7 @@ int Arm::GetEncoderPosition() {
 
 double Arm::GetValueBasedOnAngle(double angle)
 {
-	return (double)(angle * ENCODER_MULTIPLYING_CONSTANT);
+	return (int)(angle * ENCODER_MULTIPLYING_CONSTANT);
 }
 
 void Arm::SetEncoderPosition(int value)
@@ -105,7 +105,7 @@ void Arm::ZeroEncoder() {
 }
 
 //  Hypotenuse in inches
-double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
+int Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
 	double radians = GetAngleForArm(inchesHypotenuse);
 	double degrees = radians * (180/M_PI);
 
