@@ -27,11 +27,11 @@ AutoCommand::AutoCommand(bool lowBar, bool overDefense, bool fastDefense)
 	if (overDefense) {
 		float speed;
 		if (fastDefense)
-			speed = .7f;
+			speed = .625f;
 		else
 			speed = .55f;
 		AddSequential(new DriveDistance(distanceToTravelOverDefense, speed, true));
-		AddSequential(new DriveDistance(60.135f, .45f));
+		AddSequential(new DriveDistance(55.135f, .45f, false));
 	}
 
 }
