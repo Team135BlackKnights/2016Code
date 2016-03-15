@@ -22,15 +22,15 @@ void Shooter::InitDefaultCommand()
 }
 
 void Shooter::DriveShooterMotors(float power) {
-	bool value = (GetEncoderSpeed() >= 21000.0D);
 	double speed = GetEncoderSpeed();
+	bool value = (speed >= 21000.0D);
 	SmartDashboard::PutNumber((std::string)"Shooter Speed", speed);
 	SmartDashboard::PutBoolean((std::string)"Shooter Up to Speed", value);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
 void Shooter::StopShooterMotors() {
-	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(0);
+	shooter->Set(0);
 }
 
 void Shooter::DriveKicker(float value) {
@@ -41,7 +41,7 @@ void Shooter::DriveKicker(float value) {
 
 double Shooter::GetEncoderSpeed()
 {
-	return motors[TWO_WHEEL_SHOOTER_MOTOR]->GetSpeed();
+	return shooter->GetEncVel();
 }
 
 bool Shooter::ShooterUpToSpeed() {

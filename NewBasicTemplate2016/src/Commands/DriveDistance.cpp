@@ -20,6 +20,7 @@ void DriveDistance::Initialize()
 	if (this->zero) {
 		//driveTrain->ZeroEncoder(DriveTrain::FRONT_RIGHT);
 		driveTrain->ZeroEncoder(DriveTrain::FRONT_LEFT);
+		leftInitialDistance = 0;
 		//rightFinalDistance = this->inchesDistance;
 		leftFinalDistance = this->inchesDistance;
 	}
