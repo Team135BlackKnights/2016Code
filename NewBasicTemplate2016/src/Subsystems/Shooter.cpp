@@ -9,10 +9,12 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
-	kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
+	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
+	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
 
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::CtreMagEncoder_Relative);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+	DriveKicker(KICKER_RESET);
 }
 
 void Shooter::InitDefaultCommand()
@@ -33,7 +35,7 @@ void Shooter::StopShooterMotors() {
 	shooter->Set(0);
 }
 
-void Shooter::DriveKicker(float value) {
+void Shooter::DriveKicker(bool value) {
 	//Kicker shouldn't fight itself now!
 	if (this->kicker->Get() != value)
 		kicker->Set(value);

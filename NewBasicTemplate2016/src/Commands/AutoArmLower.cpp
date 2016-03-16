@@ -21,7 +21,7 @@ AutoArmLower::AutoArmLower(bool armAuto)
 void AutoArmLower::Initialize()
 {
 
-	shooter->DriveKicker(Shooter::KICKER_MID);
+	//shooter->DriveKicker(Shooter::KICKER_MID);
 	//initialEncoderPosition = (double)arm->GetEncoderPosition();
 	if (this->armAuto == Arm::AUTO_NON_LOW_BAR) {
 		//lowerEncoderArmPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);

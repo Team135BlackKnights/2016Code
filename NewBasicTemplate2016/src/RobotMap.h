@@ -25,7 +25,7 @@
 		V1, V2
 	};
 
-	const ROBOT_VERSION robit = V2;
+	const ROBOT_VERSION robit = V1;
 
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;
@@ -42,7 +42,8 @@
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
    // const int MOTOR_COLLECTION = 3;
 
-    const int SERVO_SHOOTER_KICKER = 3;
+    //const int SERVO_SHOOTER_KICKER = 3;
+    const int SOLENOID_SHOOTER_KICKER = 0;
 
     const int POT_ANALOG_PORT = 4;
 

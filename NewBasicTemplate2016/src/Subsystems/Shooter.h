@@ -13,7 +13,8 @@ private:
 
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
-	std::unique_ptr<Servo> kicker;
+	//std::unique_ptr<Servo> kicker;
+	std::unique_ptr<Solenoid> kicker;
 
 	//  Not defined yet
 public:
@@ -25,15 +26,17 @@ public:
 	double GetEncoderSpeed();
 	bool ShooterUpToSpeed();
 
-	void DriveKicker(float);
+	void DriveKicker(bool);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 	static const int IN = -1;
 	static const int OUT = -IN;
 
-	static constexpr float KICKER_KICKED = 0.6f;
-	static constexpr float KICKER_RESET = 0.03f;
-	static constexpr float KICKER_MID = 0.07f;
+	//static constexpr float KICKER_KICKED = 0.6f;
+	//static constexpr float KICKER_RESET = 0.03f;
+
+	static const bool KICKER_KICKED = true;
+	static const bool KICKER_RESET = !KICKER_KICKED;
 
 	static constexpr double MAG_ENCODER_SETPOINT = 21000.0D;
 };
