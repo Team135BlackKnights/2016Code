@@ -16,6 +16,8 @@ private:
 	//std::unique_ptr<Servo> kicker;
 	std::unique_ptr<Solenoid> kicker;
 
+	std::unique_ptr<DigitalInput> shooterTracker;
+
 	//  Not defined yet
 public:
 	Shooter();
@@ -27,6 +29,8 @@ public:
 	bool ShooterUpToSpeed();
 
 	void DriveKicker(bool);
+
+	bool GetShooterTrackerValue();
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 	static const int IN = -1;

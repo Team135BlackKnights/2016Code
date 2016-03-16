@@ -58,6 +58,8 @@
     const int DIGITAL_ARM_LIMIT_TOP = 7;
     const int DIGITAL_ARM_LIMIT_BOTTOM = 3;
 
+    const int DIGITAL_SHOOTER_TRACKER = 0;
+
 
 #endif
 

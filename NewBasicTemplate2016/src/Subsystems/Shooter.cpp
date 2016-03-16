@@ -15,12 +15,15 @@ Shooter::Shooter() :
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::CtreMagEncoder_Relative);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	DriveKicker(KICKER_RESET);
+
+	shooterTracker.reset(new DigitalInput(DIGITAL_SHOOTER_TRACKER));
 }
 
 void Shooter::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	SetDefaultCommand(new DriveShooter());
+	//SetDefaultCommand(new DriveShooter());
+	SetDefaultCommand(new ShooterTrackingTesting());
 }
 
 void Shooter::DriveShooterMotors(float power) {
@@ -49,6 +52,10 @@ double Shooter::GetEncoderSpeed()
 bool Shooter::ShooterUpToSpeed() {
 	double encoderVelocity = GetEncoderSpeed();
 	return encoderVelocity > MAG_ENCODER_SETPOINT;
+}
+
+bool Shooter::GetShooterTrackerValue() {
+	return shooterTracker->Get();
 }
 
 // Put methods for controlling this subsystem
