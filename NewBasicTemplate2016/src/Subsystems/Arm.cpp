@@ -33,7 +33,7 @@ Arm::Arm():
 void Arm::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	SetDefaultCommand(new DriveArm());
+	//SetDefaultCommand(new DriveArm());
 }
 
 void Arm::RaiseLowerArm(float motorPower, bool softStop) {

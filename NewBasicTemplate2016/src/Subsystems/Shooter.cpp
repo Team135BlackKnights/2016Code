@@ -1,6 +1,7 @@
 #include "Shooter.h"
 #include "../RobotMap.h"
 #include "../Commands/DriveShooter.h"
+#include "../Commands/ShooterTrackingTesting.h"
 
 Shooter::Shooter() :
 	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)

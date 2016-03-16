@@ -16,7 +16,7 @@ void ShooterTrackingTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ShooterTrackingTesting::Execute()
 {
-	std::cout << shooter->GetShooterTrackerValue() << std::endl;
+	std::cout << "ShooterTrackerValue: " << shooter->GetShooterTrackerValue() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

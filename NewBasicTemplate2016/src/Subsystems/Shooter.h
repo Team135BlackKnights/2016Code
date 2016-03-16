@@ -16,7 +16,8 @@ private:
 	//std::unique_ptr<Servo> kicker;
 	std::unique_ptr<Solenoid> kicker;
 
-	std::unique_ptr<DigitalInput> shooterTracker;
+	std::unique_ptr<DigitalSource> shooterTracker;
+	std::unique_ptr<Counter> shooterTracker2;
 
 	//  Not defined yet
 public:
