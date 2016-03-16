@@ -1,17 +1,10 @@
-#include <Commands/WaitTime.h>
-#include "AimBot.h"
-#include "MoveFromCameraValue.h"
-#include "RaiseArm.h"
-#include "ShootBoulder.h"
-#include "AutomationOfArm.h"
+#include "AutoCommand.h"
+#include "DriveDistance.h"
+#include "../CommandBase.h"
+#include "DriveToDefenseAndLowerArm.h"
 
-
-AimBot::AimBot(double angle)
+AutoCommand::AutoCommand(bool lowBar, bool overDefense, bool fastDefense)
 {
-	//AddSequential(new MoveFromCameraValue());
-	//AddSequential(new WaitTime(1.0f));
-	AddSequential(new AutomationOfArm(angle));
-	AddSequential(new ShootBoulder());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -28,4 +21,17 @@ AimBot::AimBot(double angle)
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+
+	AddSequential(new DriveToDefenseAndLowerArm(lowBar));
+
+	if (overDefense) {
+		float speed;
+		if (fastDefense)
+			speed = .625f;
+		else
+			speed = .55f;
+		AddSequential(new DriveDistance(distanceToTravelOverDefense, speed, true));
+		AddSequential(new DriveDistance(55.135f, .45f, false));
+	}
+
 }

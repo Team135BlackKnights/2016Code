@@ -19,8 +19,12 @@ void DriveShooter::Execute()
 	//shootPower = oi->GetStickSlider(oi->manipulator->CONTROL_SHOOTER_POWER_SLIDER);//Preferences::GetInstance()->GetFloat("Shooter Power", motorPower);
 	if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_OUT[STICK], oi->manipulator->CONTROL_SHOOTER_OUT[BUTTON]))//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
 		power = shootPower * Shooter::OUT;
-	else if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_IN[STICK], oi->manipulator->CONTROL_SHOOTER_IN[BUTTON]))//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
-		power = Preferences::GetInstance()->GetFloat("CollectPower", 0.5f) * Shooter::IN;
+	else if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_IN[STICK], oi->manipulator->CONTROL_SHOOTER_IN[BUTTON])) {//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
+		if (!oi->GetButton(oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK], oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON]))
+				power = Preferences::GetInstance()->GetFloat("CollectPower", 0.5f) * Shooter::IN;
+		else
+			power = 1.0f * Shooter::IN;
+	}
 	shooter->DriveShooterMotors(power);
 
 	//if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
@@ -28,6 +32,12 @@ void DriveShooter::Execute()
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);
+
+	double encoderVelocity = shooter->GetEncoderSpeed();
+	SmartDashboard::PutNumber("Shooter Encoder Velocity:", encoderVelocity);
+
+	bool shooterUpToSpeed = shooter->ShooterUpToSpeed();
+	SmartDashboard::PutBoolean("Shooter Up To Speed:", shooterUpToSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()

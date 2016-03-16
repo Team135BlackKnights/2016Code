@@ -7,7 +7,7 @@
 class AutomationOfArm: public CommandBase
 {
 private:
-	double currentValue,
+	int currentValue,
 		   desiredValue,
 		   startingValue,
 		   angle;

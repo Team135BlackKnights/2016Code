@@ -144,8 +144,8 @@ void OI::ResetButtonMapping()
 	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
-	buttonsArray[manipulator->CONTROL_LIFT_HANG_UP[STICK]][manipulator->CONTROL_LIFT_HANG_UP[BUTTON]]->ToggleWhenPressed(new DriveLiftHangWinch(LiftHangWinch::WINCH_UP));
-	buttonsArray[manipulator->CONTROL_LIFT_HANG_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON]]->ToggleWhenPressed(new DriveLiftHangWinch(LiftHangWinch::WINCH_DOWN));
+	buttonsArray[manipulator->CONTROL_LIFT_HANG_UP[STICK]][manipulator->CONTROL_LIFT_HANG_UP[BUTTON]]->WhileHeld(new DriveLiftHangWinch(LiftHangWinch::WINCH_UP));
+	buttonsArray[manipulator->CONTROL_LIFT_HANG_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON]]->WhileHeld(new DriveLiftHangWinch(LiftHangWinch::WINCH_DOWN));
 
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_UP));
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_DOWN));
@@ -164,9 +164,14 @@ void OI::ResetButtonMapping()
 	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenPressed(new ChangeInvertedDriveTrain(true));
 	buttonsArray[driver->CONTROL_DRIVE_TRAIN_INVERTED[STICK]][driver->CONTROL_DRIVE_TRAIN_INVERTED[BUTTON]]->WhenReleased(new ChangeInvertedDriveTrain(false));
 
+	/*
 	buttonsArray[MANIP][4]->WhenPressed(new AutomationOfArm(35.0D));
 	buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(40.0D));
 	buttonsArray[MANIP][5]->WhenPressed(new AutomationOfArm(58.0D));
+	*/
+	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
+	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
+	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
 
-	buttonsArray[MANIP][8]->WhenPressed(new AutomationOfArm());
+	buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 }

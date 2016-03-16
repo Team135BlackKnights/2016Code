@@ -8,6 +8,7 @@ DriveLiftHangWinch::DriveLiftHangWinch(float power)
 	// eg. Requires(chassis);
 	Requires(liftHangWinch.get());
 	this->power = power;
+	SmartDashboard::PutBoolean("Winch Running", false);
 }
 
 // Called just before this Command runs the first time
@@ -20,6 +21,7 @@ void DriveLiftHangWinch::Execute()
 {
 	//float sliderPower = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
 
+	SmartDashboard::PutBoolean("Winch Running", true);
 	liftHangWinch->DriveMotor(power);
 
 	/*
@@ -51,6 +53,7 @@ bool DriveLiftHangWinch::IsFinished()
 void DriveLiftHangWinch::End()
 {
 	liftHangWinch->DriveMotor(0);
+	SmartDashboard::PutBoolean("Winch Running", false);
 }
 
 // Called when another command which requires one or more of the same

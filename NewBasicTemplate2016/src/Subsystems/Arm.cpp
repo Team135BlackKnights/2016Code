@@ -20,13 +20,14 @@ Arm::Arm():
 	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 	armMotor->ConfigEncoderCodesPerRev(256);
 	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
-	this->ZeroEncoder();
+	//this->ZeroEncoder();
 	armMotor->SetSensorDirection(false);
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
 	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
 	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
+	SetEncoderPosition(Arm::ARM_UP_POSITION);
 }
 
 void Arm::InitDefaultCommand()
@@ -35,32 +36,47 @@ void Arm::InitDefaultCommand()
 	SetDefaultCommand(new DriveArm());
 }
 
-void Arm::RaiseLowerArm(float motorPower) {
+void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 	float power = motorPower;
+	/*
 	if (GetTopLimitSwitchValue()) {
-		this->SetEncoderPosition(this->ARM_UP_POSITION);
-		if (UP > 0)
-			power = fminf(power, 0);
-		else
-			power = fmaxf(power, 0);
+		//this->SetEncoderPosition(this->ARM_UP_POSITION);
+		std::cout << "\n\nTOP LIMIT PRESSED\n";
+		power = fmax(power, 0.0f);
 	}
-	else if (GetBottomLimitSwitchValue()) {
+	*/
+	if (GetBottomLimitSwitchValue()) {
+		std::cout << "\n\nBOTTOM LIMIT PRESSED\n";
 		this->ZeroEncoder();
-		if (UP > 0)
-			power = fmaxf(power, 0);
-		else
-			power = fminf(power, 0);
+		power = fminf(power, 0.0f);
 	}
-	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() * 90 / 64 << std::endl;
+	/*
+	if (softStop && GetTopLimitSwitchValue()) {
+		std::cout << "YOU'VE REACHED THE TOP\n";
+		power = fmaxf(power, 0.0f);
+		/*
+		if (UP > 0)
+			power = fminf(power, 0);
+		else
+			power = fmaxf(power, 0);
+		*/
+	//}
+	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
+
 	armMotor->Set(power);
 }
 
 bool Arm::GetTopLimitSwitchValue() {
-	return !topLimitSwitch->Get();
+	bool value = GetEncoderPosition() >= ARM_UP_POSITION;
+	//std::cout << value << std::endl;
+	return value;
 }
 
 bool Arm::GetBottomLimitSwitchValue() {
-	return !bottomLimitSwitch->Get();
+	bool value =  !bottomLimitSwitch.get()->Get();
+	if (value)
+		std::cout << "B";
+	return value;
 }
 
 //cameraDist is in inches
@@ -75,22 +91,22 @@ int Arm::GetEncoderPosition() {
 	return (ENCODER_INVERTED ? -1 : 1) * armMotor->GetEncPosition();// + UP_ARM_POSITION;
 }
 
-double Arm::GetValueBasedOnAngle(double angle)
+int Arm::GetValueBasedOnAngle(double angle)
 {
-	return (double)(angle * ENCODER_MULTIPLYING_CONSTANT);
+	return (int)(angle * ENCODER_MULTIPLYING_CONSTANT);
 }
 
 void Arm::SetEncoderPosition(int value)
 {
-	this->armMotor->SetPosition(value);
+	this->armMotor->SetEncPosition(value);
 }
 
 void Arm::ZeroEncoder() {
-	armMotor->SetPosition(0);
+	armMotor->SetEncPosition(0);
 }
 
 //  Hypotenuse in inches
-double Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
+int Arm::GetPotOrEncoderValueForAutomationOfArm(double inchesHypotenuse) {
 	double radians = GetAngleForArm(inchesHypotenuse);
 	double degrees = radians * (180/M_PI);
 

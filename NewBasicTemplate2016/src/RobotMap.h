@@ -25,7 +25,7 @@
 		V1, V2
 	};
 
-	const ROBOT_VERSION robit = V1;
+	const ROBOT_VERSION robit = V2;
 
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;
@@ -40,7 +40,7 @@
     //  Inacuurate PWM Ports
     const int MOTOR_LIFT_HANG_LIFT = 1;
     const int MOTOR_LIFT_HANG_FLIPPER = 0; //2;
-    const int MOTOR_COLLECTION = 2;
+   // const int MOTOR_COLLECTION = 3;
 
     const int SERVO_SHOOTER_KICKER = 3;
 
@@ -49,11 +49,13 @@
     //Is drive train inverted? The world may never know...
     const bool DRIVE_TRAIN_INVERTED = true;
 
+	static const int LENGTH_OF_ROBOT = 31;
+
     //  Hard Buttons Declarations
     const int DIGITAL_BUTTON_ARM_RESET = 7;
 
-    const int DIGITAL_ARM_LIMIT_TOP = 8;
-    const int DIGITAL_ARM_LIMIT_BOTTOM = 9;
+    const int DIGITAL_ARM_LIMIT_TOP = 7;
+    const int DIGITAL_ARM_LIMIT_BOTTOM = 3;
 
 
 #endif

@@ -13,8 +13,8 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	std::unique_ptr<DigitalInput> bottomLimitSwitch;
-	std::unique_ptr<DigitalInput> topLimitSwitch;
+	std::shared_ptr<DigitalInput> bottomLimitSwitch;
+	std::shared_ptr<DigitalInput> topLimitSwitch;
 
 	std::unique_ptr<CANTalon> armMotor;
 
@@ -47,26 +47,29 @@ public:
 	static const CONTROL_TYPE FEEDBACK = CONTROL_TYPE::ENCODER;
 
     static const int ARM_DOWN_POSITION = 0;
-    static const int ARM_UP_POSITION = 155;
+    static const int ARM_UP_POSITION = 196;
 
 	Arm();
 	void InitDefaultCommand();
-	void RaiseLowerArm(float);
+	void RaiseLowerArm(float, bool=true);
 
 	bool GetTopLimitSwitchValue();
 	bool GetBottomLimitSwitchValue();
 
 	int GetEncoderValueForAngle(double inchesHypotenuse);
 	double GetAngleForArm(double,  double fadeAwayDist = 0);
-	double GetValueBasedOnAngle(double angle);
+	int GetValueBasedOnAngle(double angle);
 
 	double GetPotValueForArm(double);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static const int UP = 1;
-	static const int DOWN = -UP;
+	static constexpr float UP = -1.0f;
+	static constexpr float DOWN = -UP;
 
 	static const bool ENCODER_INVERTED = false;
+
+	static const bool	AUTO_NON_LOW_BAR = false,
+							AUTO_LOW_BAR = true;
 
 	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();
@@ -74,7 +77,7 @@ public:
 	void SetEncoderPosition(int);
 	double GetPotValue();
 
-	double GetPotOrEncoderValueForAutomationOfArm(double);
+	int GetPotOrEncoderValueForAutomationOfArm(double);
 	double GetPotValueOrEncoderPosition();
 
 };
