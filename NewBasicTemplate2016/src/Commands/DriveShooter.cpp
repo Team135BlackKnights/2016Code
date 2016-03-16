@@ -4,6 +4,8 @@ DriveShooter::DriveShooter()
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(shooter.get());
+
+	motorSpeedConners = 0;
 }
 
 // Called just before this Command runs the first time
