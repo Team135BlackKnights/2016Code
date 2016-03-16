@@ -17,7 +17,7 @@ Shooter::Shooter() :
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	DriveKicker(KICKER_RESET);
 
-	shooterTracker.reset(new DigitalInput(DIGITAL_SHOOTER_TRACKER));
+	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -55,8 +55,18 @@ bool Shooter::ShooterUpToSpeed() {
 	return encoderVelocity > MAG_ENCODER_SETPOINT;
 }
 
-bool Shooter::GetShooterTrackerValue() {
-	return shooterTracker->Get();
+bool Shooter::GetDigitalShooterTrackerValue() {
+	//return shooterTracker->Get();
+	return false;
+}
+
+double Shooter::GetShooterTrackerPeriod() {
+	double time = shooterTracker->GetPeriod();
+	return ConnerConversion(time);
+}
+
+double Shooter::ConnerConversion(double value) {
+	return (double) Trunc(135.000000f * (1.0f/value), 3);
 }
 
 // Put methods for controlling this subsystem

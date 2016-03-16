@@ -16,8 +16,7 @@ private:
 	//std::unique_ptr<Servo> kicker;
 	std::unique_ptr<Solenoid> kicker;
 
-	std::unique_ptr<DigitalSource> shooterTracker;
-	std::unique_ptr<Counter> shooterTracker2;
+	std::unique_ptr<Counter> shooterTracker;
 
 	//  Not defined yet
 public:
@@ -31,7 +30,9 @@ public:
 
 	void DriveKicker(bool);
 
-	bool GetShooterTrackerValue();
+	bool GetDigitalShooterTrackerValue();
+	double GetShooterTrackerPeriod();
+	double ConnerConversion(double);
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 	static const int IN = -1;
