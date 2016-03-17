@@ -4,6 +4,8 @@ DriveShooter::DriveShooter()
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(shooter.get());
+
+	motorSpeedConners = 0;
 }
 
 // Called just before this Command runs the first time
@@ -33,11 +35,10 @@ void DriveShooter::Execute()
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);
 
-	double encoderVelocity = shooter->GetEncoderSpeed();
-	SmartDashboard::PutNumber("Shooter Encoder Velocity:", encoderVelocity);
+	motorSpeedConners = shooter->GetShooterTrackerPeriod();
+	//SmartDashboard::PutNumber("Shooter Tracker Value: ", motorSpeedConners);
+	std::cout << "Shooter Tracker Value: " << motorSpeedConners << std::endl;
 
-	bool shooterUpToSpeed = shooter->ShooterUpToSpeed();
-	SmartDashboard::PutBoolean("Shooter Up To Speed:", shooterUpToSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()

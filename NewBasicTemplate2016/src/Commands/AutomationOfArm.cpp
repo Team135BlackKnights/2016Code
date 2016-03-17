@@ -65,8 +65,8 @@ bool AutomationOfArm::IsFinished()
 {
 	//return currentArmEncoderValue == desiredArmEncoderValue;
 	//return currentPotValue = desiredPotValue;
-	if (startingValue == desiredValue)
-		return true;
+	/*if (startingValue == desiredValue)
+		return true;*/
 
 	return startingValue < desiredValue ? currentValue >= desiredValue : currentValue <= desiredValue;
 }
