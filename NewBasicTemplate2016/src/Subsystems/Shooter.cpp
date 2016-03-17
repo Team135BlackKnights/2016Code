@@ -28,10 +28,10 @@ void Shooter::InitDefaultCommand()
 }
 
 void Shooter::DriveShooterMotors(float power) {
-	double speed = GetEncoderSpeed();
-	bool value = (speed >= 21000.0D);
-	SmartDashboard::PutNumber((std::string)"Shooter Speed", speed);
-	SmartDashboard::PutBoolean((std::string)"Shooter Up to Speed", value);
+	double speed = GetShooterTrackerPeriod();
+	bool shooterUpToSpeed = ShooterUpToSpeed();
+	SmartDashboard::PutNumber((std::string)"Shooter Speed Conners", speed);
+	SmartDashboard::PutNumber("Shooter Up To Speed: ", shooterUpToSpeed);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
@@ -45,21 +45,6 @@ void Shooter::DriveKicker(bool value) {
 		kicker->Set(value);
 }
 
-double Shooter::GetEncoderSpeed()
-{
-	return shooter->GetEncVel();
-}
-
-bool Shooter::ShooterUpToSpeed() {
-	double encoderVelocity = GetEncoderSpeed();
-	return encoderVelocity > MAG_ENCODER_SETPOINT;
-}
-
-bool Shooter::GetDigitalShooterTrackerValue() {
-	//return shooterTracker->Get();
-	return false;
-}
-
 double Shooter::GetShooterTrackerPeriod() {
 	double time = shooterTracker->GetPeriod();
 	return ConnerConversion(time);
@@ -67,6 +52,16 @@ double Shooter::GetShooterTrackerPeriod() {
 
 double Shooter::ConnerConversion(double value) {
 	return (double) Trunc(135.000000f * (1.0f/value), 3);
+}
+
+bool Shooter::ShooterUpToSpeed() {
+	double shooterTrackerValue = GetShooterTrackerPeriod();
+	if (shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // Put methods for controlling this subsystem

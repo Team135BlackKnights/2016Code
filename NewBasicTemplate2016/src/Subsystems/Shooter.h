@@ -18,6 +18,9 @@ private:
 
 	std::unique_ptr<Counter> shooterTracker;
 
+	//  Value Still To Be Determined
+	static constexpr double SHOOTER_TRACKER_SETPOINT = 15000.0D;
+
 	//  Not defined yet
 public:
 	Shooter();
@@ -25,14 +28,12 @@ public:
 	void DriveShooterMotors(float=1.0f);
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
-	double GetEncoderSpeed();
-	bool ShooterUpToSpeed();
 
 	void DriveKicker(bool);
 
-	bool GetDigitalShooterTrackerValue();
 	double GetShooterTrackerPeriod();
 	double ConnerConversion(double);
+	bool ShooterUpToSpeed();
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 	static const int IN = -1;
