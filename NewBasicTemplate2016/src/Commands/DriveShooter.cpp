@@ -36,8 +36,8 @@ void DriveShooter::Execute()
 		shooter->DriveKicker(Shooter::KICKER_RESET);
 
 	motorSpeedConners = shooter->GetShooterTrackerPeriod();
-	//SmartDashboard::PutNumber("Shooter Tracker Value: ", motorSpeedConners);
-	std::cout << "Shooter Tracker Value: " << motorSpeedConners << std::endl;
+	SmartDashboard::PutNumber("Shooter Tracker Value: ", motorSpeedConners);
+	//std::cout << "Shooter Tracker Value: " << motorSpeedConners << std::endl;
 
 }
 

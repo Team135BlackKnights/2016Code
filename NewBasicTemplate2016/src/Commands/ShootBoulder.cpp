@@ -27,7 +27,7 @@ void ShootBoulder::Execute()
 
 	shooter->DriveShooterMotors(Shooter::OUT);
 
-	if (shooter->GetEncoderSpeed() >= 18000) {
+	/*if (shooter->GetEncoderSpeed() >= 18000) {
 		SmartDashboard::PutBoolean("Shooter Up to Speed: ", true);
 
 		if (!timerStarted) {
@@ -37,7 +37,7 @@ void ShootBoulder::Execute()
 		}
 	}
 	else
-		SmartDashboard::PutBoolean("Shooter Up to Speed: ", false);
+		SmartDashboard::PutBoolean("Shooter Up to Speed: ", false); */
 
 	if (timer->Get() > timeWait) {
 		shooter->DriveKicker(Shooter::KICKER_KICKED);

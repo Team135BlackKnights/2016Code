@@ -25,6 +25,9 @@ private:
 	static const bool SIDES = true;
 	static const bool MIDDLE = false;
 
+	int placer = 0;
+	double connerValueArray[10];
+
 	//  Not defined yet
 public:
 	Shooter();

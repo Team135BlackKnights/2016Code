@@ -1,7 +1,6 @@
 #include "Shooter.h"
 #include "../RobotMap.h"
 #include "../Commands/DriveShooter.h"
-#include "../Commands/ShooterTrackingTesting.h"
 
 Shooter::Shooter() :
 	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
@@ -45,11 +44,32 @@ void Shooter::DriveKicker(bool value) {
 
 double Shooter::GetShooterTrackerPeriod() {
 	double time = shooterTracker->GetPeriod();
-	return ConnerConversion(time);
+	placer  = placer + 1;
+	int placerMod = placer % 10;
+	connerValueArray[placerMod] =  ConnerConversion(time);
+	if (connerValueArray[placerMod] > 400) {
+		for (int i = 0; i > 10; i++) {
+			if (!connerValueArray[i] > 400) {
+				return connerValueArray[i];
+				i = 10;
+			}
+		}
+	}
+	else if (connerValueArray[placerMod] == 0) {
+		for (int i = 0; i > 10; i++) {
+			if (!connerValueArray[i] == 0) {
+				return connerValueArray[i];
+				i = 10;
+			}
+		}
+	}
+	else {
+		return connerValueArray[placerMod];
+	}
 }
 
 double Shooter::ConnerConversion(double value) {
-	return (double) Trunc(135.000000f * (1.0f/value), 3);
+	return (double) Trunc((1.0f/value), 3);
 }
 
 //  If sidesOfCastle == true, display true when the shooter wheels are moving at a faster rate
