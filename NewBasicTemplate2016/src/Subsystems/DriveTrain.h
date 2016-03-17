@@ -7,6 +7,8 @@
 #include "Commands/Subsystem.h"
 #include "../RobotMap.h"
 
+typedef const int sci;
+
 class DriveTrain: public Subsystem//public PIDLogging
 {
 public:
@@ -19,7 +21,8 @@ private:
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Need a value for the count of the encoder
-	static const int COUNT = robit == V1 ? 64 : 256;
+	static sci COUNT = 64;
+	static const int QUADRATURE_COUNT = COUNT * 4;
 
 	//  Measured in Inches
 	static const int RADIUS = 6.25;
@@ -64,6 +67,8 @@ public:
 	void SetNeutralMode(bool coast);
 
 	float GetDistanceInches(int);
+	int GetEncoderPositionToTurnAngle(int angleDegrees);
+	int GetEncoderPosition(int);
 	void ZeroEncoder(int);
 
 };

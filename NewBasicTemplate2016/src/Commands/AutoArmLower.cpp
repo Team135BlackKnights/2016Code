@@ -12,8 +12,6 @@ AutoArmLower::AutoArmLower(bool armAuto)
 	currentEncoderPosition = 0;
 	desiredEncoderPosition = 0;
 
-	initialEncoderPosition = 0;
-	lowerEncoderArmPosition = 0;
 	this->SetTimeout(5.0f);
 }
 
@@ -22,13 +20,10 @@ void AutoArmLower::Initialize()
 {
 
 	//shooter->DriveKicker(Shooter::KICKER_MID);
-	//initialEncoderPosition = (double)arm->GetEncoderPosition();
 	if (this->armAuto == Arm::AUTO_NON_LOW_BAR) {
-		//lowerEncoderArmPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);
-		desiredEncoderPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);//initialEncoderPosition - lowerEncoderArmPosition;
+		desiredEncoderPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);
 	}
 	else if (this->armAuto == Arm::AUTO_LOW_BAR) {
-		//lowerEncoderArmPosition = 0;
 		desiredEncoderPosition = 0;
 	}
 }
@@ -38,9 +33,7 @@ void AutoArmLower::Execute()
 {
 	currentEncoderPosition = (double) arm->GetEncoderPosition();
 
-	//if (currentEncoderPosition > desiredEncoderPosition) {
-		arm->RaiseLowerArm(motorPower * Arm::DOWN);
-	//}
+	arm->RaiseLowerArm(MOTOR_POWER * Arm::DOWN);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -22,8 +22,10 @@ private:
 	static const bool ZERO = true;
 
 	static constexpr float MOTOR_POWER_TO_RAMP = 0.8f;
+
+	float motorSpeed;
 public:
-	AutoCommand(bool lowBar, bool overDefense, bool fastDefense);
+	AutoCommand(bool, int, bool);
 };
 
 #endif

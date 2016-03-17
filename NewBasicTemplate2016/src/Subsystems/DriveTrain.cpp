@@ -94,12 +94,24 @@ void DriveTrain::SetNeutralMode(bool mode)
 
 float DriveTrain::GetDistanceInches(int motorIndex) {
 	int encoderPosition = motors[motorIndex]->GetEncPosition();
-	float numberOfRotations = encoderPosition / COUNT;
+	float numberOfRotations = encoderPosition / QUADRATURE_COUNT;
 	float distanceTravelInches = numberOfRotations * GEAR_RATIO * CIRCUMFERENCE_OF_WHEELS;
 	return distanceTravelInches;
+}
+
+int DriveTrain::GetEncoderPosition(int motorIndex) {
+	return motors[motorIndex]->GetEncPosition();
 }
 
 void DriveTrain::ZeroEncoder(int motorIndex)
 {
 	motors[motorIndex]->SetEncPosition(0);
+}
+
+int DriveTrain::GetEncoderPositionToTurnAngle(int angleDegrees) {
+	float distanceToTravel = ((CIRCUMFERENCE_OF_TURNING_ROBOT * angleDegrees)/(360.0f));
+	float numberOfRotationsOfWheels = distanceToTravel/CIRCUMFERENCE_OF_WHEELS;
+	int encoderPosition = (numberOfRotationsOfWheels * ((float)QUADRATURE_COUNT));
+	return (encoderPosition * (1/GEAR_RATIO));
+
 }

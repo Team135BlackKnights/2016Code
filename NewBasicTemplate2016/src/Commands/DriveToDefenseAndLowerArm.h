@@ -13,7 +13,7 @@ private:
 
 	static const bool ZERO = true;
 public:
-	DriveToDefenseAndLowerArm(bool loweBar);
+	DriveToDefenseAndLowerArm(bool lowBar);
 };
 
 #endif
