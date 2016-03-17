@@ -42,9 +42,9 @@ void AxisCam::InitDefaultCommand()
 	//CameraServer::GetInstance()->SetQuality(50);
 	//Start the automatic capture to dashboard
 	//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
-	pidX->SetContinuous(true);
-	this->TogglePID(true);
-	driveTurn->SetSetpoint(-32.0f);
+	//pidX->SetContinuous(true);
+	//this->TogglePID(true);
+	//driveTurn->SetSetpoint(-32.0f);
 	//yServo->Set(.2f);
 	SetDefaultCommand(new CameraTracking());
 }
@@ -53,13 +53,13 @@ void AxisCam::InitDefaultCommand()
 void AxisCam::GetCameraValues()
 {
 	//visionTable->
-	auto shapes = visionTable->GetNumberArray("SHAPES", llvm::ArrayRef<double>());
+	//auto shapes = visionTable->GetNumberArray("SHAPES", llvm::ArrayRef<double>());
 	x = visionTable->GetNumber("goalX", 0);
 	y = visionTable->GetNumber("goalY", 0);
 	width = visionTable->GetNumber("goalW", 0);
 	height = visionTable->GetNumber("goalH",0);
 
-	if(shapes.empty())
+	/*if(shapes.empty())
 	{
 		x = 666;
 		y = 666;
@@ -67,7 +67,7 @@ void AxisCam::GetCameraValues()
 		height = 666;
 		//pidX->Disable();
 		return;
-	}
+	}*/
 	//std::cout << "raw angle: " << shapes[1] << std::endl;
 	//std::cout << "angle: " << shapes[1] * (M_PI / 180) << std::endl;
 	/*width = (shapes[4] - shapes[3]) / cos(shapes[1] * (M_PI / 180));
@@ -90,10 +90,14 @@ void AxisCam::GetCameraValues()
 
 float AxisCam::xDistanceToCenter()
 {
-	if(x == 666)
+	if(x == 666){
+		std::cout << "x not good";
 		return 0;
+	}
 	//return Preferences::GetInstance()->GetFloat("Offset", 0);
-	return (x - X_IMAGE_RES /2.0f) / 1.0f;
+	float dist =  (x - X_IMAGE_RES /2.0f) / 1.0f;
+	std:: cout << dist;
+	return dist;
 }
 
 float AxisCam::xDistanceToCenter(float max)

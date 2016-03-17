@@ -24,7 +24,7 @@ void CameraTracking::Initialize()
 void CameraTracking::Execute()
 {
 	cam->GetCameraValues();
-	cam.get()->distanceToBlob();
+	//cam.get()->distanceToBlob();
 }
 
 // Make this return true when this Command no longer needs to run execute()

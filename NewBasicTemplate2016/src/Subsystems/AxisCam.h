@@ -57,7 +57,7 @@ private:
 
 public:
 	AxisCam();
-	const float X_IMAGE_RES = 800;
+	const float X_IMAGE_RES = 800.0f;
 	float ASSpectRatio;
 	float angle;
 	void InitDefaultCommand();
