@@ -35,6 +35,8 @@ void DriveShooter::Execute()
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);
 
+	motorSpeedConners = shooter->GetShooterTrackerPeriod();
+	SmartDashboard("Shooter Tracker Speed In Conners: ", motorSpeedConners);
 }
 
 // Make this return true when this Command no longer needs to run execute()

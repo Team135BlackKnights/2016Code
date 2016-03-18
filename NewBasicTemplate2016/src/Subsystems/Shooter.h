@@ -21,6 +21,10 @@ private:
 	//  Value Still To Be Determined
 	static constexpr double SHOOTER_TRACKER_SETPOINT = 15000.0D;
 
+	double previousConnerValue = 0,
+		   currentConnerValue = 0;
+
+
 	//  Not defined yet
 public:
 	Shooter();

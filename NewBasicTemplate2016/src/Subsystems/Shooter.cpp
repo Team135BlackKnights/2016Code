@@ -47,11 +47,19 @@ void Shooter::DriveKicker(bool value) {
 
 double Shooter::GetShooterTrackerPeriod() {
 	double time = shooterTracker->GetPeriod();
-	return ConnerConversion(time);
+	currentConnerValue = ConnerConversion(time);
+
+	if (0 <= currentConnerValue <= 500) {
+		previousConnerValue = currentConnerValue;
+		return currentConnerValue;
+	}
+	else if (currentConnerValue > 500) {
+		return previousConnerValue;
+	}
 }
 
 double Shooter::ConnerConversion(double value) {
-	return (double) Trunc(135.000000f * (1.0f/value), 3);
+	return (double) Trunc((1.0f/value), 3);
 }
 
 bool Shooter::ShooterUpToSpeed() {
