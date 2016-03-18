@@ -44,7 +44,7 @@ public:
 	bool ShooterUpToSpeed();
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
-	static const int IN = -1;
+	static const int IN = 1.0f;
 	static const int OUT = -IN;
 
 	//static constexpr float KICKER_KICKED = 0.6f;
@@ -54,6 +54,8 @@ public:
 	static const bool KICKER_RESET = !KICKER_KICKED;
 
 	static constexpr double MAG_ENCODER_SETPOINT = 21000.0D;
+
+	static const bool SHOOTER_INVERTED = true;
 };
 
 #endif

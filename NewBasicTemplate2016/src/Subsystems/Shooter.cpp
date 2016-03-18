@@ -10,6 +10,7 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetInverted(SHOOTER_INVERTED);
 	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
 
