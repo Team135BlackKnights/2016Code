@@ -26,7 +26,7 @@ void DriveArm::Execute()
 
 	arm->RaiseLowerArm(power);// !oi->GetButton(oi->manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[STICK], oi->manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[BUTTON]));
 
-	std::cout << arm->GetPotValueOrEncoderPosition() << std::endl;
+	//std::cout << arm->GetPotValueOrEncoderPosition() << std::endl;
 
 	//std::cout << arm->GetPotValue() << std::endl;
 }

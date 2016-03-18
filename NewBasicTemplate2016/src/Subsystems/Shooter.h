@@ -24,6 +24,10 @@ private:
 	double previousConnerValue = 0,
 		   currentConnerValue = 0;
 
+	double initialTimeValue = 0.0D,
+		   finalTimeValue = 0.0D;
+
+	bool timerStarted = false;
 
 	//  Not defined yet
 public:

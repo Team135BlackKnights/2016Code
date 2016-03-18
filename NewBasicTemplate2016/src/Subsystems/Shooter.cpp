@@ -1,7 +1,7 @@
 #include "Shooter.h"
 #include "../RobotMap.h"
 #include "../Commands/DriveShooter.h"
-#include "../Commands/ShooterTrackingTesting.h"
+//#include "../Commands/ShooterTrackingTesting.h"
 
 Shooter::Shooter() :
 	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
@@ -23,8 +23,8 @@ Shooter::Shooter() :
 void Shooter::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new DriveShooter());
-	SetDefaultCommand(new ShooterTrackingTesting());
+	SetDefaultCommand(new DriveShooter());
+	//SetDefaultCommand(new ShooterTrackingTesting());
 }
 
 void Shooter::DriveShooterMotors(float power) {
@@ -46,16 +46,34 @@ void Shooter::DriveKicker(bool value) {
 }
 
 double Shooter::GetShooterTrackerPeriod() {
-	double time = shooterTracker->GetPeriod();
-	currentConnerValue = ConnerConversion(time);
+	double timeBetweenSpindles = shooterTracker->GetPeriod();
+	double tempValue = ConnerConversion(timeBetweenSpindles);
+	if (tempValue <= 30000)
+		currentConnerValue = tempValue;
 
-	if (0 <= currentConnerValue <= 500) {
+	return currentConnerValue;
+
+	/*
+	if (0 < currentConnerValue <= 500) {
 		previousConnerValue = currentConnerValue;
 		return currentConnerValue;
+		timerStarted = false;
 	}
-	else if (currentConnerValue > 500) {
-		return previousConnerValue;
+	else if (currentConnerValue > 500 || currentConnerValue == 0) {
+		if (!timerStarted) {
+			initialTimeValue = time;
+			finalTimeValue = initialTimeValue + 2.0D;
+			timerStarted = true;
+			return previousConnerValue;
+		}
+		else if (timerStarted) {
+			return previousConnerValue;
+		}
+		else if (finalTimeValue == time && timerStarted) {
+			return 0.0D;
+		}
 	}
+	*/
 }
 
 double Shooter::ConnerConversion(double value) {
