@@ -14,8 +14,6 @@ Shooter::Shooter() :
 	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
 
-	//motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::AnalogPot);
-	//motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	DriveKicker(KICKER_RESET);
 
 	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));

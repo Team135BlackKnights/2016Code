@@ -62,7 +62,7 @@ void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 			power = fmaxf(power, 0);
 		*/
 	//}
-	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
+	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
 
 	armMotor->Set(power);
 }
@@ -75,8 +75,8 @@ bool Arm::GetTopLimitSwitchValue() {
 
 bool Arm::GetBottomLimitSwitchValue() {
 	bool value =  !bottomLimitSwitch.get()->Get();
-	if (value)
-		std::cout << "B";
+	//if (value)
+		//std::cout << "B";
 	return value;
 }
 

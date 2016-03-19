@@ -16,8 +16,6 @@ public:
 
 private:
 	float shootPower = 1.0f;
-
-	double motorSpeedConners;
 };
 
 #endif
