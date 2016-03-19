@@ -11,6 +11,7 @@ Shooter::Shooter() :
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
+	unstucker.reset(new Solenoid(SOLENOID_SHOOTER_UNSTUCKER));
 
 	//motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::AnalogPot);
 	//motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
@@ -40,6 +41,11 @@ void Shooter::DriveKicker(bool value) {
 	//Kicker shouldn't fight itself now!
 	if (this->kicker->Get() != value)
 		kicker->Set(value);
+}
+
+void Shooter::DriveUnstucker(bool value) {
+	if (this->unstucker->Get() != value)
+		unstucker->Set(value);
 }
 
 double Shooter::GetShooterTrackerPeriod() {

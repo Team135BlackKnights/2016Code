@@ -36,7 +36,7 @@ DriveTrain::~DriveTrain() {};
 Kartoffeln DriveTrain::InitDefaultCommand()
 {
 
-	//SetDefaultCommand(new DriveJ());
+	SetDefaultCommand(new DriveJ());
 }
 
 double DriveTrain::GetMotorExpiration(int motorIndex) {

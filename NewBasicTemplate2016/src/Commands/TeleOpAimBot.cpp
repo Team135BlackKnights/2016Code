@@ -1,8 +1,11 @@
 #include "TeleOpAimBot.h"
+#include "AutomationOfArm.h"
 TeleOpAimBot::TeleOpAimBot()
 {
-	AddSequential(new CheckSideSide());
-	AddSequential(new KickKicker());
+	//AddSequential(new CheckSideSide());
+	//std::cout << "lined up";
+	//AddSequential(new KickKicker());
+	AddSequential(new AutomationOfArm());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

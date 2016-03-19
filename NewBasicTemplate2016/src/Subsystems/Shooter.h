@@ -15,6 +15,7 @@ private:
 	std::unique_ptr<CANTalon> shooter;
 	//std::unique_ptr<Servo> kicker;
 	std::unique_ptr<Solenoid> kicker;
+	std::unique_ptr<Solenoid> unstucker;
 
 	std::unique_ptr<Counter> shooterTracker;
 
@@ -37,6 +38,7 @@ public:
 	void RaiseLowerArm(double);
 
 	void DriveKicker(bool);
+	void DriveUnstucker(bool);
 
 	double GetShooterTrackerPeriod();
 	double ConnerConversion(double);

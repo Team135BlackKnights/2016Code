@@ -31,7 +31,7 @@ void AutomationOfArm::Initialize()
 	if (desiredValue == -1)
 	{
 		desiredValue = (int) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
-		std::cout << desiredValue;
+		std::cout << "DESIRED VALUE: " << desiredValue;
 	}
 	SetTimeout(6.0);
 
@@ -58,6 +58,7 @@ void AutomationOfArm::Execute()
 	}
 	else
 		arm->RaiseLowerArm(0);
+	std::cout << arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
 }
 
 // Make this return true when this Command no longer needs to run execute()

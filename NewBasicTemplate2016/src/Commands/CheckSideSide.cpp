@@ -15,12 +15,12 @@ void CheckSideSide::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void CheckSideSide::Execute()
 {
-	float dist = cam.get()->xDistanceToCenter() + 65;
+	float dist = cam.get()->xDistanceToCenter();
 	float pos = arm.get()->GetEncoderPosition();
-	bool arm = (pos <= (arm.get()->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob()) + 5)) && (pos >= (arm.get()->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob()) - 5));
+	bool acheck = (pos <= (arm.get()->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob()) + 5)) && (pos >= (arm.get()->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob()) - 5));
 	bool side = (dist >= -10 && dist <= 10);
-	bool shooter = (shooter.get()->GetShooterTrackerPeriod() > 250);
-	if(side && arm && shooter)
+	bool scheck = (shooter.get()->GetShooterTrackerPeriod() > 250);
+	if(side)
 		isgood = true;
 }
 

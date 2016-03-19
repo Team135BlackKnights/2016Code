@@ -18,6 +18,7 @@ void ShootBoulder::Initialize()
 	//shooter->ZeroAllEncoders();
 	timer->Reset();
 	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",1.0f);
+	timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -38,7 +39,7 @@ void ShootBoulder::Execute()
 	}
 	else
 		SmartDashboard::PutBoolean("Shooter Up to Speed: ", false); */
-
+	std::cout << "time revved" << timer->Get();
 	if (timer->Get() > timeWait) {
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	}
