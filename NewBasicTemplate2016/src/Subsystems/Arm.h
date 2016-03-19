@@ -63,7 +63,8 @@ public:
 	double GetPotValueForArm(double);
 
 	static const int RAISE_LOWER_ARM = 0;
-	static constexpr float UP = -1.0f;
+	static const bool ARM_INVERTED = robit == V1 ? false : true;
+	static constexpr float UP = 1.0f;
 	static constexpr float DOWN = -UP;
 
 	static const bool ENCODER_INVERTED = false;

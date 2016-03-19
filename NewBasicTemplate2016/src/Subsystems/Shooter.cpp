@@ -9,11 +9,10 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetInverted(SHOOTER_INVERTED);
 	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
 
-	//motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::AnalogPot);
-	//motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	DriveKicker(KICKER_RESET);
 
 	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
@@ -43,29 +42,12 @@ void Shooter::DriveKicker(bool value) {
 }
 
 double Shooter::GetShooterTrackerPeriod() {
-	double time = shooterTracker->GetPeriod();
-	placer  = placer + 1;
-	int placerMod = placer % 10;
-	connerValueArray[placerMod] =  ConnerConversion(time);
-	if (connerValueArray[placerMod] > 400) {
-		for (int i = 0; i > 10; i++) {
-			if (!connerValueArray[i] > 400) {
-				return connerValueArray[i];
-				i = 10;
-			}
-		}
-	}
-	else if (connerValueArray[placerMod] == 0) {
-		for (int i = 0; i > 10; i++) {
-			if (!connerValueArray[i] == 0) {
-				return connerValueArray[i];
-				i = 10;
-			}
-		}
-	}
-	else {
-		return connerValueArray[placerMod];
-	}
+	double timeBetweenSpindles = shooterTracker->GetPeriod();
+	double tempValue = ConnerConversion(timeBetweenSpindles);
+	if (tempValue <= 30000)
+		currentConnerValue = tempValue;
+
+	return currentConnerValue;
 }
 
 double Shooter::ConnerConversion(double value) {

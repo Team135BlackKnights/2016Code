@@ -13,8 +13,10 @@ public:
 	void InitDefaultCommand();
 	void DriveMotor(float power=1.0f);
 
-	static constexpr float WINCH_UP = -1.0f;
+	static constexpr float WINCH_UP = 1.0f;
 	static constexpr float WINCH_DOWN = -WINCH_UP;
+
+	static const bool LIFT_HANG_WINCH_INVERTED = true;
 
 };
 

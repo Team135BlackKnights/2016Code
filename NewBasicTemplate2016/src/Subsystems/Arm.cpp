@@ -22,6 +22,7 @@ Arm::Arm():
 	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	//this->ZeroEncoder();
 	armMotor->SetSensorDirection(false);
+	armMotor->SetInverted(ARM_INVERTED);
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
@@ -33,7 +34,7 @@ Arm::Arm():
 void Arm::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new DriveArm());
+	SetDefaultCommand(new DriveArm());
 }
 
 void Arm::RaiseLowerArm(float motorPower, bool softStop) {
@@ -61,7 +62,7 @@ void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 			power = fmaxf(power, 0);
 		*/
 	//}
-	std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
+	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
 
 	armMotor->Set(power);
 }
@@ -74,8 +75,8 @@ bool Arm::GetTopLimitSwitchValue() {
 
 bool Arm::GetBottomLimitSwitchValue() {
 	bool value =  !bottomLimitSwitch.get()->Get();
-	if (value)
-		std::cout << "B";
+	//if (value)
+		//std::cout << "B";
 	return value;
 }
 

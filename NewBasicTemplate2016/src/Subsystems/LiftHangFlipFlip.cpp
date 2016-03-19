@@ -5,6 +5,7 @@ LiftHangFlipFlip::LiftHangFlipFlip() :
 		Subsystem("LiftHangFlipper")
 {
 	flipper.reset(new VictorSP(MOTOR_LIFT_HANG_FLIPPER));
+	flipper->SetInverted(LIFT_HANG_FLIPPER_INVERTED);
 }
 
 void LiftHangFlipFlip::InitDefaultCommand()

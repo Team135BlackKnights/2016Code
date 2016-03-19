@@ -6,7 +6,7 @@ LiftHangWinch::LiftHangWinch() :
 		Subsystem("LiftHangWinch")
 {
 	winch.reset(new VictorSP(MOTOR_LIFT_HANG_LIFT));
-
+	winch->SetInverted(LIFT_HANG_WINCH_INVERTED);
 
 }
 
