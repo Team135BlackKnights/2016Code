@@ -5,7 +5,7 @@
 #include "WPILib.h"
 #include "RobotMap.h"
 
-class DriveToDefenseAndLowerArm: public CommandGroup
+class DriveDistanceAndLowerArm: public CommandGroup
 {
 private:
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
@@ -13,7 +13,7 @@ private:
 
 	static const bool ZERO = true;
 public:
-	DriveToDefenseAndLowerArm(bool lowBar);
+	DriveDistanceAndLowerArm(bool lowBar);
 };
 
 #endif

@@ -1,7 +1,7 @@
+#include <Commands/DriveDistanceAndLowerArm.h>
 #include "AutoCommand.h"
 #include "DriveDistance.h"
 #include "../CommandBase.h"
-#include "DriveToDefenseAndLowerArm.h"
 #include "TurnRobotAngle.h"
 
 AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
@@ -23,7 +23,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential(new DriveToDefenseAndLowerArm(lowBar));
+	AddSequential(new DriveDistanceAndLowerArm(lowBar));
 
 	if (fastDefense) {
 		motorSpeed = .625f;
@@ -38,25 +38,27 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	AddSequential(new TurnRobotAngle(180.0f, RIGHT));
 
 	if (defensePosition == 1) {
-		AddSequential(new DriveDistance(65));
+		AddSequential(new DriveDistance(38));
+		AddSequential(new TurnRobotAngle(40, RIGHT));
 	}
 
 	else if (defensePosition == 2) {
-		AddSequential(new DriveDistance(85));
+		AddSequential(new DriveDistance(40));
+		AddSequential(new TurnRobotAngle(35, RIGHT));
 	}
 
 	else if (defensePosition == 3) {
-		AddSequential(new TurnRobotAngle(45.0f, RIGHT));
-		AddSequential(new DriveDistance(71));
-		AddSequential(new TurnRobotAngle(45.0f, LEFT));
+		AddSequential(new TurnRobotAngle(10, RIGHT));
 	}
 
 	else if (defensePosition == 4) {
-		AddSequential(new DriveDistance(10));
+		AddSequential(new DriveDistance(10, LEFT));
 	}
 
 	else if (defensePosition == 5) {
-		AddSequential(new DriveDistance(65));
+		AddSequential(new TurnRobotAngle(60, LEFT));
+		AddSequential(new DriveDistance(58));
+		AddSequential(new TurnRobotAngle(60, RIGHT));
 	}
 
 }

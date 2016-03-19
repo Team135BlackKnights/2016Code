@@ -1,8 +1,8 @@
-#include "DriveToDefenseAndLowerArm.h"
+#include <Commands/DriveDistanceAndLowerArm.h>
 #include "DriveDistance.h"
 #include "AutoArmLower.h"
 
-DriveToDefenseAndLowerArm::DriveToDefenseAndLowerArm(bool lowBar)
+DriveDistanceAndLowerArm::DriveDistanceAndLowerArm(bool lowBar)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
