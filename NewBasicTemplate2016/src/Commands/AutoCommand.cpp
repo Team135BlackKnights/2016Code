@@ -3,6 +3,7 @@
 #include "DriveDistance.h"
 #include "../CommandBase.h"
 #include "TurnRobotAngle.h"
+#include "AimBot.h"
 
 AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 {
@@ -34,16 +35,17 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 		motorSpeed = .55f;
 	}
 
-	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE, motorSpeed, NON_ZERO_ENCODER));
+	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE, motorSpeed));
 
 	//  Should move robot to get robot in front of the Alignment Line
 	if (lowBar) {
-		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .70f, NON_ZERO_ENCODER));
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .70f));
 	}
 	else {
 		AddSequential(new DriveDistanceAndLowerArm(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, Arm::AUTO_ZERO_DEGREES, NON_ZERO_ENCODER));
 	}
 
+	//  Move according to the defense Position the robot is set in front of
 	if (defensePosition == 1) {
 		AddSequential(new DriveDistance(38));
 		AddSequential(new TurnRobotAngle(40, RIGHT_TURN));
@@ -67,5 +69,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 		AddSequential(new DriveDistance(58));
 		AddSequential(new TurnRobotAngle(60, RIGHT_TURN));
 	}
+
+	AddSequential(new AimBot());
 
 }
