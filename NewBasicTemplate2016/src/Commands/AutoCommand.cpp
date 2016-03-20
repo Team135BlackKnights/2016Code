@@ -48,7 +48,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	//  Move according to the defense Position the robot is set in front of
 	if (defensePosition == 1) {
 		AddSequential(new DriveDistance(38));
-		AddSequential(new TurnRobotAngle(40, RIGHT_TURN));
+		AddSequential(new TurnRobotAngle(90, RIGHT_TURN));
 	}
 
 	else if (defensePosition == 2) {

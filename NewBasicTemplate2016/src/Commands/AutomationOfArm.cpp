@@ -10,6 +10,7 @@ AutomationOfArm::AutomationOfArm()
 	desiredValue = -1;
 	startingValue = 0;
 	this->angle = 0;
+	std::cout << "create automation";
 }
 
 AutomationOfArm::AutomationOfArm(double angle)
@@ -27,7 +28,7 @@ void AutomationOfArm::Initialize()
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 	startingValue = arm->GetEncoderPosition();
-
+	std::cout << "running init";
 	if (desiredValue == -1)
 	{
 		desiredValue = (int) arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());

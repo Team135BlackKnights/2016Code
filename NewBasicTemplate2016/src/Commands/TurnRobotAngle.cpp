@@ -32,14 +32,14 @@ void TurnRobotAngle::Execute()
 	leftCurrentEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 	//  For Turning Right
 	if (this->rightOrLeft) {
-		driveTrain->DriveTank(MOTOR_POWER, -MOTOR_POWER);
+		driveTrain->DriveTank(-MOTOR_POWER, MOTOR_POWER);
 		if (leftCurrentEncoderPosition >= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}
 	}
 	//  For Turning Left
 	else if (!this->rightOrLeft) {
-		driveTrain->DriveTank(-MOTOR_POWER, MOTOR_POWER);
+		driveTrain->DriveTank(MOTOR_POWER, -MOTOR_POWER);
 		if (leftCurrentEncoderPosition <= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}

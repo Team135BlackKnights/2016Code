@@ -10,7 +10,7 @@ class AutoCommand: public CommandGroup
 private:
 	static const int DISTANCE_TO_TRAVEL_OVER_DEFENSE = 40 + LENGTH_OF_ROBOT;
 
-	static const int DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE = 55;
+	static const int DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE = 30;
 
 	static const bool RIGHT_TURN = true,
 					  LEFT_TURN = false;

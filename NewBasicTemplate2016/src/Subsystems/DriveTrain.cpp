@@ -100,7 +100,7 @@ float DriveTrain::GetDistanceInches(int motorIndex) {
 }
 
 int DriveTrain::GetEncoderPosition(int motorIndex) {
-	return motors[motorIndex]->GetEncPosition();
+	return abs(motors[motorIndex]->GetEncPosition());
 }
 
 void DriveTrain::ZeroEncoder(int motorIndex)
