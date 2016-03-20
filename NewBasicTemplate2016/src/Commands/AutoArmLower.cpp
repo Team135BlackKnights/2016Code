@@ -23,7 +23,7 @@ void AutoArmLower::Initialize()
 	if (this->armAuto == Arm::AUTO_NON_LOW_BAR) {
 		desiredEncoderPosition = arm->GetValueBasedOnAngle(ANGLE_TO_LOWER_ARM);
 	}
-	else if (this->armAuto == Arm::AUTO_LOW_BAR) {
+	else if (this->armAuto == Arm::AUTO_ZERO_DEGREES) {
 		desiredEncoderPosition = 0;
 	}
 }

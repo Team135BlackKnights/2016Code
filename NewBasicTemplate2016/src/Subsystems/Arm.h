@@ -69,7 +69,7 @@ public:
 	static const bool ENCODER_INVERTED = false;
 
 	static const bool	AUTO_NON_LOW_BAR = false,
-							AUTO_LOW_BAR = true;
+							AUTO_ZERO_DEGREES = true;
 
 	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
 	int GetEncoderPosition();

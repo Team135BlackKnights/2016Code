@@ -13,10 +13,10 @@ private:
 
 	static constexpr float MOTOR_POWER = 0.625f;
 
-	int rightEncoderPositionToTravel = 0,
-	    rightInitialEncoderPosition = 0;
+	int leftEncoderPositionToTravel = 0,
+	    leftInitialEncoderPosition = 0;
 
-	int rightCurrentEncoderPosition = 0;
+	int leftCurrentEncoderPosition = 0;
 
 	bool turnAngleReached = false;
 public:

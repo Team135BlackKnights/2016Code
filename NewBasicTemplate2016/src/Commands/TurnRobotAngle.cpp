@@ -16,31 +16,31 @@ void TurnRobotAngle::Initialize()
 {
 	//  For Turning Right
 	if (this->rightOrLeft) {
-		rightInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
-		rightEncoderPositionToTravel = rightInitialEncoderPosition - driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
+		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
+		leftEncoderPositionToTravel = leftInitialEncoderPosition + driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
 	}
 	//  For Turing Left
 	else if (!this->rightOrLeft) {
-		rightInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
-		rightEncoderPositionToTravel = rightInitialEncoderPosition + driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
+		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
+		leftEncoderPositionToTravel = leftInitialEncoderPosition - driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
 	}
 }
 
 // Called repeatedly when this Command is scheduled to run
 void TurnRobotAngle::Execute()
 {
-	rightCurrentEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_RIGHT);
+	leftCurrentEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 	//  For Turning Right
 	if (this->rightOrLeft) {
 		driveTrain->DriveTank(MOTOR_POWER, -MOTOR_POWER);
-		if (rightCurrentEncoderPosition <= rightEncoderPositionToTravel) {
+		if (leftCurrentEncoderPosition >= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}
 	}
 	//  For Turning Left
 	else if (!this->rightOrLeft) {
 		driveTrain->DriveTank(-MOTOR_POWER, MOTOR_POWER);
-		if (rightCurrentEncoderPosition >= rightEncoderPositionToTravel) {
+		if (leftCurrentEncoderPosition <= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}
 	}
@@ -57,8 +57,8 @@ void TurnRobotAngle::End()
 {
 	driveTrain->DriveTank(0.0f, 0.0f);
 
-	rightEncoderPositionToTravel = 0;
-	rightInitialEncoderPosition = 0;
+	leftEncoderPositionToTravel = 0;
+	leftInitialEncoderPosition = 0;
 	turnAngleReached = false;
 }
 

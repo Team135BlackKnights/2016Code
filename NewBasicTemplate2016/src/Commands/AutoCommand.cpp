@@ -23,7 +23,9 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential(new DriveDistanceAndLowerArm(lowBar));
+	//  True, move arm to bottom limit switch
+	//  False, move arm to 25 degrees above bottom limit switch
+	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER));
 
 	if (fastDefense) {
 		motorSpeed = .625f;
@@ -32,33 +34,38 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 		motorSpeed = .55f;
 	}
 
-	AddSequential(new DriveDistance(distanceToTravelOverDefense, motorSpeed, true));
-	AddSequential(new DriveDistance(55.135f, .45f, false));
+	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE, motorSpeed, NON_ZERO_ENCODER));
 
-	AddSequential(new TurnRobotAngle(180.0f, RIGHT));
+	//  Should move robot to get robot in front of the Alignment Line
+	if (lowBar) {
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .70f, NON_ZERO_ENCODER));
+	}
+	else {
+		AddSequential(new DriveDistanceAndLowerArm(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, Arm::AUTO_ZERO_DEGREES, NON_ZERO_ENCODER));
+	}
 
 	if (defensePosition == 1) {
 		AddSequential(new DriveDistance(38));
-		AddSequential(new TurnRobotAngle(40, RIGHT));
+		AddSequential(new TurnRobotAngle(40, RIGHT_TURN));
 	}
 
 	else if (defensePosition == 2) {
 		AddSequential(new DriveDistance(40));
-		AddSequential(new TurnRobotAngle(35, RIGHT));
+		AddSequential(new TurnRobotAngle(35, RIGHT_TURN));
 	}
 
 	else if (defensePosition == 3) {
-		AddSequential(new TurnRobotAngle(10, RIGHT));
+		AddSequential(new TurnRobotAngle(10, RIGHT_TURN));
 	}
 
 	else if (defensePosition == 4) {
-		AddSequential(new DriveDistance(10, LEFT));
+		AddSequential(new DriveDistance(10, LEFT_TURN));
 	}
 
 	else if (defensePosition == 5) {
-		AddSequential(new TurnRobotAngle(60, LEFT));
+		AddSequential(new TurnRobotAngle(60, LEFT_TURN));
 		AddSequential(new DriveDistance(58));
-		AddSequential(new TurnRobotAngle(60, RIGHT));
+		AddSequential(new TurnRobotAngle(60, RIGHT_TURN));
 	}
 
 }
