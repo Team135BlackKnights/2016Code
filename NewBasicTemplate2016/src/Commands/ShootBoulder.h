@@ -16,6 +16,11 @@ private:
 
 	double timeWait;
 	bool timerStarted;
+
+	double initialTimerValue = 0.0D,
+		   finalTimerValue = 0.0D;
+
+	bool upToSpeed = false;
 public:
 	ShootBoulder();
 	void Initialize();

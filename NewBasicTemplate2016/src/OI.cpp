@@ -19,6 +19,8 @@
 #include "Commands/ChangeDriver.h"
 #include "Commands/ChangeInvertedDriveTrain.h"
 #include "Commands/AutomationOfArm.h"
+#include "Commands/KickUnstucker.h"
+#include "Commands/TeleOpAimBot.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -172,6 +174,8 @@ void OI::ResetButtonMapping()
 	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
 	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
 	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
+	buttonsArray[MANIP][8]->WhileHeld(new TeleOpAimBot());
+	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 
-	buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
+	//buttonsArray[MANIP][12]->WhileHeld(new KickUnstucker());
 }

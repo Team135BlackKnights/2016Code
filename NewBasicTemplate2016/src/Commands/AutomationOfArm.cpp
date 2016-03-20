@@ -16,7 +16,7 @@ AutomationOfArm::AutomationOfArm(double angle)
 {
 	Requires(arm.get());
 	currentValue = 0;
-	desiredValue = arm->GetValueBasedOnAngle(angle);
+	desiredValue = arm->GetEncoderPositionBasedOnAngle(angle);
 	startingValue = 0;
 	this->angle = angle;
 }
@@ -30,8 +30,8 @@ void AutomationOfArm::Initialize()
 
 	if (desiredValue == -1)
 	{
-		desiredValue = (int) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
-		std::cout << desiredValue;
+		desiredValue = (int) arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
+		std::cout << "DESIRED VALUE: " << desiredValue;
 	}
 	SetTimeout(6.0);
 
@@ -58,6 +58,7 @@ void AutomationOfArm::Execute()
 	}
 	else
 		arm->RaiseLowerArm(0);
+	std::cout << arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -65,8 +66,8 @@ bool AutomationOfArm::IsFinished()
 {
 	//return currentArmEncoderValue == desiredArmEncoderValue;
 	//return currentPotValue = desiredPotValue;
-	if (startingValue == desiredValue)
-		return true;
+	/*if (startingValue == desiredValue)
+		return true;*/
 
 	return startingValue < desiredValue ? currentValue >= desiredValue : currentValue <= desiredValue;
 }

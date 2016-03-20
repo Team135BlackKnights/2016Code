@@ -24,6 +24,7 @@ void CameraTracking::Initialize()
 void CameraTracking::Execute()
 {
 	cam->GetCameraValues();
+	std::cout << "Distance to center: " << cam.get()->xDistanceToCenter();
 	//cam.get()->distanceToBlob();
 }
 

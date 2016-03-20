@@ -44,6 +44,7 @@
 
     //const int SERVO_SHOOTER_KICKER = 3;
     const int SOLENOID_SHOOTER_KICKER = 0;
+    const int SOLENOID_SHOOTER_UNSTUCKER = 1;
 
     const int POT_ANALOG_PORT = 4;
 

@@ -7,11 +7,12 @@ Shooter::Shooter() :
 {
 
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
-	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetInverted(SHOOTER_INVERTED);
-	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
+
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
+	unstucker.reset(new Solenoid(SOLENOID_SHOOTER_UNSTUCKER));
 
 	DriveKicker(KICKER_RESET);
 
@@ -26,9 +27,7 @@ void Shooter::InitDefaultCommand()
 
 void Shooter::DriveShooterMotors(float power) {
 	double speed = GetShooterTrackerPeriod();
-	bool shooterUpToSpeed = ShooterUpToSpeed();
 	SmartDashboard::PutNumber((std::string)"Shooter Speed Conners", speed);
-	SmartDashboard::PutNumber("Shooter Up To Speed: ", shooterUpToSpeed);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
@@ -40,6 +39,11 @@ void Shooter::DriveKicker(bool value) {
 	//Kicker shouldn't fight itself now!
 	if (this->kicker->Get() != value)
 		kicker->Set(value);
+}
+
+void Shooter::DriveUnstucker(bool value) {
+	if (this->unstucker->Get() != value)
+		unstucker->Set(value);
 }
 
 double Shooter::GetShooterTrackerPeriod() {

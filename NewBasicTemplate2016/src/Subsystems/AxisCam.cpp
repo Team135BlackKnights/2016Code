@@ -94,9 +94,8 @@ float AxisCam::xDistanceToCenter()
 		std::cout << "x not good";
 		return 0;
 	}
-	//return Preferences::GetInstance()->GetFloat("Offset", 0);
-	float dist =  (x - X_IMAGE_RES /2.0f) / 1.0f;
-	std:: cout << dist;
+	//return Preferences::GetInstance()->GetFloa=t("Offset", 0);
+	float dist =  (x - X_IMAGE_RES /2.0f) / 1.0f + Preferences::GetInstance()->GetFloat("Offset", 0);
 	return dist;
 }
 
