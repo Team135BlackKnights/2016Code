@@ -144,7 +144,7 @@ float AxisCam::distanceToBlob()
 	double width = this->getWidth();
 	float value = 0;
 		value = 12.0f * (X_WIDTH_GOAL * X_IMAGE_RES) / ((2*width * (tan((AXIS_VANGLE / 2.0)/ 180.0 * M_PI))));
-		std::cout << "distance" << value;
+		//std::cout << "distance" << value;
 		//std::cout << "Width " << i << ": " << width << std::endl;
 		//std::cout << "CamDist take " << i << ": " << value << std::endl;
 		 //std::cout << "Aspect Ratio: " << ASSpectRatio << std::endl;

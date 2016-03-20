@@ -9,12 +9,13 @@ Shooter::Shooter() :
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetInverted(SHOOTER_INVERTED);
 	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
 
-	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetFeedbackDevice(CANTalon::FeedbackDevice::CtreMagEncoder_Relative);
-	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	DriveKicker(KICKER_RESET);
+
+	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
 }
 
 void Shooter::InitDefaultCommand()
@@ -24,10 +25,10 @@ void Shooter::InitDefaultCommand()
 }
 
 void Shooter::DriveShooterMotors(float power) {
-	double speed = GetEncoderSpeed();
-	bool value = (speed >= 21000.0D);
-	SmartDashboard::PutNumber((std::string)"Shooter Speed", speed);
-	SmartDashboard::PutBoolean((std::string)"Shooter Up to Speed", value);
+	double speed = GetShooterTrackerPeriod();
+	bool shooterUpToSpeed = ShooterUpToSpeed();
+	SmartDashboard::PutNumber((std::string)"Shooter Speed Conners", speed);
+	SmartDashboard::PutNumber("Shooter Up To Speed: ", shooterUpToSpeed);
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
@@ -41,14 +42,27 @@ void Shooter::DriveKicker(bool value) {
 		kicker->Set(value);
 }
 
-double Shooter::GetEncoderSpeed()
-{
-	return shooter->GetEncVel();
+double Shooter::GetShooterTrackerPeriod() {
+	double timeBetweenSpindles = shooterTracker->GetPeriod();
+	tempConnerValue = ConnerConversion(timeBetweenSpindles);
+	if (tempConnerValue <= 30000)
+		currentConnerValue = tempConnerValue;
+
+	return currentConnerValue;
+}
+
+double Shooter::ConnerConversion(double value) {
+	return (double) Trunc((1.0f/value), 3);
 }
 
 bool Shooter::ShooterUpToSpeed() {
-	double encoderVelocity = GetEncoderSpeed();
-	return encoderVelocity > MAG_ENCODER_SETPOINT;
+	double shooterTrackerValue = GetShooterTrackerPeriod();
+	if (shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // Put methods for controlling this subsystem

@@ -16,20 +16,29 @@ private:
 	//std::unique_ptr<Servo> kicker;
 	std::unique_ptr<Solenoid> kicker;
 
-	//  Not defined yet
+	std::unique_ptr<Counter> shooterTracker;
+
+	//  Value Still To Be Determined
+	static constexpr double SHOOTER_TRACKER_SETPOINT = 230.0D;
+
+	double currentConnerValue = 0.0D,
+		   tempConnerValue = 0.0D;
+
 public:
 	Shooter();
 	void InitDefaultCommand();
 	void DriveShooterMotors(float=1.0f);
 	void StopShooterMotors();
 	void RaiseLowerArm(double);
-	double GetEncoderSpeed();
-	bool ShooterUpToSpeed();
 
 	void DriveKicker(bool);
 
+	double GetShooterTrackerPeriod();
+	double ConnerConversion(double);
+	bool ShooterUpToSpeed();
+
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
-	static const int IN = -1;
+	static const int IN = 1.0f;
 	static const int OUT = -IN;
 
 	//static constexpr float KICKER_KICKED = 0.6f;
@@ -38,7 +47,7 @@ public:
 	static const bool KICKER_KICKED = true;
 	static const bool KICKER_RESET = !KICKER_KICKED;
 
-	static constexpr double MAG_ENCODER_SETPOINT = 21000.0D;
+	static const bool SHOOTER_INVERTED = true;
 };
 
 #endif
