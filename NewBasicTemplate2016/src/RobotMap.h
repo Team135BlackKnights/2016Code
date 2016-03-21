@@ -52,6 +52,7 @@
     const bool DRIVE_TRAIN_INVERTED = true;
 
 	static const int LENGTH_OF_ROBOT = 31;
+	static const int WIDTH_OF_ROBOT = 29;
 
     //  Hard Buttons Declarations
     const int DIGITAL_BUTTON_ARM_RESET = 7;

@@ -37,9 +37,8 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 
 	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE, motorSpeed));
 
-	//  Should move robot to get robot in front of the Alignment Line
 	if (lowBar) {
-		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .70f));
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .80f));
 	}
 	else {
 		AddSequential(new DriveDistanceAndLowerArm(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, Arm::AUTO_ZERO_DEGREES, NON_ZERO_ENCODER));
@@ -47,8 +46,8 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 
 	//  Move according to the defense Position the robot is set in front of
 	if (defensePosition == 1) {
-		AddSequential(new DriveDistance(38));
-		AddSequential(new TurnRobotAngle(90, RIGHT_TURN));
+		AddSequential(new DriveDistance(38, 0.8f));
+		AddSequential(new TurnRobotAngle(50, RIGHT_TURN));
 	}
 
 	else if (defensePosition == 2) {

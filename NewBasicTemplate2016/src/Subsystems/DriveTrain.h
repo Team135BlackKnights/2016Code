@@ -44,9 +44,9 @@ public:
 	static constexpr float DIAMETER_OF_WHEELS = 2.0f * RADIUS_OF_WHEELS;
 	static constexpr float CIRCUMFERENCE_OF_WHEELS = DIAMETER_OF_WHEELS * M_PI;
 
-	static const int DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2;
-	static constexpr float WIDTH_OF_ROBOT = 23.0f;
-	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = ((WIDTH_OF_ROBOT - (2 * DISTANCE_BETWEEN_EDGE_AND_WHEEL)) * M_PI);
+	//static constexpr float DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2.0f;
+	static constexpr float DIAMETER_OF_TURNING_ROBOT = 28;
+	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = DIAMETER_OF_TURNING_ROBOT * M_PI;
 
 	DriveTrain();
 	~DriveTrain();
