@@ -7,11 +7,11 @@
 class TurnRobotAngle: public CommandBase
 {
 private:
-	int angleDegrees;
+	double angleDegrees;
 
 	bool rightOrLeft;
 
-	static constexpr float MOTOR_POWER = 0.625f;
+	static constexpr float MOTOR_POWER = 0.80f;
 
 	int leftEncoderPositionToTravel = 0,
 	    leftInitialEncoderPosition = 0;
@@ -20,12 +20,15 @@ private:
 
 	bool turnAngleReached = false;
 public:
-	TurnRobotAngle(int, bool);
+	TurnRobotAngle(double, bool);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
+	static const bool RIGHT_TURN = true,
+					  LEFT_TURN = !RIGHT_TURN;
 };
 
 #endif

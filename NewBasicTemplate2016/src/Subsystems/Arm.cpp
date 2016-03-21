@@ -84,7 +84,7 @@ double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
 	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + 6.0D) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + 6.0) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION + 30.0) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION + 36.0) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {

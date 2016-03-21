@@ -23,10 +23,10 @@ void DriveJ::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void DriveJ::Execute()
 {
-	int inverted = oi->driver->DRIVE_TRAIN_INVERTED ? -1 : 1;
+	//int inverted = oi->driver->DRIVE_TRAIN_INVERTED ? -1 : 1;
 	float drivePower = Preferences::GetInstance()->GetFloat("DrivePower", 1.0f);
 	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
-	driveTrain->DriveTank(oi->GetStickY(OI::LEFT) * inverted * drivePower, oi->GetStickY(OI::RIGHT) * inverted * drivePower);
+	driveTrain->DriveTank(oi->GetStickY(OI::LEFT) * drivePower, oi->GetStickY(OI::RIGHT) * drivePower);
 }
 
 

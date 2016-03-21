@@ -4,6 +4,9 @@
 #include "../CommandBase.h"
 #include "TurnRobotAngle.h"
 #include "AimBot.h"
+#include "AutomationOfArm.h"
+#include "ShootBoulder.h"
+#include "WaitTime.h"
 
 AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 {
@@ -45,30 +48,39 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	}
 
 	//  Move according to the defense Position the robot is set in front of
+	if (defensePosition == 0)
+		return;
+
 	if (defensePosition == 1) {
 		AddSequential(new DriveDistance(38, 0.8f));
-		AddSequential(new TurnRobotAngle(50, RIGHT_TURN));
+		AddSequential(new WaitTime(.50f));
+		//AddSequential(new TurnRobotAngle(62.5D, TurnRobotAngle::RIGHT_TURN));
+		//AddSequential(new AutomationOfArm(40.0D));
+		///AddSequential(new ShootBoulder());
+		AddSequential(new TurnRobotAngle(40.0D, TurnRobotAngle::RIGHT_TURN));
+		//AddSequential(new WaitTime(.35f));
+		AddSequential(new AimBot());
 	}
 
 	else if (defensePosition == 2) {
 		AddSequential(new DriveDistance(40));
-		AddSequential(new TurnRobotAngle(35, RIGHT_TURN));
+		AddSequential(new TurnRobotAngle(35, TurnRobotAngle::RIGHT_TURN));
 	}
 
 	else if (defensePosition == 3) {
-		AddSequential(new TurnRobotAngle(10, RIGHT_TURN));
+		AddSequential(new TurnRobotAngle(10, TurnRobotAngle::RIGHT_TURN));
 	}
 
 	else if (defensePosition == 4) {
-		AddSequential(new DriveDistance(10, LEFT_TURN));
+		AddSequential(new DriveDistance(10, TurnRobotAngle::LEFT_TURN));
 	}
 
 	else if (defensePosition == 5) {
-		AddSequential(new TurnRobotAngle(60, LEFT_TURN));
+		AddSequential(new TurnRobotAngle(60, TurnRobotAngle::LEFT_TURN));
 		AddSequential(new DriveDistance(58));
-		AddSequential(new TurnRobotAngle(60, RIGHT_TURN));
+		AddSequential(new TurnRobotAngle(60, TurnRobotAngle::RIGHT_TURN));
 	}
 
-	AddSequential(new AimBot());
+	//AddSequential(new AimBot());
 
 }

@@ -1,6 +1,6 @@
 #include "TurnRobotAngle.h"
 
-TurnRobotAngle::TurnRobotAngle(int angleDegrees, bool rightOrLeft)
+TurnRobotAngle::TurnRobotAngle(double angleDegrees, bool rightOrLeft)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -15,12 +15,12 @@ TurnRobotAngle::TurnRobotAngle(int angleDegrees, bool rightOrLeft)
 void TurnRobotAngle::Initialize()
 {
 	//  For Turning Right
-	if (this->rightOrLeft) {
+	if (this->rightOrLeft == RIGHT_TURN) {
 		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 		leftEncoderPositionToTravel = leftInitialEncoderPosition + driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
 	}
 	//  For Turing Left
-	else if (!this->rightOrLeft) {
+	else if (!this->rightOrLeft == LEFT_TURN) {
 		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 		leftEncoderPositionToTravel = leftInitialEncoderPosition - driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
 	}
@@ -31,15 +31,15 @@ void TurnRobotAngle::Execute()
 {
 	leftCurrentEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 	//  For Turning Right
-	if (this->rightOrLeft) {
-		driveTrain->DriveTank(-MOTOR_POWER, MOTOR_POWER);
+	if (this->rightOrLeft == RIGHT_TURN) {
+		driveTrain->DriveTank(MOTOR_POWER, -MOTOR_POWER);
 		if (leftCurrentEncoderPosition >= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}
 	}
 	//  For Turning Left
-	else if (!this->rightOrLeft) {
-		driveTrain->DriveTank(MOTOR_POWER, -MOTOR_POWER);
+	else if (!this->rightOrLeft == LEFT_TURN) {
+		driveTrain->DriveTank(-MOTOR_POWER, MOTOR_POWER);
 		if (leftCurrentEncoderPosition <= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}

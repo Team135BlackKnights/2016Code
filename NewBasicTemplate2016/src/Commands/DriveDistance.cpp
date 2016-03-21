@@ -64,7 +64,7 @@ void DriveDistance::Execute()
 		}
 	}
 
-	driveTrain->DriveTank(-leftMotorPower, -leftMotorPower);
+	driveTrain->DriveTank(leftMotorPower, leftMotorPower);
 }
 
 // Make this return true when this Command no longer needs to run execute()

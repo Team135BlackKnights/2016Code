@@ -59,7 +59,7 @@ float OI::GetStickX(int controllerNum) //Returns controller's x value
 float OI::GetStickY(int controllerNum)
 {
 	//return -joysticksArray[controllerNum]->GetY();
-	return GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
+	return -GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
 }
 
 float OI::GetStickTwist(int controllerNum)

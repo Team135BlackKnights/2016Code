@@ -12,9 +12,6 @@ private:
 
 	static const int DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE = 30;
 
-	static const bool RIGHT_TURN = true,
-					  LEFT_TURN = false;
-
 	static const bool ZERO_ENCODER = true;
 	static const bool NON_ZERO_ENCODER = false;
 
@@ -23,7 +20,7 @@ private:
 	float motorSpeed;
 
 	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
-	static const int DRIVE_DISTANCE_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT;
+	static const int DRIVE_DISTANCE_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT - 12;
 public:
 	AutoCommand(bool, int, bool);
 };
