@@ -7,6 +7,7 @@
 #include "AutomationOfArm.h"
 #include "ShootBoulder.h"
 #include "WaitTime.h"
+#include "Move.h"
 
 AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 {
@@ -53,12 +54,12 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 
 	if (defensePosition == 1) {
 		AddSequential(new DriveDistance(38, 0.8f));
-		AddSequential(new WaitTime(.50f));
 		//AddSequential(new TurnRobotAngle(62.5D, TurnRobotAngle::RIGHT_TURN));
 		//AddSequential(new AutomationOfArm(40.0D));
 		///AddSequential(new ShootBoulder());
-		AddSequential(new TurnRobotAngle(40.0D, TurnRobotAngle::RIGHT_TURN));
-		//AddSequential(new WaitTime(.35f));
+		AddSequential(new TurnRobotAngle(52.5D, TurnRobotAngle::RIGHT_TURN));
+		AddSequential(new WaitTime(.25f));
+		//AddSequential(new Move(.3,0), 1.000000f);
 		AddSequential(new AimBot());
 	}
 
