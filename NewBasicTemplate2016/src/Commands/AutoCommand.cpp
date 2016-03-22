@@ -33,7 +33,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER));
 
 	if (fastDefense) {
-		motorSpeed = .625f;
+		motorSpeed = .65f;
 	}
 	else {
 		motorSpeed = .55f;
@@ -42,7 +42,8 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE, motorSpeed));
 
 	if (lowBar) {
-		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .80f));
+		AddParallel(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .875f));
+		AddSequential(new AutomationOfArm(15.0f));
 	}
 	else {
 		AddSequential(new DriveDistanceAndLowerArm(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, Arm::AUTO_ZERO_DEGREES, NON_ZERO_ENCODER));
@@ -53,11 +54,13 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 		return;
 
 	if (defensePosition == 1) {
-		AddSequential(new DriveDistance(38, 0.8f));
+		//AddParallel(new DriveDistance(48, 0.875f));
+		//AddSequential(new AutomationOfArm(15.0f));
 		//AddSequential(new TurnRobotAngle(62.5D, TurnRobotAngle::RIGHT_TURN));
 		//AddSequential(new AutomationOfArm(40.0D));
 		///AddSequential(new ShootBoulder());
-		AddSequential(new TurnRobotAngle(52.5D, TurnRobotAngle::RIGHT_TURN));
+		//AddSequential(new TurnRobotAngle(52.5D, TurnRobotAngle::RIGHT_TURN));
+		AddSequential(new TurnRobotAngle(40.0D, TurnRobotAngle::RIGHT_TURN));
 		AddSequential(new WaitTime(.25f));
 		//AddSequential(new Move(.3,0), 1.000000f);
 		AddSequential(new AimBot());
