@@ -9,8 +9,8 @@
 AimBot::AimBot(double angle)
 {
 	AddSequential(new MoveFromCameraValue());
-	//AddParallel(new AutomationOfArm());
-	AddParallel(new AutomationOfArm(39.0f));
+	AddParallel(new AutomationOfArm());
+	//AddParallel(new AutomationOfArm(39.0f));
 	AddSequential(new ShootBoulder());
 	/// Add Commands here:
 	// e.g. AddSequential(new Command1());
