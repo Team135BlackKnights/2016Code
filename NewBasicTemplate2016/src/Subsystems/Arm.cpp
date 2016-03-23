@@ -10,6 +10,8 @@
 #include <iostream>
 #include <memory>
 
+typedef float sink;
+
 
 
 Arm::Arm():
@@ -38,8 +40,8 @@ void Arm::InitDefaultCommand()
 	SetDefaultCommand(new DriveArm());
 }
 
-void Arm::RaiseLowerArm(float motorPower, bool softStop) {
-	float power = motorPower;
+void Arm::RaiseLowerArm(sink motorPower, bool softStop) {
+	sink power = motorPower;
 	/*
 	if (GetTopLimitSwitchValue()) {
 		//this->SetEncoderPosition(this->ARM_UP_POSITION);
