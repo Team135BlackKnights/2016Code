@@ -30,6 +30,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 
 	//  True, move arm to bottom limit switch
 	//  False, move arm to 25 degrees above bottom limit switch
+	std::cout << defensePosition << std::endl;
 	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER));
 
 	if (fastDefense) {
@@ -38,7 +39,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	else {
 		motorSpeed = .55f;
 	}
-
+	std::cout << defensePosition << std::endl;
 	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE, motorSpeed));
 
 	if (lowBar) {
@@ -47,7 +48,13 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 		AddSequential(new WaitTime(1.0f));
 	}
 	else {
-		AddSequential(new DriveDistanceAndLowerArm(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, Arm::AUTO_ZERO_DEGREES, NON_ZERO_ENCODER));
+		std::cout << defensePosition << std::endl;
+		AddSequential(new WaitTime(.5f));
+		std::cout << defensePosition << std::endl;
+		AddParallel(new AutomationOfArm(15.0f));
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .50f));
+		AddSequential(new WaitTime(1.0f));
+		std::cout << defensePosition << std::endl;
 	}
 
 	//  Move according to the defense Position the robot is set in front of
@@ -77,13 +84,17 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	}
 
 	else if (defensePosition == 4) {
-		AddSequential(new DriveDistance(10, TurnRobotAngle::LEFT_TURN));
+		AddSequential(new TurnRobotAngle(8, TurnRobotAngle::RIGHT_TURN));
+		AddSequential(new AimBot());
 	}
 
 	else if (defensePosition == 5) {
 		AddSequential(new TurnRobotAngle(60, TurnRobotAngle::LEFT_TURN));
 		AddSequential(new DriveDistance(58));
 		AddSequential(new TurnRobotAngle(60, TurnRobotAngle::RIGHT_TURN));
+	}
+	else {
+		AddSequential(new DriveDistance(50.0f));
 	}
 
 	//AddSequential(new AimBot());

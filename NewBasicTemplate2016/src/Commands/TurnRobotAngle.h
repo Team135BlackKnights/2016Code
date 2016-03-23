@@ -11,7 +11,7 @@ private:
 
 	bool rightOrLeft;
 
-	static constexpr float MOTOR_POWER = 0.80f;
+	float motorPower = 0.0f;
 
 	int leftEncoderPositionToTravel = 0,
 	    leftInitialEncoderPosition = 0;
@@ -20,7 +20,7 @@ private:
 
 	bool turnAngleReached = false;
 public:
-	TurnRobotAngle(double, bool);
+	TurnRobotAngle(double, bool, float = .8f);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

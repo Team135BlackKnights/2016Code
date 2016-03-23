@@ -1,6 +1,6 @@
 #include "TurnRobotAngle.h"
 
-TurnRobotAngle::TurnRobotAngle(double angleDegrees, bool rightOrLeft)
+TurnRobotAngle::TurnRobotAngle(double angleDegrees, bool rightOrLeft, float motorPower)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -9,6 +9,8 @@ TurnRobotAngle::TurnRobotAngle(double angleDegrees, bool rightOrLeft)
 	this->angleDegrees = angleDegrees;
 
 	this->rightOrLeft = rightOrLeft;
+
+	this->motorPower = motorPower;
 }
 
 // Called just before this Command runs the first time
@@ -20,7 +22,7 @@ void TurnRobotAngle::Initialize()
 		leftEncoderPositionToTravel = leftInitialEncoderPosition + driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
 	}
 	//  For Turing Left
-	else if (!this->rightOrLeft == LEFT_TURN) {
+	else if (this->rightOrLeft == LEFT_TURN) {
 		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 		leftEncoderPositionToTravel = leftInitialEncoderPosition - driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
 	}
@@ -32,18 +34,20 @@ void TurnRobotAngle::Execute()
 	leftCurrentEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 	//  For Turning Right
 	if (this->rightOrLeft == RIGHT_TURN) {
-		driveTrain->DriveTank(MOTOR_POWER, -MOTOR_POWER);
+		driveTrain->DriveTank(this->motorPower, -this->motorPower);
 		if (leftCurrentEncoderPosition >= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}
 	}
 	//  For Turning Left
-	else if (!this->rightOrLeft == LEFT_TURN) {
-		driveTrain->DriveTank(-MOTOR_POWER, MOTOR_POWER);
+	else if (this->rightOrLeft == LEFT_TURN) {
+		driveTrain->DriveTank(-this->motorPower, this->motorPower);
 		if (leftCurrentEncoderPosition <= leftEncoderPositionToTravel) {
 			turnAngleReached = true;
 		}
 	}
+
+	std::cout << "Working" << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
