@@ -8,22 +8,21 @@
 class AutoCommand: public CommandGroup
 {
 private:
-	static const int lowBarDistance = 36 + LENGTH_OF_ROBOT,
-				     rockWallDistance = 36 + LENGTH_OF_ROBOT,
-					 roughTerrainDistance = 36 + LENGTH_OF_ROBOT,
-					 moatDistance = 36 + LENGTH_OF_ROBOT,
-					 rampartsDistance = 40 + LENGTH_OF_ROBOT;
+	static const int DISTANCE_TO_TRAVEL_OVER_DEFENSE = 40 + LENGTH_OF_ROBOT;
 
-	static const int distanceToTravelOverDefense = 40 + LENGTH_OF_ROBOT;
+	static const int DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE = 20;
 
-	static const bool RIGHT = true,
-					  LEFT = false;
-
-	static const bool ZERO = true;
+	static const bool ZERO_ENCODER = true;
+	static const bool NON_ZERO_ENCODER = false;
 
 	static constexpr float MOTOR_POWER_TO_RAMP = 0.8f;
+
+	float motorSpeed;
+
+	static const int DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE = 72;
+	static const int DRIVE_DISTANCE_TO_RAMP = DISTANCE_BETWEEN_AUTOLINE_AND_DEFENSE - LENGTH_OF_ROBOT - 12;
 public:
-	AutoCommand(bool lowBar, bool overDefense, bool fastDefense);
+	AutoCommand(bool, int, bool);
 };
 
 #endif

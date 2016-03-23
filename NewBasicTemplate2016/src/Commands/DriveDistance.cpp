@@ -37,6 +37,7 @@ void DriveDistance::Execute()
 {
 	//rightCurrentDistance = driveTrain->GetDistanceInches(DriveTrain::FRONT_RIGHT);
 	leftCurrentDistance = driveTrain->GetDistanceInches(DriveTrain::FRONT_LEFT);
+	std::cout << "Current Distance" << leftCurrentDistance << std::endl;
 
 	//std::cout << "Left: " << leftCurrentDistance << " Right: " << rightCurrentDistance << std::endl;
 

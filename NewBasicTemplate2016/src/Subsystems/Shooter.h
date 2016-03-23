@@ -15,28 +15,16 @@ private:
 	std::unique_ptr<CANTalon> shooter;
 	//std::unique_ptr<Servo> kicker;
 	std::unique_ptr<Solenoid> kicker;
+	std::unique_ptr<Solenoid> unstucker;
 
 	std::unique_ptr<Counter> shooterTracker;
 
 	//  Value Still To Be Determined
-	static constexpr double SHOOTER_TRACKER_SETPOINT_SIDES = 15000.0D;
-	static constexpr double SHOOTER_TRACKER_SETPOINT_MIDDLE = 12000.0D;
+	static constexpr double SHOOTER_TRACKER_SETPOINT = 230.0D;
 
-	static const bool SIDES = true;
-	static const bool MIDDLE = false;
+	double currentConnerValue = 0.0D,
+		   tempConnerValue = 0.0D;
 
-	int placer = 0;
-	double connerValueArray[10];
-
-	double previousConnerValue = 0,
-		   currentConnerValue = 0;
-
-	double initialTimeValue = 0.0D,
-		   finalTimeValue = 0.0D;
-
-	bool timerStarted = false;
-
-	//  Not defined yet
 public:
 	Shooter();
 	void InitDefaultCommand();
@@ -45,10 +33,11 @@ public:
 	void RaiseLowerArm(double);
 
 	void DriveKicker(bool);
+	void DriveUnstucker(bool);
 
 	double GetShooterTrackerPeriod();
 	double ConnerConversion(double);
-	bool ShooterUpToSpeed(bool);
+	bool ShooterUpToSpeed();
 
 	static const int TWO_WHEEL_SHOOTER_MOTOR = 0;
 	static const int IN = 1.0f;
@@ -59,8 +48,6 @@ public:
 
 	static const bool KICKER_KICKED = true;
 	static const bool KICKER_RESET = !KICKER_KICKED;
-
-	static constexpr double MAG_ENCODER_SETPOINT = 21000.0D;
 
 	static const bool SHOOTER_INVERTED = true;
 };

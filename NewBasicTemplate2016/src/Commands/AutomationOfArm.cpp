@@ -10,13 +10,14 @@ AutomationOfArm::AutomationOfArm()
 	desiredValue = -1;
 	startingValue = 0;
 	this->angle = 0;
+	std::cout << "create automation";
 }
 
 AutomationOfArm::AutomationOfArm(double angle)
 {
 	Requires(arm.get());
 	currentValue = 0;
-	desiredValue = arm->GetValueBasedOnAngle(angle);
+	desiredValue = arm->GetEncoderPositionBasedOnAngle(angle);
 	startingValue = 0;
 	this->angle = angle;
 }
@@ -27,11 +28,11 @@ void AutomationOfArm::Initialize()
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 	startingValue = arm->GetEncoderPosition();
-
+	std::cout << "running init";
 	if (desiredValue == -1)
 	{
-		desiredValue = (int) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
-		std::cout << desiredValue;
+		desiredValue = (int) arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
+		std::cout << "DESIRED VALUE: " << desiredValue;
 	}
 	SetTimeout(6.0);
 
@@ -58,6 +59,7 @@ void AutomationOfArm::Execute()
 	}
 	else
 		arm->RaiseLowerArm(0);
+	std::cout << arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
 }
 
 // Make this return true when this Command no longer needs to run execute()

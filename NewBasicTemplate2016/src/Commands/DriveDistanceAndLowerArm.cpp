@@ -1,8 +1,8 @@
-#include "DriveToDefenseAndLowerArm.h"
+#include <Commands/DriveDistanceAndLowerArm.h>
 #include "DriveDistance.h"
 #include "AutoArmLower.h"
 
-DriveToDefenseAndLowerArm::DriveToDefenseAndLowerArm(bool lowBar)
+DriveDistanceAndLowerArm::DriveDistanceAndLowerArm(int distanceToTravel, bool armLower, bool zeroEncoder)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -21,6 +21,6 @@ DriveToDefenseAndLowerArm::DriveToDefenseAndLowerArm(bool lowBar)
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddParallel(new AutoArmLower(lowBar));
-	AddParallel(new DriveDistance(DRIVE_DISTANCE_TO_RAMP, 0.45f, ZERO));
+	AddParallel(new AutoArmLower(armLower));
+	AddParallel(new DriveDistance(distanceToTravel, 0.60f, zeroEncoder));
 }

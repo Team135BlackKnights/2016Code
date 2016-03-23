@@ -44,13 +44,15 @@
 
     //const int SERVO_SHOOTER_KICKER = 3;
     const int SOLENOID_SHOOTER_KICKER = 0;
+    const int SOLENOID_SHOOTER_UNSTUCKER = 1;
 
     const int POT_ANALOG_PORT = 4;
 
     //Is drive train inverted? The world may never know...
-    const bool DRIVE_TRAIN_INVERTED = true;
+    const bool DRIVE_TRAIN_INVERTED = false;
 
 	static const int LENGTH_OF_ROBOT = 31;
+	static const int WIDTH_OF_ROBOT = 29;
 
     //  Hard Buttons Declarations
     const int DIGITAL_BUTTON_ARM_RESET = 7;

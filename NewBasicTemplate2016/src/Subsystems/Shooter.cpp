@@ -7,11 +7,12 @@ Shooter::Shooter() :
 {
 
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
-	//  motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
+
 	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetInverted(SHOOTER_INVERTED);
-	//kicker.reset(new Servo(SERVO_SHOOTER_KICKER));
+
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
+	unstucker.reset(new Solenoid(SOLENOID_SHOOTER_UNSTUCKER));
 
 	DriveKicker(KICKER_RESET);
 
@@ -22,7 +23,6 @@ void Shooter::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	SetDefaultCommand(new DriveShooter());
-	//SetDefaultCommand(new ShooterTrackingTesting());
 }
 
 void Shooter::DriveShooterMotors(float power) {
@@ -41,11 +41,16 @@ void Shooter::DriveKicker(bool value) {
 		kicker->Set(value);
 }
 
+void Shooter::DriveUnstucker(bool value) {
+	if (this->unstucker->Get() != value)
+		unstucker->Set(value);
+}
+
 double Shooter::GetShooterTrackerPeriod() {
 	double timeBetweenSpindles = shooterTracker->GetPeriod();
-	double tempValue = ConnerConversion(timeBetweenSpindles);
-	if (tempValue <= 30000)
-		currentConnerValue = tempValue;
+	tempConnerValue = ConnerConversion(timeBetweenSpindles);
+	if (tempConnerValue <= 30000)
+		currentConnerValue = tempConnerValue;
 
 	return currentConnerValue;
 }
@@ -54,26 +59,13 @@ double Shooter::ConnerConversion(double value) {
 	return (double) Trunc((1.0f/value), 3);
 }
 
-//  If sidesOfCastle == true, display true when the shooter wheels are moving at a faster rate
-//  If sidesOfCastle == false, the robot should be shooting from the middle of the field, at a slightly slower rate
-bool Shooter::ShooterUpToSpeed(bool sidesOfCastle) {
+bool Shooter::ShooterUpToSpeed() {
 	double shooterTrackerValue = GetShooterTrackerPeriod();
-
-	if (sidesOfCastle) {
-		if (shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT_SIDES) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	if (shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT) {
+		return true;
 	}
 	else {
-		if (shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT_MIDDLE) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return false;
 	}
 }
 

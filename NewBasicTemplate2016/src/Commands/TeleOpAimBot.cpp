@@ -1,18 +1,12 @@
-#include <Commands/WaitTime.h>
-#include "AimBot.h"
-#include "MoveFromCameraValue.h"
-#include "RaiseArm.h"
-#include "ShootBoulder.h"
+#include "TeleOpAimBot.h"
 #include "AutomationOfArm.h"
-
-
-AimBot::AimBot(int position)
+TeleOpAimBot::TeleOpAimBot()
 {
-	AddSequential(new MoveFromCameraValue(position));
-	AddParallel(new AutomationOfArm());
-	//AddParallel(new AutomationOfArm(39.0f));
-	AddSequential(new ShootBoulder());
-	/// Add Commands here:
+	//AddSequential(new CheckSideSide());
+	//std::cout << "lined up";
+	//AddSequential(new KickKicker());
+	AddSequential(new AutomationOfArm());
+	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
 	// these will run in order.
