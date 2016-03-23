@@ -9,7 +9,7 @@
 #include "WaitTime.h"
 #include "Move.h"
 
-AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
+AutoCommand::AutoCommand(int defensePosition, bool fastDefense)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -31,6 +31,8 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	//  True, move arm to bottom limit switch
 	//  False, move arm to 25 degrees above bottom limit switch
 	std::cout << defensePosition << std::endl;
+	bool lowBar = defensePosition == 1 ? true : false;
+
 	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER));
 
 	if (fastDefense) {

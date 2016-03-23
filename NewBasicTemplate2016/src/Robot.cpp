@@ -35,8 +35,8 @@ private:
 	{
 		//autoCommand = (CommandGroup*) autoChooser->GetSelected();
 
-		//  True if Robot is going under the robot
-		bool lowBar = Preferences::GetInstance()->GetBoolean("Low Bar", true);
+		//  LowBar is automatically calculated if defense position is 1
+		//bool lowBar = Preferences::GetInstance()->GetBoolean("Low Bar", true);
 
 		//  Input the defense position 1-5 in which the robot starts in front of before auto begins
 		int defensePosition = Preferences::GetInstance()->GetInt("Defense Position: ", 1);
@@ -44,7 +44,7 @@ private:
 		//  True if robot is to go a faster speed, false if about an average speed
 		bool fastDefense = Preferences::GetInstance()->GetBoolean("Fast Defense", false);
 
-		autoCommand = new AutoCommand(lowBar, defensePosition, fastDefense);
+		autoCommand = new AutoCommand(defensePosition, fastDefense);
 		autoCommand->Start();
 	}
 
