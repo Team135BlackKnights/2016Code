@@ -18,7 +18,7 @@ void MoveFromCameraValue::Initialize(){
 	isgood = false;
 	if(pos == 1)
 		offset = -35;
-	else if(pos = 4)
+	else //if(pos == 4)
 		offset = 35;
 
 }

@@ -22,10 +22,7 @@ void AutoArmLower::Initialize()
 
 	//shooter->DriveKicker(Shooter::KICKER_MID);
 	if (this->armAuto == Arm::AUTO_NON_LOW_BAR) {
-		initialEncoderPosition = arm->GetEncoderPosition();
-		desiredEncoderPosition = initialEncoderPosition - arm->GetEncoderPositionBasedOnAngle(ANGLE_TO_LOWER_ARM);
-
-		//desiredEncoderPosition = arm->GetEncoderPositionBasedOnAngle(DESIRED_ANGLE_FOR_ARM_ABOVE_HORIZONTAL);
+		desiredEncoderPosition = arm->GetEncoderPositionBasedOnAngle(DESIRED_ANGLE_FOR_ARM_ABOVE_HORIZONTAL);
 	}
 	else if (this->armAuto == Arm::AUTO_ZERO_DEGREES) {
 		desiredEncoderPosition = 0;

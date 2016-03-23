@@ -31,7 +31,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense)
 	//  True, move arm to bottom limit switch
 	//  False, move arm to 25 degrees above bottom limit switch
 	std::cout << defensePosition << std::endl;
-	bool lowBar = defensePosition == 1 ? true : false;
+	bool lowBar = defensePosition == 1 ? Arm::AUTO_ZERO_DEGREES : Arm::AUTO_NON_LOW_BAR;
 
 	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER));
 
@@ -60,10 +60,11 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense)
 	}
 
 	//  Move according to the defense Position the robot is set in front of
-	if (defensePosition == 0)
+	switch (defensePosition) {
+	case 0:
 		return;
 
-	if (defensePosition == 1) {
+	case 1:
 		//AddParallel(new DriveDistance(48, 0.875f));
 		//AddSequential(new AutomationOfArm(15.0f));
 		//AddSequential(new TurnRobotAngle(62.5D, TurnRobotAngle::RIGHT_TURN));
@@ -73,33 +74,24 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense)
 		AddSequential(new TurnRobotAngle(35.0D, TurnRobotAngle::RIGHT_TURN));
 		AddSequential(new WaitTime(.25f));
 		//AddSequential(new Move(.3,0), 1.000000f);
-		AddSequential(new AimBot(1));
-	}
-
-	else if (defensePosition == 2) {
+		//AddSequential(new AimBot(1));
+	case 2:
 		AddSequential(new DriveDistance(40));
 		AddSequential(new TurnRobotAngle(35, TurnRobotAngle::RIGHT_TURN));
-	}
-
-	else if (defensePosition == 3) {
+	case 3:
 		AddSequential(new TurnRobotAngle(20, TurnRobotAngle::RIGHT_TURN));
-		AddSequential(new AimBot(4));
-	}
-
-	else if (defensePosition == 4) {
+		//AddSequential(new AimBot(3));
+	case 4:
 		//AddSequential(new TurnRobotAngle(8, TurnRobotAngle::RIGHT_TURN));
-		AddSequential(new AimBot(4));
-	}
-
-	else if (defensePosition == 5) {
+		//AddSequential(new AimBot(4));
+	case 5:
 		AddSequential(new TurnRobotAngle(60, TurnRobotAngle::LEFT_TURN));
 		AddSequential(new DriveDistance(58));
 		AddSequential(new TurnRobotAngle(60, TurnRobotAngle::RIGHT_TURN));
-	}
-	else {
-		AddSequential(new DriveDistance(50.0f));
+	default:
+		std::cout << "WHAT ARE YOU DOING!!!!!!!\n";
 	}
 
-	//AddSequential(new AimBot());
+	AddSequential(new AimBot(defensePosition));
 
 }
