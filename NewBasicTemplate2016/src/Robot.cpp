@@ -44,7 +44,9 @@ private:
 		//  True if robot is to go a faster speed, false if about an average speed
 		bool fastDefense = Preferences::GetInstance()->GetBoolean("Fast Defense", false);
 
-		autoCommand = new AutoCommand(defensePosition, fastDefense);
+		bool shoot = Preferences::GetInstance()->GetBoolean("Shoot", true);
+
+		autoCommand = new AutoCommand(defensePosition, fastDefense, shoot);
 		autoCommand->Start();
 	}
 

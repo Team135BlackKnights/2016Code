@@ -9,7 +9,7 @@
 #include "WaitTime.h"
 #include "Move.h"
 
-AutoCommand::AutoCommand(int defensePosition, bool fastDefense)
+AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -92,6 +92,6 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense)
 		std::cout << "WHAT ARE YOU DOING!!!!!!!\n";
 	}
 
-	AddSequential(new AimBot(defensePosition));
+	AddSequential(new AimBot(defensePosition, shoot));
 
 }

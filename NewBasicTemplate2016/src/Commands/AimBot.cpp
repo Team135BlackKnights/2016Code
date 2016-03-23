@@ -6,12 +6,13 @@
 #include "AutomationOfArm.h"
 
 
-AimBot::AimBot(int position)
+AimBot::AimBot(int position, bool shoot)
 {
 	AddSequential(new MoveFromCameraValue(position));
 	AddParallel(new AutomationOfArm());
 	//AddParallel(new AutomationOfArm(39.0f));
-	AddSequential(new ShootBoulder());
+	if (shoot)
+		AddSequential(new ShootBoulder());
 	/// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
