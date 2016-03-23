@@ -33,10 +33,11 @@ void DriveShooter::Execute()
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);
 
+	/*
 	if (oi->GetButton(OI::MANIP, 12))
 		shooter->DriveUnstucker(Shooter::KICKER_KICKED);
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
-		shooter->DriveUnstucker(Shooter::KICKER_RESET);
+	*/
 
 }
 

@@ -127,6 +127,10 @@ void OI::UpdateManipulator(Manipulator* manipulator, bool updateButtons)
 		ResetButtonMapping();
 }
 
+JoystickButton* OI::GetAButton(int data[2]) {
+	return buttonsArray[data[STICK]][data[BUTTON]].get();
+}
+
 void OI::ResetButtonMapping()
 {
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
@@ -172,7 +176,7 @@ void OI::ResetButtonMapping()
 	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
 	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
 	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
-	buttonsArray[MANIP][8]->WhileHeld(new TeleOpAimBot());
+	GetAButton(manipulator->CONTROL_TELEOP_AIM_BOT)->WhileHeld(new TeleOpAimBot());
 	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 
 	//buttonsArray[MANIP][12]->WhileHeld(new KickUnstucker());

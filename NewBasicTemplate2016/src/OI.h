@@ -42,6 +42,7 @@ public:
 	bool IsPOV(int, int);
 	bool IsPressed(int[3]);
 	float GetStickAxis(int, Joystick::AxisType);
+	JoystickButton* GetAButton(int[2]);
 	Driver* driver;
 	Manipulator* manipulator;
 

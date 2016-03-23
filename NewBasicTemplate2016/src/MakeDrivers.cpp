@@ -16,7 +16,6 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_SHOOT[STICK] = MANIP;
 	manipulator->CONTROL_SHOOT[BUTTON] = 7;
 
-	manipulator->CONTROL_SHOOTER_POWER_SLIDER = MANIP;
 	manipulator->CONTROL_SHOOTER_IN[STICK] = MANIP;
 	manipulator->CONTROL_SHOOTER_IN[BUTTON] = 2;
 
@@ -49,19 +48,22 @@ void OI::SetUpManipulators() {
 	manipulator->CONTROL_ARM_REMOVE_SOFT_STOP[BUTTON] = 11;
 
 	//Lift Hang
-	manipulator->CONTROL_LIFT_HANG_POWER_SLIDER = RIGHT;
 	manipulator->CONTROL_LIFT_HANG_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_UP[BUTTON] = 10;
 
 	manipulator->CONTROL_LIFT_HANG_DOWN[STICK] = RIGHT;
 	manipulator->CONTROL_LIFT_HANG_DOWN[BUTTON] = 7;
 
-	manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = MANIP;
+	//manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON] = 9;
 
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK] = MANIP;
 	manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON] = 11;
+
+	manipulator->CONTROL_TELEOP_AIM_BOT[STICK] = MANIP;
+	manipulator->CONTROL_TELEOP_AIM_BOT[BUTTON] = 12;
+	manipulator->CONTROL_TELEOP_AIM_BOT[MODE] = CONTROL_MODE_BTN;
 }
 
 void OI::SetUpDrivers() {
