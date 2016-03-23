@@ -152,13 +152,11 @@ void OI::ResetButtonMapping()
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_UP));
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_DOWN));
 
-	float forwardPower = Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER;
-	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(forwardPower));
-	float reversePower = Move::REVERSE * SLIDER_MOVEMENT_MULTIPLIER;
-	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(reversePower));
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD * STRAIGHT_MOVEMENT_MULTIPLIER));
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE * STRAIGHT_MOVEMENT_MULTIPLIER));
 
-	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
-	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE * TURN_MOVEMENT_MULTIPLIER, Move::FORWARD * TURN_MOVEMENT_MULTIPLIER));
+	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD * TURN_MOVEMENT_MULTIPLIER, Move::REVERSE * TURN_MOVEMENT_MULTIPLIER));
 
 	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
 	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));

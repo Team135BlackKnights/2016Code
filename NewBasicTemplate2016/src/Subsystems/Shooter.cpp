@@ -61,12 +61,7 @@ double Shooter::ConnerConversion(double value) {
 
 bool Shooter::ShooterUpToSpeed() {
 	double shooterTrackerValue = GetShooterTrackerPeriod();
-	if (shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return shooterTrackerValue >= SHOOTER_TRACKER_SETPOINT;
 }
 
 // Put methods for controlling this subsystem

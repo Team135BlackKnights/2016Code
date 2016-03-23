@@ -74,6 +74,4 @@ struct Driver {
 	int CONTROL_NEUTRAL_MODE[2];
 };
 
-
-
 #endif /* SRC_DRIVER_H_ */

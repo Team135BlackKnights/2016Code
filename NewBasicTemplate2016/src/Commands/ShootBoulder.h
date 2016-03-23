@@ -8,13 +8,11 @@ class ShootBoulder: public CommandBase
 {
 private:
 	//  Still To Be Determined
-	const int setEncoderVelocity = 100;
-
-	int encoderVelocity;
 
 	std::unique_ptr<Timer> timer;
 
 	double timeWait;
+	double timeout = 10.0f;
 	bool timerStarted;
 
 	double initialTimerValue = 0.0D,
