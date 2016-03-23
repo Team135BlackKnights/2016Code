@@ -18,7 +18,6 @@ void ShootBoulder::Initialize()
 	//shooter->ZeroAllEncoders();
 	timer->Reset();
 	timeWait = Preferences::GetInstance()->GetFloat("ShooterWaitTime",1.0f);
-	timer->Start();
 	//upToSpeed = false;
 }
 
@@ -30,7 +29,9 @@ void ShootBoulder::Execute()
 	shooter->DriveShooterMotors(Shooter::OUT);
 
 	std::cout << "time revved" << timer->Get();
-	if (timer->Get() > timeWait) {
+	//if (timer->Get() > timeWait) {
+	if(shooter->GetShooterTrackerPeriod() >= Shooter::SHOOTER_TRACKER_SETPOINT){
+		timer->Start();
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	}
 
@@ -45,7 +46,7 @@ void ShootBoulder::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return timer->Get() >= timeWait + 3.0f;
+	return timer->Get() >= 3.0f;
 	//return (upToSpeed && finalTimerValue >= timer->Get());
 }
 
