@@ -48,7 +48,7 @@ void Arm::RaiseLowerArm(float motorPower, bool softStop) {
 	}
 	*/
 	if (GetBottomLimitSwitchValue()) {
-		std::cout << "\n\nBOTTOM LIMIT PRESSED\n";
+		std::cout << "\nBOTTOM LIMIT PRESSED\n";
 		this->ZeroEncoder();
 		power = fmaxf(power, 0.0f);
 	}
