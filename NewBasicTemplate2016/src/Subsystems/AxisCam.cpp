@@ -105,6 +105,11 @@ float AxisCam::xDistanceToCenter(float max)
 	return std::min((x- X_IMAGE_RES / 2.0f), max);
 }
 
+float AxisCam::xDistanceToCenter(int offset)
+{
+	return (x - X_IMAGE_RES / 2.0f) / 1.0f + offset;
+}
+
 float AxisCam::yDistanceToCenter()
 {
 	if(y == 666)

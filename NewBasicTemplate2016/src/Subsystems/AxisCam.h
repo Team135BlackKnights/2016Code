@@ -65,6 +65,7 @@ public:
 	void InitGimbals();
 	float xDistanceToCenter();
 	float xDistanceToCenter(float max);
+	float xDistanceToCenter(int offset);
 	const float TURN_SPEED = Preferences::GetInstance()->GetFloat("turn",.2);
 	float yDistanceToCenter();
 	float percentArea(double area);

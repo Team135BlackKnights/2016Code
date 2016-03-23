@@ -6,9 +6,9 @@
 #include "AutomationOfArm.h"
 
 
-AimBot::AimBot(double angle)
+AimBot::AimBot(int position)
 {
-	AddSequential(new MoveFromCameraValue());
+	AddSequential(new MoveFromCameraValue(position));
 	AddParallel(new AutomationOfArm());
 	//AddParallel(new AutomationOfArm(39.0f));
 	AddSequential(new ShootBoulder());

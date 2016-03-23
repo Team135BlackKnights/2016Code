@@ -11,8 +11,10 @@ private:
 	bool isgoodFirst = false;
 	float motorSpeed = Preferences::GetInstance()->GetFloat("motorSpeed", 0);
 	Timer* timer;
+	int pos;
+	int offset;
 public:
-	MoveFromCameraValue();
+	MoveFromCameraValue(int position);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

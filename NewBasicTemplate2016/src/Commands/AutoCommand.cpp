@@ -71,7 +71,7 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 		AddSequential(new TurnRobotAngle(35.0D, TurnRobotAngle::RIGHT_TURN));
 		AddSequential(new WaitTime(.25f));
 		//AddSequential(new Move(.3,0), 1.000000f);
-		AddSequential(new AimBot());
+		AddSequential(new AimBot(1));
 	}
 
 	else if (defensePosition == 2) {
@@ -80,12 +80,13 @@ AutoCommand::AutoCommand(bool lowBar, int defensePosition, bool fastDefense)
 	}
 
 	else if (defensePosition == 3) {
-		AddSequential(new TurnRobotAngle(10, TurnRobotAngle::RIGHT_TURN));
+		AddSequential(new TurnRobotAngle(20, TurnRobotAngle::RIGHT_TURN));
+		AddSequential(new AimBot(4));
 	}
 
 	else if (defensePosition == 4) {
-		AddSequential(new TurnRobotAngle(8, TurnRobotAngle::RIGHT_TURN));
-		AddSequential(new AimBot());
+		//AddSequential(new TurnRobotAngle(8, TurnRobotAngle::RIGHT_TURN));
+		AddSequential(new AimBot(4));
 	}
 
 	else if (defensePosition == 5) {
