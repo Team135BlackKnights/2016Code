@@ -18,6 +18,8 @@ private:
 
 	std::unique_ptr<CANTalon> armMotor;
 
+	bool armPosIsGood;
+
 	//  256 COUNT over 90 degrees
 	static const int ARM_ENCODER_COUNT = (robit == V1 ? 64 : 256);
 	//  When multiplying by the constant, this constant converts from angles into encoder position
@@ -60,6 +62,8 @@ public:
 	void SetEncoderPosition(int);
 
 	int GetEncoderPositionForAutomationOfArm(double);
+	bool ArmPosIsGood(bool);
+	bool ArmPosIsGood();
 
 	static const int RAISE_LOWER_ARM = 0;
 	static const bool ARM_INVERTED = robit == V1 ? false : true;

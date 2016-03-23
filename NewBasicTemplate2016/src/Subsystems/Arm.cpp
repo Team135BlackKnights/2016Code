@@ -29,6 +29,7 @@ Arm::Arm():
 	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
 	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 	SetEncoderPosition(Arm::ARM_UP_POSITION);
+	armPosIsGood = false;
 }
 
 void Arm::InitDefaultCommand()
@@ -111,6 +112,14 @@ int Arm::GetEncoderPositionForAutomationOfArm(double inchesHypotenuse) {
 	double degrees = radians * (180/M_PI);
 
 	return degrees * ENCODER_MULTIPLYING_CONSTANT;
+}
+
+bool Arm::ArmPosIsGood(bool isGood) {
+	return armPosIsGood = isGood;
+}
+
+bool Arm::ArmPosIsGood() {
+	return armPosIsGood;
 }
 
 // Put methods for controlling this subsystem

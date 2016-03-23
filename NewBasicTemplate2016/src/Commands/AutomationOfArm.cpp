@@ -11,6 +11,7 @@ AutomationOfArm::AutomationOfArm()
 	startingValue = 0;
 	this->angle = 0;
 	std::cout << "create automation";
+	arm->ArmPosIsGood(false);
 }
 
 AutomationOfArm::AutomationOfArm(double angle)
@@ -20,6 +21,7 @@ AutomationOfArm::AutomationOfArm(double angle)
 	desiredValue = arm->GetEncoderPositionBasedOnAngle(angle);
 	startingValue = 0;
 	this->angle = angle;
+	arm->ArmPosIsGood(false);
 }
 
 // Called just before this Command runs the first time
@@ -77,11 +79,12 @@ bool AutomationOfArm::IsFinished()
 void AutomationOfArm::End()
 {
 	arm->RaiseLowerArm(0);
+	arm->ArmPosIsGood(true);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutomationOfArm::Interrupted()
 {
-	End();
+	arm->RaiseLowerArm(0);
 }
