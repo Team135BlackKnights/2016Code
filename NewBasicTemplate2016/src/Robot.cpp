@@ -39,12 +39,12 @@ private:
 		//bool lowBar = Preferences::GetInstance()->GetBoolean("Low Bar", true);
 
 		//  Input the defense position 1-5 in which the robot starts in front of before auto begins
-		int defensePosition = Preferences::GetInstance()->GetInt("Defense Position: ", 1);
+		int defensePosition = Preferences::GetInstance()->GetInt("AUTO Defense Position: ", 1);
 
 		//  True if robot is to go a faster speed, false if about an average speed
-		bool fastDefense = Preferences::GetInstance()->GetBoolean("Fast Defense", false);
+		bool fastDefense = Preferences::GetInstance()->GetBoolean("AUTO Fast Defense", false);
 
-		bool shoot = Preferences::GetInstance()->GetBoolean("Shoot", true);
+		bool shoot = Preferences::GetInstance()->GetBoolean("AUTO Shoot", false);
 
 		autoCommand = new AutoCommand(defensePosition, fastDefense, shoot);
 		autoCommand->Start();

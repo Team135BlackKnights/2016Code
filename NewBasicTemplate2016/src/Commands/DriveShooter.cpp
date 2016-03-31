@@ -21,7 +21,7 @@ void DriveShooter::Execute()
 		power = shootPower * Shooter::OUT;
 	else if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_IN[STICK], oi->manipulator->CONTROL_SHOOTER_IN[BUTTON])) {//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
 		if (!oi->GetButton(oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK], oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON]))
-				power = Preferences::GetInstance()->GetFloat("CollectPower", 0.5f) * Shooter::IN;
+				power = Preferences::GetInstance()->GetFloat("CollectPower", .7f) * Shooter::IN;
 		else
 			power = 1.0f * Shooter::IN;
 	}

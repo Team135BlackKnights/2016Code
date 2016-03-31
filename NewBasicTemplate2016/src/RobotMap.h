@@ -25,7 +25,7 @@
 		V1, V2
 	};
 
-	const ROBOT_VERSION robit = V1;
+	const ROBOT_VERSION robit = V2;
 
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;
@@ -58,9 +58,11 @@
     const int DIGITAL_BUTTON_ARM_RESET = 7;
 
     const int DIGITAL_ARM_LIMIT_TOP = 7;
-    const int DIGITAL_ARM_LIMIT_BOTTOM = 3;
+    const int DIGITAL_ARM_LIMIT_BOTTOM = 8;
 
-    const int DIGITAL_SHOOTER_TRACKER = 0;
+    const int DIGITAL_SHOOTER_TRACKER = 9;
+
+    const int RELAY_FLASHLIGHT = 1;
 
 
 #endif

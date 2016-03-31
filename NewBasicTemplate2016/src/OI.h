@@ -27,8 +27,8 @@ protected:
 
 	ArmResetOnDetonatorButton* resetArm;
 
-	const float STRAIGHT_MOVEMENT_MULTIPLIER = SmartDashboard::GetNumber("straight button movement", .4f);
-	const float TURN_MOVEMENT_MULTIPLIER = SmartDashboard::GetNumber("turn button movement", .4f);
+	const float STRAIGHT_MOVEMENT_MULTIPLIER = Preferences::GetInstance()->GetFloat("straight button movement", .6f);
+	const float TURN_MOVEMENT_MULTIPLIER = Preferences::GetInstance()->GetFloat("turn button movement", .4f);
 
 public:
 	OI();

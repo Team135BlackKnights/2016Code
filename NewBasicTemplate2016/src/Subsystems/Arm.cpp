@@ -66,6 +66,7 @@ void Arm::RaiseLowerArm(sink motorPower, bool softStop) {
 		*/
 	//}
 	//std::cout << "encoder: " << this->GetEncoderPosition()<< " angle: "<< this->GetEncoderPosition() / Arm::ENCODER_MULTIPLYING_CONSTANT << std::endl;
+	SmartDashboard::PutNumber("Current Encoder Value:", GetEncoderPosition());
 	armMotor->Set(power);
 }
 

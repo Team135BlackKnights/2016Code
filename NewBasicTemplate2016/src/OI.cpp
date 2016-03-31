@@ -21,6 +21,7 @@
 #include "Commands/AutomationOfArm.h"
 #include "Commands/KickUnstucker.h"
 #include "Commands/TeleOpAimBot.h"
+#include "Commands/DriveFlashlight.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -180,4 +181,5 @@ void OI::ResetButtonMapping()
 	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 
 	//buttonsArray[MANIP][12]->WhileHeld(new KickUnstucker());
+	buttonsArray[MANIP][7]->WhenPressed(new DriveFlashlight());
 }
