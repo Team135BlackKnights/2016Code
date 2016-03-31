@@ -12,6 +12,8 @@ private:
 
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
+	std::unique_ptr<DigitalOutput> turnOn;
+	std::unique_ptr<DigitalOutput> turnOff;
 public:
 	Flashlight();
 	void InitDefaultCommand();

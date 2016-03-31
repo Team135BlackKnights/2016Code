@@ -7,6 +7,8 @@ Flashlight::Flashlight() :
 {
 		light.reset(new Relay(2, Relay::Direction::kBothDirections));
 		//lightTest.reset(new Solenoid(2));
+		turnOn.reset(new DigitalOutput(8));
+		turnOff.reset(new DigitalOutput(9));
 		SetFlashlight(false);
 }
 
@@ -21,8 +23,13 @@ void Flashlight::SetFlashlight(bool on) {
 	//if (this->on != on) {
 		this->on = on;
 		//SmartDashboard::PutBoolean("LIGHT", light->Get() == Relay::kForward || light->Get() == Relay::Value::kOn);
-		light->Set(this->on ? Relay::Value::kForward : Relay::Value::kReverse);
+		//light->Set(this->on ? Relay::Value::kForward : Relay::Value::kReverse);
 		SmartDashboard::PutBoolean("LIGHT ON", light->Get());
+
+		if(on)
+			turnOn->Pulse(1);
+		else
+			turnOff->Pulse(1);
 	//}
 }
 
