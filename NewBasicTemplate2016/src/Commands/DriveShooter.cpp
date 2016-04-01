@@ -4,12 +4,18 @@ DriveShooter::DriveShooter()
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(shooter.get());
+
+	timer.reset(new Timer());
 }
 
 // Called just before this Command runs the first time
 void DriveShooter::Initialize()
 {
 	shooter->DriveKicker(Shooter::KICKER_RESET);
+	shooter->BasedTimeCreateFileName();
+	shooter->OpenFile();
+	timer->Reset();
+	timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -38,7 +44,10 @@ void DriveShooter::Execute()
 		shooter->DriveUnstucker(Shooter::KICKER_KICKED);
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 	*/
+	shooterTrackerValue = shooter->GetShooterTrackerPeriod();
+	shooter->LogOneEncoderValue(timer->Get(), shooterTrackerValue);
 
+	std::cout << "Shooter Tracker Value: " << shooterTrackerValue << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -52,6 +61,9 @@ void DriveShooter::End()
 {
 	shooter->DriveShooterMotors(0);
 	shooter->DriveKicker(Shooter::KICKER_RESET);
+	shooter->CloseFile();
+	timer->Stop();
+	timer->Reset();
 }
 
 // Called when another command which requires one or more of the same

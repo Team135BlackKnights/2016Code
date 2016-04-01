@@ -142,7 +142,7 @@ void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double d
 	this->WriteString(data.str());
 }
 
-void PIDLogging::LogOneEncoderValue(int motorIndex, double timerValue, double dataOne) {
+void PIDLogging::LogOneEncoderValue(double timerValue, double dataOne) {
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream logger;

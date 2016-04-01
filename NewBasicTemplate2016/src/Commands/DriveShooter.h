@@ -16,6 +16,10 @@ public:
 
 private:
 	float shootPower = 1.0f;
+
+	double shooterTrackerValue = 0.0D;
+
+	std::unique_ptr<Timer> timer;
 };
 
 #endif

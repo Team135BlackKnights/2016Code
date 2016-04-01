@@ -54,7 +54,7 @@ public:
 	double GetVelocity(int);
 
 	void LogTwoEncoderValues(int, double, double, double);
-	void LogOneEncoderValue(int, double, double);
+	void LogOneEncoderValue(double, double);
 
 	void LogEncoderData(int, double, short int);
 	void LogEncoderDataHeader(short int);
