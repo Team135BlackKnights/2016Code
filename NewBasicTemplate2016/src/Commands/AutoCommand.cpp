@@ -1,9 +1,15 @@
+#include <Commands/DriveDistanceAndLowerArm.h>
 #include "AutoCommand.h"
 #include "DriveDistance.h"
 #include "../CommandBase.h"
-#include "DriveToDefenseAndLowerArm.h"
+#include "TurnRobotAngle.h"
+#include "AimBot.h"
+#include "AutomationOfArm.h"
+#include "ShootBoulder.h"
+#include "WaitTime.h"
+#include "Move.h"
 
-AutoCommand::AutoCommand(bool lowBar, bool overDefense, bool fastDefense)
+AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -22,16 +28,78 @@ AutoCommand::AutoCommand(bool lowBar, bool overDefense, bool fastDefense)
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential(new DriveToDefenseAndLowerArm(lowBar));
+	//  True, move arm to bottom limit switch
+	//  False, move arm to 25 degrees above bottom limit switch
+	std::cout << defensePosition << std::endl;
+	bool lowBar = defensePosition == 1 ? Arm::AUTO_ZERO_DEGREES : Arm::AUTO_NON_LOW_BAR;
 
-	if (overDefense) {
-		float speed;
-		if (fastDefense)
-			speed = .625f;
-		else
-			speed = .55f;
-		AddSequential(new DriveDistance(distanceToTravelOverDefense, speed, true));
-		AddSequential(new DriveDistance(55.135f, .45f, false));
+	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, NON_ZERO_ENCODER), 6.0f);
+
+	if (fastDefense) {
+		motorSpeed = .65f;
+	}
+	else {
+		motorSpeed = .55f;
+	}
+	std::cout << defensePosition << std::endl;
+	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE + 30.0f, motorSpeed));
+
+	if (lowBar) {
+		AddParallel(new AutomationOfArm(15.0f));
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .875f));
+		AddSequential(new WaitTime(1.0f));
+	}
+	else {
+		std::cout << defensePosition << std::endl;
+		AddSequential(new WaitTime(.5f));
+		std::cout << defensePosition << std::endl;
+		AddParallel(new AutomationOfArm(15.0f));
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .50f));
+		AddSequential(new WaitTime(1.0f));
+		std::cout << defensePosition << std::endl;
+	}
+
+	if (shoot) {
+		//  Move according to the defense Position the robot is set in front of
+		switch (defensePosition) {
+		case 0:
+			return;
+
+		case 1:
+			//AddParallel(new DriveDistance(48, 0.875f));
+			//AddSequential(new AutomationOfArm(15.0f));
+			//AddSequential(new TurnRobotAngle(62.5D, TurnRobotAngle::RIGHT_TURN));
+			//AddSequential(new AutomationOfArm(40.0D));
+			///AddSequential(new ShootBoulder());
+			//AddSequential(new TurnRobotAngle(52.5D, TurnRobotAngle::RIGHT_TURN));
+			AddSequential(new TurnRobotAngle(35.0D, TurnRobotAngle::RIGHT_TURN));
+			AddSequential(new WaitTime(.25f));
+			break;
+			//AddSequential(new Move(.3,0), 1.000000f);
+			//AddSequential(new AimBot(1));
+		case 2:
+			AddSequential(new DriveDistance(40));
+			AddSequential(new TurnRobotAngle(35, TurnRobotAngle::RIGHT_TURN));
+			break;
+		case 3:
+			AddSequential(new TurnRobotAngle(20, TurnRobotAngle::RIGHT_TURN));
+			break;
+			//AddSequential(new AimBot(3));
+		case 4:
+			//AddSequential(new TurnRobotAngle(8, TurnRobotAngle::RIGHT_TURN));
+			//AddSequential(new AimBot(4));
+			break;
+		case 5:
+			AddSequential(new TurnRobotAngle(60, TurnRobotAngle::LEFT_TURN));
+			AddSequential(new DriveDistance(58));
+			AddSequential(new TurnRobotAngle(60, TurnRobotAngle::RIGHT_TURN));
+			break;
+		default:
+			std::cout << "WHAT ARE YOU DOING!!!!!!!\n";
+			break;
+		}
+
+		AddSequential(new AimBot(defensePosition, shoot));
 	}
 
 }

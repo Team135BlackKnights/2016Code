@@ -57,7 +57,7 @@ private:
 
 public:
 	AxisCam();
-	const float X_IMAGE_RES = 800;
+	const float X_IMAGE_RES = 800.0f;
 	float ASSpectRatio;
 	float angle;
 	void InitDefaultCommand();
@@ -65,6 +65,7 @@ public:
 	void InitGimbals();
 	float xDistanceToCenter();
 	float xDistanceToCenter(float max);
+	float xDistanceToCenter(int offset);
 	const float TURN_SPEED = Preferences::GetInstance()->GetFloat("turn",.2);
 	float yDistanceToCenter();
 	float percentArea(double area);

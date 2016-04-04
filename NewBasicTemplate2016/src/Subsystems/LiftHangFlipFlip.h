@@ -15,6 +15,8 @@ public:
 
 	static constexpr float FLIPPER_UP = 1.0f;
 	static constexpr float FLIPPER_DOWN = -FLIPPER_UP;
+
+	static const bool LIFT_HANG_FLIPPER_INVERTED = false;
 };
 
 #endif

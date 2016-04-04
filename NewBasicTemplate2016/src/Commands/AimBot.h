@@ -7,7 +7,7 @@
 class AimBot: public CommandGroup
 {
 public:
-	AimBot(double angle=-1.0D);
+	AimBot(int = 1.0D, bool = true);
 };
 
 #endif

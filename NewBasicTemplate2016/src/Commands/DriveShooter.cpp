@@ -21,7 +21,7 @@ void DriveShooter::Execute()
 		power = shootPower * Shooter::OUT;
 	else if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_IN[STICK], oi->manipulator->CONTROL_SHOOTER_IN[BUTTON])) {//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
 		if (!oi->GetButton(oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK], oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON]))
-				power = Preferences::GetInstance()->GetFloat("CollectPower", 0.5f) * Shooter::IN;
+				power = Preferences::GetInstance()->GetFloat("CollectPower", .7f) * Shooter::IN;
 		else
 			power = 1.0f * Shooter::IN;
 	}
@@ -33,11 +33,12 @@ void DriveShooter::Execute()
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 		shooter->DriveKicker(Shooter::KICKER_RESET);
 
-	double encoderVelocity = shooter->GetEncoderSpeed();
-	SmartDashboard::PutNumber("Shooter Encoder Velocity:", encoderVelocity);
+	/*
+	if (oi->GetButton(OI::MANIP, 12))
+		shooter->DriveUnstucker(Shooter::KICKER_KICKED);
+	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
+	*/
 
-	bool shooterUpToSpeed = shooter->ShooterUpToSpeed();
-	SmartDashboard::PutBoolean("Shooter Up To Speed:", shooterUpToSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()

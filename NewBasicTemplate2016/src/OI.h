@@ -27,7 +27,8 @@ protected:
 
 	ArmResetOnDetonatorButton* resetArm;
 
-	const float SLIDER_MOVEMENT_MULTIPLIER = .4f;
+	const float STRAIGHT_MOVEMENT_MULTIPLIER = Preferences::GetInstance()->GetFloat("straight button movement", .6f);
+	const float TURN_MOVEMENT_MULTIPLIER = Preferences::GetInstance()->GetFloat("turn button movement", .4f);
 
 public:
 	OI();
@@ -41,6 +42,7 @@ public:
 	bool IsPOV(int, int);
 	bool IsPressed(int[3]);
 	float GetStickAxis(int, Joystick::AxisType);
+	JoystickButton* GetAButton(int[2]);
 	Driver* driver;
 	Manipulator* manipulator;
 

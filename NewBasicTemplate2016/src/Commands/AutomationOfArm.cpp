@@ -10,15 +10,18 @@ AutomationOfArm::AutomationOfArm()
 	desiredValue = -1;
 	startingValue = 0;
 	this->angle = 0;
+	std::cout << "create automation";
+	arm->ArmPosIsGood(false);
 }
 
 AutomationOfArm::AutomationOfArm(double angle)
 {
 	Requires(arm.get());
 	currentValue = 0;
-	desiredValue = arm->GetValueBasedOnAngle(angle);
+	desiredValue = arm->GetEncoderPositionBasedOnAngle(angle);
 	startingValue = 0;
 	this->angle = angle;
+	arm->ArmPosIsGood(false);
 }
 
 // Called just before this Command runs the first time
@@ -27,11 +30,11 @@ void AutomationOfArm::Initialize()
 	//desiredArmEncoderValue = arm->GetEncoderValueForAngle(cam.get()->distanceToBlob(cam.get()->getWidth()));
 	//std::cout << "encoder value : "<< desiredArmEncoderValue << std::endl;
 	startingValue = arm->GetEncoderPosition();
-
+	std::cout << "running init";
 	if (desiredValue == -1)
 	{
-		desiredValue = (int) arm->GetPotOrEncoderValueForAutomationOfArm(cam.get()->distanceToBlob());
-		std::cout << desiredValue;
+		desiredValue = (int) arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
+		std::cout << "DESIRED VALUE: " << desiredValue;
 	}
 	SetTimeout(6.0);
 
@@ -58,6 +61,7 @@ void AutomationOfArm::Execute()
 	}
 	else
 		arm->RaiseLowerArm(0);
+	std::cout << arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -65,8 +69,8 @@ bool AutomationOfArm::IsFinished()
 {
 	//return currentArmEncoderValue == desiredArmEncoderValue;
 	//return currentPotValue = desiredPotValue;
-	if (startingValue == desiredValue)
-		return true;
+	/*if (startingValue == desiredValue)
+		return true;*/
 
 	return startingValue < desiredValue ? currentValue >= desiredValue : currentValue <= desiredValue;
 }
@@ -75,11 +79,12 @@ bool AutomationOfArm::IsFinished()
 void AutomationOfArm::End()
 {
 	arm->RaiseLowerArm(0);
+	arm->ArmPosIsGood(true);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutomationOfArm::Interrupted()
 {
-	End();
+	arm->RaiseLowerArm(0);
 }
