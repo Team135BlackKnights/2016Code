@@ -6,6 +6,8 @@ DriveShooter::DriveShooter()
 	Requires(shooter.get());
 
 	timer.reset(new Timer());
+
+	setTimerValue = 0;
 }
 
 // Called just before this Command runs the first time
@@ -15,7 +17,6 @@ void DriveShooter::Initialize()
 	shooter->BasedTimeCreateFileName();
 	shooter->OpenFile();
 	timer->Reset();
-	timer->Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -23,13 +24,19 @@ void DriveShooter::Execute()
 {
 	float power = 0;
 	//shootPower = oi->GetStickSlider(oi->manipulator->CONTROL_SHOOTER_POWER_SLIDER);//Preferences::GetInstance()->GetFloat("Shooter Power", motorPower);
-	if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_OUT[STICK], oi->manipulator->CONTROL_SHOOTER_OUT[BUTTON]))//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
+	if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_OUT[STICK], oi->manipulator->CONTROL_SHOOTER_OUT[BUTTON])) {
+		//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
 		power = shootPower * Shooter::OUT;
+		startTracking = true;
+	}
 	else if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_IN[STICK], oi->manipulator->CONTROL_SHOOTER_IN[BUTTON])) {//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
 		if (!oi->GetButton(oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK], oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON]))
 				power = Preferences::GetInstance()->GetFloat("CollectPower", .7f) * Shooter::IN;
 		else
 			power = 1.0f * Shooter::IN;
+	}
+	else {
+		continueShooterTracking = false;
 	}
 	shooter->DriveShooterMotors(power);
 
@@ -44,8 +51,28 @@ void DriveShooter::Execute()
 		shooter->DriveUnstucker(Shooter::KICKER_KICKED);
 	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
 	*/
+
 	shooterTrackerValue = shooter->GetShooterTrackerPeriod();
-	shooter->LogOneEncoderValue(timer->Get(), shooterTrackerValue);
+
+	if (startTracking) {
+		timer->Reset();
+		timer->Start();
+		continueShooterTracking = true;
+		timerStarted = true;
+	}
+	if (continueShooterTracking) {
+		shooter->LogOneEncoderValue(timer->Get(), shooterTrackerValue);
+		startTracking  = false;
+		//if (shooterTrackerValue <= 70 && timer->Get() > 3) {
+			//continueShooterTracking = false;
+		//}
+	}
+	else if (continueShooterTracking == false && timerStarted == true) {
+		shooter->CloseFile();
+		timer->Stop();
+		timer->Reset();
+		timerStarted = false;
+	}
 
 	std::cout << "Shooter Tracker Value: " << shooterTrackerValue << std::endl;
 }

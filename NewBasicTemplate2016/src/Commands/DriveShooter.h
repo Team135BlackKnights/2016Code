@@ -20,6 +20,12 @@ private:
 	double shooterTrackerValue = 0.0D;
 
 	std::unique_ptr<Timer> timer;
+
+	bool startTracking = false;
+	bool continueShooterTracking = false;
+	bool timerStarted = false;
+
+	double setTimerValue;
 };
 
 #endif
