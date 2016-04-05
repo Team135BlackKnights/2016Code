@@ -82,6 +82,14 @@ std::string LogData::ZeroifyNumber(int number, int digits) {
 	return num.str();
 }
 
+void LogData::LogShooterTrackerValueHeader() {
+	std::stringstream data;
+
+	data << "TIME" << "," << "SHOOTER SPEED" << "," << "VALUE(TRIM(CLEAN()))" << "\n";
+
+	this->WriteString(data.str());
+}
+
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

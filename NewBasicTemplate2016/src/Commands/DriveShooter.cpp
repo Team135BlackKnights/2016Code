@@ -16,6 +16,7 @@ void DriveShooter::Initialize()
 	shooter->DriveKicker(Shooter::KICKER_RESET);
 	shooter->BasedTimeCreateFileName();
 	shooter->OpenFile();
+	shooter->LogShooterTrackerValueHeader();
 	timer->Reset();
 }
 
