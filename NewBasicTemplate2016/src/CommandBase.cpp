@@ -12,6 +12,7 @@ std::unique_ptr<LiftHangWinch> CommandBase::liftHangWinch;
 std::unique_ptr<LiftHangFlipFlip> CommandBase::liftHangFlip;
 std::unique_ptr<AxisCam> CommandBase::cam;
 std::unique_ptr<Flashlight> CommandBase::flashlight;
+std::unique_ptr<SonarSensors> CommandBase::sonarSensors;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -43,4 +44,6 @@ void CommandBase::init()
 	cam.reset(new AxisCam());
 
 	flashlight.reset(new Flashlight());
+
+	sonarSensors.reset(new SonarSensors());
 }

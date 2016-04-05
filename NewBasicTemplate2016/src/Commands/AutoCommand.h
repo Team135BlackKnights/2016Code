@@ -8,7 +8,7 @@
 class AutoCommand: public CommandGroup
 {
 private:
-	static const int DISTANCE_TO_TRAVEL_OVER_DEFENSE = 40 + LENGTH_OF_ROBOT;
+	static const int DISTANCE_TO_TRAVEL_OVER_DEFENSE = 70 + LENGTH_OF_ROBOT;
 
 	static const int DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE = 20;
 

@@ -27,6 +27,10 @@ private:
 	//  Measured in Inches
 	static const int RADIUS = 6.25;
 
+	bool rightOrLeft;
+
+	double angleToTurnDegrees;
+
 public:
 
 	static const int 	FRONT_LEFT = RobotDrive::kFrontLeftMotor,
@@ -47,6 +51,9 @@ public:
 	//static constexpr float DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2.0f;
 	static constexpr float DIAMETER_OF_TURNING_ROBOT = 28;
 	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = DIAMETER_OF_TURNING_ROBOT * M_PI;
+
+	static const bool RIGHT_TURN = true,
+					  LEFT_TURN = !RIGHT_TURN;
 
 	DriveTrain();
 	~DriveTrain();
@@ -70,6 +77,11 @@ public:
 	int GetEncoderPositionToTurnAngle(int angleDegrees);
 	int GetEncoderPosition(int);
 	void ZeroEncoder(int);
+
+	void CalculateAngleToTurnAfterCrossingDefense(double, double, bool);
+
+	bool GetDirectionToTurnAuto();
+	double GetAngleToTurnAuto();
 
 };
 

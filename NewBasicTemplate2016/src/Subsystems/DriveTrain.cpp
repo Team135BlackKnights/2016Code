@@ -28,7 +28,8 @@ DriveTrain::DriveTrain():
 		//this->SetupMotors();
 		this->SetNeutralMode(BRAKE);
 
-
+		rightOrLeft = false;
+		angleToTurnDegrees = 0.0D;
 }
 
 DriveTrain::~DriveTrain() {};
@@ -114,4 +115,25 @@ int DriveTrain::GetEncoderPositionToTurnAngle(int angleDegrees) {
 	int encoderPosition = (numberOfRotationsOfWheels * ((float)QUADRATURE_COUNT));
 	return (encoderPosition * (1/GEAR_RATIO));
 
+}
+
+void DriveTrain::CalculateAngleToTurnAfterCrossingDefense(double initialDistance, double finalDistance, bool rightOrLeft) {
+	double differenceOfDistances = (finalDistance - initialDistance);
+	if (differenceOfDistances >= 3.0D) {
+		double angleToTurnRadians = atan(differenceOfDistances/((double)WIDTH_OF_ROBOT));
+		this->angleToTurnDegrees = angleToTurnRadians * (180.0D/((double)M_PI));
+	}
+	else {
+		this->angleToTurnDegrees = 0.0D;
+	}
+
+	this->rightOrLeft = rightOrLeft;
+}
+
+bool DriveTrain::GetDirectionToTurnAuto() {
+	return this->rightOrLeft;
+}
+
+double DriveTrain::GetAngleToTurnAuto() {
+	return this->angleToTurnDegrees;
 }
