@@ -53,7 +53,7 @@ public:
 	double GetDistance(int);
 	double GetVelocity(int);
 
-	void LogTwoEncoderValues(int, double, double, double);
+	void LogTwoValues(double, double, double);
 	void LogOneEncoderValue(int, double, double);
 
 	void LogEncoderData(int, double, short int);

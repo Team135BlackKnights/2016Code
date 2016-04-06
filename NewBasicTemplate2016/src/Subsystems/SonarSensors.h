@@ -3,8 +3,9 @@
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
+#include "PIDLogging.h"
 
-class SonarSensors: public Subsystem
+class SonarSensors: public PIDLogging
 {
 private:
 	// It's desirable that everything possible under private except

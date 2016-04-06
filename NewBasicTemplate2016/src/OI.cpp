@@ -22,6 +22,7 @@
 #include "Commands/KickUnstucker.h"
 #include "Commands/TeleOpAimBot.h"
 #include "Commands/DriveFlashlight.h"
+#include "Commands/GetSonarDistances.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -147,6 +148,8 @@ void OI::ResetButtonMapping()
 			buttonsArray[i][k].reset(new JoystickButton(joysticksArray[i].get(), k));
 		}
 	}
+
+	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->ToggleWhenPressed(new GetSonarDistances());
 
 	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());

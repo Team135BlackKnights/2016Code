@@ -1,8 +1,9 @@
 #include "SonarSensors.h"
 #include "../RobotMap.h"
+#include "Commands/GetSonarDistances.h"
 
 SonarSensors::SonarSensors() :
-		Subsystem("ExampleSubsystem")
+	PIDLogging("SonarSensors", "/home/lvuser/", numMotors, radius)
 {
 	leftSonar.reset(new AnalogInput(ANALOG_LEFT_SONAR_PORT));
 	rightSonar.reset(new AnalogInput(ANALOG_RIGHT_SONAR_PORT));
@@ -12,6 +13,7 @@ void SonarSensors::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
+	//SetDefaultCommand(new GetSonarDistances());
 }
 
 float SonarSensors::GetDistanceInches(int analogPort) {

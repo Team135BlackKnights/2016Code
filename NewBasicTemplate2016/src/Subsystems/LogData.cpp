@@ -7,6 +7,7 @@ LogData::LogData(std::string filePath)
 {
 	this->filePath = filePath;
 	this->fileName = "";
+	//this->filePath = " /home/lvuser";
 }
 
 void LogData::WriteString(std::string data) {
@@ -80,6 +81,12 @@ std::string LogData::ZeroifyNumber(int number, int digits) {
 	}
 	num << number;
 	return num.str();
+}
+
+void LogData::LogSonarDataHeader() {
+	std::stringstream data;
+	data << "TIME" << "," << "LEFT SONAR" << "," << "RIGHT SONAR" << "," << "VALUE(TRIM(CLEAN()))" << "\n";
+	this->WriteString(data.str());
 }
 
 
