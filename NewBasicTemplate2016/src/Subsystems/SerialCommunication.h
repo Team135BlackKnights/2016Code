@@ -11,7 +11,7 @@ private:
 	// for methods that implement subsystem capabilities
 	std::unique_ptr<SerialPort> serialPort;
 
-	static const int BYTES_TO_WRITE = 5;
+	int bytesToWrite;
 public:
 	SerialCommunication();
 	void InitDefaultCommand();
