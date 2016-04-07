@@ -64,6 +64,9 @@
 
     const int RELAY_FLASHLIGHT = 1;
 
+    const int ANALOG_LEFT_SONAR_PORT = 0;
+    const int ANALOG_RIGHT_SONAR_PORT = 1;
+
 
 #endif
 

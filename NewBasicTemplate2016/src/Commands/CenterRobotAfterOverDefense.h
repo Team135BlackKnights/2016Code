@@ -1,10 +1,10 @@
-#ifndef TurnRobotAngle_H
-#define TurnRobotAngle_H
+#ifndef CenterRobotAfterOverDefense_H
+#define CenterRobotAfterOverDefense_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class TurnRobotAngle: public CommandBase
+class CenterRobotAfterOverDefense: public CommandBase
 {
 private:
 	double angleDegrees;
@@ -20,7 +20,7 @@ private:
 
 	bool turnAngleReached = false;
 public:
-	TurnRobotAngle(double, bool, float = .8f);
+	CenterRobotAfterOverDefense(float);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

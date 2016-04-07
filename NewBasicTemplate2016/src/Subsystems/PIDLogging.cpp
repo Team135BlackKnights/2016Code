@@ -131,14 +131,14 @@ void PIDLogging::SetPIDPreferences() {
 	ChangeFileName(NameofFile.str());
 }
 
-void PIDLogging::LogTwoEncoderValues(int motorIndex, double timerValue, double dataOne, double dataTwo) {
+void PIDLogging::LogTwoValues(double timerValue, double dataOne, double dataTwo) {
 	//  int encoderPosition = this->GetEncoderPosition(motorIndex);
 	//  int encoderGet = this->GetPosition(motorIndex);
 
 	std::cout << "LOGGING THINGS!";
 	std::stringstream data;
 	timerValue = Trunc(timerValue, 4);
-	data << timerValue << "," << dataOne << "," << dataTwo << "\n";
+	data << timerValue << "," << dataOne << "," << dataTwo;
 	this->WriteString(data.str());
 }
 

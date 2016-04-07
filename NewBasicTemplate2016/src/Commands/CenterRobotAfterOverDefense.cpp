@@ -1,35 +1,39 @@
-#include "TurnRobotAngle.h"
+#include "CenterRobotAfterOverDefense.h"
 
-TurnRobotAngle::TurnRobotAngle(double angleDegrees, bool rightOrLeft, float motorPower)
+CenterRobotAfterOverDefense::CenterRobotAfterOverDefense(float motorPower)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 
-	this->angleDegrees = angleDegrees;
-
-	this->rightOrLeft = rightOrLeft;
-
 	this->motorPower = motorPower;
+
+	angleDegrees = 0.0D;
+
+	rightOrLeft = DriveTrain::RIGHT_TURN;
 }
 
 // Called just before this Command runs the first time
-void TurnRobotAngle::Initialize()
+void CenterRobotAfterOverDefense::Initialize()
 {
+	angleDegrees = driveTrain->GetAngleToTurnAuto();
+
+	rightOrLeft = driveTrain->GetDirectionToTurnAuto();
+
 	//  For Turning Right
-	if (this->rightOrLeft == DriveTrain::RIGHT_TURN) {
+	if (rightOrLeft == DriveTrain::RIGHT_TURN) {
 		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
-		leftEncoderPositionToTravel = leftInitialEncoderPosition + driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
+		leftEncoderPositionToTravel = leftInitialEncoderPosition + driveTrain->GetEncoderPositionToTurnAngle(angleDegrees);
 	}
 	//  For Turing Left
-	else if (this->rightOrLeft == DriveTrain::LEFT_TURN) {
+	else if (rightOrLeft == DriveTrain::LEFT_TURN) {
 		leftInitialEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
-		leftEncoderPositionToTravel = leftInitialEncoderPosition - driveTrain->GetEncoderPositionToTurnAngle(this->angleDegrees);
+		leftEncoderPositionToTravel = leftInitialEncoderPosition - driveTrain->GetEncoderPositionToTurnAngle(angleDegrees);
 	}
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TurnRobotAngle::Execute()
+void CenterRobotAfterOverDefense::Execute()
 {
 	leftCurrentEncoderPosition = driveTrain->GetEncoderPosition(DriveTrain::FRONT_LEFT);
 	//  For Turning Right
@@ -46,18 +50,16 @@ void TurnRobotAngle::Execute()
 			turnAngleReached = true;
 		}
 	}
-
-	std::cout << "Working" << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TurnRobotAngle::IsFinished()
+bool CenterRobotAfterOverDefense::IsFinished()
 {
 	return turnAngleReached;
 }
 
 // Called once after isFinished returns true
-void TurnRobotAngle::End()
+void CenterRobotAfterOverDefense::End()
 {
 	driveTrain->DriveTank(0.0f, 0.0f);
 
@@ -68,7 +70,7 @@ void TurnRobotAngle::End()
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TurnRobotAngle::Interrupted()
+void CenterRobotAfterOverDefense::Interrupted()
 {
-	End();
+	this->End();
 }

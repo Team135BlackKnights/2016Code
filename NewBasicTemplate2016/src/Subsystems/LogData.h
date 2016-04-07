@@ -26,6 +26,8 @@ public:
 	void OpenFile();
 
 	std::string ZeroifyNumber(int, int);
+
+	void LogSonarDataHeader();
 };
 
 #endif

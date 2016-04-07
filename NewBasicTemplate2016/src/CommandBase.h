@@ -12,7 +12,9 @@
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Arm.h"
 #include "Subsystems/Flashlight.h"
+
 #include "Subsystems/SerialCommunication.h"
+#include "Subsystems/SonarSensors.h"
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -39,6 +41,7 @@ public:
 	static std::unique_ptr<Flashlight> flashlight;
 
 	static std::unique_ptr<SerialCommunication> serialCommunication;
+	static std::unique_ptr<SonarSensors> sonarSensors;
 };
 
 #endif
