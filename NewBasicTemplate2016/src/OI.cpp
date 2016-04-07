@@ -19,6 +19,9 @@
 #include "Commands/ChangeDriver.h"
 #include "Commands/ChangeInvertedDriveTrain.h"
 #include "Commands/AutomationOfArm.h"
+#include "Commands/KickUnstucker.h"
+#include "Commands/TeleOpAimBot.h"
+#include "Commands/DriveFlashlight.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -57,7 +60,7 @@ float OI::GetStickX(int controllerNum) //Returns controller's x value
 float OI::GetStickY(int controllerNum)
 {
 	//return -joysticksArray[controllerNum]->GetY();
-	return GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
+	return -GetStickAxis(controllerNum, Joystick::AxisType::kYAxis);
 }
 
 float OI::GetStickTwist(int controllerNum)
@@ -125,6 +128,10 @@ void OI::UpdateManipulator(Manipulator* manipulator, bool updateButtons)
 		ResetButtonMapping();
 }
 
+JoystickButton* OI::GetAButton(int data[2]) {
+	return buttonsArray[data[STICK]][data[BUTTON]].get();
+}
+
 void OI::ResetButtonMapping()
 {
 	joysticksArray[LEFT].reset(new Joystick(JOYSTICK_LEFT)); //creates a left joystick object
@@ -150,13 +157,11 @@ void OI::ResetButtonMapping()
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_UP[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_UP));
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[STICK]][manipulator->CONTROL_LIFT_HANG_FLIPPER_DOWN[BUTTON]]->WhileHeld(new DriveLiftHangFlipper(LiftHangFlipFlip::FLIPPER_DOWN));
 
-	float forwardPower = Move::FORWARD * SLIDER_MOVEMENT_MULTIPLIER;
-	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(forwardPower));
-	float reversePower = Move::REVERSE * SLIDER_MOVEMENT_MULTIPLIER;
-	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(reversePower));
+	buttonsArray[driver->CONTROL_FORWARD[STICK]][driver->CONTROL_FORWARD[BUTTON]]->WhileHeld(new Move(Move::FORWARD * STRAIGHT_MOVEMENT_MULTIPLIER));
+	buttonsArray[driver->CONTROL_REVERSE[STICK]][driver->CONTROL_REVERSE[BUTTON]]->WhileHeld(new Move(Move::REVERSE * STRAIGHT_MOVEMENT_MULTIPLIER));
 
-	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE, Move::FORWARD));
-	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD, Move::REVERSE));
+	buttonsArray[driver->CONTROL_TURN_LEFT[STICK]][driver->CONTROL_TURN_LEFT[BUTTON]]->WhileHeld(new Move(Move::REVERSE * TURN_MOVEMENT_MULTIPLIER, Move::FORWARD * TURN_MOVEMENT_MULTIPLIER));
+	buttonsArray[driver->CONTROL_TURN_RIGHT[STICK]][driver->CONTROL_TURN_RIGHT[BUTTON]]->WhileHeld(new Move(Move::FORWARD * TURN_MOVEMENT_MULTIPLIER, Move::REVERSE * TURN_MOVEMENT_MULTIPLIER));
 
 	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenPressed(new ChangeNeutralMode(DriveTrain::COAST));
 	buttonsArray[driver->CONTROL_NEUTRAL_MODE[STICK]][driver->CONTROL_NEUTRAL_MODE[BUTTON]]->WhenReleased(new ChangeNeutralMode(DriveTrain::BRAKE));
@@ -172,6 +177,9 @@ void OI::ResetButtonMapping()
 	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
 	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
 	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
+	GetAButton(manipulator->CONTROL_TELEOP_AIM_BOT)->WhileHeld(new TeleOpAimBot());
+	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 
-	buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
+	//buttonsArray[MANIP][12]->WhileHeld(new KickUnstucker());
+	buttonsArray[MANIP][7]->WhenPressed(new DriveFlashlight());
 }

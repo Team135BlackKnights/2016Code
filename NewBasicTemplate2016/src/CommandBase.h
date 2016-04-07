@@ -11,6 +11,7 @@
 #include "WPILib.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Arm.h"
+#include "Subsystems/Flashlight.h"
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -33,6 +34,8 @@ public:
 
 
 	static std::unique_ptr<LiftHangFlipFlip> liftHangFlip;
+
+	static std::unique_ptr<Flashlight> flashlight;
 };
 
 #endif

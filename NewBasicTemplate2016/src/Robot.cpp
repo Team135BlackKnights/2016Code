@@ -8,7 +8,7 @@
 class Robot: public IterativeRobot
 {
 private:
-	SendableChooser* autoChooser;
+	//SendableChooser* autoChooser;
 	CommandGroup* autoCommand;
 
 
@@ -34,7 +34,19 @@ private:
 	void AutonomousInit()
 	{
 		//autoCommand = (CommandGroup*) autoChooser->GetSelected();
-		autoCommand = new AutoCommand(Preferences::GetInstance()->GetBoolean("lowBar", true), true, Preferences::GetInstance()->GetBoolean("fastDefense", false));
+
+		//  LowBar is automatically calculated if defense position is 1
+		//bool lowBar = Preferences::GetInstance()->GetBoolean("Low Bar", true);
+
+		//  Input the defense position 1-5 in which the robot starts in front of before auto begins
+		int defensePosition = Preferences::GetInstance()->GetInt("AUTO Defense Position: ", 1);
+
+		//  True if robot is to go a faster speed, false if about an average speed
+		bool fastDefense = Preferences::GetInstance()->GetBoolean("AUTO Fast Defense", false);
+
+		bool shoot = Preferences::GetInstance()->GetBoolean("AUTO Shoot", false);
+
+		autoCommand = new AutoCommand(defensePosition, fastDefense, shoot);
 		autoCommand->Start();
 	}
 

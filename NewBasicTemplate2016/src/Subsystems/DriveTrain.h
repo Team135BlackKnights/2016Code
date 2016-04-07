@@ -7,6 +7,8 @@
 #include "Commands/Subsystem.h"
 #include "../RobotMap.h"
 
+typedef const int sci;
+
 class DriveTrain: public Subsystem//public PIDLogging
 {
 public:
@@ -19,7 +21,8 @@ private:
 	std::unique_ptr<RobotDrive> chassis;
 
 	//  Need a value for the count of the encoder
-	static const int COUNT = robit == V1 ? 64 : 256;
+	static sci COUNT = 64;
+	static const int QUADRATURE_COUNT = COUNT * 4;
 
 	//  Measured in Inches
 	static const int RADIUS = 6.25;
@@ -41,9 +44,9 @@ public:
 	static constexpr float DIAMETER_OF_WHEELS = 2.0f * RADIUS_OF_WHEELS;
 	static constexpr float CIRCUMFERENCE_OF_WHEELS = DIAMETER_OF_WHEELS * M_PI;
 
-	static const int DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2;
-	static constexpr float WIDTH_OF_ROBOT = 23.0f;
-	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = ((WIDTH_OF_ROBOT - (2 * DISTANCE_BETWEEN_EDGE_AND_WHEEL)) * M_PI);
+	//static constexpr float DISTANCE_BETWEEN_EDGE_AND_WHEEL = 2.0f;
+	static constexpr float DIAMETER_OF_TURNING_ROBOT = 28;
+	static constexpr float CIRCUMFERENCE_OF_TURNING_ROBOT = DIAMETER_OF_TURNING_ROBOT * M_PI;
 
 	DriveTrain();
 	~DriveTrain();
@@ -64,6 +67,8 @@ public:
 	void SetNeutralMode(bool coast);
 
 	float GetDistanceInches(int);
+	int GetEncoderPositionToTurnAngle(int angleDegrees);
+	int GetEncoderPosition(int);
 	void ZeroEncoder(int);
 
 };

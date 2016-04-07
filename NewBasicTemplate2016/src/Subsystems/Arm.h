@@ -18,18 +18,23 @@ private:
 
 	std::unique_ptr<CANTalon> armMotor;
 
+	bool armPosIsGood;
+
 	//  256 COUNT over 90 degrees
-	static constexpr float ENCODER_MULTIPLYING_CONSTANT = ((robit == V1 ? 64.0f : 256.0f) / 90.0f);
+	static const int ARM_ENCODER_COUNT = (robit == V1 ? 64 : 256);
+	//  When multiplying by the constant, this constant converts from angles into encoder position
+	//  When dividing by the constant, this constant converts from encoder position into angle
+	static constexpr float ENCODER_MULTIPLYING_CONSTANT = ((float)ARM_ENCODER_COUNT / 90.0f);
 	static constexpr float POT_CONSTANT = 300.0f;
 
 	//Height of tower to the tape
 	static constexpr double HEIGHT_OF_TOWER = 85.0D;
 	//Height of the lens of the camera off the ground
-	static constexpr double CAMERA_HEIGHT_OFF_GROUND = 11.0D;
+	static constexpr double CAMERA_HEIGHT_OFF_GROUND = 12.0D;
 	//Height of the arm axle off the ground
 	static constexpr double ARM_HEIGHT_OFF_GROUND = 11.0D;
 	//Distance of the camera to the pivot point of the arm
-	static constexpr double CAMERA_DISTANCE_FROM_SHOOTING_AXIS = 13.0D;
+	static constexpr double CAMERA_DISTANCE_FROM_SHOOTING_AXIS = 1.0D;
 	//Distance above the bottom of the goal we want to aim
 	static constexpr double GOAL_HEIGHT_COMPENSATION = 12.0D;
 
@@ -39,13 +44,6 @@ private:
 	AnalogInput* ai;
 
 public:
-	enum CONTROL_TYPE {
-		POT = 0,
-		ENCODER = 1
-	};
-
-	static const CONTROL_TYPE FEEDBACK = CONTROL_TYPE::ENCODER;
-
     static const int ARM_DOWN_POSITION = 0;
     static const int ARM_UP_POSITION = 196;
 
@@ -56,29 +54,26 @@ public:
 	bool GetTopLimitSwitchValue();
 	bool GetBottomLimitSwitchValue();
 
-	int GetEncoderValueForAngle(double inchesHypotenuse);
 	double GetAngleForArm(double,  double fadeAwayDist = 0);
-	int GetValueBasedOnAngle(double angle);
+	int GetEncoderPositionBasedOnAngle(double angle);
 
-	double GetPotValueForArm(double);
+	int GetEncoderPosition();
+	void ZeroEncoder();
+	void SetEncoderPosition(int);
+
+	int GetEncoderPositionForAutomationOfArm(double);
+	bool ArmPosIsGood(bool);
+	bool ArmPosIsGood();
 
 	static const int RAISE_LOWER_ARM = 0;
-	static constexpr float UP = -1.0f;
+	static const bool ARM_INVERTED = robit == V1 ? false : true;
+	static constexpr float UP = 1.0f;
 	static constexpr float DOWN = -UP;
 
 	static const bool ENCODER_INVERTED = false;
 
 	static const bool	AUTO_NON_LOW_BAR = false,
-							AUTO_LOW_BAR = true;
-
-	//const int encoderPos = Preferences::GetInstance()->GetInt("encoderPos",0);
-	int GetEncoderPosition();
-	void ZeroEncoder();
-	void SetEncoderPosition(int);
-	double GetPotValue();
-
-	int GetPotOrEncoderValueForAutomationOfArm(double);
-	double GetPotValueOrEncoderPosition();
+						AUTO_ZERO_DEGREES = true;
 
 };
 
