@@ -16,6 +16,7 @@ public:
 
 private:
 	float shootPower = 1.0f;
+	std::unique_ptr<Timer> time;
 };
 
 #endif

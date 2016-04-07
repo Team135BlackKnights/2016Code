@@ -10,6 +10,8 @@ DriveShooter::DriveShooter()
 void DriveShooter::Initialize()
 {
 	shooter->DriveKicker(Shooter::KICKER_RESET);
+	time.reset(new Timer());
+	time->Reset();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -28,11 +30,21 @@ void DriveShooter::Execute()
 	shooter->DriveShooterMotors(power);
 
 	//if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
-	if (oi->IsPressed(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK))
-		shooter->DriveKicker(Shooter::KICKER_KICKED);
-	else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
-		shooter->DriveKicker(Shooter::KICKER_RESET);
 
+	//if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
+	if (oi->IsPressed(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK)){
+		shooter->DriveKicker(Shooter::KICKER_KICKED);
+		time->Start();
+	}
+	//else //if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_RESET[BUTTON]))
+	//	shooter->DriveKicker(Shooter::KICKER_RESET);
+
+	if(time->Get() > .5){
+		std::cout << "shot";
+		shooter->DriveKicker(Shooter::KICKER_RESET);
+		time->Reset();
+		time->Stop();
+	}
 	/*
 	if (oi->GetButton(OI::MANIP, 12))
 		shooter->DriveUnstucker(Shooter::KICKER_KICKED);
