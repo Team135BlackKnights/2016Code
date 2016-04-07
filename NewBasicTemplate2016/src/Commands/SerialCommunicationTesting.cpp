@@ -6,6 +6,7 @@ SerialCommunicationTesting::SerialCommunicationTesting()
 	// eg. Requires(chassis);
 	Requires(serialCommunication.get());
 	Requires(shooter.get());
+	Requires(sonarSensors.get());
 }
 
 // Called just before this Command runs the first time
@@ -17,8 +18,11 @@ void SerialCommunicationTesting::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void SerialCommunicationTesting::Execute()
 {
-	shooterTrackerValue = shooter->GetShooterTrackerPeriod();
-	serialCommunication->SendSerialShooterTrackerValue(shooterTrackerValue);
+	//shooterTrackerValue = shooter->GetShooterTrackerPeriod();
+	//serialCommunication->SendSerialShooterTrackerValue(shooterTrackerValue);
+
+	sonarDistanceValue = sonarSensors->GetDistanceInches(ANALOG_LEFT_SONAR_PORT);
+	serialCommunication->SendSonarDistanceValue(sonarDistanceValue);
 }
 
 // Make this return true when this Command no longer needs to run execute()

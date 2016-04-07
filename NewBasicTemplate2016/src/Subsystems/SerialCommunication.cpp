@@ -29,5 +29,15 @@ void SerialCommunication::SendSerialShooterTrackerValue(double shooterTrackerVal
 	serialPort->Flush();
 }
 
+void SerialCommunication::SendSonarDistanceValue(float sonarDistanceValue) {
+	int intSonarDistanceValue = ((int)(round(sonarDistanceValue)));
+	bytesToWrite = (intSonarDistanceValue >= 100) ? 3 : 2;
+	std::string stringSonarDistanceValue = ((std::string)intSonarDistanceValue);
+	serialPort->Write("A", 1);
+	serialPort->Write(stringSonarDistanceValue, bytesToWrite);
+	serialPort->Write(".", 1);
+	serialPort->Flush();
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

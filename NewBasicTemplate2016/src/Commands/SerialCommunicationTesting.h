@@ -8,6 +8,7 @@ class SerialCommunicationTesting: public CommandBase
 {
 private:
 	double shooterTrackerValue = 0.0D;
+	float sonarDistanceValue = 0.0f;
 
 public:
 	SerialCommunicationTesting();

@@ -16,6 +16,7 @@ public:
 	SerialCommunication();
 	void InitDefaultCommand();
 	void SendSerialShooterTrackerValue(double);
+	void SendSonarDistanceValue(float);
 };
 
 #endif
