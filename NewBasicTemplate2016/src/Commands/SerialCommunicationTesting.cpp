@@ -5,7 +5,7 @@ SerialCommunicationTesting::SerialCommunicationTesting()
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(serialCommunication.get());
-	Requires(shooter.get());
+	//Requires(shooter.get());
 	Requires(sonarSensors.get());
 }
 

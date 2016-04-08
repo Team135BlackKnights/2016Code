@@ -5,12 +5,14 @@ SerialCommunication::SerialCommunication() :
 		Subsystem("SerialCommunication")
 {
 	serialPort.reset(new SerialPort(9600, SerialPort::Port::kUSB));
+	// Idea: Comment out serialPort->Reset()
 	serialPort->Reset();
-	//serialPort->SetWriteBufferMode(SerialPort::WriteBufferMode::kFlushWhenFull);
-	//serialPort->SetWriteBufferSize(16);
-	//serialPort->SetTimeout(10.0f);
+	serialPort->SetWriteBufferMode(SerialPort::WriteBufferMode::kFlushOnAccess);
+	serialPort->SetWriteBufferSize(16);
+	serialPort->SetTimeout(10);
 
 	bytesToWrite = 0;
+	//buffer = new char('\a');
 }
 
 void SerialCommunication::InitDefaultCommand()
@@ -33,11 +35,10 @@ void SerialCommunication::SendSonarDistanceValue(float sonarDistanceValue) {
 	int intSonarDistanceValue = ((int)(round(sonarDistanceValue)));
 	bytesToWrite = (intSonarDistanceValue >= 100) ? 3 : 2;
 	std::string stringSonarDistanceValue = std::to_string(intSonarDistanceValue);
-	char *c = 'k';
 	//serialPort->Write("A", 1);
 	//serialPort->Write(stringSonarDistanceValue, bytesToWrite);
 	//serialPort->Write(".", 1);
-	serialPort->Write(c, 5);
+	serialPort->Write("hello", 10);
 	//serialPort->Flush();
 	//std::cout << "Workinggggggggggggggggggg" << std::endl;
 }

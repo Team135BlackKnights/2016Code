@@ -12,6 +12,7 @@ private:
 	std::unique_ptr<SerialPort> serialPort;
 
 	int bytesToWrite;
+	//char *buffer;
 public:
 	SerialCommunication();
 	void InitDefaultCommand();
