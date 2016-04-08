@@ -22,6 +22,7 @@ void SerialCommunicationTesting::Execute()
 	//serialCommunication->SendSerialShooterTrackerValue(shooterTrackerValue);
 
 	sonarDistanceValue = sonarSensors->GetDistanceInches(ANALOG_LEFT_SONAR_PORT);
+	std::cout << "Sonar Distance: " << sonarDistanceValue << std::endl;
 	serialCommunication->SendSonarDistanceValue(sonarDistanceValue);
 }
 

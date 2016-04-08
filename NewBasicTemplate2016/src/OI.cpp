@@ -23,6 +23,7 @@
 #include "Commands/TeleOpAimBot.h"
 #include "Commands/DriveFlashlight.h"
 #include "Commands/GetSonarDistances.h"
+#include "Commands/SerialCommunicationTesting.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -149,9 +150,9 @@ void OI::ResetButtonMapping()
 		}
 	}
 
-	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->ToggleWhenPressed(new GetSonarDistances());
+	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->ToggleWhenPressed(new SerialCommunicationTesting());
 
-	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
+	//buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_UP[STICK]][manipulator->CONTROL_LIFT_HANG_UP[BUTTON]]->WhileHeld(new DriveLiftHangWinch(LiftHangWinch::WINCH_UP));
