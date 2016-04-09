@@ -177,7 +177,8 @@ void OI::ResetButtonMapping()
 	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
 	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
 	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
-	GetAButton(manipulator->CONTROL_TELEOP_AIM_BOT)->WhileHeld(new TeleOpAimBot());
+	buttonsArray[MANIP][12]->ToggleWhenPressed(new TeleOpAimBot());
+	//GetAButton(manipulator->CONTROL_TELEOP_AIM_BOT)->WhileHeld(new TeleOpAimBot());
 	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 
 	//buttonsArray[MANIP][12]->WhileHeld(new KickUnstucker());

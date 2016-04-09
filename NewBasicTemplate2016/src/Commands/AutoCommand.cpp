@@ -33,7 +33,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 	std::cout << defensePosition << std::endl;
 	bool lowBar = defensePosition == 1 ? Arm::AUTO_ZERO_DEGREES : Arm::AUTO_NON_LOW_BAR;
 
-	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, NON_ZERO_ENCODER), 6.0f);
+	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER), 6.0f);
 
 	if (fastDefense) {
 		motorSpeed = .65f;
@@ -45,7 +45,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE + 30.0f, motorSpeed));
 
 	if (lowBar) {
-		AddParallel(new AutomationOfArm(15.0f));
+		AddParallel(new AutomationOfArm(10.0f));
 		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .875f));
 		AddSequential(new WaitTime(1.0f));
 	}
@@ -53,7 +53,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 		std::cout << defensePosition << std::endl;
 		AddSequential(new WaitTime(.5f));
 		std::cout << defensePosition << std::endl;
-		AddParallel(new AutomationOfArm(15.0f));
+		AddParallel(new AutomationOfArm(10.0f));
 		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_AFTER_CROSSING_DEFENSE, .50f));
 		AddSequential(new WaitTime(1.0f));
 		std::cout << defensePosition << std::endl;

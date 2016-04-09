@@ -27,6 +27,7 @@ void DriveJ::Execute()
 	float drivePower = Preferences::GetInstance()->GetFloat("DrivePower", 1.0f);
 	//driveTrain->DriveTank(oi->GetStickY(OI::LEFT), oi->GetStickY(OI::RIGHT)); //Drives the Robot depending on x-y-z speed values
 	driveTrain->DriveTank(oi->GetStickY(OI::LEFT) * drivePower, oi->GetStickY(OI::RIGHT) * drivePower);
+	std::cout << "Driven: " << driveTrain->GetDistanceInches(DriveTrain::FRONT_LEFT) << std::endl;
 }
 
 

@@ -25,7 +25,7 @@
 		V1, V2
 	};
 
-	const ROBOT_VERSION robit = V2;
+	const ROBOT_VERSION robit = V1;
 
     const int MOTOR_FRONT_LEFT	= 10;
     const int MOTOR_REAR_LEFT	= 12;

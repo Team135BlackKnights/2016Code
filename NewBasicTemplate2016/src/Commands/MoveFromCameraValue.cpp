@@ -7,7 +7,7 @@ MoveFromCameraValue::MoveFromCameraValue(int position)
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 	pos = position;
-	offset = 0;
+	offset = 35;
 }
 
 // Called just before this Command runs the first time
@@ -16,11 +16,11 @@ void MoveFromCameraValue::Initialize(){
 	//isgood = false;
 	std::cout << "running ";
 	isgood = false;
-	if(pos == 1)
+	/*if(pos == 1)
 		offset = -35;
 	else //if(pos == 4)
 		offset = 35;
-
+*/
 }
 
 // Called repeatedly when this Command is scheduled to run

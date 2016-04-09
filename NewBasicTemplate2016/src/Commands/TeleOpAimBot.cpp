@@ -1,10 +1,12 @@
 #include "TeleOpAimBot.h"
 #include "AutomationOfArm.h"
+#include "MoveFromCameraValue.h"
 TeleOpAimBot::TeleOpAimBot()
 {
 	//AddSequential(new CheckSideSide());
 	//std::cout << "lined up";
 	//AddSequential(new KickKicker());
+	AddSequential(new MoveFromCameraValue(Preferences::GetInstance()->GetInt("Defense Position: ", 3)));
 	AddSequential(new AutomationOfArm());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
