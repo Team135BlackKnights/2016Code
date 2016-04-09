@@ -62,6 +62,7 @@ void AutomationOfArm::Execute()
 	else
 		arm->RaiseLowerArm(0);
 	std::cout << arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
+	std::cout << arm->ArmPosIsGood() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

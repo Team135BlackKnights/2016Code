@@ -16,11 +16,11 @@ void MoveFromCameraValue::Initialize(){
 	//isgood = false;
 	std::cout << "running ";
 	isgood = false;
-	/*if(pos == 1)
-		offset = -35;
-	else //if(pos == 4)
+	if(pos == 1)
 		offset = 35;
-*/
+	else //if(pos == 4)
+		offset = 65;
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -30,9 +30,9 @@ void MoveFromCameraValue::Execute()
 	//driveTrain->DriveTank(speed, -speed); -32
 	float dist = cam.get()->xDistanceToCenter(offset);
 	std::cout << "DISTANCE: " << dist << std::endl;
-	if(dist <= -10 && !isgood)
+	if(dist <= -5 && !isgood)
 		driveTrain.get()->DriveTank(0,motorSpeed);
-	else if(dist >= 10 && !isgood)
+	else if(dist >= 5 && !isgood)
 		driveTrain.get()->DriveTank(motorSpeed,0);//RotateTank(motorSpeed);
 	else
 	{

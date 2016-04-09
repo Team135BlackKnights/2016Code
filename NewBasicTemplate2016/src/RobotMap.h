@@ -60,7 +60,7 @@
     const int DIGITAL_ARM_LIMIT_TOP = 7;
     const int DIGITAL_ARM_LIMIT_BOTTOM = 8;
 
-    const int DIGITAL_SHOOTER_TRACKER = 9;
+    const int DIGITAL_SHOOTER_TRACKER = 0;
 
     const int RELAY_FLASHLIGHT = 1;
 

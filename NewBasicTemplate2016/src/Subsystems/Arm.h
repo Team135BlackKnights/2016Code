@@ -45,7 +45,7 @@ private:
 
 public:
     static const int ARM_DOWN_POSITION = 0;
-    static const int ARM_UP_POSITION = 196;
+    static const int ARM_UP_POSITION = (robit == V1 ? 48 : 196);
 
 	Arm();
 	void InitDefaultCommand();

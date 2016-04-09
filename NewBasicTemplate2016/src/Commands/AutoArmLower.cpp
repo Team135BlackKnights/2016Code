@@ -35,6 +35,7 @@ void AutoArmLower::Execute()
 	currentEncoderPosition = (double) arm->GetEncoderPosition();
 
 	arm->RaiseLowerArm(MOTOR_POWER * Arm::DOWN);
+	std::cout <<"arm angle: " << currentEncoderPosition << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

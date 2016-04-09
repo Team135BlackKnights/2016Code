@@ -29,6 +29,7 @@ void DriveArm::Execute()
 
 	//std::cout << arm->GetPotValue() << std::endl;
 	std::cout << "Arm Angle: " << arm->GetEncoderPosition() * 90/64 << std::endl;
+	std::cout << "arm pos: " << arm->GetEncoderPosition() << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
