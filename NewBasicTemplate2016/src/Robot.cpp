@@ -14,6 +14,9 @@ private:
 
 	void RobotInit()
 	{
+		CameraServer::GetInstance()->SetQuality(50);
+				//the camera name (ex "cam0") can be found through the roborio web interface
+		CameraServer::GetInstance()->StartAutomaticCapture("cam3");
 		CommandBase::init();
 
 		/*
