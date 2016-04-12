@@ -6,6 +6,9 @@
 
 class DriveFlashlight: public CommandBase
 {
+private:
+	bool switched;
+	std::unique_ptr<Timer> timer;
 public:
 	DriveFlashlight();
 	void Initialize();

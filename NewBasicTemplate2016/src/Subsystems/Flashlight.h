@@ -7,17 +7,19 @@
 class Flashlight: public Subsystem
 {
 private:
-	std::unique_ptr<Relay> light;
+	//std::unique_ptr<Relay> light;
 	//std::unique_ptr<Solenoid> lightTest;
 
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	std::unique_ptr<DigitalOutput> turnOn;
-	std::unique_ptr<DigitalOutput> turnOff;
+	Solenoid* turnOn;
+	Solenoid* turnOff;
+	Solenoid* activeSoul;
 public:
 	Flashlight();
 	void InitDefaultCommand();
-	void SetFlashlight(bool on);
+	void SetSolenoid(bool power);
+	void SwitchActiveSoul();
 	bool on;
 };
 

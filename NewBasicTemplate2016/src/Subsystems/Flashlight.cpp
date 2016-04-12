@@ -5,11 +5,12 @@
 Flashlight::Flashlight() :
 		Subsystem("Flashlight")
 {
-		light.reset(new Relay(2, Relay::Direction::kBothDirections));
+		//light.reset(new Relay(2, Relay::Direction::kBothDirections));
 		//lightTest.reset(new Solenoid(2));
-		turnOn.reset(new DigitalOutput(8));
-		turnOff.reset(new DigitalOutput(9));
-		SetFlashlight(false);
+		turnOn = new Solenoid(3);
+		turnOff = new Solenoid(2);
+		activeSoul = turnOff;
+		SetSolenoid(false);
 }
 
 void Flashlight::InitDefaultCommand()
@@ -19,18 +20,20 @@ void Flashlight::InitDefaultCommand()
 	//SetDefaultCommand(new DriveFlashlight());
 }
 
-void Flashlight::SetFlashlight(bool on) {
+void Flashlight::SetSolenoid(bool power) {
 	//if (this->on != on) {
-		this->on = on;
 		//SmartDashboard::PutBoolean("LIGHT", light->Get() == Relay::kForward || light->Get() == Relay::Value::kOn);
 		//light->Set(this->on ? Relay::Value::kForward : Relay::Value::kReverse);
-		SmartDashboard::PutBoolean("LIGHT ON", light->Get());
-
-		if(on)
-			turnOn->Pulse(1);
-		else
-			turnOff->Pulse(1);
+		activeSoul->Set(power);
 	//}
+}
+
+void Flashlight::SwitchActiveSoul() {
+	on = !on;
+	if (on)
+		activeSoul = turnOn;
+	else
+		activeSoul = turnOff;
 }
 
 // Put methods for controlling this subsystem
