@@ -9,7 +9,7 @@ class MoveFromCameraValue: public CommandBase
 private:
 	bool isgood = false;
 	bool isgoodFirst = false;
-	float motorSpeed = Preferences::GetInstance()->GetFloat("motorSpeed", 0);
+	float motorSpeed =.6f;
 	Timer* timer;
 	int pos;
 	int offset;

@@ -21,7 +21,7 @@ private:
 	bool armPosIsGood;
 
 	//  256 COUNT over 90 degrees
-	static const int ARM_ENCODER_COUNT = (robit == V1 ? 64 : 256);
+	static const int ARM_ENCODER_COUNT =256;// (robit == V1 ? 64 : 256);
 	//  When multiplying by the constant, this constant converts from angles into encoder position
 	//  When dividing by the constant, this constant converts from encoder position into angle
 	static constexpr float ENCODER_MULTIPLYING_CONSTANT = ((float)ARM_ENCODER_COUNT / 90.0f);

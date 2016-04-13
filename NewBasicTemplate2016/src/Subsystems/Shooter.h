@@ -20,7 +20,7 @@ private:
 	std::unique_ptr<Counter> shooterTracker;
 
 	//  Value Still To Be Determined
-	static constexpr double SHOOTER_TRACKER_SETPOINT = 300.0D;
+	static constexpr double SHOOTER_TRACKER_SETPOINT = 330.0D;
 
 	double currentConnerValue = 0.0D,
 		   tempConnerValue = 0.0D;

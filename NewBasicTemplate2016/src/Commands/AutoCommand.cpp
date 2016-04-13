@@ -101,7 +101,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 			std::cout << "WHAT ARE YOU DOING!!!!!!!\n";
 			break;
 		}
-
+		AddSequential(new WaitTime(.25f));
 		AddSequential(new AimBot(defensePosition, shoot));
 	}
 
