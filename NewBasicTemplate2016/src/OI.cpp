@@ -148,7 +148,7 @@ void OI::ResetButtonMapping()
 		}
 	}
 
-	buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
+	//buttonsArray[manipulator->CONTROL_SHOOT[STICK]][manipulator->CONTROL_SHOOT[BUTTON]]->WhenPressed(new AimBot());
 	//buttonsArray[manipulator->CONTROL_ARM_RESET[STICK]][manipulator->CONTROL_ARM_RESET[BUTTON]]->WhenPressed(new ArmReset());
 
 	buttonsArray[manipulator->CONTROL_LIFT_HANG_UP[STICK]][manipulator->CONTROL_LIFT_HANG_UP[BUTTON]]->WhileHeld(new DriveLiftHangWinch(LiftHangWinch::WINCH_UP));
@@ -182,5 +182,8 @@ void OI::ResetButtonMapping()
 	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 
 	//buttonsArray[MANIP][12]->WhileHeld(new KickUnstucker());
-	buttonsArray[MANIP][7]->WhenPressed(new DriveFlashlight());
+	buttonsArray[MANIP][7]->WhenPressed(new DriveFlashlight(true));
+	DriveFlashlight* turnOff = new DriveFlashlight(false);
+	turnOff->Start();
+	buttonsArray[MANIP][8]->WhenPressed(turnOff);
 }

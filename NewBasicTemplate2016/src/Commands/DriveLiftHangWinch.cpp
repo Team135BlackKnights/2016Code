@@ -22,7 +22,13 @@ void DriveLiftHangWinch::Execute()
 	//float sliderPower = oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
 
 	SmartDashboard::PutBoolean("Winch Running", true);
-	liftHangWinch->DriveMotor(power);
+	if(power < 0)
+	{
+		if(Preferences::GetInstance()->GetBoolean("UNWINCH", false))
+			liftHangWinch->DriveMotor(power);
+	}
+	else if(power > 0)
+		liftHangWinch->DriveMotor(power);
 
 	/*
 	if (oi->GetButton(oi->manipulator->CONTROL_LIFT_HANG_UP[STICK], oi->manipulator->CONTROL_LIFT_HANG_UP[BUTTON]))

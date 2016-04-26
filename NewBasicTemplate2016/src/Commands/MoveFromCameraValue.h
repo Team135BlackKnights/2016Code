@@ -13,8 +13,9 @@ private:
 	Timer* timer;
 	int pos;
 	int offset;
+	int dir;
 public:
-	MoveFromCameraValue(int position);
+	MoveFromCameraValue(int position, int dir);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

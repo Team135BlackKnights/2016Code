@@ -10,7 +10,7 @@
 #include "WaitTime.h"
 #include "Move.h"
 
-AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
+AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot, int dir)
 {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
@@ -59,7 +59,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 		std::cout << defensePosition << std::endl;
 	}
 
-	if (shoot) {
+	//if (shoot) {
 		//  Move according to the defense Position the robot is set in front of
 		switch (defensePosition) {
 		case 0:
@@ -78,11 +78,11 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 			//AddSequential(new Move(.3,0), 1.000000f);
 			//AddSequential(new AimBot(1));
 		case 2:
-			AddSequential(new DriveDistance(60, .75f));
-			AddSequential(new RaiseAndTurn(55.0D, 50.0D, TurnRobotAngle::RIGHT_TURN));
+			AddSequential(new DriveDistance(30, .75f));
+			//AddSequential(new RaiseAndTurn(55.0D, 50.0D, TurnRobotAngle::RIGHT_TURN));
 			break;
 		case 3:
-			AddSequential(new RaiseAndTurn(55.0D, 1.0D, TurnRobotAngle::RIGHT_TURN));
+			AddSequential(new RaiseAndTurn(55.0D, 5.0D, TurnRobotAngle::RIGHT_TURN));
 			//AddSequential(new WaitTime(.5f));
 			break;
 			//AddSequential(new AimBot(3));
@@ -102,7 +102,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot)
 			break;
 		}
 		AddSequential(new WaitTime(.25f));
-		AddSequential(new AimBot(defensePosition, shoot));
-	}
+		AddSequential(new AimBot(defensePosition, shoot,dir));
+	//}
 
 }

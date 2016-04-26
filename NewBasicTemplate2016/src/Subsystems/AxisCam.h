@@ -44,7 +44,7 @@ private:
 	const int TILT_DERIVATIVE_GAIN = 400;
 	const float X_WIDTH_GOAL = 20.0/12.0; //in feet
 	const float Y_HEIGHT_GOAL = 1.0; //feet
-	const double AXIS_VANGLE = 56;//54;//50;//67;//45 last one
+	const double AXIS_VANGLE = 75;//56;//54;//50;//67;//45 last one
 	float x;
 	float y;
 	float width;

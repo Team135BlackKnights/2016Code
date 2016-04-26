@@ -1,12 +1,13 @@
 #include "DriveFlashlight.h"
 
-DriveFlashlight::DriveFlashlight()
+DriveFlashlight::DriveFlashlight(bool on)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(flashlight.get());
 	switched = false;
 	timer.reset(new Timer());
+	this->solenoid = on ? flashlight->turnOn : flashlight->turnOff;
 }
 
 // Called just before this Command runs the first time
@@ -26,7 +27,7 @@ void DriveFlashlight::Execute()
 	*/
 
 	if (!switched) {
-		flashlight->SetSolenoid(true);
+		flashlight->SetSolenoid(solenoid, true);
 		switched = true;
 		timer->Reset();
 		timer->Start();
@@ -36,7 +37,7 @@ void DriveFlashlight::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool DriveFlashlight::IsFinished()
 {
-	return timer->Get() > 3.0f;
+	return timer->Get() > .5f;
 }
 
 // Called once after isFinished returns true
@@ -44,8 +45,8 @@ void DriveFlashlight::End()
 {
 	switched = false;
 	timer->Stop();
-	flashlight->SetSolenoid(false);
-	flashlight->SwitchActiveSoul();
+	flashlight->SetSolenoid(solenoid, false);
+	//flashlight->SwitchActiveSoul();
 }
 
 // Called when another command which requires one or more of the same

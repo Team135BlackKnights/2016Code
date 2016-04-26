@@ -1,13 +1,23 @@
 #include <Commands/MoveFromCameraValue.h>
 #include <cstdbool>
 
-MoveFromCameraValue::MoveFromCameraValue(int position)
+MoveFromCameraValue::MoveFromCameraValue(int position, int dir)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(driveTrain.get());
 	pos = position;
 	offset = 35;
+	if(dir == -1)
+		this->dir = 20;
+	else if(dir == 1)
+		this->dir = -20;
+	else
+		this->dir = 0;
+	if(pos == 1)
+		offset = 35;// + dir;
+	else //if(pos == 4)
+		offset = 15;// + dir;//65;
 }
 
 // Called just before this Command runs the first time
@@ -16,10 +26,6 @@ void MoveFromCameraValue::Initialize(){
 	//isgood = false;
 	std::cout << "running ";
 	isgood = false;
-	if(pos == 1)
-		offset = 35;
-	else //if(pos == 4)
-		offset = 25;//65;
 
 }
 
@@ -30,9 +36,10 @@ void MoveFromCameraValue::Execute()
 	//driveTrain->DriveTank(speed, -speed); -32
 	float dist = cam.get()->xDistanceToCenter(offset);
 	std::cout << "DISTANCE: " << dist << std::endl;
-	if(dist <= -5 && !isgood)
+	std::cout << "offset: " << offset << std::endl;
+	if(dist <= -10 && !isgood)
 		driveTrain.get()->DriveTank(0,motorSpeed);
-	else if(dist >= 5 && !isgood)
+	else if(dist >= 10 && !isgood)
 		driveTrain.get()->DriveTank(motorSpeed,0);//RotateTank(motorSpeed);
 	else
 	{

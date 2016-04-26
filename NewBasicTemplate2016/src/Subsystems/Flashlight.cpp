@@ -10,7 +10,6 @@ Flashlight::Flashlight() :
 		turnOn = new Solenoid(3);
 		turnOff = new Solenoid(2);
 		activeSoul = turnOff;
-		SetSolenoid(false);
 }
 
 void Flashlight::InitDefaultCommand()
@@ -20,11 +19,11 @@ void Flashlight::InitDefaultCommand()
 	//SetDefaultCommand(new DriveFlashlight());
 }
 
-void Flashlight::SetSolenoid(bool power) {
+void Flashlight::SetSolenoid(Solenoid* solenoid, bool power) {
 	//if (this->on != on) {
 		//SmartDashboard::PutBoolean("LIGHT", light->Get() == Relay::kForward || light->Get() == Relay::Value::kOn);
 		//light->Set(this->on ? Relay::Value::kForward : Relay::Value::kReverse);
-		activeSoul->Set(power);
+		solenoid->Set(power);
 	//}
 }
 

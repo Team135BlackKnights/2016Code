@@ -6,9 +6,12 @@
 #include "AutomationOfArm.h"
 
 
-AimBot::AimBot(int position, bool shoot)
+AimBot::AimBot(int position, bool shoot, int dir)
 {
-	AddSequential(new MoveFromCameraValue(position));
+	if (position == 1 || position == 2)
+		return;
+	AddSequential(new MoveFromCameraValue(position, dir));
+	AddSequential(new WaitTime(.25f));
 	AddParallel(new AutomationOfArm());
 	//AddParallel(new AutomationOfArm(39.0f));
 	if (shoot)

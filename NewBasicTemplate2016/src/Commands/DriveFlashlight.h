@@ -9,8 +9,9 @@ class DriveFlashlight: public CommandBase
 private:
 	bool switched;
 	std::unique_ptr<Timer> timer;
+	Solenoid* solenoid;
 public:
-	DriveFlashlight();
+	DriveFlashlight(bool on);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

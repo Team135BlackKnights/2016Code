@@ -17,6 +17,8 @@ Shooter::Shooter() :
 	DriveKicker(KICKER_RESET);
 
 	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
+
+	//serial.reset(new SerialPort(115200));
 }
 
 void Shooter::InitDefaultCommand()
@@ -28,6 +30,7 @@ void Shooter::InitDefaultCommand()
 void Shooter::DriveShooterMotors(float power) {
 	double speed = GetShooterTrackerPeriod();
 	SmartDashboard::PutNumber((std::string)"Shooter Speed Conners", speed);
+	SmartDashboard::PutString((std::string)"Good to Shoot", ShooterUpToSpeed() ? "YESYESYESYESYESYES" : "No");
 	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
 }
 
@@ -52,6 +55,7 @@ double Shooter::GetShooterTrackerPeriod() {
 	if (tempConnerValue <= 30000)
 		currentConnerValue = tempConnerValue;
 
+	//serial->Write((std::string)(currentConnerValue), 8);
 	return currentConnerValue;
 }
 
