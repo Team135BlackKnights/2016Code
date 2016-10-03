@@ -17,7 +17,7 @@ void DriveLiftHangFlipper::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveLiftHangFlipper::Execute()
 {
-	float power = 0.5f;//oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
+	float power = Preferences::GetInstance()->GetFloat("FLIPPER POWER", 0.3f);//oi->GetStickSlider(oi->manipulator->CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER);
 	liftHangFlip->DriveMotor(direction * power);
 }
 

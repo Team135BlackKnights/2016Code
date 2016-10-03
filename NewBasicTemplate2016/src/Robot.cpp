@@ -14,13 +14,14 @@ private:
 
 	void RobotInit()
 	{
-		//cameraServer = CameraServer::GetInstance();
-		////cameraServer->SetQuality(50);
+		cameraServer = CameraServer::GetInstance();
+		cameraServer->SetQuality(50);
 				//the camera name (ex "cam0") can be found through the roborio web interface
-		//cameraServer->StartAutomaticCapture("cam3");
+		cameraServer->StartAutomaticCapture("cam3");
 
 
 		Preferences::GetInstance()->PutBoolean("UNWINCH", false);
+		Preferences::GetInstance()->PutBoolean("PREMATCH CAN RAISE ARM", false);
 		CommandBase::init();
 		//yeet
 		/*

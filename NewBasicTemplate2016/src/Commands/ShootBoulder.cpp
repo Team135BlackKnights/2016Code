@@ -30,7 +30,7 @@ void ShootBoulder::Execute()
 
 	std::cout << "time revved" << timer->Get();
 	//if (timer->Get() > timeWait) {
-	if(shooter->ShooterUpToSpeed() && arm->ArmPosIsGood()){
+	if((timer->Get() > 3.0) && arm->ArmPosIsGood()){
 		timeWait = timer->Get();
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 	}
@@ -38,7 +38,7 @@ void ShootBoulder::Execute()
 	/*if (shooter->ShooterUpToSpeed() && upToSpeed == false) {
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 		initialTimerValue = timer->Get();
-		finalTimerValue = initialTimerValue + .50f;
+		finalTimerValue = initialTimerValue + .50f;bCommandBase::driveTrain.get()
 	} */
 
 }
@@ -46,7 +46,7 @@ void ShootBoulder::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return timer->Get() >= timeWait + 1.5D;
+	return timer->Get() >= timeWait + .25D;
 	//return (upToSpeed && finalTimerValue >= timer->Get());
 }
 

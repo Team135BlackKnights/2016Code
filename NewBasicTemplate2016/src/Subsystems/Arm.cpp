@@ -28,10 +28,11 @@ Arm::Arm():
 	ai = new AnalogInput(POT_ANALOG_PORT);
 	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
-	bottomLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_BOTTOM));
+	bottomLimitSwitch.reset(new DigitalInput(7));//DIGITAL_ARM_LIMIT_BOTTOM));
 	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 	SetEncoderPosition(Arm::ARM_UP_POSITION);
 	armPosIsGood = false;
+	overrideLimitSwitch = false;
 }
 
 void Arm::InitDefaultCommand()
@@ -52,8 +53,14 @@ void Arm::RaiseLowerArm(sink motorPower, bool softStop) {
 	if (GetBottomLimitSwitchValue()) {
 		std::cout << "\nBOTTOM LIMIT PRESSED\n";
 		this->ZeroEncoder();
-		power = fmaxf(power, 0.0f);
+		if (overrideLimitSwitch == false) {
+			power = fminf(power, 0.0f);
+		}
 	}
+	/*else if (GetTopLimitSwitchValue() && !Preferences::GetInstance()->GetBoolean("PREMATCH CAN RAISE ARM", false)) {
+		std::cout << "HIGHEST POINT REACHED\n";
+		power = fminf(power, 0.0f);
+	} */
 	/*
 	if (softStop && GetTopLimitSwitchValue()) {
 		std::cout << "YOU'VE REACHED THE TOP\n";
@@ -77,6 +84,8 @@ bool Arm::GetTopLimitSwitchValue() {
 }
 
 bool Arm::GetBottomLimitSwitchValue() {
+	if (overrideLimitSwitch) return false;
+
 	bool value =  !bottomLimitSwitch.get()->Get();
 	if (value)
 		std::cout << "B";
@@ -88,7 +97,7 @@ double Arm::GetAngleForArm(double cameraDist, double fadeAwayDist)
 {
 	double groundDist = (HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + 6.0D) / (tan(asin((HEIGHT_OF_TOWER - CAMERA_HEIGHT_OFF_GROUND + 6.0) / cameraDist))) + fadeAwayDist;
 	std::cout << "Ground distance: " << groundDist << std::endl;
-	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION + 60.0) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
+	return atan((HEIGHT_OF_TOWER - ARM_HEIGHT_OFF_GROUND + GOAL_HEIGHT_COMPENSATION + 40.0) / (groundDist + CAMERA_DISTANCE_FROM_SHOOTING_AXIS));
 }
 
 int Arm::GetEncoderPosition() {
@@ -123,6 +132,10 @@ bool Arm::ArmPosIsGood(bool isGood) {
 
 bool Arm::ArmPosIsGood() {
 	return armPosIsGood;
+}
+
+void Arm::OverrideLimitSwitch() {
+	overrideLimitSwitch = !overrideLimitSwitch;
 }
 
 // Put methods for controlling this subsystem

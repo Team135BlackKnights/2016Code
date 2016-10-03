@@ -13,8 +13,6 @@ private:
 public:
 	CameraUSB();
 	void InitDefaultCommand();
-	std::shared_ptr<USBCamera> camera;
-	Image* imageFrame;
 };
 
 #endif

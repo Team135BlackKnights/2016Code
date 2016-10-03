@@ -24,7 +24,6 @@ private:
 	static const int ARM_ENCODER_COUNT =256;// (robit == V1 ? 64 : 256);
 	//  When multiplying by the constant, this constant converts from angles into encoder position
 	//  When dividing by the constant, this constant converts from encoder position into angle
-	static constexpr float ENCODER_MULTIPLYING_CONSTANT = ((float)ARM_ENCODER_COUNT / 90.0f);
 	static constexpr float POT_CONSTANT = 300.0f;
 
 	//Height of tower to the tape
@@ -45,7 +44,8 @@ private:
 
 public:
     static const int ARM_DOWN_POSITION = 0;
-    static const int ARM_UP_POSITION = (robit == V1 ? 48 : 196);
+    static const int ARM_UP_POSITION = (robit == V1 ? 48 : 194);
+	static constexpr float ENCODER_MULTIPLYING_CONSTANT = ((float)ARM_ENCODER_COUNT / 90.0f);
 
 	Arm();
 	void InitDefaultCommand();
@@ -65,15 +65,19 @@ public:
 	bool ArmPosIsGood(bool);
 	bool ArmPosIsGood();
 
+	void OverrideLimitSwitch();
+
 	static const int RAISE_LOWER_ARM = 0;
-	static const bool ARM_INVERTED = robit == V1 ? false : true;
-	static constexpr float UP = 1.0f;
+	static const bool ARM_INVERTED = false;// robit == V1 ? false : false;
+	static constexpr float UP = -1.0f;
 	static constexpr float DOWN = -UP;
 
 	static const bool ENCODER_INVERTED = false;
 
 	static const bool	AUTO_NON_LOW_BAR = false,
 						AUTO_ZERO_DEGREES = true;
+
+	bool overrideLimitSwitch;
 
 };
 

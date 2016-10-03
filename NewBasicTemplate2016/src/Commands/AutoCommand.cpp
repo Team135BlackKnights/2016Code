@@ -32,19 +32,22 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot, int 
 	//  True, move arm to bottom limit switch
 	//  False, move arm to 25 degrees above bottom limit switch
 	std::cout << defensePosition << std::endl;
-	bool lowBar = defensePosition == 1 ? Arm::AUTO_ZERO_DEGREES : Arm::AUTO_NON_LOW_BAR;
-	for(int i = 0; i < 10;i++)
-		std::cout << lowBar << std::endl;
-	AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER), 6.0f);
+	bool lowBar = (defensePosition == 1) ? Arm::AUTO_ZERO_DEGREES : Arm::AUTO_NON_LOW_BAR;
+	//for(int i = 0; i < 10;i++)
+		//std::cout << lowBar << std::endl;
 
-	if (fastDefense) {
-		motorSpeed = .65f;
+	if (defensePosition != 0) {
+		AddSequential(new DriveDistanceAndLowerArm(DRIVE_DISTANCE_TO_RAMP, lowBar, ZERO_ENCODER), 6.0f);
+
+		if (fastDefense) {
+			motorSpeed = .65f;
+		}
+		else {
+			motorSpeed = .55f;
+		}
+		std::cout << defensePosition << std::endl;
+		AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE + 30.0f, motorSpeed));
 	}
-	else {
-		motorSpeed = .55f;
-	}
-	std::cout << defensePosition << std::endl;
-	AddSequential(new DriveDistance(DISTANCE_TO_TRAVEL_OVER_DEFENSE + 30.0f, motorSpeed));
 
 	if (lowBar) {
 		AddParallel(new AutomationOfArm(10.0f));
@@ -61,9 +64,15 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot, int 
 
 	//if (shoot) {
 		//  Move according to the defense Position the robot is set in front of
-		switch (defensePosition) {
+	switch (defensePosition) {
 		case 0:
-			return;
+			AddSequential(new AutomationOfArm(120.0D / Arm::ENCODER_MULTIPLYING_CONSTANT));
+			AddSequential(new WaitTime(1.0f));
+			//AddSequential(new ShootBoulder());
+			//AddSequential(new TurnRobotAngle(90.0D, TurnRobotAngle::RIGHT_TURN));
+			//AddSequential(new WaitTime(1.0f));
+			//AddSequential(new DriveDistance(100, .4f, false));
+			break;
 
 		case 1:
 			//AddParallel(new DriveDistance(48, 0.875f));
@@ -99,10 +108,11 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot, int 
 			break;
 		default:
 			std::cout << "WHAT ARE YOU DOING!!!!!!!\n";
+			std::cout << "hey there little girl - MR. Kistler's Niece";
 			break;
 		}
 		AddSequential(new WaitTime(.25f));
-		AddSequential(new AimBot(defensePosition, shoot,dir));
+		//AddSequential(new AimBot(defensePosition, shoot,dir));
 	//}
 
 }

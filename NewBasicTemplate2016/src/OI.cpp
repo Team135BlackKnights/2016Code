@@ -22,6 +22,7 @@
 #include "Commands/KickUnstucker.h"
 #include "Commands/TeleOpAimBot.h"
 #include "Commands/DriveFlashlight.h"
+#include "Commands/OverrideLimitSwitch.h"
 
 // OI::fxn_name means that it is only available to that class. An object of that class must be created in other files
 OI::OI()
@@ -174,10 +175,13 @@ void OI::ResetButtonMapping()
 	buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(40.0D));
 	buttonsArray[MANIP][5]->WhenPressed(new AutomationOfArm(58.0D));
 	*/
-	buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
-	buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
-	buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
-	buttonsArray[MANIP][12]->ToggleWhenPressed(new TeleOpAimBot());
+	buttonsArray[MANIP][12]->WhenPressed(new OverrideLimitSwitch());
+	//buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(54.7D));
+	//buttonsArray[MANIP][6]->WhenPressed(new AutomationOfArm(Arm::ARM_UP_POSITION / Arm::ENCODER_MULTIPLYING_CONSTANT));
+	//buttonsArray[MANIP][4]->ToggleWhenPressed(new AutomationOfArm(33.0D));
+	//buttonsArray[MANIP][6]->ToggleWhenPressed(new AutomationOfArm(38.0D));
+	//buttonsArray[MANIP][5]->ToggleWhenPressed(new AutomationOfArm(54.0D));
+	//buttonsArray[MANIP][12]->ToggleWhenPressed(new TeleOpAimBot());
 	//GetAButton(manipulator->CONTROL_TELEOP_AIM_BOT)->WhileHeld(new TeleOpAimBot());
 	//buttonsArray[MANIP][8]->ToggleWhenPressed(new AutomationOfArm());
 

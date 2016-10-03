@@ -1,5 +1,6 @@
 #include <Subsystems/LiftHangFlipFlip.h>
 #include "../RobotMap.h"
+#include "../CommandBase.h"
 
 LiftHangFlipFlip::LiftHangFlipFlip() :
 		Subsystem("LiftHangFlipper")
