@@ -6,6 +6,7 @@
 #include <fstream>
 #include "Commands/Subsystem.h"
 #include "../RobotMap.h"
+#include "CANTalon.h"
 
 typedef const int sci;
 

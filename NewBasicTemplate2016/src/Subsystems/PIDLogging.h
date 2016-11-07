@@ -10,6 +10,7 @@
 
 #include <Commands/PIDSubsystem.h>
 #include "LogData.h"
+#include "CANTalon.h"
 
 class PIDLogging: public PIDSubsystem, public LogData {
 public:
