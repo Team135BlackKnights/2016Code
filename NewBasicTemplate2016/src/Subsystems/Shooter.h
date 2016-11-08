@@ -4,7 +4,6 @@
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 #include "PIDLogging.h"
-#include "CANTalon.h"
 
 class Shooter: public PIDLogging
 {

@@ -8,6 +8,8 @@
 #include "PIDLogging.h"
 #include <sstream>
 #include "RobotMap.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 PIDLogging::PIDLogging(const std::string &name, const std::string& filePath, int numMotors, double radius):
 	PIDSubsystem("PIDLogging", p, i, d),

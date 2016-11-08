@@ -18,7 +18,7 @@ Shooter::Shooter() :
 
 	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
 
-	//serial.reset(new SerialPort(115200));
+	//serial.reset(new SerialPort(115200
 }
 
 void Shooter::InitDefaultCommand()
