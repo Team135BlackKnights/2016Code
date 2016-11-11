@@ -3,9 +3,8 @@
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
-#include "PIDLogging.h"
 #include <RobotMap.h>
-#include <CANTalon.h>
+#include "CANTalon.h"
 
 
 class Arm: public Subsystem //public PIDLogging

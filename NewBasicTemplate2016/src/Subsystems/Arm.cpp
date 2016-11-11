@@ -21,7 +21,7 @@ Arm::Arm():
 
 	armMotor->SetFeedbackDevice(CANTalon::FeedbackDevice::QuadEncoder);
 	armMotor->ConfigEncoderCodesPerRev(ARM_ENCODER_COUNT);
-	armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
+	//armMotor->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateQuadEncoder, 15);
 	//this->ZeroEncoder();
 	armMotor->SetSensorDirection(false);
 	armMotor->SetInverted(ARM_INVERTED);
