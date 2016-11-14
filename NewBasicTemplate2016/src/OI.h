@@ -1,7 +1,6 @@
 #ifndef OI_H
 #define OI_H
 
-#include <Triggers/ArmResetOnDetonatorButton.h>
 #include "WPILib.h"
 #include "Driver.h"
 
@@ -24,8 +23,6 @@ protected:
 		  	 Controller [1]
 		  	 Controller [2]
 		 */
-
-	ArmResetOnDetonatorButton* resetArm;
 
 	const float STRAIGHT_MOVEMENT_MULTIPLIER = Preferences::GetInstance()->GetFloat("straight button movement", .6f);
 	const float TURN_MOVEMENT_MULTIPLIER = Preferences::GetInstance()->GetFloat("turn button movement", .4f);

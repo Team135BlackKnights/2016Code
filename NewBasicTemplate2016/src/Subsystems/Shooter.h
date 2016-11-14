@@ -3,9 +3,9 @@
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
-#include "PIDLogging.h"
+#include "CANTalon.h"
 
-class Shooter: public PIDLogging
+class Shooter: public Subsystem //PIDLogging
 {
 private:
 	// It's desirable that everything possible under private except

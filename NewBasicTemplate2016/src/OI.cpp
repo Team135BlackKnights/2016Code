@@ -44,7 +44,6 @@ OI::OI()
 	SetUpDrivers();
 
 	ResetButtonMapping();
-	resetArm = new ArmResetOnDetonatorButton();
 }
 
 //OI Functions

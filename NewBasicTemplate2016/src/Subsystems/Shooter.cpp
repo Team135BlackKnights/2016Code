@@ -3,13 +3,13 @@
 #include "../Commands/DriveShooter.h"
 
 Shooter::Shooter() :
-	PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
+	//PIDLogging("Shooter", "/home/lvuser/", numMotors, radius)
+	Subsystem("Shooter")
 {
 
 	shooter.reset(new CANTalon(MOTOR_SHOOT_BOULDER));
 
-	motors[TWO_WHEEL_SHOOTER_MOTOR] = shooter.get();
-	motors[TWO_WHEEL_SHOOTER_MOTOR]->SetInverted(SHOOTER_INVERTED);
+	shooter->SetInverted(SHOOTER_INVERTED);
 
 	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
 	unstucker.reset(new Solenoid(SOLENOID_SHOOTER_UNSTUCKER));
@@ -31,7 +31,7 @@ void Shooter::DriveShooterMotors(float power) {
 	double speed = GetShooterTrackerPeriod();
 	SmartDashboard::PutNumber((std::string)"Shooter Speed Conners", speed);
 	SmartDashboard::PutString((std::string)"Good to Shoot", ShooterUpToSpeed() ? "YESYESYESYESYESYES" : "No");
-	motors[TWO_WHEEL_SHOOTER_MOTOR]->Set(power);
+	shooter->Set(power);
 }
 
 void Shooter::StopShooterMotors() {
