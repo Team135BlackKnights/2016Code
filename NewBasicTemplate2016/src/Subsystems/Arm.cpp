@@ -60,12 +60,12 @@ void Arm::RaiseLowerArm(sink motorPower, bool softStop) {
 	/*else if (GetTopLimitSwitchValue() && !Preferences::GetInstance()->GetBoolean("PREMATCH CAN RAISE ARM", false)) {
 		std::cout << "HIGHEST POINT REACHED\n";
 		power = fminf(power, 0.0f);
-	} */
-	/*
+	}
+
 	if (softStop && GetTopLimitSwitchValue()) {
 		std::cout << "YOU'VE REACHED THE TOP\n";
 		power = fmaxf(power, 0.0f);
-		/*
+
 		if (UP > 0)
 			power = fminf(power, 0);
 		else
