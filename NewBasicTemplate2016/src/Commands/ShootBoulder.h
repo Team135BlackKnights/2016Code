@@ -12,11 +12,11 @@ private:
 	std::unique_ptr<Timer> timer;
 
 	double timeWait;
-	const double TIMEOUT = 10.0D;
+	const double TIMEOUT = 10.0;
 	bool timerStarted;
 
-	double initialTimerValue = 0.0D,
-		   finalTimerValue = 0.0D;
+	double initialTimerValue = 0.0,
+		   finalTimerValue = 0.0;
 
 	bool upToSpeed = false;
 public:

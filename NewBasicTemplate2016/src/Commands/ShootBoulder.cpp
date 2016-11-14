@@ -46,7 +46,7 @@ void ShootBoulder::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return timer->Get() >= timeWait + .25D;
+	return timer->Get() >= timeWait + .25;
 	//return (upToSpeed && finalTimerValue >= timer->Get());
 }
 

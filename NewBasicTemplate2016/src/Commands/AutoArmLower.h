@@ -13,10 +13,10 @@ private:
 		   currentEncoderPosition,
 		   initialEncoderPosition;
 
-	static constexpr double MOTOR_POWER = 1.0D;
+	static constexpr double MOTOR_POWER = 1.0;
 
-	static constexpr double ANGLE_TO_LOWER_ARM = 43.0D;
-	static constexpr double DESIRED_ANGLE_FOR_ARM_ABOVE_HORIZONTAL = 30.0D;
+	static constexpr double ANGLE_TO_LOWER_ARM = 43.0;
+	static constexpr double DESIRED_ANGLE_FOR_ARM_ABOVE_HORIZONTAL = 30.0;
 public:
 	AutoArmLower(bool);
 	void Initialize();

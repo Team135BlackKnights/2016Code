@@ -21,21 +21,21 @@ private:
 	bool armPosIsGood;
 
 	//  256 COUNT over 90 degrees
-	static const int ARM_ENCODER_COUNT =256;// (robit == V1 ? 64 : 256);
+	static const int ARM_ENCODER_COUNT = 256;// (robit == V1 ? 64 : 256);
 	//  When multiplying by the constant, this constant converts from angles into encoder position
 	//  When dividing by the constant, this constant converts from encoder position into angle
 	static constexpr float POT_CONSTANT = 300.0f;
 
 	//Height of tower to the tape
-	static constexpr double HEIGHT_OF_TOWER = 85.0D;
+	static constexpr double HEIGHT_OF_TOWER = 85.0;
 	//Height of the lens of the camera off the ground
-	static constexpr double CAMERA_HEIGHT_OFF_GROUND = 12.0D;
+	static constexpr double CAMERA_HEIGHT_OFF_GROUND = 12.0;
 	//Height of the arm axle off the ground
-	static constexpr double ARM_HEIGHT_OFF_GROUND = 11.0D;
+	static constexpr double ARM_HEIGHT_OFF_GROUND = 11.0;
 	//Distance of the camera to the pivot point of the arm
-	static constexpr double CAMERA_DISTANCE_FROM_SHOOTING_AXIS = 1.0D;
+	static constexpr double CAMERA_DISTANCE_FROM_SHOOTING_AXIS = 1.0;
 	//Distance above the bottom of the goal we want to aim
-	static constexpr double GOAL_HEIGHT_COMPENSATION = 12.0D;
+	static constexpr double GOAL_HEIGHT_COMPENSATION = 12.0;
 
 	static const int COUNT = 64;
 

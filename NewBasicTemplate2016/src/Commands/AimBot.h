@@ -7,7 +7,7 @@
 class AimBot: public CommandGroup
 {
 public:
-	AimBot(int = 1.0D, bool = true, int dir = 0);
+	AimBot(int = 1.0, bool = true, int dir = 0);
 };
 
 #endif

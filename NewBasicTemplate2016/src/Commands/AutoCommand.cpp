@@ -66,7 +66,7 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot, int 
 		//  Move according to the defense Position the robot is set in front of
 	switch (defensePosition) {
 		case 0:
-			AddSequential(new AutomationOfArm(120.0D / Arm::ENCODER_MULTIPLYING_CONSTANT));
+			AddSequential(new AutomationOfArm(120.0 / Arm::ENCODER_MULTIPLYING_CONSTANT));
 			AddSequential(new WaitTime(1.0f));
 			//AddSequential(new ShootBoulder());
 			//AddSequential(new TurnRobotAngle(90.0D, TurnRobotAngle::RIGHT_TURN));
@@ -91,20 +91,20 @@ AutoCommand::AutoCommand(int defensePosition, bool fastDefense, bool shoot, int 
 			//AddSequential(new RaiseAndTurn(55.0D, 50.0D, TurnRobotAngle::RIGHT_TURN));
 			break;
 		case 3:
-			AddSequential(new RaiseAndTurn(55.0D, 5.0D, TurnRobotAngle::RIGHT_TURN));
+			AddSequential(new RaiseAndTurn(55.0, 5.0, TurnRobotAngle::RIGHT_TURN));
 			//AddSequential(new WaitTime(.5f));
 			break;
 			//AddSequential(new AimBot(3));
 		case 4:
 			//AddSequential(new RaiseAndTurn(55.0D, 1.0D, TurnRobotAngle::LEFT_TURN));
 
-			AddSequential(new AutomationOfArm(55.0D));
+			AddSequential(new AutomationOfArm(55.0));
 			//AddSequential(new TurnRobotAngle(8, TurnRobotAngle::RIGHT_TURN));
 			//AddSequential(new AimBot(4));
 			break;
 		case 5:
-			AddSequential(new WaitTime(.25D));
-			AddSequential(new RaiseAndTurn(55.0D, 3.0D, TurnRobotAngle::LEFT_TURN));
+			AddSequential(new WaitTime(.25));
+			AddSequential(new RaiseAndTurn(55.0, 3.0, TurnRobotAngle::LEFT_TURN));
 			break;
 		default:
 			std::cout << "WHAT ARE YOU DOING!!!!!!!\n";

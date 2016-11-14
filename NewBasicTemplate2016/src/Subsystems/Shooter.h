@@ -21,10 +21,10 @@ private:
 	//std::unique_ptr<SerialPort> serial;
 
 	//  Value Still To Be Determined
-	static constexpr double SHOOTER_TRACKER_SETPOINT = 300.0D;
+	static constexpr double SHOOTER_TRACKER_SETPOINT = 300.0;
 
-	double currentConnerValue = 0.0D,
-		   tempConnerValue = 0.0D;
+	double currentConnerValue = 0.0,
+		   tempConnerValue = 0.0;
 
 public:
 	Shooter();
