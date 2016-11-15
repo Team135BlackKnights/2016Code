@@ -7,7 +7,7 @@ DriveFlashlight::DriveFlashlight(bool on)
 	Requires(flashlight.get());
 	switched = false;
 	timer.reset(new Timer());
-	this->solenoid = on ? flashlight->turnOn : flashlight->turnOff;
+	//this->solenoid = on ? flashlight->turnOn : flashlight->turnOff;
 }
 
 // Called just before this Command runs the first time

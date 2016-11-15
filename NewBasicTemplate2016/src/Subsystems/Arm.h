@@ -13,8 +13,8 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 
-	std::shared_ptr<DigitalInput> bottomLimitSwitch;
-	std::shared_ptr<DigitalInput> topLimitSwitch;
+	//std::shared_ptr<DigitalInput> bottomLimitSwitch;
+	//std::shared_ptr<DigitalInput> topLimitSwitch;
 
 	std::unique_ptr<CANTalon> armMotor;
 
@@ -39,8 +39,8 @@ private:
 
 	static const int COUNT = 64;
 
-	Potentiometer* pot;
-	AnalogInput* ai;
+	//Potentiometer* pot;
+	//AnalogInput* ai;
 
 public:
     static const int ARM_DOWN_POSITION = 0;

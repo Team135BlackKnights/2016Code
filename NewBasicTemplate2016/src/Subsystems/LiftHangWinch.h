@@ -7,7 +7,7 @@
 class LiftHangWinch: public Subsystem
 {
 private:
-	std::unique_ptr<VictorSP> winch;
+	//std::unique_ptr<VictorSP> winch;
 public:
 	LiftHangWinch();
 	void InitDefaultCommand();

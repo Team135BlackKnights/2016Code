@@ -5,8 +5,8 @@
 LiftHangFlipFlip::LiftHangFlipFlip() :
 		Subsystem("LiftHangFlipper")
 {
-	flipper.reset(new VictorSP(MOTOR_LIFT_HANG_FLIPPER));
-	flipper->SetInverted(LIFT_HANG_FLIPPER_INVERTED);
+	//flipper.reset(new VictorSP(MOTOR_LIFT_HANG_FLIPPER));
+	//flipper->SetInverted(LIFT_HANG_FLIPPER_INVERTED);
 }
 
 void LiftHangFlipFlip::InitDefaultCommand()
@@ -16,7 +16,7 @@ void LiftHangFlipFlip::InitDefaultCommand()
 
 void LiftHangFlipFlip::DriveMotor(float power)
 {
-	flipper->Set(power);
+	//flipper->Set(power);
 }
 
 // Put methods for controlling this subsystem

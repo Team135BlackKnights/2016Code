@@ -11,12 +11,12 @@ Shooter::Shooter() :
 
 	shooter->SetInverted(SHOOTER_INVERTED);
 
-	kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
-	unstucker.reset(new Solenoid(SOLENOID_SHOOTER_UNSTUCKER));
+	//kicker.reset(new Solenoid(SOLENOID_SHOOTER_KICKER));
+	//unstucker.reset(new Solenoid(SOLENOID_SHOOTER_UNSTUCKER));
 
 	DriveKicker(KICKER_RESET);
 
-	shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
+	//shooterTracker.reset(new Counter(DIGITAL_SHOOTER_TRACKER));
 
 	//serial.reset(new SerialPort(115200
 }
@@ -40,17 +40,18 @@ void Shooter::StopShooterMotors() {
 
 void Shooter::DriveKicker(bool value) {
 	//Kicker shouldn't fight itself now!
-	if (this->kicker->Get() != value)
-		kicker->Set(value);
+	//if (this->kicker->Get() != value)
+	//	kicker->Set(value);
 }
 
 void Shooter::DriveUnstucker(bool value) {
-	if (this->unstucker->Get() != value)
-		unstucker->Set(value);
+	//if (this->unstucker->Get() != value)
+	//	unstucker->Set(value);
 }
 
 double Shooter::GetShooterTrackerPeriod() {
-	double timeBetweenSpindles = shooterTracker->GetPeriod();
+//	double timeBetweenSpindles = shooterTracker->GetPeriod();
+	double timeBetweenSpindles = 0;
 	tempConnerValue = ConnerConversion(timeBetweenSpindles);
 	if (tempConnerValue <= 30000)
 		currentConnerValue = tempConnerValue;

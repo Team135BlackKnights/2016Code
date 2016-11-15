@@ -7,9 +7,9 @@ Flashlight::Flashlight() :
 {
 		//light.reset(new Relay(2, Relay::Direction::kBothDirections));
 		//lightTest.reset(new Solenoid(2));
-		turnOn = new Solenoid(3);
-		turnOff = new Solenoid(2);
-		activeSoul = turnOff;
+		//turnOn = new Solenoid(3);
+		//turnOff = new Solenoid(2);
+		//activeSoul = turnOff;
 }
 
 void Flashlight::InitDefaultCommand()
@@ -28,11 +28,11 @@ void Flashlight::SetSolenoid(Solenoid* solenoid, bool power) {
 }
 
 void Flashlight::SwitchActiveSoul() {
-	on = !on;
+	/*on = !on;
 	if (on)
 		activeSoul = turnOn;
 	else
-		activeSoul = turnOff;
+		activeSoul = turnOff; */
 }
 
 // Put methods for controlling this subsystem

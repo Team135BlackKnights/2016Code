@@ -25,11 +25,11 @@ Arm::Arm():
 	//this->ZeroEncoder();
 	armMotor->SetSensorDirection(false);
 	armMotor->SetInverted(ARM_INVERTED);
-	ai = new AnalogInput(POT_ANALOG_PORT);
-	pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
+	//ai = new AnalogInput(POT_ANALOG_PORT);
+	//pot = new AnalogPotentiometer(ai, POT_CONSTANT, 0); // 0 can change if you want more offset
 
-	bottomLimitSwitch.reset(new DigitalInput(7));//DIGITAL_ARM_LIMIT_BOTTOM));
-	topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
+	//bottomLimitSwitch.reset(new DigitalInput(7));//DIGITAL_ARM_LIMIT_BOTTOM));
+	//topLimitSwitch.reset(new DigitalInput(DIGITAL_ARM_LIMIT_TOP));
 	SetEncoderPosition(Arm::ARM_UP_POSITION);
 	armPosIsGood = false;
 	overrideLimitSwitch = false;
@@ -49,14 +49,17 @@ void Arm::RaiseLowerArm(sink motorPower, bool softStop) {
 		std::cout << "\n\nTOP LIMIT PRESSED\n";
 		power = fmax(power, 0.0f);
 	}
+
 	*/
-	if (GetBottomLimitSwitchValue()) {
+	/*if (GetBottomLimitSwitchValue()) {
 		std::cout << "\nBOTTOM LIMIT PRESSED\n";
 		this->ZeroEncoder();
 		if (overrideLimitSwitch == false) {
 			power = fminf(power, 0.0f);
 		}
-	}
+	} */
+
+
 	/*else if (GetTopLimitSwitchValue() && !Preferences::GetInstance()->GetBoolean("PREMATCH CAN RAISE ARM", false)) {
 		std::cout << "HIGHEST POINT REACHED\n";
 		power = fminf(power, 0.0f);
@@ -84,12 +87,13 @@ bool Arm::GetTopLimitSwitchValue() {
 }
 
 bool Arm::GetBottomLimitSwitchValue() {
-	if (overrideLimitSwitch) return false;
+	/*if (overrideLimitSwitch) return false;
 
 	bool value =  !bottomLimitSwitch.get()->Get();
 	if (value)
 		std::cout << "B";
-	return value;
+	return value; */
+	return false;
 }
 
 //cameraDist is in inches

@@ -7,7 +7,7 @@
 class LiftHangFlipFlip: public Subsystem
 {
 private:
-	std::unique_ptr<VictorSP> flipper;
+	//std::unique_ptr<VictorSP> flipper;
 public:
 	LiftHangFlipFlip();
 	void InitDefaultCommand();

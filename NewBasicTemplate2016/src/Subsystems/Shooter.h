@@ -14,10 +14,10 @@ private:
 	//  Motor for Two Wheels, motor for raising and lower arm, motor for collection of boulder
 	std::unique_ptr<CANTalon> shooter;
 	//std::unique_ptr<Servo> kicker;
-	std::unique_ptr<Solenoid> kicker;
-	std::unique_ptr<Solenoid> unstucker;
+	//std::unique_ptr<Solenoid> kicker;
+	//std::unique_ptr<Solenoid> unstucker;
 
-	std::unique_ptr<Counter> shooterTracker;
+	//std::unique_ptr<Counter> shooterTracker;
 	//std::unique_ptr<SerialPort> serial;
 
 	//  Value Still To Be Determined
