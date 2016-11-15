@@ -6,13 +6,11 @@
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveTrain.h"
-#include "Subsystems/AxisCam.h"
 #include "OI.h"
 #include "WPILib.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Arm.h"
 #include "Subsystems/Flashlight.h"
-#include "Subsystems/CameraUSB.h"
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -30,14 +28,12 @@ public:
 	static std::unique_ptr<Shooter> shooter;
 	static std::unique_ptr<Arm> arm;
 	//static std::unique_ptr<Preferences> preferences;
-	static std::unique_ptr<AxisCam> cam;
 	static std::unique_ptr<LiftHangWinch> liftHangWinch;
 
 
 	static std::unique_ptr<LiftHangFlipFlip> liftHangFlip;
 
 	static std::unique_ptr<Flashlight> flashlight;
-	static std::unique_ptr<CameraUSB> camUSB;
 };
 
 #endif

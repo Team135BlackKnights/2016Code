@@ -3,7 +3,6 @@
 #include "DriveDistance.h"
 #include "../CommandBase.h"
 #include "TurnRobotAngle.h"
-#include "AimBot.h"
 #include "AutomationOfArm.h"
 #include "RaiseAndTurn.h"
 #include "ShootBoulder.h"

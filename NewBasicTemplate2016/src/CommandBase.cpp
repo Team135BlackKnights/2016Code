@@ -10,9 +10,7 @@ std::unique_ptr<Arm> CommandBase::arm;
 std::unique_ptr<DriveTrain> CommandBase::driveTrain;
 std::unique_ptr<LiftHangWinch> CommandBase::liftHangWinch;
 std::unique_ptr<LiftHangFlipFlip> CommandBase::liftHangFlip;
-std::unique_ptr<AxisCam> CommandBase::cam;
 std::unique_ptr<Flashlight> CommandBase::flashlight;
-std::unique_ptr<CameraUSB> CommandBase::camUSB;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -39,11 +37,7 @@ void CommandBase::init()
 
 	liftHangFlip.reset(new LiftHangFlipFlip());
 
-	cam.reset(new AxisCam());
-
 	flashlight.reset(new Flashlight());
-
-	camUSB.reset(new CameraUSB());
 
 	oi.reset(new OI());
 

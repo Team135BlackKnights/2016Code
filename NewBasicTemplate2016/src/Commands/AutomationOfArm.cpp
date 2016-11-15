@@ -33,7 +33,7 @@ void AutomationOfArm::Initialize()
 	std::cout << "running init";
 	if (desiredValue == -1)
 	{
-		desiredValue = (int) arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
+		//desiredValue = (int) arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
 		std::cout << "DESIRED VALUE: " << desiredValue;
 	}
 	SetTimeout(6.0);
@@ -61,7 +61,7 @@ void AutomationOfArm::Execute()
 	}
 	else
 		arm->RaiseLowerArm(0);
-	std::cout << arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
+	//std::cout << arm->GetEncoderPositionForAutomationOfArm(cam.get()->distanceToBlob());
 	std::cout << arm->ArmPosIsGood() << std::endl;
 }
 

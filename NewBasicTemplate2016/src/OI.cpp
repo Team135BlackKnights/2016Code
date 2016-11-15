@@ -14,13 +14,11 @@
 #include "Commands/ShootBoulder.h"
 #include "Commands/ChangeNeutralMode.h"
 #include "Commands/Move.h"
-#include "Commands/AimBot.h"
 #include "Commands/ArmReset.h"
 #include "Commands/ChangeDriver.h"
 #include "Commands/ChangeInvertedDriveTrain.h"
 #include "Commands/AutomationOfArm.h"
 #include "Commands/KickUnstucker.h"
-#include "Commands/TeleOpAimBot.h"
 #include "Commands/DriveFlashlight.h"
 #include "Commands/OverrideLimitSwitch.h"
 
