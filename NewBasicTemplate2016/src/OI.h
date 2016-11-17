@@ -2,7 +2,7 @@
 #define OI_H
 
 #include "WPILib.h"
-#include "Driver.h"
+#include "RobotMap.h"
 
 class OI
 {
@@ -40,8 +40,6 @@ public:
 	bool IsPressed(int[3]);
 	float GetStickAxis(int, Joystick::AxisType);
 	JoystickButton* GetAButton(int[2]);
-	Driver* driver;
-	Manipulator* manipulator;
 
 	//USB JOYSTICK VALUES
     const int JOYSTICK_LEFT = 0;
@@ -87,11 +85,58 @@ public:
 	static const int CONTROL_MODE_POV = 0,
 					 CONTROL_MODE_BTN = 1;
 
-	void SetUpManipulators();
-	void SetUpDrivers();
-	void UpdateDriver(Driver*, bool = true);
-	void UpdateManipulator(Manipulator*, bool=true);
+	// Driver.h Variables
+
+	//SHOOTER
+	//int CONTROL_SHOOTER_KICKER_MODE;
+	int CONTROL_SHOOTER_KICKER_KICK[3];
+	//int CONTROL_SHOOTER_KICKER_RESET[2];
+
+	//int CONTROL_SHOOTER_POWER_SLIDER;
+	int CONTROL_SHOOTER_IN[2];
+	int CONTROL_SHOOTER_OUT[2];
+
+	int CONTROL_SHOOTER_INTAKE_OVERRIDE[2];
+
+	int CONTROL_SHOOT[2]; //Aim Bot FTW
+
+	//ARM
+	int CONTROL_ARM_RESET[2];
+	int CONTROL_ARM_STOP[3];
+	int CONTROL_ARM_REMOVE_SOFT_STOP[2];
+
+	int CONTROL_ARM_STICK;
+	bool CONTROL_ARM_INVERTED;
+	Joystick::AxisType CONTROL_ARM_AXIS;
+
+	//LIFT HANG
+	int CONTROL_LIFT_HANG_UP[2];
+	int CONTROL_LIFT_HANG_DOWN[2];
+
+	//int CONTROL_LIFT_HANG_FLIPPER_POWER_SLIDER;
+	int CONTROL_LIFT_HANG_FLIPPER_UP[2];
+	int CONTROL_LIFT_HANG_FLIPPER_DOWN[2];
+
+	int CONTROL_TELEOP_AIM_BOT[3];
+
+	int CONTROL_MOVEMENT_SLIDER;
+	int CONTROL_DRIVE_TRAIN_INVERTED[2];
+	bool DRIVE_TRAIN_INVERTED;
+
+	int CONTROL_TURN_LEFT[2];
+	int CONTROL_TURN_RIGHT[2];
+
+	int CONTROL_FORWARD[2];
+	int CONTROL_REVERSE[3];
+
+	int CONTROL_NEUTRAL_MODE[2];
+
+	//void SetUpManipulators();
+	//void SetUpDrivers();
+	//void UpdateDriver(Driver*, bool = true);
+	//void UpdateManipulator(Manipulator*, bool=true);
 
 	void ResetButtonMapping();
+	void DefiningDriverVariables();
 };
 #endif

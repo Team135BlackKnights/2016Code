@@ -19,10 +19,10 @@ void DriveShooter::Execute()
 {
 	float power = 0;
 	//shootPower = oi->GetStickSlider(oi->manipulator->CONTROL_SHOOTER_POWER_SLIDER);//Preferences::GetInstance()->GetFloat("Shooter Power", motorPower);
-	if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_OUT[STICK], oi->manipulator->CONTROL_SHOOTER_OUT[BUTTON]))//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
+	if (oi->GetButton(oi->CONTROL_SHOOTER_OUT[STICK], oi->CONTROL_SHOOTER_OUT[BUTTON]))//oi->CONTROL_SHOOT[0], oi->CONTROL_SHOOT[1]))
 		power = shootPower * Shooter::OUT;
-	else if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_IN[STICK], oi->manipulator->CONTROL_SHOOTER_IN[BUTTON])) {//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
-		if (!oi->GetButton(oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK], oi->manipulator->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON]))
+	else if (oi->GetButton(oi->CONTROL_SHOOTER_IN[STICK], oi->CONTROL_SHOOTER_IN[BUTTON])) {//oi->CONTROL_COLLECTION_IN[0], oi->CONTROL_COLLECTION_IN[1]))
+		if (!oi->GetButton(oi->CONTROL_SHOOTER_INTAKE_OVERRIDE[STICK], oi->CONTROL_SHOOTER_INTAKE_OVERRIDE[BUTTON]))
 				power = Preferences::GetInstance()->GetFloat("CollectPower", .7f) * Shooter::IN;
 		else
 			power = 1.0f * Shooter::IN;
@@ -32,7 +32,7 @@ void DriveShooter::Execute()
 	//if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
 
 	//if (oi->GetButton(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[STICK], oi->manipulator->CONTROL_SHOOTER_KICKER_KICK[BUTTON]))
-	if (oi->IsPressed(oi->manipulator->CONTROL_SHOOTER_KICKER_KICK)){
+	if (oi->IsPressed(oi->CONTROL_SHOOTER_KICKER_KICK)){
 		shooter->DriveKicker(Shooter::KICKER_KICKED);
 		time->Start();
 	}

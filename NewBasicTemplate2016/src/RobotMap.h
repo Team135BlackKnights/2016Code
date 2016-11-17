@@ -64,6 +64,10 @@
 
     const int RELAY_FLASHLIGHT = 1;
 
+	const int STICK = 0;
+	const int BUTTON = 1;
+	const int MODE = 2;
+
 
 #endif
 

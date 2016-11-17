@@ -16,10 +16,10 @@ void DriveArm::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveArm::Execute()
 {
-	float y = oi->GetStickAxis(oi->manipulator->CONTROL_ARM_STICK, oi->manipulator->CONTROL_ARM_AXIS);
-	if (oi->IsPressed(oi->manipulator->CONTROL_ARM_STOP))
+	float y = oi->GetStickAxis(oi->CONTROL_ARM_STICK, oi->CONTROL_ARM_AXIS);
+	if (oi->IsPressed(oi->CONTROL_ARM_STOP))
 		y = 0;
-	float power = y * Arm::UP * (oi->manipulator->CONTROL_ARM_INVERTED ? -1 : 1);
+	float power = y * Arm::UP * (oi->CONTROL_ARM_INVERTED ? -1 : 1);
 
 	//if (abs(power) < 0.05f)
 		//power = 0.0f;
