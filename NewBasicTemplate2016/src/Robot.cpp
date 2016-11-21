@@ -10,14 +10,14 @@ class Robot: public IterativeRobot
 private:
 	//SendableChooser* autoChooser;
 	CommandGroup* autoCommand;
-	CameraServer* cameraServer;
+	//CameraServer* cameraServer;
 
 	void RobotInit()
 	{
-		cameraServer = CameraServer::GetInstance();
-		cameraServer->SetQuality(50);
-				//the camera name (ex "cam0") can be found through the roborio web interface
-		cameraServer->StartAutomaticCapture("cam3");
+		//cameraServer = CameraServer::GetInstance();
+		//cameraServer->SetQuality(50);
+		//		//the camera name (ex "cam0") can be found through the roborio web interface
+		//cameraServer->StartAutomaticCapture("cam3");
 
 
 		Preferences::GetInstance()->PutBoolean("UNWINCH", false);
